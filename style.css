@@ -5,13 +5,14 @@
 }
 
 :root {
-  --accent: #00e5ff;
+  --accent: #3a9e5f;
+  --accent-bright: #4ecb78;
   --accent2: #ff2d78;
   --bg: #0a0a0f;
   --bg2: #10101a;
   --text: #e0e0f0;
   --muted: #888;
-  --green: #00ff88;
+  --green: #4ecb78;
   --yellow: #ffd700;
   --red: #ff4444;
 }
@@ -21,7 +22,7 @@ html {
 }
 
 body {
-  font-family: 'Rajdhani', sans-serif;
+  font-family: Arial, sans-serif;
   background: var(--bg);
   color: var(--text);
   font-size: 1rem;
@@ -37,7 +38,7 @@ body {
   justify-content: center;
   text-align: center;
   background:
-    radial-gradient(ellipse at 50% 60%, rgba(0,229,255,0.08) 0%, transparent 70%),
+    radial-gradient(ellipse at 50% 60%, rgba(58,158,95,0.10) 0%, transparent 70%),
     radial-gradient(ellipse at 80% 20%, rgba(255,45,120,0.07) 0%, transparent 60%),
     linear-gradient(160deg, #0a0a0f 0%, #0d0d1f 100%);
   overflow: hidden;
@@ -51,8 +52,8 @@ body {
     0deg,
     transparent,
     transparent 2px,
-    rgba(0,229,255,0.02) 2px,
-    rgba(0,229,255,0.02) 4px
+    rgba(58,158,95,0.02) 2px,
+    rgba(58,158,95,0.02) 4px
   );
   pointer-events: none;
 }
@@ -118,7 +119,7 @@ body {
 .btn:hover {
   background: var(--accent);
   color: var(--bg);
-  box-shadow: 0 0 30px rgba(0,229,255,0.4);
+  box-shadow: 0 0 30px rgba(58,158,95,0.4);
 }
 
 /* ── SECTIONS ─────────────────────────────────────── */
@@ -179,39 +180,50 @@ body {
 }
 
 .equipment-box {
-  background: linear-gradient(135deg, rgba(0,229,255,0.05), rgba(255,45,120,0.05));
-  border: 1px solid rgba(0,229,255,0.2);
+  background: linear-gradient(135deg, rgba(58,158,95,0.07), rgba(255,45,120,0.05));
+  border: 1px solid rgba(58,158,95,0.3);
   border-radius: 4px;
-  padding: 2.5rem;
-  text-align: center;
+  padding: 2rem;
+  text-align: left;
   clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
 }
 
-.eq-icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
+.eq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1rem;
 }
 
-.equipment-box h3 {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 0.8rem;
-  letter-spacing: 0.3em;
-  color: var(--accent);
-  text-transform: uppercase;
-  margin-bottom: 0.5rem;
+.eq-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(255,255,255,0.04);
+  border-radius: 6px;
+  padding: 0.7rem 1rem;
+  border-left: 3px solid var(--accent);
 }
 
-.eq-name {
-  font-family: 'Orbitron', sans-serif;
+.eq-item-icon {
   font-size: 1.4rem;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 0.3rem;
+  flex-shrink: 0;
 }
 
-.eq-desc {
+.eq-item-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.eq-item-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #fff;
+}
+
+.eq-item-desc {
+  font-size: 0.78rem;
   color: var(--muted);
-  font-size: 0.9rem;
 }
 
 /* ── GENRES ───────────────────────────────────────── */
@@ -285,45 +297,39 @@ body {
   color: var(--muted);
 }
 
-/* ── BOOKING ──────────────────────────────────────── */
-.booking-form {
+/* ── CONTACT ──────────────────────────────────────── */
+.contact-box {
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  max-width: 700px;
+  align-items: center;
+  gap: 1.2rem;
+  background: rgba(58,158,95,0.07);
+  border: 1px solid rgba(58,158,95,0.3);
+  border-radius: 8px;
+  padding: 1.5rem 2rem;
+  max-width: 480px;
 }
 
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
+.contact-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
 }
 
-@media (max-width: 600px) {
-  .form-row { grid-template-columns: 1fr; }
+.contact-box p {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
 }
 
-.booking-form input,
-.booking-form textarea {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(0,229,255,0.2);
-  color: var(--text);
-  font-family: 'Rajdhani', sans-serif;
-  font-size: 1rem;
-  padding: 0.85rem 1rem;
-  border-radius: 2px;
-  outline: none;
-  transition: border-color 0.2s;
-  width: 100%;
+.contact-box a {
+  color: var(--accent-bright);
+  font-size: 1.15rem;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: 0.02em;
 }
 
-.booking-form input:focus,
-.booking-form textarea:focus {
-  border-color: var(--accent);
-}
-
-.booking-form textarea {
-  resize: vertical;
+.contact-box a:hover {
+  text-decoration: underline;
 }
 
 /* ── STORIES ──────────────────────────────────────── */
@@ -343,7 +349,7 @@ body {
   box-shadow:
     0 0 0 2px #333,
     0 30px 80px rgba(0,0,0,0.8),
-    0 0 40px rgba(0,229,255,0.1);
+    0 0 40px rgba(58,158,95,0.15);
   overflow: hidden;
   user-select: none;
 }
@@ -464,10 +470,19 @@ body {
   display: block;
 }
 
+/* YouTube – full height of phone, video slide has no caption overlap */
+.story-slide[data-type="video"] {
+  display: none;
+  flex-direction: column;
+}
+.story-slide[data-type="video"].active {
+  display: flex;
+}
+
 /* YouTube */
 .yt-wrap {
-  flex: 1;
-  position: relative;
+  position: absolute;
+  inset: 0;
   background: #000;
 }
 
@@ -492,9 +507,9 @@ body {
 
 .story-tag {
   display: inline-block;
-  background: rgba(0,229,255,0.2);
+  background: rgba(58,158,95,0.2);
   border: 1px solid var(--accent);
-  color: var(--accent);
+  color: var(--accent-bright);
   font-size: 0.65rem;
   letter-spacing: 0.1em;
   padding: 2px 8px;
@@ -529,5 +544,5 @@ body {
   background: var(--bg2);
   color: var(--muted);
   font-size: 0.9rem;
-  border-top: 1px solid rgba(0,229,255,0.08);
+  border-top: 1px solid rgba(58,158,95,0.12);
 }
