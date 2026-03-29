@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://bariser3.github.io/ERMN/sitemap.xml
+Sitemap: https://DJERMN.github.io/ERMN/sitemap.xml
