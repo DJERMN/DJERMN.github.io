@@ -2,12 +2,27 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>DJ ERMN</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap" rel="stylesheet" />
 </head>
 <body>
+
+  <!-- NAV -->
+  <nav class="navbar" id="navbar">
+    <a class="nav-logo" href="#">DJ ERMN</a>
+    <button class="hamburger" id="hamburger" aria-label="Menü öffnen">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#stories"  onclick="closeMenu()">Stories</a></li>
+      <li><a href="#videos"   onclick="closeMenu()">Video</a></li>
+      <li><a href="#about"    onclick="closeMenu()">Über mich</a></li>
+      <li><a href="#genres"   onclick="closeMenu()">Genres</a></li>
+      <li><a href="#booking"  onclick="closeMenu()">Booking</a></li>
+    </ul>
+  </nav>
 
   <!-- HERO -->
   <header class="hero">
@@ -81,26 +96,35 @@
   </section>
 
   <!-- VIDEOS -->
-  <section class="section" id="videos">
+  <section class="section dark" id="videos">
     <div class="container">
-      <h2 class="section-title">Videos</h2>
-      <p class="section-sub">Hör rein – live aufgenommen.</p>
-      <div class="video-grid">
-        <div class="video-card">
-          <div class="video-wrap">
-            <iframe src="https://www.youtube.com/embed/kAqLYnxC4yc?rel=0&modestbranding=1"
-              frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen></iframe>
+      <h2 class="section-title">Video</h2>
+      <p class="section-sub">Club Session – live aufgenommen.</p>
+
+      <div class="video-accordion" id="videoAccordion">
+        <div class="video-thumb-wrap" id="videoThumb" onclick="openVideo()">
+          <img src="https://img.youtube.com/vi/WdeILncveY4/maxresdefault.jpg" alt="Set – Club Session" />
+          <div class="video-play-btn">
+            <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="40" cy="40" r="38" stroke="white" stroke-width="3" fill="rgba(0,0,0,0.5)"/>
+              <polygon points="32,24 32,56 60,40" fill="white"/>
+            </svg>
           </div>
-          <p class="video-label">Set #1 – Live Recording</p>
+          <div class="video-thumb-label">
+            <span class="story-tag">▶ Jetzt ansehen</span>
+            <p>Club Session</p>
+          </div>
         </div>
-        <div class="video-card">
+        <div class="video-player-wrap" id="videoPlayer" style="display:none;">
           <div class="video-wrap">
-            <iframe src="https://www.youtube.com/embed/WdeILncveY4?rel=0&modestbranding=1"
-              frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            <iframe id="ytFrame"
+              src=""
+              data-src="https://www.youtube.com/embed/WdeILncveY4?rel=0&modestbranding=1&autoplay=1"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen></iframe>
           </div>
-          <p class="video-label">Set #2 – Club Session</p>
+          <button class="video-close-btn" onclick="closeVideo()">✕ Schließen</button>
         </div>
       </div>
     </div>
@@ -315,6 +339,32 @@
     });
 
     goTo(0);
+
+    /* ── Hamburger ───────────────────────────────── */
+    const hamburger = document.getElementById('hamburger');
+    const navLinks  = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      navLinks.classList.toggle('open');
+    });
+    function closeMenu() {
+      hamburger.classList.remove('open');
+      navLinks.classList.remove('open');
+    }
+
+    /* ── Video Accordion ─────────────────────────── */
+    function openVideo() {
+      const frame = document.getElementById('ytFrame');
+      frame.src = frame.dataset.src;
+      document.getElementById('videoThumb').style.display  = 'none';
+      document.getElementById('videoPlayer').style.display = 'block';
+    }
+    function closeVideo() {
+      const frame = document.getElementById('ytFrame');
+      frame.src = '';
+      document.getElementById('videoPlayer').style.display = 'none';
+      document.getElementById('videoThumb').style.display  = 'block';
+    }
   </script>
 
 </body>
