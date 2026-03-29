@@ -10,21 +10,21 @@
   <meta name="keywords" content="DJ ERMN, DJ buchen Stuttgart, DJ buchen Böblingen, DJ Hochzeit Stuttgart, DJ Firmenfeier, DJ Geburtstag, DJ Baden-Württemberg, DJ Esslingen, DJ Kirchheim Teck, DJ Waiblingen, DJ Schwarzwald, DJ Schweiz, DJ Österreich, House DJ, Techno DJ, Clubbangers, HipHop DJ" />
   <meta name="author" content="DJ ERMN" />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://DJERMN.github.io/ERMN/" />
+  <link rel="canonical" href="https://DJERMN.github.io/" />
 
   <!-- ── Open Graph (Google, Facebook, WhatsApp) ── -->
   <meta property="og:type"        content="website" />
-  <meta property="og:url"         content="https://DJERMN.github.io/ERMN/" />
+  <meta property="og:url"         content="https://DJERMN.github.io/" />
   <meta property="og:title"       content="DJ ERMN – DJ buchen in Stuttgart & Region BW" />
   <meta property="og:description" content="Euer DJ für Hochzeit, Firmenfeier & Geburtstag. House · Techno · Clubbangers · HipHop. Region Stuttgart, Böblingen, Baden-Württemberg." />
-  <meta property="og:image"       content="https://DJERMN.github.io/ERMN/purple-ermn-1.jpg" />
+  <meta property="og:image"       content="https://DJERMN.github.io/purple-ermn-1.jpg" />
   <meta property="og:locale"      content="de_DE" />
 
   <!-- ── Twitter Card ──────────────────────────── -->
   <meta name="twitter:card"        content="summary_large_image" />
   <meta name="twitter:title"       content="DJ ERMN – DJ buchen in Stuttgart & Region BW" />
   <meta name="twitter:description" content="Euer DJ für Hochzeit, Firmenfeier & Geburtstag. House · Techno · Clubbangers · HipHop." />
-  <meta name="twitter:image"       content="https://DJERMN.github.io/ERMN/purple-ermn-1.jpg" />
+  <meta name="twitter:image"       content="https://DJERMN.github.io/purple-ermn-1.jpg" />
 
   <!-- ── Structured Data (JSON-LD) ─────────────── -->
   <script type="application/ld+json">
@@ -32,8 +32,8 @@
     "@context": "https://schema.org",
     "@type": "MusicGroup",
     "name": "DJ ERMN",
-    "url": "https://DJERMN.github.io/ERMN/",
-    "image": "https://DJERMN.github.io/ERMN/purple-ermn-1.jpg",
+    "url": "https://DJERMN.github.io/",
+    "image": "https://DJERMN.github.io/purple-ermn-1.jpg",
     "description": "DJ ERMN – Euer DJ für Hochzeit, Firmenfeier und Geburtstag in Stuttgart, Böblingen und ganz Baden-Württemberg. Genres: House, Techno, Clubbangers, HipHop.",
     "genre": ["House", "Techno", "Clubbangers", "HipHop"],
     "areaServed": [
@@ -53,16 +53,46 @@
 </head>
 <body>
 
-  <!-- COOKIE CONSENT -->
-  <div class="cookie-banner" id="cookieBanner">
-    <div class="cookie-inner">
-      <div class="cookie-text">
-        <strong>🍪 Cookies & Datenschutz</strong>
-        <p>Diese Website nutzt externe Dienste (YouTube, Google Fonts), die Cookies setzen und Daten an Dritte übertragen können. Mit „Akzeptieren" stimmst du der Nutzung zu. Mehr Infos im <a href="impressum.html">Impressum</a>.</p>
+  <!-- COOKIE CONSENT OVERLAY -->
+  <div class="cookie-overlay" id="cookieBanner">
+    <div class="cookie-modal">
+      <div class="cookie-modal-icon">🍪</div>
+      <h2 class="cookie-modal-title">Datenschutz & Cookies</h2>
+      <p class="cookie-modal-desc">
+        Diese Website verwendet Cookies und externe Dienste. Wähle aus, was du erlaubst.
+        Mehr Infos im <a href="impressum.html">Impressum</a>.
+      </p>
+
+      <div class="cookie-options">
+        <label class="cookie-option disabled">
+          <div class="cookie-option-info">
+            <span class="cookie-option-name">✅ Notwendig</span>
+            <span class="cookie-option-desc">Technisch erforderlich, immer aktiv</span>
+          </div>
+          <input type="checkbox" checked disabled />
+          <span class="cookie-toggle locked"></span>
+        </label>
+        <label class="cookie-option">
+          <div class="cookie-option-info">
+            <span class="cookie-option-name">🎨 Google Fonts</span>
+            <span class="cookie-option-desc">Schriftarten von Google (Datenübertragung an Google)</span>
+          </div>
+          <input type="checkbox" id="chkFonts" />
+          <span class="cookie-toggle"></span>
+        </label>
+        <label class="cookie-option">
+          <div class="cookie-option-info">
+            <span class="cookie-option-name">▶ YouTube</span>
+            <span class="cookie-option-desc">Video-Einbettung (Tracking durch Google/YouTube)</span>
+          </div>
+          <input type="checkbox" id="chkYoutube" />
+          <span class="cookie-toggle"></span>
+        </label>
       </div>
-      <div class="cookie-actions">
-        <button class="cookie-btn decline" onclick="setConsent(false)">Ablehnen</button>
-        <button class="cookie-btn accept"  onclick="setConsent(true)">Akzeptieren</button>
+
+      <div class="cookie-modal-actions">
+        <button class="cookie-btn accept-all" onclick="acceptAll()">Alle akzeptieren</button>
+        <button class="cookie-btn save-sel"   onclick="saveSelection()">Auswahl speichern</button>
       </div>
     </div>
   </div>
@@ -329,27 +359,32 @@
 
   <script>
     /* ── Cookie Consent ──────────────────────────── */
-    function setConsent(accepted) {
-      localStorage.setItem('cookieConsent', accepted ? 'yes' : 'no');
-      document.getElementById('cookieBanner').style.display = 'none';
-      if (accepted) loadExternalServices();
+    function acceptAll() {
+      document.getElementById('chkFonts').checked   = true;
+      document.getElementById('chkYoutube').checked = true;
+      saveSelection();
     }
 
-    function loadExternalServices() {
-      // Load Google Fonts
+    function saveSelection() {
+      const fonts   = document.getElementById('chkFonts').checked;
+      const youtube = document.getElementById('chkYoutube').checked;
+      localStorage.setItem('cookieFonts',   fonts   ? 'yes' : 'no');
+      localStorage.setItem('cookieYoutube', youtube ? 'yes' : 'no');
+      localStorage.setItem('cookieConsent', 'done');
+      document.getElementById('cookieBanner').style.display = 'none';
+      if (fonts)   loadFonts();
+    }
+
+    function loadFonts() {
       document.getElementById('gfonts').href =
         'https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap';
     }
 
     // Check on load
-    const consent = localStorage.getItem('cookieConsent');
-    if (consent === 'yes') {
+    if (localStorage.getItem('cookieConsent') === 'done') {
       document.getElementById('cookieBanner').style.display = 'none';
-      loadExternalServices();
-    } else if (consent === 'no') {
-      document.getElementById('cookieBanner').style.display = 'none';
+      if (localStorage.getItem('cookieFonts') === 'yes') loadFonts();
     }
-    // else: banner stays visible
 
     /* ── Story Logic ─────────────────────────────── */
     const slides      = document.querySelectorAll('.story-slide');
@@ -448,8 +483,8 @@
 
     /* ── Video Accordion ─────────────────────────── */
     function openVideo() {
-      if (localStorage.getItem('cookieConsent') !== 'yes') {
-        alert('Bitte stimme zuerst den Cookies zu, um YouTube-Videos zu laden.');
+      if (localStorage.getItem('cookieYoutube') !== 'yes') {
+        alert('Bitte stimme unter "Auswahl speichern" dem Laden von YouTube-Videos zu.');
         return;
       }
       const frame = document.getElementById('ytFrame');
