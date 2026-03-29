@@ -367,7 +367,28 @@
   </footer>
 
   <script>
+    /* ── Zoom Prevention (iOS + Android) ─────────── */
+    document.addEventListener('gesturestart',  e => e.preventDefault(), { passive: false });
+    document.addEventListener('gesturechange', e => e.preventDefault(), { passive: false });
+    document.addEventListener('gestureend',    e => e.preventDefault(), { passive: false });
+    let lastTouch = 0;
+    document.addEventListener('touchend', e => {
+      const now = Date.now();
+      if (now - lastTouch < 300) e.preventDefault();
+      lastTouch = now;
+    }, { passive: false });
+    document.addEventListener('touchmove', e => {
+      if (e.touches.length > 1) e.preventDefault();
+    }, { passive: false });
+
     /* ── Cookie Consent ──────────────────────────── */
+    const banner = document.getElementById('cookieBanner');
+
+    function closeBanner() {
+      banner.classList.add('cookie-hide');
+      setTimeout(() => { banner.style.display = 'none'; }, 400);
+    }
+
     function acceptAll() {
       document.getElementById('chkFonts').checked   = true;
       document.getElementById('chkYoutube').checked = true;
@@ -380,8 +401,8 @@
       localStorage.setItem('cookieFonts',   fonts   ? 'yes' : 'no');
       localStorage.setItem('cookieYoutube', youtube ? 'yes' : 'no');
       localStorage.setItem('cookieConsent', 'done');
-      document.getElementById('cookieBanner').style.display = 'none';
-      if (fonts)   loadFonts();
+      closeBanner();
+      if (fonts) loadFonts();
     }
 
     function loadFonts() {
@@ -389,10 +410,16 @@
         'https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap';
     }
 
-    // Check on load
+    // Show or hide on load
     if (localStorage.getItem('cookieConsent') === 'done') {
-      document.getElementById('cookieBanner').style.display = 'none';
+      banner.style.display = 'none';
       if (localStorage.getItem('cookieFonts') === 'yes') loadFonts();
+    } else {
+      // Smooth fade-in after short delay
+      banner.style.display = 'flex';
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => { banner.style.opacity = '1'; });
+      });
     }
 
     /* ── Story Logic ─────────────────────────────── */
