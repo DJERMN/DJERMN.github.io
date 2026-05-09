@@ -6,357 +6,74 @@
 <title>Hochzeiten — Playlists</title>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; background: #0a0a12; color: #f0f0f0; min-height: 100vh; -webkit-text-size-adjust: 100%; padding-bottom: 100px; }
 
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-    background: #0a0a12;
-    color: #f0f0f0;
-    min-height: 100vh;
-    -webkit-text-size-adjust: 100%;
-    padding-bottom: 100px;
-  }
+  header { background: linear-gradient(135deg, #130a2e 0%, #0d1628 60%, #0a0a12 100%); padding: clamp(28px,6vw,52px) clamp(16px,5vw,48px) clamp(20px,4vw,36px); border-bottom: 1px solid #ffffff12; position: relative; overflow: hidden; }
+  header::before { content:''; position:absolute; inset:0; background: radial-gradient(ellipse at 20% 50%,#7c3aed18 0%,transparent 60%), radial-gradient(ellipse at 80% 20%,#2563eb12 0%,transparent 50%); pointer-events:none; }
+  header h1 { font-size:clamp(1.5rem,6vw,2.6rem); font-weight:800; letter-spacing:-0.5px; background:linear-gradient(100deg,#fff 0%,#c084fc 50%,#818cf8 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; position:relative; line-height:1.15; }
+  header p { margin-top:8px; color:#6b7a99; font-size:clamp(0.75rem,3vw,0.9rem); position:relative; }
+  .hint { margin-top:10px; font-size:clamp(0.72rem,2.5vw,0.82rem); color:#a78bfa; position:relative; }
 
-  /* ── Header ── */
-  header {
-    background: linear-gradient(135deg, #130a2e 0%, #0d1628 60%, #0a0a12 100%);
-    padding: clamp(28px, 6vw, 52px) clamp(16px, 5vw, 48px) clamp(20px, 4vw, 36px);
-    border-bottom: 1px solid #ffffff12;
-    position: relative;
-    overflow: hidden;
-  }
-  header::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at 20% 50%, #7c3aed18 0%, transparent 60%),
-                radial-gradient(ellipse at 80% 20%, #2563eb12 0%, transparent 50%);
-    pointer-events: none;
-  }
-  header h1 {
-    font-size: clamp(1.5rem, 6vw, 2.6rem);
-    font-weight: 800;
-    letter-spacing: -0.5px;
-    background: linear-gradient(100deg, #fff 0%, #c084fc 50%, #818cf8 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    position: relative;
-    line-height: 1.15;
-  }
-  header p {
-    margin-top: 8px;
-    color: #6b7a99;
-    font-size: clamp(0.75rem, 3vw, 0.9rem);
-    position: relative;
-  }
-  .hint {
-    margin-top: 10px;
-    font-size: clamp(0.72rem, 2.5vw, 0.82rem);
-    color: #a78bfa;
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
+  .nav { display:flex; flex-wrap:nowrap; gap:8px; margin-top:18px; position:relative; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; padding-bottom:2px; }
+  .nav::-webkit-scrollbar { display:none; }
+  .nav a { color:#94a3b8; text-decoration:none; font-size:0.78rem; font-weight:500; padding:6px 14px; border:1px solid #ffffff18; border-radius:999px; background:#ffffff08; white-space:nowrap; flex-shrink:0; -webkit-tap-highlight-color:transparent; touch-action:manipulation; }
 
-  /* ── Nav ── */
-  .nav {
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 8px;
-    margin-top: 18px;
-    position: relative;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    padding-bottom: 2px;
-  }
-  .nav::-webkit-scrollbar { display: none; }
-  .nav a {
-    color: #94a3b8;
-    text-decoration: none;
-    font-size: 0.78rem;
-    font-weight: 500;
-    padding: 6px 14px;
-    border: 1px solid #ffffff18;
-    border-radius: 999px;
-    background: #ffffff08;
-    white-space: nowrap;
-    flex-shrink: 0;
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
-  }
+  main { max-width:1440px; margin:0 auto; padding:clamp(24px,5vw,48px) clamp(12px,4vw,36px) 40px; }
 
-  /* ── Main ── */
-  main {
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: clamp(24px, 5vw, 48px) clamp(12px, 4vw, 36px) 40px;
-  }
+  .playlist-section { margin-bottom:clamp(40px,8vw,60px); scroll-margin-top:16px; }
+  .playlist-section h2 { font-size:clamp(1rem,4vw,1.2rem); font-weight:700; color:#e2e8f0; margin-bottom:18px; display:flex; align-items:center; gap:8px; padding-bottom:12px; border-bottom:1px solid #ffffff12; flex-wrap:wrap; }
+  .sec-icon { font-size:1.1rem; line-height:1; flex-shrink:0; }
+  .count { font-size:0.7rem; font-weight:600; color:#6b7280; background:#1a1f2e; border:1px solid #ffffff10; padding:2px 10px; border-radius:999px; }
 
-  /* ── Section ── */
-  .playlist-section {
-    margin-bottom: clamp(40px, 8vw, 60px);
-    scroll-margin-top: 16px;
-  }
-  .playlist-section h2 {
-    font-size: clamp(1rem, 4vw, 1.2rem);
-    font-weight: 700;
-    color: #e2e8f0;
-    margin-bottom: 18px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid #ffffff12;
-    flex-wrap: wrap;
-  }
-  .sec-icon { font-size: 1.1rem; line-height: 1; flex-shrink: 0; }
-  .count {
-    font-size: 0.7rem;
-    font-weight: 600;
-    color: #6b7280;
-    background: #1a1f2e;
-    border: 1px solid #ffffff10;
-    padding: 2px 10px;
-    border-radius: 999px;
-  }
+  .cards { display:grid; grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr)); gap:10px; }
 
-  /* ── Cards ── */
-  .cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
-    gap: 10px;
-  }
+  .card { background:#12121e; border:1px solid #ffffff0c; border-radius:14px; display:flex; align-items:center; gap:12px; padding:10px; cursor:pointer; user-select:none; -webkit-tap-highlight-color:transparent; touch-action:manipulation; transition:background 0.18s,border-color 0.18s; position:relative; }
+  @media (hover:hover) { .card:hover { background:#1a1a2e; border-color:#ffffff20; } .card.selected:hover { background:#2a0a0a; } }
 
-  .card {
-    background: #12121e;
-    border: 1px solid #ffffff0c;
-    border-radius: 14px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px;
-    cursor: pointer;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
-    transition: background 0.18s, border-color 0.18s, box-shadow 0.18s;
-    position: relative;
-  }
+  .card-check { position:absolute; top:8px; right:8px; width:22px; height:22px; border-radius:50%; border:2px solid #ffffff25; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:all 0.18s; }
+  .check-icon { font-size:0.7rem; color:transparent; font-weight:900; line-height:1; transition:color 0.18s; }
+  .card.selected { background:#1f0a0a; border-color:#ef444455; box-shadow:0 0 0 1px #ef444422,0 4px 20px #ef44440f; }
+  .card.selected .card-check { background:#ef4444; border-color:#ef4444; }
+  .card.selected .check-icon { color:#fff; }
+  .card.selected .card-title { color:#fca5a5; }
 
-  /* Auswahlkreis */
-  .card-check {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    border: 2px solid #ffffff25;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    transition: all 0.18s;
-    background: transparent;
-  }
-  .check-icon {
-    font-size: 0.7rem;
-    color: transparent;
-    font-weight: 900;
-    line-height: 1;
-    transition: color 0.18s;
-  }
+  .cover { width:clamp(52px,14vw,64px); height:clamp(52px,14vw,64px); border-radius:8px; object-fit:cover; flex-shrink:0; background:#1a1f2e; pointer-events:none; }
+  .no-cover { display:flex; align-items:center; justify-content:center; font-size:1.5rem; background:#1a1f2e; }
 
-  /* Ausgewählt */
-  .card.selected {
-    background: #1f0a0a;
-    border-color: #ef444455;
-    box-shadow: 0 0 0 1px #ef444422, 0 4px 20px #ef44440f;
-  }
-  .card.selected .card-check {
-    background: #ef4444;
-    border-color: #ef4444;
-  }
-  .card.selected .check-icon {
-    color: #fff;
-  }
-  .card.selected .card-title {
-    color: #fca5a5;
-  }
+  .card-info { flex:1; min-width:0; padding-right:20px; }
+  .card-title { font-size:clamp(0.78rem,2.5vw,0.85rem); font-weight:600; color:#f1f5f9; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-bottom:2px; line-height:1.3; transition:color 0.18s; }
+  .card-artist { font-size:clamp(0.7rem,2.2vw,0.76rem); color:#9ca3af; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-bottom:8px; line-height:1.3; }
+  .card-meta { display:flex; flex-wrap:wrap; gap:4px; }
+  .badge { font-size:clamp(0.6rem,1.8vw,0.65rem); font-weight:600; padding:3px 7px; border-radius:6px; letter-spacing:0.2px; white-space:nowrap; }
+  .bpm { background:#1e1b4b; color:#a5b4fc; border:1px solid #3730a330; }
+  .key { background:#052e16; color:#6ee7b7; border:1px solid #16a34a30; }
+  .dur { background:#1c1917; color:#a8a29e; border:1px solid #57534e30; }
+  .genre { background:#1e1030; color:#c4b5fd; border:1px solid #7c3aed30; }
 
-  @media (hover: hover) {
-    .card:hover {
-      background: #1a1a2e;
-      border-color: #ffffff20;
-    }
-    .card.selected:hover {
-      background: #2a0a0a;
-    }
-  }
+  .hotcues { margin-top:6px; font-size:0.62rem; font-family:monospace; color:#fbbf24; letter-spacing:0.3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 
-  .cover {
-    width: clamp(52px, 14vw, 64px);
-    height: clamp(52px, 14vw, 64px);
-    border-radius: 8px;
-    object-fit: cover;
-    flex-shrink: 0;
-    background: #1a1f2e;
-    pointer-events: none;
-  }
-  .no-cover {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    background: #1a1f2e;
-  }
+  .share-bar { position:fixed; bottom:0; left:0; right:0; z-index:100; background:#0d0d1a; border-top:1px solid #ffffff15; padding:clamp(12px,3vw,16px) clamp(16px,5vw,32px); display:flex; align-items:center; justify-content:space-between; gap:12px; transform:translateY(100%); transition:transform 0.25s cubic-bezier(0.34,1.56,0.64,1); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); }
+  .share-bar.visible { transform:translateY(0); }
+  .share-bar-info { flex:1; min-width:0; }
+  .share-bar-count { font-size:clamp(0.85rem,3vw,1rem); font-weight:700; color:#fca5a5; }
+  .share-bar-sub { font-size:clamp(0.68rem,2.2vw,0.75rem); color:#6b7280; margin-top:2px; }
+  .share-actions { display:flex; gap:8px; flex-shrink:0; }
+  .btn-reset { padding:10px 16px; border-radius:10px; border:1px solid #ffffff18; background:#1f2937; color:#9ca3af; font-size:0.8rem; font-weight:600; cursor:pointer; -webkit-tap-highlight-color:transparent; white-space:nowrap; }
+  .btn-share { padding:10px 20px; border-radius:10px; border:none; background:linear-gradient(135deg,#25d366,#128c7e); color:#fff; font-size:0.82rem; font-weight:700; cursor:pointer; display:flex; align-items:center; gap:7px; -webkit-tap-highlight-color:transparent; white-space:nowrap; }
+  .btn-share:active { opacity:0.85; }
 
-  .card-info { flex: 1; min-width: 0; padding-right: 20px; }
-  .card-title {
-    font-size: clamp(0.78rem, 2.5vw, 0.85rem);
-    font-weight: 600;
-    color: #f1f5f9;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    margin-bottom: 2px;
-    line-height: 1.3;
-    transition: color 0.18s;
-  }
-  .card-artist {
-    font-size: clamp(0.7rem, 2.2vw, 0.76rem);
-    color: #9ca3af;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    margin-bottom: 8px;
-    line-height: 1.3;
-  }
-  .card-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-  }
-  .badge {
-    font-size: clamp(0.6rem, 1.8vw, 0.65rem);
-    font-weight: 600;
-    padding: 3px 7px;
-    border-radius: 6px;
-    letter-spacing: 0.2px;
-    white-space: nowrap;
-  }
-  .bpm   { background: #1e1b4b; color: #a5b4fc; border: 1px solid #3730a330; }
-  .key   { background: #052e16; color: #6ee7b7; border: 1px solid #16a34a30; }
-  .dur   { background: #1c1917; color: #a8a29e; border: 1px solid #57534e30; }
-  .genre { background: #1e1030; color: #c4b5fd; border: 1px solid #7c3aed30; }
-
-  /* ── Sticky Footer Bar ── */
-  .share-bar {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 100;
-    background: #0d0d1a;
-    border-top: 1px solid #ffffff15;
-    padding: clamp(12px, 3vw, 16px) clamp(16px, 5vw, 32px);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    transform: translateY(100%);
-    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-  }
-  .share-bar.visible {
-    transform: translateY(0);
-  }
-  .share-bar-info {
-    flex: 1;
-    min-width: 0;
-  }
-  .share-bar-count {
-    font-size: clamp(0.85rem, 3vw, 1rem);
-    font-weight: 700;
-    color: #fca5a5;
-  }
-  .share-bar-sub {
-    font-size: clamp(0.68rem, 2.2vw, 0.75rem);
-    color: #6b7280;
-    margin-top: 2px;
-  }
-  .share-actions {
-    display: flex;
-    gap: 8px;
-    flex-shrink: 0;
-  }
-  .btn-reset {
-    padding: 10px 16px;
-    border-radius: 10px;
-    border: 1px solid #ffffff18;
-    background: #1f2937;
-    color: #9ca3af;
-    font-size: 0.8rem;
-    font-weight: 600;
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
-    white-space: nowrap;
-  }
-  .btn-share {
-    padding: 10px 20px;
-    border-radius: 10px;
-    border: none;
-    background: linear-gradient(135deg, #25d366, #128c7e);
-    color: #fff;
-    font-size: 0.82rem;
-    font-weight: 700;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
-    white-space: nowrap;
-  }
-  .btn-share:active { opacity: 0.85; }
-
-  /* Toast */
-  .toast {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%) translateY(-80px);
-    background: #1a2e1a;
-    border: 1px solid #4ade8055;
-    color: #4ade80;
-    padding: 10px 20px;
-    border-radius: 10px;
-    font-size: 0.82rem;
-    font-weight: 600;
-    z-index: 200;
-    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    white-space: nowrap;
-  }
-  .toast.show {
-    transform: translateX(-50%) translateY(0);
-  }
+  .toast { position:fixed; top:20px; left:50%; transform:translateX(-50%) translateY(-80px); background:#1a2e1a; border:1px solid #4ade8055; color:#4ade80; padding:10px 20px; border-radius:10px; font-size:0.82rem; font-weight:600; z-index:200; transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1); white-space:nowrap; }
+  .toast.show { transform:translateX(-50%) translateY(0); }
 </style>
 </head>
 <body>
-
 <header>
   <h1>💍 Hochzeiten — Playlists</h1>
-  <p>Rekordbox Library · 114 Songs in 7 Playlists</p>
-  <p class="hint">👆 Tippe auf einen Song, der <strong>nicht geht</strong> — dann teile deine Auswahl.</p>
+  <p>Rekordbox Library · 112 Songs in 7 Playlists</p>
+  <p class="hint">👆 Tippe auf einen Song der nicht geht — dann teile deine Auswahl.</p>
   <nav class="nav"><a href="#NightStart---Light-Start">🌅 NightStart - Light Start</a><a href="#NightStart---Mid">🌙 NightStart - Mid</a><a href="#NightStart---Warm">🔥 NightStart - Warm</a><a href="#NightStart---Hot">💥 NightStart - Hot</a><a href="#NightStart---Freak">⚡ NightStart - Freak</a><a href="#Peak---Banger-b-125-BPM">🎯 Peak - Banger b. 125 BPM</a><a href="#Peak---Banger-b-150-BPM">🚀 Peak - Banger b. 150 BPM</a></nav>
 </header>
-
-<main>
-<section class="playlist-section" id="NightStart---Light-Start">
+<main><section class="playlist-section" id="NightStart---Light-Start">
       <h2><span class="sec-icon">🌅</span> NightStart - Light Start <span class="count">14 Songs</span></h2>
       <div class="cards"><div class="card" onclick="toggleSong(this)" data-title="Rude Boy - Paul Mond Remix (Clean)" data-artist="Rihanna" data-playlist="NightStart - Light Start">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -370,6 +87,7 @@
           <span class="badge dur">⏱ 3:55</span>
           <span class="badge genre">Pop</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]0:29.8 [C]2:41.0 [D]3:37.9</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Hey Mama - Lincoln Baio Lighter Edit" data-artist="David Guetta ft. Nicki Minaj, Bebe Rexha & Afrojack" data-playlist="NightStart - Light Start">
@@ -384,6 +102,7 @@
           <span class="badge dur">⏱ 3:07</span>
           <span class="badge genre">Pop</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]0:17.5 [C]1:36.1 [D]2:28.4</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="One Dance - King Most Mrs. Officer Remix" data-artist="Drake ft. Wizkid & Kyla" data-playlist="NightStart - Light Start">
@@ -398,6 +117,7 @@
           <span class="badge dur">⏱ 2:31</span>
           <span class="badge genre">Hip Hop</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]0:09.5 [C]1:17.7 [D]2:11.8</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="I Don&#39;t Care (Intro)" data-artist="Ed Sheeran & Justin Bieber" data-playlist="NightStart - Light Start">
@@ -412,6 +132,7 @@
           <span class="badge dur">⏱ 4:23</span>
           <span class="badge genre">Pop</span>
         </div>
+        <div class="hotcues">[A]0:00.0 [B]0:18.8 [C]2:11.8 [D]3:45.9</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Can&#39;t Feel My Face - Soltice, Naken & Batikboy Remix" data-artist="The Weeknd" data-playlist="NightStart - Light Start">
@@ -426,6 +147,7 @@
           <span class="badge dur">⏱ 3:24</span>
           <span class="badge genre">Dance</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]1:08.0 [C]1:33.5 [D]3:07.0</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Yo Voy (Remix)" data-artist="Thombs, B R O S S" data-playlist="NightStart - Light Start">
@@ -440,6 +162,7 @@
           <span class="badge dur">⏱ 3:18</span>
           <span class="badge genre">Hip Hop</span>
         </div>
+        <div class="hotcues">[A]0:00.0 [B]0:40.8 [C]2:38.4 [D]2:55.2</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Dilemma - Madsko & Dan Bravo Remix (Dirty)" data-artist="Nelly ft. Kelly Rowland" data-playlist="NightStart - Light Start">
@@ -454,6 +177,7 @@
           <span class="badge dur">⏱ 2:45</span>
           <span class="badge genre">-</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]0:26.8 [C]1:20.1 [D]2:22.3</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Replay - Merco Remix" data-artist="Iyaz" data-playlist="NightStart - Light Start">
@@ -468,6 +192,7 @@
           <span class="badge dur">⏱ 2:30</span>
           <span class="badge genre">Pop</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]0:27.8 [C]1:13.9 [D]2:09.3</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="RITMO (Bad Boys For Life)" data-artist="Black Eyed Peas J Balvin" data-playlist="NightStart - Light Start">
@@ -482,6 +207,7 @@
           <span class="badge dur">⏱ 3:41</span>
           <span class="badge genre">-</span>
         </div>
+        <div class="hotcues">[A]0:01.1 [B]0:33.1 [C]1:50.9 [D]3:17.7</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Shape Of You - Dan Bravo Remix" data-artist="Ed Sheeran" data-playlist="NightStart - Light Start">
@@ -496,6 +222,7 @@
           <span class="badge dur">⏱ 4:22</span>
           <span class="badge genre">-</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]0:52.4 [C]2:02.3 [D]4:04.4</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Alejandro - Joan Qveralt Remix" data-artist="Lady Gaga" data-playlist="NightStart - Light Start">
@@ -510,6 +237,7 @@
           <span class="badge dur">⏱ 3:54</span>
           <span class="badge genre">Pop</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]0:25.1 [C]1:56.9 [D]3:37.1</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Work It - Tall Boys Lovin On Me Edit (Intro - Clean)" data-artist="Missy Elliot" data-playlist="NightStart - Light Start">
@@ -524,6 +252,7 @@
           <span class="badge dur">⏱ 2:48</span>
           <span class="badge genre">Hip Hop</span>
         </div>
+        <div class="hotcues">[A]0:02.1 [B]1:12.9 [C]1:40.4 [D]2:26.1</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Anti-Hero - Roosevelt Remix" data-artist="Taylor Swift" data-playlist="NightStart - Light Start">
@@ -538,6 +267,7 @@
           <span class="badge dur">⏱ 4:56</span>
           <span class="badge genre">-</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]2:35.8 [C]3:27.6 [D]4:36.8</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Tequila - Stavros Martina & Kevin D Remix" data-artist="The Champs" data-playlist="NightStart - Light Start">
@@ -552,6 +282,7 @@
           <span class="badge dur">⏱ 1:48</span>
           <span class="badge genre">Latin</span>
         </div>
+        <div class="hotcues">[A]0:00.2 [B]0:38.0 [C]1:06.3 [D]1:25.2</div>
       </div>
     </div></div>
     </section>
@@ -569,6 +300,7 @@
           <span class="badge dur">⏱ 2:46</span>
           <span class="badge genre">Hip Hop</span>
         </div>
+        <div class="hotcues">[A]0:00.5 [B]0:11.0 [C]1:17.7 [D]2:37.0</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Talk Dirty - Richastic Remix (Clean)" data-artist="Jason Derulo ft. 2 Chainz" data-playlist="NightStart - Mid">
@@ -583,6 +315,7 @@
           <span class="badge dur">⏱ 3:07</span>
           <span class="badge genre">Dance</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]0:32.6 [C]1:37.7 [D]2:34.7</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="My Humps - Anthem Kingz Bongos Edit (Dirty)" data-artist="Black Eyed Peas ft. Pitbull" data-playlist="NightStart - Mid">
@@ -597,6 +330,7 @@
           <span class="badge dur">⏱ 3:16</span>
           <span class="badge genre">Pop</span>
         </div>
+        <div class="hotcues">[A]0:01.8 [B]0:39.2 [C]1:50.0 [D]3:00.8</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Ain&#39;t Nobody (Loves Me Better)" data-artist="Felix Jaehn Jasmine Thompson" data-playlist="NightStart - Mid">
@@ -611,6 +345,7 @@
           <span class="badge dur">⏱ 3:06</span>
           <span class="badge genre">-</span>
         </div>
+        <div class="hotcues">[A]0:01.9 [B]0:32.4 [C]1:29.4 [D]2:44.6</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Stupid Love (DJcity Intro)" data-artist="Lady Gaga" data-playlist="NightStart - Mid">
@@ -625,6 +360,7 @@
           <span class="badge dur">⏱ 3:51</span>
           <span class="badge genre">Pop</span>
         </div>
+        <div class="hotcues">[A]0:00.0 [B]0:16.3 [C]1:53.9 [D]3:35.6</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Relax - The DISCO_NECT Remix" data-artist="Frankie Goes To Hollywood" data-playlist="NightStart - Mid">
@@ -639,6 +375,7 @@
           <span class="badge dur">⏱ 4:10</span>
           <span class="badge genre">Dance</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]0:04.1 [C]2:21.2 [D]3:50.0</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Ride Wit Me - DJcity vs Richastic 102-118 Throwback Transition (Dirty)" data-artist="Nelly" data-playlist="NightStart - Mid">
@@ -653,6 +390,7 @@
           <span class="badge dur">⏱ 3:54</span>
           <span class="badge genre">Dance</span>
         </div>
+        <div class="hotcues">[A]0:00.0 [B]0:55.0 [C]2:00.0 [D]3:37.7</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Messy - Les Bisous Remix (Intro - Dirty)" data-artist="Lola Young" data-playlist="NightStart - Mid">
@@ -667,6 +405,7 @@
           <span class="badge dur">⏱ 5:08</span>
           <span class="badge genre">Dance</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]0:16.1 [C]3:28.1 [D]4:48.1</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Don&#39;t Be Shy" data-artist="Tiësto KAROL G" data-playlist="NightStart - Mid">
@@ -681,6 +420,7 @@
           <span class="badge dur">⏱ 2:20</span>
           <span class="badge genre">-</span>
         </div>
+        <div class="hotcues">[A]0:00.7 [B]0:40.7 [C]1:28.7 [D]2:00.7</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Move Bitch - Richastic Remix (Intro - Dirty)" data-artist="Ludacris ft. Mystikal & I-20" data-playlist="NightStart - Mid">
@@ -695,6 +435,7 @@
           <span class="badge dur">⏱ 3:07</span>
           <span class="badge genre">-</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]0:53.0 [C]1:25.5 [D]2:50.9</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="NUEVAYoL - Da Phonk Club Edit (Dirty)" data-artist="Bad Bunny" data-playlist="NightStart - Mid">
@@ -709,6 +450,7 @@
           <span class="badge dur">⏱ 2:49</span>
           <span class="badge genre">Latin</span>
         </div>
+        <div class="hotcues">[A]0:00.3 [B]0:30.8 [C]1:19.7 [D]2:26.8</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Love Again (Imanbek Remix)" data-artist="Dua Lipa" data-playlist="NightStart - Mid">
@@ -723,6 +465,7 @@
           <span class="badge dur">⏱ 3:33</span>
           <span class="badge genre">-</span>
         </div>
+        <div class="hotcues">[A]0:02.0 [B]0:10.0 [C]1:54.0 [D]3:16.0</div>
       </div>
     </div></div>
     </section>
@@ -740,6 +483,7 @@
           <span class="badge dur">⏱ 5:11</span>
           <span class="badge genre">House</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]0:31.8 [C]2:56.6 [D]4:51.7</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Mwaki" data-artist="Zerb & Sofiya Nzau" data-playlist="NightStart - Warm">
@@ -754,6 +498,7 @@
           <span class="badge dur">⏱ 4:32</span>
           <span class="badge genre">Dance</span>
         </div>
+        <div class="hotcues">[A]0:00.2 [B]0:16.2 [C]3:08.2 [D]4:12.2</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="the boy is mine - DJ Robbie Lewis Remix" data-artist="Ariana Grande" data-playlist="NightStart - Warm">
@@ -768,6 +513,7 @@
           <span class="badge dur">⏱ 3:28</span>
           <span class="badge genre">Pop</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]0:16.1 [C]1:36.1 [D]3:12.1</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Un Gatito Me Llamó (Intro - Dirty)" data-artist="KAROL G " data-playlist="NightStart - Warm">
@@ -782,6 +528,7 @@
           <span class="badge dur">⏱ 2:31</span>
           <span class="badge genre">Latin</span>
         </div>
+        <div class="hotcues">[A]0:02.0 [B]0:52.4 [C]1:08.5 [D]2:15.1</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Blurred Lines - Stavros Martina & Kevin D Remix (Dirty)" data-artist="Robin Thicke ft. Pharrell" data-playlist="NightStart - Warm">
@@ -796,6 +543,7 @@
           <span class="badge dur">⏱ 3:30</span>
           <span class="badge genre">Pop</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]0:24.1 [C]1:36.1 [D]3:12.1</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Blinding Lights - Chunky Dip & Jesse James More Than You Know Edit" data-artist="The Weeknd" data-playlist="NightStart - Warm">
@@ -810,6 +558,7 @@
           <span class="badge dur">⏱ 2:22</span>
           <span class="badge genre">Pop</span>
         </div>
+        <div class="hotcues">[A]0:00.0 [B]0:39.0 [C]1:18.1 [D]2:04.9</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Dance Monkey - Groove Safari Remix" data-artist="Tones & I" data-playlist="NightStart - Warm">
@@ -824,6 +573,7 @@
           <span class="badge dur">⏱ 3:54</span>
           <span class="badge genre">House</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]0:16.1 [C]1:56.1 [D]3:28.1</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="BAILALO - Afro Cumbia DJ Tool" data-artist="Eddie Boy" data-playlist="NightStart - Warm">
@@ -838,6 +588,7 @@
           <span class="badge dur">⏱ 2:52</span>
           <span class="badge genre">Dance</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]0:46.0 [C]1:20.1 [D]2:24.1</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Treasure - DJ Beatzilla & Bossa Nova Crazy Edit" data-artist="Bruno Mars" data-playlist="NightStart - Warm">
@@ -852,6 +603,7 @@
           <span class="badge dur">⏱ 2:40</span>
           <span class="badge genre">Dance</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]0:47.7 [C]1:51.2 [D]2:22.9</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="yes, and? (DJcity Intro - Dirty)" data-artist="Ariana Grande & Mariah Carey" data-playlist="NightStart - Warm">
@@ -866,6 +618,7 @@
           <span class="badge dur">⏱ 3:13</span>
           <span class="badge genre">Pop</span>
         </div>
+        <div class="hotcues">[A]0:00.0 [B]1:38.9 [C]2:25.3 [D]2:57.5</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Addicted" data-artist="ZERB & The Chainsmokers ft. Ink" data-playlist="NightStart - Warm">
@@ -880,6 +633,7 @@
           <span class="badge dur">⏱ 3:28</span>
           <span class="badge genre">Dance</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]0:16.1 [C]1:48.0 [D]3:10.1</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Telephone" data-artist="Lady Gaga, Beyoncé" data-playlist="NightStart - Warm">
@@ -894,6 +648,7 @@
           <span class="badge dur">⏱ 3:40</span>
           <span class="badge genre">Hip Hop</span>
         </div>
+        <div class="hotcues">[A]0:00.2 [B]0:23.8 [C]2:06.1 [D]3:01.1</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="I Like To Move It (feat. The Mad Stuntman) [Radio Mix]" data-artist="Reel 2 Real The Mad Stuntman" data-playlist="NightStart - Warm">
@@ -908,6 +663,7 @@
           <span class="badge dur">⏱ 3:41</span>
           <span class="badge genre">-</span>
         </div>
+        <div class="hotcues">[A]0:01.9 [B]0:17.5 [C]1:59.0 [D]2:51.6</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Running Up That Hill (A Deal With God) - PATCH SAFARI Remix" data-artist="Kate Bush" data-playlist="NightStart - Warm">
@@ -922,6 +678,7 @@
           <span class="badge dur">⏱ 4:46</span>
           <span class="badge genre">Dance</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]0:31.8 [C]2:38.7 [D]4:29.8</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Baianá" data-artist="Bakermat" data-playlist="NightStart - Warm">
@@ -936,6 +693,7 @@
           <span class="badge dur">⏱ 3:02</span>
           <span class="badge genre">-</span>
         </div>
+        <div class="hotcues">[A]0:00.9 [B]1:16.4 [C]2:19.3 [D]2:50.8</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="La Bebé - Eddie Boy Quickie Edit" data-artist="Hugel, Aaron Sevilla & Juany Bravo
@@ -954,11 +712,12 @@
           <span class="badge dur">⏱ 2:53</span>
           <span class="badge genre">Dance</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]1:10.9 [C]2:06.0 [D]2:37.4</div>
       </div>
     </div></div>
     </section>
 <section class="playlist-section" id="NightStart---Hot">
-      <h2><span class="sec-icon">💥</span> NightStart - Hot <span class="count">22 Songs</span></h2>
+      <h2><span class="sec-icon">💥</span> NightStart - Hot <span class="count">21 Songs</span></h2>
       <div class="cards"><div class="card" onclick="toggleSong(this)" data-title="Mi Gente - ATCG Remix" data-artist="J Balvin & Willy William" data-playlist="NightStart - Hot">
       <div class="card-check"><span class="check-icon">✕</span></div>
       <img src="https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/84/cd/7a/84cd7a5c-7dec-d743-9f4e-3fc74c150a77/886446592145.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy">
@@ -971,6 +730,7 @@
           <span class="badge dur">⏱ 4:02</span>
           <span class="badge genre">Latin</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]1:03.0 [C]2:39.4 [D]3:40.4</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Danza Kuduro - Tiësto Remix" data-artist="Don Omar & Lucenzo" data-playlist="NightStart - Hot">
@@ -985,6 +745,7 @@
           <span class="badge dur">⏱ 3:37</span>
           <span class="badge genre">Dance</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]0:15.4 [C]1:39.9 [D]3:17.8</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Diamonds - DJ GALIN Remix" data-artist="Rihanna" data-playlist="NightStart - Hot">
@@ -999,20 +760,7 @@
           <span class="badge dur">⏱ 4:45</span>
           <span class="badge genre">Dance</span>
         </div>
-      </div>
-    </div>
-<div class="card" onclick="toggleSong(this)" data-title="Titanium - Jablonski Tantalizing Edit" data-artist="David Guetta ft. Sia" data-playlist="NightStart - Hot">
-      <div class="card-check"><span class="check-icon">✕</span></div>
-      <img src="https://is1-ssl.mzstatic.com/image/thumb/Features125/v4/f0/a4/2c/f0a42c10-829c-8b84-7ac2-271f45d4687e/dj.zykhivrk.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy">
-      <div class="card-info">
-        <div class="card-title" title="Titanium - Jablonski Tantalizing Edit">Titanium - Jablonski Tantalizing Edit</div>
-        <div class="card-artist">David Guetta ft. Sia</div>
-        <div class="card-meta">
-          <span class="badge bpm">♩ 123</span>
-          <span class="badge key">🎹 5A</span>
-          <span class="badge dur">⏱ 3:44</span>
-          <span class="badge genre">Dance</span>
-        </div>
+        <div class="hotcues">[A]0:00.1 [B]0:15.8 [C]2:13.8 [D]4:27.6</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Right Round - Anthem Kingz I Wish Edit" data-artist="Flo Rida ft. Ke$ha" data-playlist="NightStart - Hot">
@@ -1027,6 +775,7 @@
           <span class="badge dur">⏱ 2:44</span>
           <span class="badge genre">House</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]0:31.1 [C]1:17.5 [D]2:11.7</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Houdini - Effendi Remix" data-artist="Dua Lipa" data-playlist="NightStart - Hot">
@@ -1041,6 +790,7 @@
           <span class="badge dur">⏱ 5:15</span>
           <span class="badge genre">Dance</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]0:31.3 [D]2:14.2 [C]3:38.6</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="One Kiss" data-artist="Calvin Harris Dua Lipa" data-playlist="NightStart - Hot">
@@ -1055,6 +805,7 @@
           <span class="badge dur">⏱ 3:34</span>
           <span class="badge genre">Club-Banger</span>
         </div>
+        <div class="hotcues">[A]0:00.0 [B]0:07.7 [C]1:56.1 [D]3:13.5</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Show Me Love - Marlon Galvao Remix" data-artist="Robin S." data-playlist="NightStart - Hot">
@@ -1069,6 +820,7 @@
           <span class="badge dur">⏱ 2:34</span>
           <span class="badge genre">Dance</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]0:46.2 [C]1:16.9 [D]2:10.6</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Like A Prayer - DJ Dark Remix" data-artist="Madonna" data-playlist="NightStart - Hot">
@@ -1083,20 +835,7 @@
           <span class="badge dur">⏱ 3:51</span>
           <span class="badge genre">Dance</span>
         </div>
-      </div>
-    </div>
-<div class="card" onclick="toggleSong(this)" data-title="Rock This Party (Everybody Dance Now) - Jablonski Shakira Shakira Edit" data-artist="Bob Sinclar ft. Big Ali" data-playlist="NightStart - Hot">
-      <div class="card-check"><span class="check-icon">✕</span></div>
-      <img src="https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/5f/5d/19/5f5d1997-e9c4-48ab-27ba-ae6b040b58a2/3596974549197_cover.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy">
-      <div class="card-info">
-        <div class="card-title" title="Rock This Party (Everybody Dance Now) - Jablonski Shakira Shakira Edit">Rock This Party (Everybody Dance Now) - Jablonski Shakira Shakira Edit</div>
-        <div class="card-artist">Bob Sinclar ft. Big Ali</div>
-        <div class="card-meta">
-          <span class="badge bpm">♩ 125</span>
-          <span class="badge key">🎹 8A</span>
-          <span class="badge dur">⏱ 3:20</span>
-          <span class="badge genre">-</span>
-        </div>
+        <div class="hotcues">[A]0:00.2 [B]0:15.6 [C]1:47.7 [D]3:35.3</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="How Deep Is Your Love" data-artist="Calvin Harris Disciples" data-playlist="NightStart - Hot">
@@ -1111,6 +850,7 @@
           <span class="badge dur">⏱ 3:32</span>
           <span class="badge genre">Club-Banger</span>
         </div>
+        <div class="hotcues">[A]0:00.0 [B]0:31.5 [C]2:05.9 [D]2:53.1</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Rhythm Of The Night - Optical Disco Remix" data-artist="Corona" data-playlist="NightStart - Hot">
@@ -1125,6 +865,7 @@
           <span class="badge dur">⏱ 5:09</span>
           <span class="badge genre">Dance</span>
         </div>
+        <div class="hotcues">[A]0:01.5 [B]0:46.1 [C]2:34.4 [D]4:53.8</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Beat Dancer" data-artist="Juliet Sikora" data-playlist="NightStart - Hot">
@@ -1139,6 +880,22 @@
           <span class="badge dur">⏱ 3:20</span>
           <span class="badge genre">-</span>
         </div>
+        <div class="hotcues">[A]0:00.0 [B]1:09.1 [C]2:25.9 [D]2:56.6</div>
+      </div>
+    </div>
+<div class="card" onclick="toggleSong(this)" data-title="Baby - Robin Roij Remix" data-artist="Justin Bieber" data-playlist="NightStart - Hot">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover no-cover">🎵</div>
+      <div class="card-info">
+        <div class="card-title" title="Baby - Robin Roij Remix">Baby - Robin Roij Remix</div>
+        <div class="card-artist">Justin Bieber</div>
+        <div class="card-meta">
+          <span class="badge bpm">♩ 125</span>
+          <span class="badge key">🎹 5B</span>
+          <span class="badge dur">⏱ 2:49</span>
+          <span class="badge genre">Pop</span>
+        </div>
+        <div class="hotcues">[A]0:01.5 [B]0:30.3 [C]1:26.0 [D]2:33.2</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Safe And Sound - De Soffer Remix" data-artist="Capital Cities" data-playlist="NightStart - Hot">
@@ -1153,6 +910,7 @@
           <span class="badge dur">⏱ 3:51</span>
           <span class="badge genre">House</span>
         </div>
+        <div class="hotcues">[A]0:00.3 [B]0:31.8 [C]1:46.6 [D]3:40.7</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Closer - Dazz & Calvo Remix" data-artist="Ne-Yo" data-playlist="NightStart - Hot">
@@ -1167,6 +925,7 @@
           <span class="badge dur">⏱ 3:56</span>
           <span class="badge genre">House</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]1:02.5 [C]1:49.3 [D]3:36.6</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Umbrella - MIRAMAR Remix" data-artist="Rihanna" data-playlist="NightStart - Hot">
@@ -1181,6 +940,7 @@
           <span class="badge dur">⏱ 4:21</span>
           <span class="badge genre">-</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]0:31.6 [C]2:29.6 [D]3:46.4</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Sugar - Colin Jay Remix (Intro - Dirty)" data-artist="Maroon 5" data-playlist="NightStart - Hot">
@@ -1195,6 +955,7 @@
           <span class="badge dur">⏱ 4:47</span>
           <span class="badge genre">Pop</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]1:33.0 [C]2:19.4 [D]4:31.0</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Animals - Joan Qveralt Remix" data-artist="Maroon 5" data-playlist="NightStart - Hot">
@@ -1209,6 +970,7 @@
           <span class="badge dur">⏱ 2:40</span>
           <span class="badge genre">Pop</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]1:04.1 [C]1:36.1 [D]2:24.1</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Move Your Body" data-artist="Öwnboss SEVEK" data-playlist="NightStart - Hot">
@@ -1223,6 +985,7 @@
           <span class="badge dur">⏱ 2:37</span>
           <span class="badge genre">Club-Banger</span>
         </div>
+        <div class="hotcues">[A]0:00.0 [B]0:34.6 [C]1:47.5 [D]2:25.9</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="One More Time - Capital People Remix" data-artist="Daft Punk" data-playlist="NightStart - Hot">
@@ -1237,6 +1000,7 @@
           <span class="badge dur">⏱ 5:25</span>
           <span class="badge genre">House</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]1:06.4 [C]3:50.3 [D]4:52.7</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Sun Is Shining (DJcity Intro)" data-artist="Bob Marley ft. Robin Schulz" data-playlist="NightStart - Hot">
@@ -1251,6 +1015,7 @@
           <span class="badge dur">⏱ 3:21</span>
           <span class="badge genre">House</span>
         </div>
+        <div class="hotcues">[A]0:00.0 [B]0:46.5 [C]1:32.9 [D]3:05.8</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Never Going Home" data-artist="Kungs" data-playlist="NightStart - Hot">
@@ -1265,11 +1030,12 @@
           <span class="badge dur">⏱ 4:39</span>
           <span class="badge genre">House</span>
         </div>
+        <div class="hotcues">[A]0:00.0 [B]0:15.8 [C]2:21.7 [D]4:04.0</div>
       </div>
     </div></div>
     </section>
 <section class="playlist-section" id="NightStart---Freak">
-      <h2><span class="sec-icon">⚡</span> NightStart - Freak <span class="count">39 Songs</span></h2>
+      <h2><span class="sec-icon">⚡</span> NightStart - Freak <span class="count">38 Songs</span></h2>
       <div class="cards"><div class="card" onclick="toggleSong(this)" data-title="I Got You (I Feel Good) - Marijn Jansen Remix" data-artist="James Brown & The Famous Flames" data-playlist="NightStart - Freak">
       <div class="card-check"><span class="check-icon">✕</span></div>
       <img src="https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/8a/76/04/8a760498-ce95-c1f3-4bff-958362821728/14UMGIM28794.rgb.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy">
@@ -1282,6 +1048,7 @@
           <span class="badge dur">⏱ 5:15</span>
           <span class="badge genre">Dance</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]0:30.1 [C]2:45.1 [D]5:00.1</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Titanium - DJ Smerk Don&#39;t Wake Me Up Edit" data-artist="David Guetta ft. Sia" data-playlist="NightStart - Freak">
@@ -1296,6 +1063,7 @@
           <span class="badge dur">⏱ 2:57</span>
           <span class="badge genre">-</span>
         </div>
+        <div class="hotcues">[A]0:00.0 [B]0:14.8 [C]1:58.2 [D]2:42.5</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Play Hard - Gallardo Remix" data-artist="David Guetta ft. Ne-Yo & Akon" data-playlist="NightStart - Freak">
@@ -1310,6 +1078,7 @@
           <span class="badge dur">⏱ 3:42</span>
           <span class="badge genre">Dance</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]0:15.3 [C]1:46.7 [D]3:27.7</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Poker Face - CHALANT Remix" data-artist="Lady Gaga" data-playlist="NightStart - Freak">
@@ -1324,6 +1093,7 @@
           <span class="badge dur">⏱ 3:56</span>
           <span class="badge genre">Dance</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]1:13.9 [C]1:58.2 [D]3:41.6</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="When I Grow Up - Deux Twins Remix" data-artist="The Pussycat Dolls" data-playlist="NightStart - Freak">
@@ -1338,6 +1108,7 @@
           <span class="badge dur">⏱ 3:43</span>
           <span class="badge genre">Dance</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]0:59.6 [C]1:44.3 [D]3:28.4</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="We Found Love" data-artist="Rihanna Calvin Harris" data-playlist="NightStart - Freak">
@@ -1352,6 +1123,7 @@
           <span class="badge dur">⏱ 3:35</span>
           <span class="badge genre">Club-Banger</span>
         </div>
+        <div class="hotcues">[A]0:00.2 [B]1:22.7 [C]1:37.7 [D]3:00.2</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Where You Are" data-artist="John Summit HAYLA" data-playlist="NightStart - Freak">
@@ -1366,6 +1138,7 @@
           <span class="badge dur">⏱ 3:55</span>
           <span class="badge genre">Club-Banger</span>
         </div>
+        <div class="hotcues">[A]0:00.0 [B]0:17.1 [C]3:13.6 [D]3:44.0</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Don&#39;t Stop The Music - Spryte Remix" data-artist="Rihanna" data-playlist="NightStart - Freak">
@@ -1380,6 +1153,7 @@
           <span class="badge dur">⏱ 4:05</span>
           <span class="badge genre">House</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]1:20.1 [C]1:50.6 [D]3:36.8</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Hit The Road Jack - Pizzata & Klein Remix" data-artist="Ray Charles" data-playlist="NightStart - Freak">
@@ -1394,6 +1168,7 @@
           <span class="badge dur">⏱ 2:59</span>
           <span class="badge genre">Dance</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]0:15.3 [C]1:58.2</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Fresh - Kide & Giorgio Dala Remix" data-artist="Kool & The Gang" data-playlist="NightStart - Freak">
@@ -1408,6 +1183,7 @@
           <span class="badge dur">⏱ 4:11</span>
           <span class="badge genre">Dance</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]0:59.2 [C]1:58.2 [D]3:56.4</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Rainfall (Praise You)" data-artist="Tom Santa" data-playlist="NightStart - Freak">
@@ -1422,6 +1198,7 @@
           <span class="badge dur">⏱ 2:46</span>
           <span class="badge genre">Club-Banger</span>
         </div>
+        <div class="hotcues">[A]0:00.3 [B]0:28.4 [C]1:45.3 [D]2:30.3</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Jump Around - MOONLGHT Remix (Intro - Clean)" data-artist="House Of Pain" data-playlist="NightStart - Freak">
@@ -1436,6 +1213,7 @@
           <span class="badge dur">⏱ 3:28</span>
           <span class="badge genre">Dance</span>
         </div>
+        <div class="hotcues">[A]0:00.2 [B]0:15.2 [C]1:47.0 [D]3:13.3</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Barbie Girl - Anthem Kingz Party Starter" data-artist="Aqua" data-playlist="NightStart - Freak">
@@ -1450,6 +1228,7 @@
           <span class="badge dur">⏱ 2:36</span>
           <span class="badge genre">Dance</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]0:45.8 [C]1:46.8 [D]2:02.0</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Heads Will Roll - PBH & JACK Remix" data-artist="Yeah Yeah Yeahs" data-playlist="NightStart - Freak">
@@ -1464,6 +1243,7 @@
           <span class="badge dur">⏱ 4:21</span>
           <span class="badge genre">House</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]0:15.3 [C]2:17.2 [D]3:48.6</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Sexy And I Know It" data-artist="LMFAO" data-playlist="NightStart - Freak">
@@ -1478,6 +1258,7 @@
           <span class="badge dur">⏱ 3:19</span>
           <span class="badge genre">Club-Banger</span>
         </div>
+        <div class="hotcues">[A]0:00.0 [B]0:59.1 [C]1:58.2 [D]2:57.2</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="I Love It - MARROW LET&#39;S GO Slam Intro Edit (Dirty)" data-artist="Icona Pop ft. Charli XCX" data-playlist="NightStart - Freak">
@@ -1492,6 +1273,7 @@
           <span class="badge dur">⏱ 2:41</span>
           <span class="badge genre">-</span>
         </div>
+        <div class="hotcues">[A]0:01.8 [B]0:37.2 [C]1:46.0 [D]2:25.1</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="I Love It - Anthem Kingz Heads Will Roll Edit (Dirty)" data-artist="Icona Pop ft. Charli XCX" data-playlist="NightStart - Freak">
@@ -1506,6 +1288,7 @@
           <span class="badge dur">⏱ 2:05</span>
           <span class="badge genre">-</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]0:15.3 [C]1:16.3 [D]1:46.7</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Rock This Party (Everybody Dance Now) - MIKIS & ZING Remix" data-artist="Bob Sinclar ft. Big Ali" data-playlist="NightStart - Freak">
@@ -1520,6 +1303,7 @@
           <span class="badge dur">⏱ 3:25</span>
           <span class="badge genre">House</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]1:20.1 [C]1:35.3 [D]3:06.8</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Bulletproof - FÄT TONY & Medun Remix" data-artist="La Roux" data-playlist="NightStart - Freak">
@@ -1534,6 +1318,7 @@
           <span class="badge dur">⏱ 3:22</span>
           <span class="badge genre">Dance</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]0:15.1 [C]1:37.6 [D]3:07.6</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Hit &#39;Em Up Style (Oops!)" data-artist="Essel James Hurr" data-playlist="NightStart - Freak">
@@ -1548,6 +1333,7 @@
           <span class="badge dur">⏱ 2:39</span>
           <span class="badge genre">Club-Banger</span>
         </div>
+        <div class="hotcues">[A]0:00.5 [B]0:31.2 [C]1:49.9 [D]2:05.3</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Low - SANDERSVILLE Remix" data-artist="Flo Rida ft. T-Pain" data-playlist="NightStart - Freak">
@@ -1562,6 +1348,7 @@
           <span class="badge dur">⏱ 3:16</span>
           <span class="badge genre">Dance</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]0:15.1 [C]1:30.1 [D]2:45.1</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Paparazzi - Waltry Remix" data-artist="Lady Gaga" data-playlist="NightStart - Freak">
@@ -1576,6 +1363,7 @@
           <span class="badge dur">⏱ 3:49</span>
           <span class="badge genre">Dance</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]1:00.1 [C]2:02.0 [D]3:32.0</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Hot In Herre - Andrew Lux Remix" data-artist="Nelly" data-playlist="NightStart - Freak">
@@ -1590,6 +1378,7 @@
           <span class="badge dur">⏱ 2:51</span>
           <span class="badge genre">Dance</span>
         </div>
+        <div class="hotcues">[A]0:01.6 [B]0:03.6 [C]1:50.2 [D]2:35.9</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Levels - RICHIE ROZEX Remix" data-artist="Avicii" data-playlist="NightStart - Freak">
@@ -1604,6 +1393,7 @@
           <span class="badge dur">⏱ 3:32</span>
           <span class="badge genre">Dance</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]0:15.1 [C]2:15.1 [D]3:17.0</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Y.M.C.A. - DJ Getdown Remix" data-artist="Village People" data-playlist="NightStart - Freak">
@@ -1618,6 +1408,7 @@
           <span class="badge dur">⏱ 3:12</span>
           <span class="badge genre">-</span>
         </div>
+        <div class="hotcues">[A]0:00.5 [B]0:23.4 [C]1:28.2 [D]2:50.1</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Viva La Vida - CHALANT Remix" data-artist="Coldplay" data-playlist="NightStart - Freak">
@@ -1632,6 +1423,7 @@
           <span class="badge dur">⏱ 5:10</span>
           <span class="badge genre">Dance</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]0:29.6 [C]2:57.3 [D]4:55.5</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="I Love It (feat. Charli XCX)" data-artist="Icona Pop Charli xcx" data-playlist="NightStart - Freak">
@@ -1646,6 +1438,7 @@
           <span class="badge dur">⏱ 2:37</span>
           <span class="badge genre">Club-Banger</span>
         </div>
+        <div class="hotcues">[A]0:00.2 [B]0:23.1 [C]1:24.1 [D]2:25.0</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Freed From Desire - 5HOURS & Martina Minelli Remix" data-artist="Gala" data-playlist="NightStart - Freak">
@@ -1660,6 +1453,7 @@
           <span class="badge dur">⏱ 3:49</span>
           <span class="badge genre">Dance</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]0:15.3 [C]1:46.7 [D]3:39.1</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="High Hopes (Don Diablo Remix)" data-artist="Panic! At The Disco" data-playlist="NightStart - Freak">
@@ -1674,20 +1468,7 @@
           <span class="badge dur">⏱ 3:05</span>
           <span class="badge genre">Club-Banger</span>
         </div>
-      </div>
-    </div>
-<div class="card" onclick="toggleSong(this)" data-title="Like A Prayer - DJ Dark Remix" data-artist="Madonna" data-playlist="NightStart - Freak">
-      <div class="card-check"><span class="check-icon">✕</span></div>
-      <img src="https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/33/55/5c/33555c2f-df24-dd08-b680-d92473948262/603497804955.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy">
-      <div class="card-info">
-        <div class="card-title" title="Like A Prayer - DJ Dark Remix">Like A Prayer - DJ Dark Remix</div>
-        <div class="card-artist">Madonna</div>
-        <div class="card-meta">
-          <span class="badge bpm">♩ 125</span>
-          <span class="badge key">🎹 7A</span>
-          <span class="badge dur">⏱ 3:51</span>
-          <span class="badge genre">Dance</span>
-        </div>
+        <div class="hotcues">[A]0:01.0 [B]1:17.1 [C]1:32.4 [D]2:29.5</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Gimme! Gimme! Gimme! (A Man After Midnight) - HAWK Remix" data-artist="ABBA" data-playlist="NightStart - Freak">
@@ -1702,6 +1483,7 @@
           <span class="badge dur">⏱ 3:50</span>
           <span class="badge genre">House</span>
         </div>
+        <div class="hotcues">[A]0:00.2 [B]1:16.4 [C]1:46.8 [D]3:33.5</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Just Dance - Freejak Remix" data-artist="Lady Gaga ft. Colby O&#39;Donis" data-playlist="NightStart - Freak">
@@ -1716,6 +1498,7 @@
           <span class="badge dur">⏱ 4:00</span>
           <span class="badge genre">-</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]0:15.1 [C]2:00.1 [D]3:45.1</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Treasure - Mr. Sherman Remix (Clean)" data-artist="Bruno Mars" data-playlist="NightStart - Freak">
@@ -1730,6 +1513,7 @@
           <span class="badge dur">⏱ 3:13</span>
           <span class="badge genre">Dance</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]0:53.4 [C]1:31.5 [D]2:55.3</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Let Me Blow Ya Mind - Lincoln Baio Beggin&#39; Edit (Dirty)" data-artist="Eve ft. Gwen Stefani" data-playlist="NightStart - Freak">
@@ -1744,6 +1528,7 @@
           <span class="badge dur">⏱ 3:25</span>
           <span class="badge genre">-</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]0:45.8 [C]1:46.7 [D]2:55.3</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="I Love It - Mark Anthony Phatt Bass Edit (Dirty)" data-artist="Icona Pop" data-playlist="NightStart - Freak">
@@ -1758,6 +1543,7 @@
           <span class="badge dur">⏱ 1:52</span>
           <span class="badge genre">Dance</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]0:52.6 [C]1:07.6 [D]1:37.6</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Señorita - CAVALLI Afro House Remix" data-artist="Shawn Mendes ft. Camila Cabello" data-playlist="NightStart - Freak">
@@ -1772,6 +1558,7 @@
           <span class="badge dur">⏱ 3:45</span>
           <span class="badge genre">Dance</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]0:15.1 [C]1:45.1 [D]3:30.1</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Pompeii - J Bruus Remix" data-artist="Bastille" data-playlist="NightStart - Freak">
@@ -1786,6 +1573,7 @@
           <span class="badge dur">⏱ 4:41</span>
           <span class="badge genre">-</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]1:02.9 [C]2:13.0 [D]4:22.2</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Watch Out For This (Bumaye) - Alex Guesta Mas Gasolina Edit" data-artist="Major Lazer ft. Busy Signal, The Flexican & FS Green" data-playlist="NightStart - Freak">
@@ -1800,6 +1588,7 @@
           <span class="badge dur">⏱ 3:33</span>
           <span class="badge genre">-</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]0:15.3 [C]1:41.0 [D]3:18.2</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Bulletproof" data-artist="La Roux Gamper & Dadoni" data-playlist="NightStart - Freak">
@@ -1814,6 +1603,7 @@
           <span class="badge dur">⏱ 2:42</span>
           <span class="badge genre">Club-Banger</span>
         </div>
+        <div class="hotcues">[A]0:00.0 [B]0:22.9 [C]1:39.1 [D]2:24.8</div>
       </div>
     </div></div>
     </section>
@@ -1831,6 +1621,7 @@
           <span class="badge dur">⏱ 3:05</span>
           <span class="badge genre">Dance</span>
         </div>
+        <div class="hotcues">[A]0:01.9 [B]0:34.5 [C]1:34.1 [D]2:50.9</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Who&#39;s That Girl? - Richastic Remix (Intro)" data-artist="Eve" data-playlist="Peak - Banger b. 125 BPM">
@@ -1845,6 +1636,7 @@
           <span class="badge dur">⏱ 2:41</span>
           <span class="badge genre">-</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]0:38.5 [C]1:24.6 [D]2:26.0</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Thrift Shop - Spracto Remix (Dirty)" data-artist="Macklemore & Ryan Lewis ft. Wanz" data-playlist="Peak - Banger b. 125 BPM">
@@ -1859,6 +1651,7 @@
           <span class="badge dur">⏱ 3:44</span>
           <span class="badge genre">Dance</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]1:02.0 [C]2:34.9 [D]3:29.1</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="We No Speak Americano - 10th Anniversary Edit" data-artist="Yolanda Be Cool & DCUP" data-playlist="Peak - Banger b. 125 BPM">
@@ -1873,6 +1666,7 @@
           <span class="badge dur">⏱ 4:30</span>
           <span class="badge genre">House</span>
         </div>
+        <div class="hotcues">[A]0:00.0 [B]0:15.4 [C]2:49.0 [D]4:13.5</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Without Me - Rogerson Remix (Clean)" data-artist="Eminem" data-playlist="Peak - Banger b. 125 BPM">
@@ -1887,6 +1681,7 @@
           <span class="badge dur">⏱ 3:35</span>
           <span class="badge genre">House</span>
         </div>
+        <div class="hotcues">[A]0:00.0 [B]0:46.1 [C]1:47.5 [D]3:19.7</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="The Rhythm" data-artist="Don Diablo" data-playlist="Peak - Banger b. 125 BPM">
@@ -1901,6 +1696,7 @@
           <span class="badge dur">⏱ 3:07</span>
           <span class="badge genre">Club-Banger</span>
         </div>
+        <div class="hotcues">[A]0:00.5 [B]0:46.9 [C]2:04.4 [D]2:50.8</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="We Dem Boyz - Jablonski Calabria Edit (Clean)" data-artist="Wiz Khalifa" data-playlist="Peak - Banger b. 125 BPM">
@@ -1915,6 +1711,7 @@
           <span class="badge dur">⏱ 3:50</span>
           <span class="badge genre">Dance</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]0:15.5 [C]2:31.8 [D]3:33.2</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="EoO - MarkCutz Hype Intro (Dirty)" data-artist="Bad Bunny" data-playlist="Peak - Banger b. 125 BPM">
@@ -1929,6 +1726,7 @@
           <span class="badge dur">⏱ 3:35</span>
           <span class="badge genre">Latin</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]0:42.4 [C]2:21.3 [D]3:17.7</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Titanium - Jablonski Tantalizing Edit" data-artist="David Guetta ft. Sia" data-playlist="Peak - Banger b. 125 BPM">
@@ -1943,6 +1741,7 @@
           <span class="badge dur">⏱ 3:44</span>
           <span class="badge genre">Dance</span>
         </div>
+        <div class="hotcues">[A]0:00.1 [B]0:15.7 [C]2:36.2 [D]3:23.0</div>
       </div>
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Sweet Memories" data-artist="Cid Kaskade" data-playlist="Peak - Banger b. 125 BPM">
@@ -1957,6 +1756,7 @@
           <span class="badge dur">⏱ 2:37</span>
           <span class="badge genre">Club-Banger</span>
         </div>
+        <div class="hotcues">[A]0:00.0 [B]0:46.1 [C]2:02.9 [D]2:18.2</div>
       </div>
     </div></div>
     </section>
@@ -1974,13 +1774,12 @@
           <span class="badge dur">⏱ 4:28</span>
           <span class="badge genre">Hip Hop</span>
         </div>
+        <div class="hotcues">[A]0:00.0 [B]0:25.6 [C]2:20.8 [D]4:16.0</div>
       </div>
     </div></div>
     </section>
-
 </main>
 
-<!-- Sticky Share Bar -->
 <div class="share-bar" id="shareBar">
   <div class="share-bar-info">
     <div class="share-bar-count"><span id="selCount">0</span> Songs markiert</div>
@@ -1994,79 +1793,41 @@
     </button>
   </div>
 </div>
-
-<!-- Toast Notification -->
 <div class="toast" id="toast">✓ In Zwischenablage kopiert!</div>
 
 <script>
   let selected = new Set();
-
   function toggleSong(card) {
     const id = card.dataset.title + '||' + card.dataset.artist;
-    if (selected.has(id)) {
-      selected.delete(id);
-      card.classList.remove('selected');
-    } else {
-      selected.add(id);
-      card.classList.add('selected');
-    }
+    if (selected.has(id)) { selected.delete(id); card.classList.remove('selected'); }
+    else { selected.add(id); card.classList.add('selected'); }
     updateBar();
   }
-
   function updateBar() {
-    const bar = document.getElementById('shareBar');
-    const countEl = document.getElementById('selCount');
-    countEl.textContent = selected.size;
-    if (selected.size > 0) {
-      bar.classList.add('visible');
-    } else {
-      bar.classList.remove('visible');
-    }
+    document.getElementById('selCount').textContent = selected.size;
+    document.getElementById('shareBar').classList.toggle('visible', selected.size > 0);
   }
-
   function resetAll() {
     selected.clear();
     document.querySelectorAll('.card.selected').forEach(c => c.classList.remove('selected'));
     updateBar();
   }
-
   function shareSelection() {
-    const cards = document.querySelectorAll('.card.selected');
-    const songs = Array.from(cards).map(c => ({
-      song: c.dataset.title,
-      artist: c.dataset.artist,
-      playlist: c.dataset.playlist
+    const songs = Array.from(document.querySelectorAll('.card.selected')).map(c => ({
+      song: c.dataset.title, artist: c.dataset.artist, playlist: c.dataset.playlist
     }));
-
-    const payload = JSON.stringify({
-      datum: new Date().toLocaleDateString('de-DE'),
-      hinweis: "Diese Songs bitte weglassen",
-      songs: songs
-    }, null, 2);
-
-    // Clipboard kopieren
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(payload).then(() => showToast());
-    } else {
-      // Fallback
-      const ta = document.createElement('textarea');
-      ta.value = payload;
-      ta.style.position = 'fixed';
-      ta.style.opacity = '0';
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand('copy');
-      document.body.removeChild(ta);
-      showToast();
+    const payload = JSON.stringify({ datum: new Date().toLocaleDateString('de-DE'), hinweis: "Diese Songs bitte weglassen", songs }, null, 2);
+    if (navigator.clipboard?.writeText) { navigator.clipboard.writeText(payload).then(showToast); }
+    else {
+      const ta = Object.assign(document.createElement('textarea'), { value: payload, style: 'position:fixed;opacity:0' });
+      document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); showToast();
     }
   }
-
   function showToast() {
-    const toast = document.getElementById('toast');
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 2500);
+    const t = document.getElementById('toast');
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
   }
 </script>
-
 </body>
 </html>
