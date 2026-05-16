@@ -174,6 +174,21 @@
       background-size: 200% 100%;
       animation: shimmer 1.4s ease-in-out infinite;
     }
+
+    /* Mood */
+    .mood-section { margin-top: 24px; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+    .mood-emojis { display: flex; gap: 2px; }
+    .mood-btn {
+      font-size: 1.5rem; line-height: 1;
+      background: none; border: none; cursor: pointer;
+      padding: 8px 7px; border-radius: 12px;
+      opacity: 0.28; transition: opacity 0.15s, transform 0.15s, background 0.15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .mood-btn:active { transform: scale(0.86); }
+    .mood-btn.mood-selected { opacity: 1; background: rgba(255,255,255,0.09); }
+    .mood-avg { font-size: 0.6rem; font-weight: 700; color: #52525b; letter-spacing: 0.1em; text-transform: uppercase; }
+    .mood-avg span { color: #71717a; }
   </style>
 </head>
 <body>
@@ -197,7 +212,7 @@
 
 <script type="module">
   import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
-  import { getDatabase, ref, onValue, get } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
+  import { getDatabase, ref, onValue, get, set } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
 
   const app = initializeApp({
     apiKey: 'AIzaSyDB7qRbmUTU25sv4R8Db4SWjyc2FGaPQeE',
@@ -218,6 +233,51 @@
   let lastArtwork = null;
   let toastTimer  = null;
   let reloadTimer = setTimeout(() => location.reload(), 45000);
+
+  const uid = (() => {
+    let id = localStorage.getItem('djermn-uid');
+    if (!id) { id = crypto.randomUUID(); localStorage.setItem('djermn-uid', id); }
+    return id;
+  })();
+  let moodUnsub = null;
+
+  function moodKey(title) {
+    return title.replace(/[.#$[\]/]/g, '_').substring(0, 100);
+  }
+
+  function avgEmoji(avg) {
+    if (avg >= 4.5) return '🔥';
+    if (avg >= 3.5) return '😍';
+    if (avg >= 2.5) return '🙂';
+    if (avg >= 1.5) return '😐';
+    return '😴';
+  }
+
+  function renderMood(title) {
+    if (moodUnsub) { moodUnsub(); moodUnsub = null; }
+    const key = moodKey(title);
+    moodUnsub = onValue(ref(db, `mood/${key}`), (snap) => {
+      const el = document.getElementById('mood-section');
+      if (!el) return;
+      const votes = snap.val() || {};
+      const vals  = Object.values(votes).filter(v => typeof v === 'number');
+      const avg   = vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : null;
+      const myVote = votes[uid] ?? null;
+      const emojis = [['🔥',5],['😍',4],['🙂',3],['😐',2],['😴',1]];
+      el.innerHTML = `
+        <div class="mood-emojis">
+          ${emojis.map(([e,v]) => `<button class="mood-btn${myVote===v?' mood-selected':''}" data-val="${v}" data-key="${key}">${e}</button>`).join('')}
+        </div>
+        <div class="mood-avg">${avg !== null
+          ? `${avgEmoji(avg)} <span>Ø ${avg.toFixed(1)} · ${vals.length} Vote${vals.length!==1?'s':''}</span>`
+          : 'Stimmung bewerten'}</div>`;
+      el.querySelectorAll('.mood-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          set(ref(db, `mood/${btn.dataset.key}/${uid}`), parseInt(btn.dataset.val)).catch(() => {});
+        });
+      });
+    });
+  }
 
   const NOTE = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:56px;height:56px;opacity:0.15">
     <path d="M9 18V5l12-2v13M9 18a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm12 0a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
@@ -249,6 +309,7 @@
 
   function render(data) {
     if (!data || !data.title) {
+      if (moodUnsub) { moodUnsub(); moodUnsub = null; }
       bg.style.backgroundImage = '';
       appEl.innerHTML = `<div class="idle">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -275,9 +336,11 @@
       <div class="title">${esc(data.title)}</div>
       <div class="artist">${esc(data.artist || '')}</div>
       ${(bpm || key) ? `<div class="badges">${bpm}${key}</div>` : ''}
-      <div class="live"><span class="live-dot"></span>Live</div>`;
+      <div class="live"><span class="live-dot"></span>Live</div>
+      <div id="mood-section" class="mood-section"></div>`;
 
     requestAnimationFrame(dropIn);
+    renderMood(data.title);
   }
 
   function swapArtwork(url) {
