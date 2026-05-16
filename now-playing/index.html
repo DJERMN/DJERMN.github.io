@@ -25,7 +25,6 @@
       overflow: hidden;
     }
 
-    /* Blurred artwork background */
     #bg {
       position: fixed;
       inset: -30%;
@@ -36,7 +35,6 @@
       z-index: 0;
     }
 
-    /* Everything above the blur */
     #app {
       position: relative;
       z-index: 1;
@@ -45,9 +43,10 @@
       align-items: center;
       width: 100%;
       max-width: 380px;
+      transition: opacity 0.3s;
     }
+    #app.fading { opacity: 0; }
 
-    /* Album art */
     .art-wrap {
       width: min(260px, 75vw);
       height: min(260px, 75vw);
@@ -58,26 +57,13 @@
       margin-bottom: 36px;
       flex-shrink: 0;
     }
-    .art-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
+    .art-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .art-placeholder {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
     }
-    .art-placeholder svg {
-      width: 56px;
-      height: 56px;
-      opacity: 0.15;
-    }
+    .art-placeholder svg { width: 56px; height: 56px; opacity: 0.15; }
 
-    /* Song info */
     .title {
       font-size: clamp(1.15rem, 5.5vw, 1.6rem);
       font-weight: 800;
@@ -93,89 +79,29 @@
       color: rgba(255,255,255,0.55);
       text-align: center;
       margin-bottom: 24px;
-      line-height: 1.4;
     }
 
-    /* Badges */
-    .badges {
-      display: flex;
-      gap: 8px;
-      justify-content: center;
-      margin-bottom: 36px;
-    }
-    .badge {
-      font-size: 0.68rem;
-      font-weight: 700;
-      padding: 5px 14px;
-      border-radius: 999px;
-      letter-spacing: 0.3px;
-      backdrop-filter: blur(8px);
-    }
-    .badge-bpm {
-      background: rgba(30, 24, 0, 0.9);
-      color: #e6b84c;
-      border: 1px solid rgba(230,184,76,0.25);
-    }
-    .badge-key {
-      background: rgba(4, 43, 18, 0.9);
-      color: #4ade80;
-      border: 1px solid rgba(74,222,128,0.2);
-    }
+    .badges { display: flex; gap: 8px; justify-content: center; margin-bottom: 36px; }
+    .badge { font-size: 0.68rem; font-weight: 700; padding: 5px 14px; border-radius: 999px; letter-spacing: 0.3px; backdrop-filter: blur(8px); }
+    .badge-bpm { background: rgba(30,24,0,0.9); color: #e6b84c; border: 1px solid rgba(230,184,76,0.25); }
+    .badge-key { background: rgba(4,43,18,0.9); color: #4ade80; border: 1px solid rgba(74,222,128,0.2); }
 
-    /* Live dot */
-    .live {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      font-size: 0.6rem;
-      font-weight: 700;
-      color: rgba(255,255,255,0.25);
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-    }
-    .live-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #ef4444;
-      box-shadow: 0 0 6px #ef4444;
-      animation: blink 2s ease-in-out infinite;
-    }
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.25; }
-    }
+    .live { display: flex; align-items: center; gap: 7px; font-size: 0.6rem; font-weight: 700; color: rgba(255,255,255,0.25); letter-spacing: 0.18em; text-transform: uppercase; }
+    .live-dot { width: 6px; height: 6px; border-radius: 50%; background: #ef4444; box-shadow: 0 0 6px #ef4444; animation: blink 2s ease-in-out infinite; }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
 
-    /* Idle / connecting state */
-    .idle {
-      text-align: center;
-      color: rgba(255,255,255,0.3);
-    }
-    .idle svg {
-      width: 48px;
-      height: 48px;
-      margin-bottom: 20px;
-      opacity: 0.2;
-    }
-    .idle h2 {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
+    .idle { text-align: center; color: rgba(255,255,255,0.3); }
+    .idle svg { width: 48px; height: 48px; margin-bottom: 20px; opacity: 0.2; }
+    .idle h2 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
     .idle p { font-size: 0.8rem; opacity: 0.6; }
-
-    /* Fade transition */
-    #app { opacity: 1; transition: opacity 0.3s; }
-    #app.fading { opacity: 0; }
   </style>
 </head>
 <body>
-
 <div id="bg"></div>
 <div id="app">
   <div class="idle">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-      <circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/>
+      <path d="M9 18V5l12-2v13M9 18a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm12 0a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
     </svg>
     <h2>Verbinde...</h2>
     <p>Warte auf Rekordbox</p>
@@ -183,58 +109,54 @@
 </div>
 
 <script>
-  const BLOB = 'https://jsonblob.com/api/jsonBlob/019e2f85-472d-74c8-b41a-cf030b71f295';
-  let lastTitle = undefined;
-
+  const RAW = 'https://raw.githubusercontent.com/DJERMN/DJERMN.github.io/main/now-playing.json';
   const bg  = document.getElementById('bg');
   const app = document.getElementById('app');
+  let lastTitle = undefined;
 
-  const NOTE_SVG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:56px;height:56px;opacity:0.15">
+  const NOTE = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:56px;height:56px;opacity:0.15">
     <path d="M9 18V5l12-2v13M9 18a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm12 0a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
   </svg>`;
 
   function esc(s) {
-    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   }
 
   function render(data) {
     if (!data.title) {
       bg.style.backgroundImage = '';
-      app.innerHTML = `
-        <div class="idle">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M9 18V5l12-2v13M9 18a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm12 0a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-          </svg>
-          <h2>Warte auf ersten Song...</h2>
-          <p>DJERMN startet gleich</p>
-        </div>`;
+      app.innerHTML = `<div class="idle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M9 18V5l12-2v13M9 18a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm12 0a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+        </svg>
+        <h2>Warte auf ersten Song...</h2>
+        <p>DJERMN startet gleich</p>
+      </div>`;
       return;
     }
 
-    if (data.artwork) {
-      bg.style.backgroundImage = `url('${data.artwork}')`;
-    } else {
-      bg.style.backgroundImage = '';
-    }
+    if (data.artwork) bg.style.backgroundImage = `url('${data.artwork}')`;
+    else bg.style.backgroundImage = '';
 
-    const artHtml = data.artwork
+    const art = data.artwork
       ? `<img src="${esc(data.artwork)}" alt="Cover">`
-      : `<div class="art-placeholder">${NOTE_SVG}</div>`;
+      : `<div class="art-placeholder">${NOTE}</div>`;
 
-    const bpmHtml = data.bpm  ? `<span class="badge badge-bpm">${data.bpm} BPM</span>` : '';
-    const keyHtml = data.key  ? `<span class="badge badge-key">${esc(data.key)}</span>` : '';
+    const bpm = data.bpm ? `<span class="badge badge-bpm">${data.bpm} BPM</span>` : '';
+    const key = data.key ? `<span class="badge badge-key">${esc(data.key)}</span>` : '';
 
     app.innerHTML = `
-      <div class="art-wrap">${artHtml}</div>
+      <div class="art-wrap">${art}</div>
       <div class="title">${esc(data.title)}</div>
       <div class="artist">${esc(data.artist || '')}</div>
-      ${(bpmHtml || keyHtml) ? `<div class="badges">${bpmHtml}${keyHtml}</div>` : ''}
+      ${(bpm || key) ? `<div class="badges">${bpm}${key}</div>` : ''}
       <div class="live"><span class="live-dot"></span>Live</div>`;
   }
 
   async function poll() {
     try {
-      const r = await fetch(BLOB, { cache: 'no-store' });
+      const url = RAW + '?_=' + Date.now();
+      const r = await fetch(url, { cache: 'no-store' });
       if (!r.ok) return;
       const data = await r.json();
       if (data.title !== lastTitle) {
