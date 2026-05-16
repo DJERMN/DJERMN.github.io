@@ -95,6 +95,21 @@
     .idle h2 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
     .idle p { font-size: 0.8rem; opacity: 0.6; }
 
+    /* Dancer */
+    .dancer-wrap { display: flex; flex-direction: column; align-items: center; gap: 8px; margin-bottom: 20px; }
+    .dancer { width: 44px; height: 58px; color: rgba(255,255,255,0.55); overflow: visible; }
+    .dancer-hint { font-size: 0.58rem; color: rgba(255,255,255,0.22); letter-spacing: 0.04em; text-align: center; }
+
+    .dancer-all  { animation: sway 0.5s ease-in-out infinite alternate; transform-box: fill-box; transform-origin: 50% 55%; }
+    .dancer-ar-l { animation: arm  0.5s ease-in-out infinite alternate;         transform-box: fill-box; transform-origin: 22px 22px; }
+    .dancer-ar-r { animation: arm  0.5s ease-in-out infinite alternate-reverse; transform-box: fill-box; transform-origin: 22px 22px; }
+    .dancer-lg-l { animation: leg  0.5s ease-in-out infinite alternate;         transform-box: fill-box; transform-origin: 22px 40px; }
+    .dancer-lg-r { animation: leg  0.5s ease-in-out infinite alternate-reverse; transform-box: fill-box; transform-origin: 22px 40px; }
+
+    @keyframes sway { from { transform: rotate(-9deg);  } to { transform: rotate(9deg);  } }
+    @keyframes arm  { from { transform: rotate(-35deg); } to { transform: rotate(25deg); } }
+    @keyframes leg  { from { transform: rotate(-18deg); } to { transform: rotate(18deg); } }
+
     /* Refresh button */
     #refresh-btn {
       position: fixed;
@@ -208,10 +223,25 @@
   let lastTitle   = null;
   let lastArtwork = null;
   let toastTimer  = null;
+  let reloadTimer = setTimeout(() => location.reload(), 45000);
 
   const NOTE = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:56px;height:56px;opacity:0.15">
     <path d="M9 18V5l12-2v13M9 18a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm12 0a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
   </svg>`;
+
+  const DANCER = `<div class="dancer-wrap">
+    <svg class="dancer" viewBox="0 0 44 58" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+      <g class="dancer-all">
+        <circle cx="22" cy="7" r="6"/>
+        <line x1="22" y1="13" x2="22" y2="40"/>
+        <g class="dancer-ar-l"><line x1="22" y1="22" x2="6"  y2="32"/></g>
+        <g class="dancer-ar-r"><line x1="22" y1="22" x2="38" y2="32"/></g>
+        <g class="dancer-lg-l"><line x1="22" y1="40" x2="10" y2="56"/></g>
+        <g class="dancer-lg-r"><line x1="22" y1="40" x2="34" y2="56"/></g>
+      </g>
+    </svg>
+    <p class="dancer-hint">Neuer Song sichtbar in ~45 Sekunden</p>
+  </div>`;
 
   function esc(s) {
     return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
@@ -255,6 +285,7 @@
     const key = data.key ? `<span class="badge badge-key">${esc(data.key)}</span>` : '';
 
     appEl.innerHTML = `
+      ${DANCER}
       <div class="art-wrap">${art}</div>
       <div class="title">${esc(data.title)}</div>
       <div class="artist">${esc(data.artist || '')}</div>
@@ -296,6 +327,9 @@
   });
 
   onValue(ref(db, 'now-playing'), (snapshot) => {
+    clearTimeout(reloadTimer);
+    reloadTimer = setTimeout(() => location.reload(), 45000);
+
     const data = snapshot.val() || {};
     const titleChanged   = data.title !== lastTitle;
     const artworkArrived = !lastArtwork && data.artwork && data.title === lastTitle;
