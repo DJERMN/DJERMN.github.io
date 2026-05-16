@@ -7,75 +7,87 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Inter', -apple-system, sans-serif; background: #0c0c0c; color: #f0f0f0; min-height: 100vh; -webkit-text-size-adjust: 100%; padding-bottom: 100px; }
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: { extend: { fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] } } }
+  }
+</script>
+<style type="text/tailwindcss">
+  @layer base {
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { @apply font-sans bg-zinc-950 text-zinc-100 min-h-screen; padding-bottom: 100px; -webkit-text-size-adjust: 100%; }
+  }
+  @layer components {
+    header { @apply bg-zinc-900 border-b border-zinc-800; padding: clamp(28px,6vw,52px) clamp(16px,5vw,48px) clamp(20px,4vw,36px); }
+    header h1 { @apply font-extrabold text-white tracking-tight leading-tight; font-size: clamp(1.4rem,5vw,2.2rem); }
+    header p { @apply mt-1.5 text-zinc-400; font-size: clamp(0.75rem,2.5vw,0.85rem); }
+    .hint { @apply mt-2 text-zinc-500; font-size: clamp(0.72rem,2.2vw,0.8rem); }
 
-  header { background: #111; padding: clamp(28px,6vw,52px) clamp(16px,5vw,48px) clamp(20px,4vw,36px); border-bottom: 1px solid #1e1e1e; }
-  header h1 { font-size: clamp(1.4rem,5vw,2.2rem); font-weight: 800; letter-spacing: -0.5px; color: #fff; line-height: 1.2; }
-  header p { margin-top: 6px; color: #888; font-size: clamp(0.75rem,2.5vw,0.85rem); }
-  .hint { margin-top: 8px; font-size: clamp(0.72rem,2.2vw,0.8rem); color: #777; }
+    .nav { @apply flex mt-5 overflow-x-auto pb-0.5; flex-wrap: nowrap; gap: 6px; scrollbar-width: none; }
+    .nav::-webkit-scrollbar { display: none; }
+    .nav a { @apply text-zinc-500 no-underline font-medium border border-zinc-800 rounded shrink-0 whitespace-nowrap transition-colors duration-150; font-size: 0.72rem; padding: 5px 13px; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+    .nav a:hover { @apply text-amber-400; border-color: rgba(251,191,36,0.3); }
 
-  .nav { display: flex; flex-wrap: nowrap; gap: 6px; margin-top: 20px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding-bottom: 2px; }
-  .nav::-webkit-scrollbar { display: none; }
-  .nav a { color: #888; text-decoration: none; font-size: 0.72rem; font-weight: 500; padding: 5px 13px; border: 1px solid #2a2a2a; border-radius: 4px; white-space: nowrap; flex-shrink: 0; -webkit-tap-highlight-color: transparent; touch-action: manipulation; transition: color 0.15s, border-color 0.15s; }
-  @media (hover:hover) { .nav a:hover { color: #e6b84c; border-color: rgba(230,184,76,0.3); } }
+    main { @apply max-w-[1440px] mx-auto; padding: clamp(32px,5vw,56px) clamp(12px,4vw,36px) 40px; }
 
-  main { max-width: 1440px; margin: 0 auto; padding: clamp(32px,5vw,56px) clamp(12px,4vw,36px) 40px; }
+    .playlist-section { @apply mb-12; scroll-margin-top: 16px; }
+    .playlist-section h2 { @apply text-amber-400 font-semibold mb-3.5 pb-3 border-b border-zinc-800 flex items-center flex-wrap gap-2.5; font-size: clamp(0.82rem,3vw,0.95rem); }
+    .count { @apply text-zinc-600 font-normal text-xs; }
 
-  .playlist-section { margin-bottom: clamp(48px,8vw,64px); scroll-margin-top: 16px; }
-  .playlist-section h2 { font-size: clamp(0.8rem,3vw,0.95rem); font-weight: 700; color: #e6b84c; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid #1e1e1e; display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
-  .count { font-size: 0.68rem; font-weight: 500; color: #555; }
+    .cards { @apply border border-zinc-800 rounded-lg overflow-hidden; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 290px), 1fr)); gap: 1px; background-color: #27272a; }
 
-  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 290px), 1fr)); gap: 1px; background: #1a1a1a; border: 1px solid #1a1a1a; border-radius: 8px; overflow: hidden; }
+    .card { @apply bg-zinc-900 flex items-center gap-3 cursor-pointer relative transition-colors duration-100; padding: 11px 12px; border-radius: 0; -webkit-tap-highlight-color: transparent; touch-action: manipulation; user-select: none; }
+    @media (hover: hover) {
+      .card:hover { @apply bg-zinc-800; }
+      .card.selected:hover { background-color: #200a0a; }
+    }
 
-  .card { background: #111; border-radius: 0; display: flex; align-items: center; gap: 12px; padding: 12px; cursor: pointer; user-select: none; -webkit-tap-highlight-color: transparent; touch-action: manipulation; transition: background 0.1s; position: relative; }
-  @media (hover:hover) { .card:hover { background: #161616; } .card.selected:hover { background: #1c0a0a; } }
+    .card-check { @apply absolute top-2.5 right-2.5 w-5 h-5 rounded border border-zinc-700 flex items-center justify-center shrink-0 transition-all duration-150; }
+    .check-icon { @apply leading-none transition-colors duration-150; font-size: 0.6rem; color: transparent; font-weight: 900; }
+    .card.selected { background-color: #1c0808; }
+    .card.selected .card-check { @apply bg-red-700 border-red-700; }
+    .card.selected .check-icon { @apply text-white; }
+    .card.selected .card-title { @apply text-red-300; }
 
-  .card-check { position: absolute; top: 10px; right: 10px; width: 20px; height: 20px; border-radius: 3px; border: 1px solid #2a2a2a; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.15s; }
-  .check-icon { font-size: 0.6rem; color: transparent; font-weight: 900; line-height: 1; transition: color 0.15s; }
-  .card.selected { background: #180a0a; }
-  .card.selected .card-check { background: #c0392b; border-color: #c0392b; }
-  .card.selected .check-icon { color: #fff; }
-  .card.selected .card-title { color: #e88; }
+    .cover-wrap { @apply relative shrink-0; width: 52px; height: 52px; }
+    .cover-wrap .cover { @apply w-full h-full; flex-shrink: unset; }
+    .cover { @apply rounded-md object-cover shrink-0 bg-zinc-800; width: 52px; height: 52px; pointer-events: none; }
+    .no-cover { @apply flex items-center justify-center text-xl bg-zinc-800; }
 
-  .cover-wrap { position: relative; flex-shrink: 0; width: 52px; height: 52px; }
-  .cover-wrap .cover { width: 100%; height: 100%; flex-shrink: unset; }
-  .cover { width: 52px; height: 52px; border-radius: 6px; object-fit: cover; flex-shrink: 0; background: #222; pointer-events: none; }
-  .no-cover { display: flex; align-items: center; justify-content: center; font-size: 1.2rem; background: #222; }
+    .play-btn { @apply absolute rounded-full flex items-center justify-center p-0 cursor-pointer transition-all duration-150; bottom: 3px; right: 3px; width: 22px; height: 22px; background: rgba(0,0,0,0.85); border: 1px solid rgba(255,255,255,0.18); -webkit-tap-highlight-color: transparent; }
+    .play-btn:active { transform: scale(0.86); }
+    .play-btn svg { @apply shrink-0; width: 9px; height: 9px; fill: #d4d4d4; }
+    .play-btn.pb-playing { background: #f59e0b; border-color: rgba(245,158,11,0.35); }
+    .play-btn.pb-playing svg { fill: #000; }
+    .play-btn.pb-error { background: rgba(185,28,28,0.9); border-color: transparent; }
+    .play-btn.pb-loading { border-color: transparent; }
+    @keyframes pb-spin { to { transform: rotate(360deg); } }
+    .play-btn.pb-loading::before { content: ''; position: absolute; inset: -2px; border-radius: 50%; border: 1.5px solid transparent; border-top-color: #f59e0b; animation: pb-spin 0.7s linear infinite; }
 
-  .play-btn { position: absolute; bottom: 3px; right: 3px; width: 22px; height: 22px; border-radius: 50%; background: rgba(0,0,0,0.85); border: 1px solid rgba(255,255,255,0.2); cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0; transition: background 0.15s, border-color 0.15s, transform 0.1s; -webkit-tap-highlight-color: transparent; }
-  .play-btn:active { transform: scale(0.86); }
-  .play-btn svg { width: 9px; height: 9px; fill: #ddd; flex-shrink: 0; }
-  .play-btn.pb-playing { background: #e6b84c; border-color: rgba(230,184,76,0.5); }
-  .play-btn.pb-playing svg { fill: #000; }
-  .play-btn.pb-error { background: rgba(192,57,43,0.9); border-color: transparent; }
-  .play-btn.pb-loading { border-color: transparent; }
-  @keyframes pb-spin { to { transform: rotate(360deg); } }
-  .play-btn.pb-loading::before { content: ''; position: absolute; inset: -2px; border-radius: 50%; border: 1.5px solid transparent; border-top-color: #e6b84c; animation: pb-spin 0.7s linear infinite; }
+    .card-info { @apply flex-1 min-w-0; padding-right: 26px; }
+    .card-title { @apply text-sm font-semibold text-zinc-100 truncate mb-0.5 leading-snug transition-colors duration-150; }
+    .card-artist { @apply text-xs text-zinc-400 truncate leading-snug; margin-bottom: 6px; }
+    .card-meta { @apply flex flex-wrap gap-1; }
+    .badge { @apply text-[0.6rem] font-semibold px-1.5 py-0.5 rounded whitespace-nowrap; letter-spacing: 0.2px; }
+    .bpm { @apply bg-amber-950 text-amber-400 ring-1 ring-amber-900/50; }
+    .key { @apply bg-emerald-950 text-emerald-400 ring-1 ring-emerald-900/50; }
+    .dur { @apply bg-zinc-800 text-zinc-500 ring-1 ring-zinc-700/50; }
+    .genre { @apply bg-zinc-800 text-zinc-400 ring-1 ring-zinc-700/50; }
 
-  .card-info { flex: 1; min-width: 0; padding-right: 26px; }
-  .card-title { font-size: 0.8rem; font-weight: 600; color: #f0f0f0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 3px; line-height: 1.3; transition: color 0.15s; }
-  .card-artist { font-size: 0.7rem; color: #888; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 7px; line-height: 1.3; }
-  .card-meta { display: flex; flex-wrap: wrap; gap: 4px; }
-  .badge { font-size: 0.6rem; font-weight: 600; padding: 2px 7px; border-radius: 4px; letter-spacing: 0.2px; white-space: nowrap; }
-  .bpm { background: #1e1800; color: #e6b84c; border: 1px solid #2e2400; }
-  .key { background: #042b12; color: #4ade80; border: 1px solid #064718; }
-  .dur { background: #161616; color: #888; border: 1px solid #222; }
-  .genre { background: #161616; color: #999; border: 1px solid #222; }
+    .share-bar { @apply fixed bottom-0 left-0 right-0 z-50 bg-zinc-900 border-t border-zinc-800 flex items-center justify-between gap-3; padding: clamp(12px,3vw,16px) clamp(16px,5vw,32px); transform: translateY(100%); transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1); }
+    .share-bar.visible { transform: translateY(0); }
+    .share-bar-info { @apply flex-1 min-w-0; }
+    .share-bar-count { @apply font-bold text-red-400; font-size: clamp(0.85rem,3vw,0.95rem); }
+    .share-bar-sub { @apply text-xs text-zinc-500 mt-0.5; }
+    .share-actions { @apply flex gap-2 shrink-0; }
+    .btn-reset { @apply text-xs font-semibold border border-zinc-700 text-zinc-400 bg-transparent rounded cursor-pointer whitespace-nowrap; padding: 9px 14px; font-family: inherit; -webkit-tap-highlight-color: transparent; }
+    .btn-share { @apply text-xs font-semibold bg-green-500 text-white rounded cursor-pointer flex items-center gap-1.5 whitespace-nowrap border-0; padding: 9px 18px; font-family: inherit; -webkit-tap-highlight-color: transparent; }
+    .btn-share:active { @apply opacity-80; }
 
-  .share-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 100; background: #0e0e0e; border-top: 1px solid #1e1e1e; padding: clamp(12px,3vw,16px) clamp(16px,5vw,32px); display: flex; align-items: center; justify-content: space-between; gap: 12px; transform: translateY(100%); transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1); }
-  .share-bar.visible { transform: translateY(0); }
-  .share-bar-info { flex: 1; min-width: 0; }
-  .share-bar-count { font-size: clamp(0.85rem,3vw,0.95rem); font-weight: 700; color: #e88; }
-  .share-bar-sub { font-size: clamp(0.65rem,2vw,0.72rem); color: #555; margin-top: 2px; }
-  .share-actions { display: flex; gap: 8px; flex-shrink: 0; }
-  .btn-reset { padding: 9px 14px; border-radius: 5px; border: 1px solid #2a2a2a; background: transparent; color: #777; font-size: 0.73rem; font-weight: 600; cursor: pointer; -webkit-tap-highlight-color: transparent; white-space: nowrap; font-family: inherit; transition: color 0.15s; }
-  .btn-share { padding: 9px 18px; border-radius: 5px; border: none; background: #25d366; color: #fff; font-size: 0.75rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px; -webkit-tap-highlight-color: transparent; white-space: nowrap; font-family: inherit; }
-  .btn-share:active { opacity: 0.85; }
-
-  .toast { position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-80px); background: #111; border: 1px solid #2a2a2a; color: #e6b84c; padding: 10px 20px; border-radius: 6px; font-size: 0.78rem; font-weight: 600; z-index: 200; transition: transform 0.28s cubic-bezier(0.34,1.56,0.64,1); white-space: nowrap; }
-  .toast.show { transform: translateX(-50%) translateY(0); }
+    .toast { @apply fixed z-[200] bg-zinc-900 border border-zinc-700 text-amber-400 text-xs font-semibold rounded whitespace-nowrap; top: 20px; left: 50%; padding: 10px 20px; transform: translateX(-50%) translateY(-80px); transition: transform 0.28s cubic-bezier(0.34,1.56,0.64,1); }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+  }
 </style>
 </head>
 <body>
