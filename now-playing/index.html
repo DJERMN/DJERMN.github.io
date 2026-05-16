@@ -20,7 +20,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 32px 24px;
+      padding: 16px 24px;
       position: relative;
       overflow: hidden;
     }
@@ -48,13 +48,13 @@
     #app.fading { opacity: 0; }
 
     .art-wrap {
-      width: min(260px, 75vw);
-      height: min(260px, 75vw);
-      border-radius: 20px;
+      width: min(200px, 52vw);
+      height: min(200px, 52vw);
+      border-radius: 16px;
       overflow: hidden;
       background: #18181b;
-      box-shadow: 0 40px 100px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.06);
-      margin-bottom: 36px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.06);
+      margin-bottom: 20px;
       flex-shrink: 0;
     }
     .art-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -70,7 +70,7 @@
       text-align: center;
       letter-spacing: -0.3px;
       line-height: 1.25;
-      margin-bottom: 10px;
+      margin-bottom: 6px;
       text-shadow: 0 2px 12px rgba(0,0,0,0.5);
     }
     .artist {
@@ -78,10 +78,10 @@
       font-weight: 500;
       color: #a1a1aa;
       text-align: center;
-      margin-bottom: 24px;
+      margin-bottom: 14px;
     }
 
-    .badges { display: flex; gap: 6px; justify-content: center; margin-bottom: 36px; }
+    .badges { display: flex; gap: 6px; justify-content: center; margin-bottom: 20px; }
     .badge { font-size: 0.6rem; font-weight: 700; padding: 3px 10px; border-radius: 4px; letter-spacing: 0.2px; }
     .badge-bpm { background: #451a03; color: #fbbf24; box-shadow: inset 0 0 0 1px rgba(120,53,15,0.5); }
     .badge-key { background: #022c22; color: #34d399; box-shadow: inset 0 0 0 1px rgba(6,78,59,0.5); }
@@ -96,7 +96,7 @@
     .idle p { font-size: 0.8rem; color: #52525b; }
 
     /* Note */
-    .note-wrap { display: flex; flex-direction: column; align-items: center; gap: 8px; margin-bottom: 20px; }
+    .note-wrap { display: flex; flex-direction: column; align-items: center; gap: 6px; margin-bottom: 12px; }
     .note-hint { font-size: 0.58rem; color: rgba(255,255,255,0.22); letter-spacing: 0.04em; text-align: center; }
     .note-icon { font-size: 2.4rem; animation: pulse-note 1.1s ease-in-out infinite; display: block; line-height: 1; }
     @keyframes pulse-note {
@@ -176,7 +176,7 @@
     }
 
     /* Mood */
-    .mood-section { margin-top: 24px; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+    .mood-section { margin-top: 16px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
     .mood-emojis { display: flex; gap: 2px; }
     .mood-btn {
       font-size: 1.5rem; line-height: 1;
