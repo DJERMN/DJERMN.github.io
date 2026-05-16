@@ -19,69 +19,48 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      padding: 16px 24px;
+      justify-content: flex-start;
+      padding: 28px 20px 100px;
       position: relative;
-      overflow: hidden;
+      overflow-x: hidden;
     }
 
     #bg {
-      position: fixed;
-      inset: -30%;
-      background-size: cover;
-      background-position: center;
+      position: fixed; inset: -30%;
+      background-size: cover; background-position: center;
       filter: blur(60px) brightness(0.25) saturate(1.8);
-      transition: background-image 1s ease;
-      z-index: 0;
+      transition: background-image 1s ease; z-index: 0;
     }
 
     #app {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-      max-width: 380px;
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column; align-items: center;
+      width: 100%; max-width: 380px;
       transition: opacity 0.3s;
     }
     #app.fading { opacity: 0; }
 
     .art-wrap {
-      width: min(200px, 52vw);
-      height: min(200px, 52vw);
-      border-radius: 16px;
-      overflow: hidden;
+      width: min(150px, 38vw);
+      height: min(150px, 38vw);
+      border-radius: 14px; overflow: hidden;
       background: #18181b;
-      box-shadow: 0 24px 60px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.06);
-      margin-bottom: 20px;
-      flex-shrink: 0;
+      box-shadow: 0 18px 50px rgba(0,0,0,0.65), 0 0 0 1px rgba(255,255,255,0.06);
+      margin-bottom: 16px; flex-shrink: 0;
     }
     .art-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .art-placeholder {
-      width: 100%; height: 100%;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .art-placeholder svg { width: 56px; height: 56px; opacity: 0.15; }
 
     .title {
-      font-size: clamp(1.15rem, 5.5vw, 1.6rem);
-      font-weight: 800;
-      text-align: center;
-      letter-spacing: -0.3px;
-      line-height: 1.25;
-      margin-bottom: 6px;
-      text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+      font-size: clamp(1rem, 5vw, 1.4rem); font-weight: 800;
+      text-align: center; letter-spacing: -0.3px; line-height: 1.25;
+      margin-bottom: 5px; text-shadow: 0 2px 12px rgba(0,0,0,0.5);
     }
     .artist {
-      font-size: clamp(0.85rem, 3.5vw, 1rem);
-      font-weight: 500;
-      color: #a1a1aa;
-      text-align: center;
-      margin-bottom: 14px;
+      font-size: clamp(0.78rem, 3.2vw, 0.92rem); font-weight: 500;
+      color: #a1a1aa; text-align: center; margin-bottom: 12px;
     }
 
-    .badges { display: flex; gap: 6px; justify-content: center; margin-bottom: 20px; }
+    .badges { display: flex; gap: 6px; justify-content: center; margin-bottom: 16px; }
     .badge { font-size: 0.6rem; font-weight: 700; padding: 3px 10px; border-radius: 4px; letter-spacing: 0.2px; }
     .badge-bpm { background: #451a03; color: #fbbf24; box-shadow: inset 0 0 0 1px rgba(120,53,15,0.5); }
     .badge-key { background: #022c22; color: #34d399; box-shadow: inset 0 0 0 1px rgba(6,78,59,0.5); }
@@ -95,108 +74,241 @@
     .idle h2 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; color: #71717a; }
     .idle p { font-size: 0.8rem; color: #52525b; }
 
-    /* Note */
-    .note-wrap { display: flex; flex-direction: column; align-items: center; gap: 6px; margin-bottom: 12px; }
+    .note-wrap { display: flex; flex-direction: column; align-items: center; gap: 6px; margin-bottom: 10px; }
     .note-hint { font-size: 0.58rem; color: rgba(255,255,255,0.22); letter-spacing: 0.04em; text-align: center; }
-    .note-icon { font-size: 2.4rem; animation: pulse-note 1.1s ease-in-out infinite; display: block; line-height: 1; }
-    @keyframes pulse-note {
-      0%, 100% { transform: scale(1);    opacity: 0.55; }
-      50%       { transform: scale(1.28); opacity: 1;    }
-    }
+    .note-icon { font-size: 2rem; animation: pulse-note 1.1s ease-in-out infinite; display: block; line-height: 1; }
+    @keyframes pulse-note { 0%, 100% { transform: scale(1); opacity: 0.55; } 50% { transform: scale(1.28); opacity: 1; } }
 
-    /* Refresh button */
     #refresh-btn {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.12);
-      color: rgba(255,255,255,0.35);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      transition: background 0.15s, color 0.15s, transform 0.15s;
-      z-index: 10;
+      position: fixed; bottom: 24px; right: 24px;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.35); display: flex; align-items: center; justify-content: center;
+      cursor: pointer; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      transition: background 0.15s, color 0.15s, transform 0.15s; z-index: 10;
       -webkit-tap-highlight-color: transparent;
     }
     #refresh-btn:active { background: rgba(255,255,255,0.16); color: rgba(255,255,255,0.8); transform: scale(0.92); }
     #refresh-btn svg { transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
     #refresh-btn.spinning svg { transform: rotate(360deg); }
 
-    /* Toast */
     #toast {
-      position: fixed;
-      top: 20px;
-      left: 50%;
+      position: fixed; top: 20px; left: 50%;
       transform: translateX(-50%) translateY(-72px);
       transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-      background: rgba(255,255,255,0.1);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255,255,255,0.14);
-      color: rgba(255,255,255,0.75);
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      padding: 7px 18px;
-      border-radius: 999px;
-      white-space: nowrap;
-      z-index: 10;
-      display: flex;
-      align-items: center;
-      gap: 7px;
+      background: rgba(255,255,255,0.1); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.14); color: rgba(255,255,255,0.75);
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 7px 18px; border-radius: 999px; white-space: nowrap; z-index: 10;
+      display: flex; align-items: center; gap: 7px;
     }
     #toast.show { transform: translateX(-50%) translateY(0); }
     #toast-dot { width: 5px; height: 5px; border-radius: 50%; background: #4ade80; box-shadow: 0 0 6px #4ade80; animation: blink 1s ease-in-out infinite; }
 
-    /* Artwork drop-in */
-    @keyframes art-drop {
-      0%   { transform: scale(0.86) rotate(-4deg); opacity: 0; }
-      100% { transform: scale(1)    rotate(0deg);  opacity: 1; }
-    }
+    @keyframes art-drop { 0% { transform: scale(0.86) rotate(-4deg); opacity: 0; } 100% { transform: scale(1) rotate(0deg); opacity: 1; } }
     .art-wrap.drop-in { animation: art-drop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
 
-    /* Shimmer skeleton */
-    @keyframes shimmer {
-      0%   { background-position: -200% 0; }
-      100% { background-position:  200% 0; }
-    }
+    @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
     .art-shimmer {
       width: 100%; height: 100%;
       background: linear-gradient(90deg, #18181b 25%, #27272a 50%, #18181b 75%);
-      background-size: 200% 100%;
-      animation: shimmer 1.4s ease-in-out infinite;
+      background-size: 200% 100%; animation: shimmer 1.4s ease-in-out infinite;
     }
 
-    /* Mood */
+    /* ── Mood ── */
     #mood-section {
       position: relative; z-index: 1;
-      width: 100%; max-width: 380px;
-      margin-top: 24px;
-      padding-top: 20px;
+      width: 100%; max-width: 380px; margin-top: 20px; padding-top: 18px;
       border-top: 1px solid rgba(255,255,255,0.06);
       display: flex; flex-direction: column; align-items: center; gap: 8px;
     }
     .mood-label { font-size: 0.55rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #3f3f46; margin-bottom: 2px; }
     .mood-emojis { display: flex; gap: 2px; }
     .mood-btn {
-      font-size: 1.5rem; line-height: 1;
-      background: none; border: none; cursor: pointer;
-      padding: 8px 7px; border-radius: 12px;
-      opacity: 0.28; transition: opacity 0.15s, transform 0.15s, background 0.15s;
+      font-size: 1.5rem; line-height: 1; background: none; border: none; cursor: pointer;
+      padding: 8px 7px; border-radius: 12px; opacity: 0.28;
+      transition: opacity 0.15s, transform 0.15s, background 0.15s;
       -webkit-tap-highlight-color: transparent;
     }
     .mood-btn:active { transform: scale(0.86); }
     .mood-btn.mood-selected { opacity: 1; background: rgba(255,255,255,0.09); }
     .mood-avg { font-size: 0.6rem; font-weight: 700; color: #52525b; letter-spacing: 0.1em; text-transform: uppercase; }
     .mood-avg span { color: #71717a; }
+
+    /* ── Games Section ── */
+    #games-section {
+      position: relative; z-index: 1;
+      width: 100%; max-width: 380px; margin-top: 18px;
+    }
+    .games-tabs {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; margin-bottom: 10px;
+    }
+    .game-tab {
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px; color: #52525b; font-family: 'Inter', sans-serif;
+      font-size: 0.5rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 9px 4px 7px; cursor: pointer;
+      display: flex; flex-direction: column; align-items: center; gap: 4px;
+      transition: all 0.15s; -webkit-tap-highlight-color: transparent;
+    }
+    .game-tab .ti { font-size: 1.3rem; line-height: 1; }
+    .game-tab.active { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.15); color: #e4e4e7; }
+    .game-tab:active { transform: scale(0.93); }
+    .games-panel { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 16px; overflow: hidden; }
+
+    /* ── Info Panel ── */
+    .info-panel {
+      padding: 24px 18px 20px;
+      display: flex; flex-direction: column; align-items: center; gap: 16px;
+    }
+    .dj-logo { display: flex; flex-direction: column; align-items: center; line-height: 1; gap: 2px; }
+    .logo-ermn {
+      font-size: clamp(3rem, 17vw, 4.2rem); font-weight: 900; letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #ffffff 0%, #71717a 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .logo-baris {
+      font-size: clamp(0.9rem, 5vw, 1.1rem); font-weight: 700; letter-spacing: 0.42em;
+      color: #52525b; text-transform: uppercase;
+    }
+    .info-text {
+      font-size: 0.82rem; line-height: 1.7; color: #a1a1aa; text-align: center;
+      padding: 0 4px;
+    }
+    .phase-section {
+      align-self: stretch; padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex; flex-direction: column; gap: 10px; align-items: center;
+    }
+    .phase-label {
+      font-size: 0.55rem; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: #3f3f46;
+    }
+    .phase-chips { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
+    .phase-chip {
+      padding: 5px 13px; border-radius: 999px;
+      font-size: 0.65rem; font-weight: 700;
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
+      color: #52525b; cursor: pointer; transition: all 0.15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .phase-chip.active {
+      background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.22); color: #f4f4f5;
+    }
+    .phase-chip:active { transform: scale(0.92); }
+
+    /* ── Icebreaker Panel ── */
+    .icebreaker-panel {
+      padding: 16px; min-height: 280px;
+      display: flex; flex-direction: column; align-items: center; gap: 14px;
+    }
+    .ib-progress {
+      font-size: 0.55rem; font-weight: 700; color: #3f3f46; letter-spacing: 0.12em; text-transform: uppercase;
+      align-self: stretch; display: flex; align-items: center; gap: 8px;
+    }
+    .ib-progress-bar { flex: 1; height: 3px; background: rgba(255,255,255,0.06); border-radius: 2px; }
+    .ib-progress-fill { height: 100%; background: rgba(255,255,255,0.2); border-radius: 2px; transition: width 0.3s ease; }
+    .ib-card-wrap {
+      width: 100%; position: relative; height: 130px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .ib-card {
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px; padding: 20px 18px; width: 100%;
+      font-size: 0.93rem; font-weight: 600; line-height: 1.5; text-align: center; color: #f4f4f5;
+      transition: transform 0.32s cubic-bezier(0.25,0.46,0.45,0.94), opacity 0.32s;
+      position: absolute; user-select: none;
+    }
+    .ib-card.fly-left  { transform: translateX(-140%) rotate(-18deg); opacity: 0; pointer-events: none; }
+    .ib-card.fly-right { transform: translateX(140%) rotate(18deg);  opacity: 0; pointer-events: none; }
+    .ib-stats { font-size: 0.7rem; font-weight: 500; color: #71717a; text-align: center; min-height: 18px; }
+    .ib-stats strong { color: #a1a1aa; }
+    .ib-actions { display: flex; gap: 24px; align-items: center; }
+    .ib-btn {
+      width: 62px; height: 62px; border-radius: 50%; border: none; font-size: 1.7rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.12s; -webkit-tap-highlight-color: transparent;
+    }
+    .ib-btn:active { transform: scale(0.85); }
+    .ib-btn-no  { background: rgba(239,68,68,0.12); border: 1.5px solid rgba(239,68,68,0.3); color: #ef4444; }
+    .ib-btn-yes { background: rgba(74,222,128,0.12); border: 1.5px solid rgba(74,222,128,0.3); color: #4ade80; }
+
+    /* ── Snake Panel ── */
+    .snake-panel { padding: 14px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+    .snake-header { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+    .snake-title { font-size: 0.55rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #3f3f46; }
+    .snake-score-display { font-size: 0.75rem; font-weight: 700; color: #4ade80; letter-spacing: 0.05em; }
+    .snake-canvas-wrap { position: relative; }
+    #snake-canvas { border-radius: 10px; border: 1px solid rgba(255,255,255,0.06); display: block; touch-action: none; }
+    .snake-overlay {
+      position: absolute; inset: 0; background: rgba(9,9,11,0.78);
+      backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); border-radius: 10px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+    }
+    .snake-start-btn {
+      background: #ffffff; color: #09090b; border: none; border-radius: 10px;
+      font-family: 'Inter', sans-serif; font-size: 0.78rem; font-weight: 700;
+      padding: 11px 28px; cursor: pointer; -webkit-tap-highlight-color: transparent;
+    }
+    .snake-start-btn:active { opacity: 0.85; transform: scale(0.95); }
+    .snake-gameover-score { font-size: 0.85rem; color: #a1a1aa; font-weight: 600; }
+    .snake-dpad {
+      display: grid; grid-template-columns: repeat(3, 50px); grid-template-rows: repeat(2, 42px); gap: 4px;
+    }
+    .snake-dpad button {
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px; color: #71717a; font-size: 0.9rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      -webkit-tap-highlight-color: transparent; touch-action: manipulation;
+    }
+    .snake-dpad button:active { background: rgba(255,255,255,0.14); color: #e4e4e7; transform: scale(0.9); }
+    .dpad-up { grid-column: 2; grid-row: 1; }
+    .dpad-left { grid-column: 1; grid-row: 2; }
+    .dpad-down { grid-column: 2; grid-row: 2; }
+    .dpad-right { grid-column: 3; grid-row: 2; }
+
+    /* ── Chat Panel ── */
+    .chat-panel { display: flex; flex-direction: column; height: 360px; }
+    .chat-messages {
+      flex: 1; overflow-y: auto; padding: 12px 14px;
+      display: flex; flex-direction: column; gap: 7px; scrollbar-width: none;
+    }
+    .chat-messages::-webkit-scrollbar { display: none; }
+    .chat-msg {
+      max-width: 80%; padding: 8px 12px; border-radius: 16px;
+      font-size: 0.83rem; line-height: 1.45; word-break: break-word;
+    }
+    .chat-msg.mine { align-self: flex-end; border-bottom-right-radius: 4px; color: #09090b; font-weight: 500; }
+    .chat-msg.theirs {
+      align-self: flex-start;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.08);
+      color: #e4e4e7; border-bottom-left-radius: 4px;
+    }
+    .chat-input-wrap {
+      padding: 10px 12px; border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex; gap: 8px; align-items: flex-end;
+    }
+    .chat-input {
+      flex: 1; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 12px; color: #f4f4f5; font-family: 'Inter', sans-serif;
+      font-size: 0.85rem; padding: 8px 12px; outline: none; resize: none; max-height: 80px; line-height: 1.4;
+    }
+    .chat-input::placeholder { color: #52525b; }
+    .chat-input:focus { border-color: rgba(255,255,255,0.2); }
+    .chat-send-btn {
+      width: 36px; height: 36px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 10px; color: #a1a1aa; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; flex-shrink: 0; -webkit-tap-highlight-color: transparent; transition: background 0.12s;
+    }
+    .chat-send-btn:active { background: rgba(255,255,255,0.2); color: #f4f4f5; }
+    .chat-counter { font-size: 0.5rem; color: #3f3f46; text-align: right; padding: 0 14px 6px; }
+    .chat-counter.warn { color: #f59e0b; }
+    .chat-counter.over { color: #ef4444; }
+    .chat-empty {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      height: 100%; gap: 7px; color: #3f3f46; font-size: 0.75rem;
+    }
+    .chat-empty-icon { font-size: 2rem; opacity: 0.35; }
   </style>
 </head>
 <body>
@@ -208,6 +320,7 @@
     <path d="M21 3v5h-5"/>
   </svg>
 </button>
+
 <div id="app">
   <div class="idle">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -217,188 +330,575 @@
     <p>Warte auf Rekordbox</p>
   </div>
 </div>
+
 <div id="mood-section"></div>
 
+<div id="games-section">
+  <div class="games-tabs">
+    <button class="game-tab active" data-tab="info"><span class="ti">💌</span>Info</button>
+    <button class="game-tab" data-tab="icebreaker"><span class="ti">🃏</span>Icebreaker</button>
+    <button class="game-tab" data-tab="snake"><span class="ti">🐍</span>Me Time</button>
+    <button class="game-tab" data-tab="chat"><span class="ti">💬</span>Kommentare</button>
+  </div>
+  <div class="games-panel" id="games-panel"></div>
+</div>
+
 <script type="module">
-  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
-  import { getDatabase, ref, onValue, get, set } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+import { getDatabase, ref, onValue, get, set, push, onChildAdded, query, limitToLast } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
 
-  const app = initializeApp({
-    apiKey: 'AIzaSyDB7qRbmUTU25sv4R8Db4SWjyc2FGaPQeE',
-    authDomain: 'now-playing-75593.firebaseapp.com',
-    projectId: 'now-playing-75593',
-    storageBucket: 'now-playing-75593.firebasestorage.app',
-    messagingSenderId: '407700694205',
-    appId: '1:407700694205:web:d402761f32892fee5cc3d4',
-    databaseURL: 'https://now-playing-75593-default-rtdb.europe-west1.firebasedatabase.app',
-  });
+const app = initializeApp({
+  apiKey: 'AIzaSyDB7qRbmUTU25sv4R8Db4SWjyc2FGaPQeE',
+  authDomain: 'now-playing-75593.firebaseapp.com',
+  projectId: 'now-playing-75593',
+  storageBucket: 'now-playing-75593.firebasestorage.app',
+  messagingSenderId: '407700694205',
+  appId: '1:407700694205:web:d402761f32892fee5cc3d4',
+  databaseURL: 'https://now-playing-75593-default-rtdb.europe-west1.firebasedatabase.app',
+});
 
-  const db         = getDatabase(app);
-  const bg         = document.getElementById('bg');
-  const appEl      = document.getElementById('app');
-  const toast      = document.getElementById('toast');
-  const refreshBtn = document.getElementById('refresh-btn');
-  let lastTitle   = null;
-  let lastArtwork = null;
-  let toastTimer  = null;
-  let reloadTimer = setTimeout(() => location.reload(), 45000);
+const db = getDatabase(app);
+const bg = document.getElementById('bg');
+const appEl = document.getElementById('app');
+const toast = document.getElementById('toast');
+const refreshBtn = document.getElementById('refresh-btn');
+let lastTitle = null, lastArtwork = null, toastTimer = null;
+let reloadTimer = setTimeout(() => location.reload(), 45000);
 
-  const uid = (() => {
-    let id = localStorage.getItem('djermn-uid');
-    if (!id) { id = crypto.randomUUID(); localStorage.setItem('djermn-uid', id); }
-    return id;
-  })();
+const uid = (() => {
+  let id = localStorage.getItem('djermn-uid');
+  if (!id) { id = crypto.randomUUID(); localStorage.setItem('djermn-uid', id); }
+  return id;
+})();
 
-  function avgEmoji(avg) {
-    if (avg >= 4.5) return '🔥';
-    if (avg >= 3.5) return '😍';
-    if (avg >= 2.5) return '🙂';
-    if (avg >= 1.5) return '😐';
-    return '😴';
-  }
+const userColor = (() => {
+  const palette = ['#f87171','#fb923c','#fbbf24','#4ade80','#60a5fa','#a78bfa','#f472b6','#34d399','#e879f9'];
+  let c = localStorage.getItem('djermn-color');
+  if (!c) { c = palette[Math.floor(Math.random() * palette.length)]; localStorage.setItem('djermn-color', c); }
+  return c;
+})();
 
-  function initMood() {
-    const today = new Date().toISOString().slice(0, 10); // "2026-05-16"
-    onValue(ref(db, `mood/${today}`), (snap) => {
-      const el = document.getElementById('mood-section');
-      if (!el) return;
-      const votes = snap.val() || {};
-      const vals  = Object.values(votes).filter(v => typeof v === 'number');
-      const avg   = vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : null;
-      const myVote = votes[uid] ?? null;
-      const emojis = [['🔥',5],['😍',4],['🙂',3],['😐',2],['😴',1]];
-      el.innerHTML = `
-        <div class="mood-label">Stimmung heute</div>
-        <div class="mood-emojis">
-          ${emojis.map(([e,v]) => `<button class="mood-btn${myVote===v?' mood-selected':''}" data-val="${v}" data-date="${today}">${e}</button>`).join('')}
-        </div>
-        <div class="mood-avg">${avg !== null
-          ? `${avgEmoji(avg)} <span>Ø ${avg.toFixed(1)} · ${vals.length} Vote${vals.length!==1?'s':''}</span>`
-          : 'Erste Bewertung sein!'}</div>`;
-      el.querySelectorAll('.mood-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          set(ref(db, `mood/${btn.dataset.date}/${uid}`), parseInt(btn.dataset.val)).catch(() => {});
-        });
+// ── Now Playing ───────────────────────────────────────────────────────
+function avgEmoji(avg) {
+  if (avg >= 4.5) return '🔥'; if (avg >= 3.5) return '😍';
+  if (avg >= 2.5) return '🙂'; if (avg >= 1.5) return '😐'; return '😴';
+}
+
+function initMood() {
+  const today = new Date().toISOString().slice(0, 10);
+  onValue(ref(db, `mood/${today}`), (snap) => {
+    const el = document.getElementById('mood-section');
+    if (!el) return;
+    const votes = snap.val() || {};
+    const vals = Object.values(votes).filter(v => typeof v === 'number');
+    const avg = vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : null;
+    const myVote = votes[uid] ?? null;
+    const emojis = [['🔥',5],['😍',4],['🙂',3],['😐',2],['😴',1]];
+    el.innerHTML = `
+      <div class="mood-label">Stimmung heute</div>
+      <div class="mood-emojis">
+        ${emojis.map(([e,v]) => `<button class="mood-btn${myVote===v?' mood-selected':''}" data-val="${v}" data-date="${today}">${e}</button>`).join('')}
+      </div>
+      <div class="mood-avg">${avg !== null
+        ? `${avgEmoji(avg)} <span>Ø ${avg.toFixed(1)} · ${vals.length} Vote${vals.length!==1?'s':''}</span>`
+        : 'Erste Bewertung sein!'}</div>`;
+    el.querySelectorAll('.mood-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        set(ref(db, `mood/${btn.dataset.date}/${uid}`), parseInt(btn.dataset.val)).catch(() => {});
       });
     });
+  });
+}
+
+const DANCER = `<div class="note-wrap"><span class="note-icon">♪</span><p class="note-hint">Neuer Song in ~45 Sekunden</p></div>`;
+
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function showToast() {
+  clearTimeout(toastTimer); toast.classList.add('show');
+  toastTimer = setTimeout(() => toast.classList.remove('show'), 2800);
+}
+function dropIn() {
+  const wrap = appEl.querySelector('.art-wrap');
+  if (!wrap) return;
+  wrap.classList.remove('drop-in'); void wrap.offsetWidth; wrap.classList.add('drop-in');
+  wrap.addEventListener('animationend', () => wrap.classList.remove('drop-in'), { once: true });
+}
+function render(data) {
+  if (!data || !data.title) {
+    bg.style.backgroundImage = '';
+    appEl.innerHTML = `<div class="idle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18V5l12-2v13M9 18a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm12 0a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/></svg><h2>Warte auf ersten Song...</h2><p>DJERMN startet gleich</p></div>`;
+    return;
   }
+  if (data.artwork) bg.style.backgroundImage = `url('${data.artwork}')`;
+  const art = data.artwork ? `<img src="${esc(data.artwork)}" alt="Cover">` : `<div class="art-shimmer"></div>`;
+  const bpm = data.bpm ? `<span class="badge badge-bpm">${data.bpm} BPM</span>` : '';
+  const key = data.key ? `<span class="badge badge-key">${esc(data.key)}</span>` : '';
+  appEl.innerHTML = `${DANCER}<div class="art-wrap">${art}</div><div class="title">${esc(data.title)}</div><div class="artist">${esc(data.artist||'')}</div>${(bpm||key)?`<div class="badges">${bpm}${key}</div>`:''}<div class="live"><span class="live-dot"></span>Live</div>`;
+  requestAnimationFrame(dropIn);
+}
+function swapArtwork(url) {
+  const wrap = appEl.querySelector('.art-wrap');
+  if (!wrap) return;
+  bg.style.backgroundImage = `url('${url}')`;
+  const img = document.createElement('img');
+  img.alt = 'Cover';
+  img.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity 0.6s';
+  img.onload = () => { img.style.opacity = '1'; };
+  img.src = url; wrap.innerHTML = ''; wrap.appendChild(img);
+}
 
-  const NOTE = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:56px;height:56px;opacity:0.15">
-    <path d="M9 18V5l12-2v13M9 18a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm12 0a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-  </svg>`;
+refreshBtn.addEventListener('click', async () => {
+  refreshBtn.classList.add('spinning');
+  refreshBtn.addEventListener('transitionend', () => refreshBtn.classList.remove('spinning'), { once: true });
+  try {
+    const snapshot = await get(ref(db, 'now-playing'));
+    const data = snapshot.val() || {};
+    lastTitle = null; lastArtwork = null;
+    appEl.classList.add('fading');
+    setTimeout(() => { lastTitle = data.title; lastArtwork = data.artwork; render(data); appEl.classList.remove('fading'); }, 300);
+  } catch (_) {}
+});
 
-  const DANCER = `<div class="note-wrap">
-    <span class="note-icon">♪</span>
-    <p class="note-hint">Neuer Song sichtbar in ~45 Sekunden</p>
+initMood();
+
+onValue(ref(db, 'now-playing'), (snapshot) => {
+  clearTimeout(reloadTimer); reloadTimer = setTimeout(() => location.reload(), 45000);
+  const data = snapshot.val() || {};
+  const titleChanged = data.title !== lastTitle;
+  const artworkArrived = !lastArtwork && data.artwork && data.title === lastTitle;
+  if (titleChanged) {
+    appEl.classList.add('fading');
+    setTimeout(() => {
+      lastTitle = data.title; lastArtwork = data.artwork;
+      render(data); appEl.classList.remove('fading');
+      if (data.title) showToast();
+    }, 300);
+  } else if (artworkArrived) {
+    lastArtwork = data.artwork; swapArtwork(data.artwork);
+  }
+});
+
+// ── Games Tabs ────────────────────────────────────────────────────────
+let activeTab = 'info';
+let panelUnsub = null;
+let snakeGame = null;
+
+document.querySelectorAll('.game-tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.game-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeTab = btn.dataset.tab;
+    renderPanel();
+  });
+});
+
+function renderPanel() {
+  if (panelUnsub) { panelUnsub(); panelUnsub = null; }
+  if (snakeGame) { snakeGame.stop(); snakeGame = null; }
+  const panel = document.getElementById('games-panel');
+  if      (activeTab === 'info')        renderInfoPanel(panel);
+  else if (activeTab === 'icebreaker')  renderIcebreakerPanel(panel);
+  else if (activeTab === 'snake')       renderSnakePanel(panel);
+  else if (activeTab === 'chat')        renderChatPanel(panel);
+}
+
+// ── Info ──────────────────────────────────────────────────────────────
+const PHASES = [
+  ['🌿','Chillout'], ['🎵','Warm-Up'], ['💃','Tanzen'],
+  ['🎉','Party Mode'], ['⚡','Techno'], ['🌙','Letzter Song'],
+];
+
+function checkDjPin() {
+  if (sessionStorage.getItem('dj-admin')) return true;
+  const pin = prompt('DJ PIN:');
+  if (pin === '1234') { sessionStorage.setItem('dj-admin', '1'); return true; }
+  return false;
+}
+
+function renderInfoPanel(panel) {
+  panel.innerHTML = `<div class="info-panel">
+    <div class="dj-logo">
+      <span class="logo-ermn">ERMN</span>
+      <span class="logo-baris">BARIS</span>
+    </div>
+    <p class="info-text">Liebe Gäste, ich freue mich heute für Euch spielen zu dürfen. Mein Name ist Baris ERMN – wenn ihr Fragen habt, kommt auf uns zu, wir beißen nicht. Adrian ist mein treuer Kumpel und Assistent. 🤝</p>
+    <div class="phase-section">
+      <div class="phase-label">Aktuelle Phase</div>
+      <div class="phase-chips" id="phase-chips">…</div>
+    </div>
   </div>`;
 
-  function esc(s) {
-    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  }
+  get(ref(db, 'info/phase')).then(snap => {
+    renderPhaseChips(snap.val() || 'Chillout');
+  }).catch(() => renderPhaseChips('Chillout'));
+}
 
-  function showToast() {
-    clearTimeout(toastTimer);
-    toast.classList.add('show');
-    toastTimer = setTimeout(() => toast.classList.remove('show'), 2800);
-  }
+function renderPhaseChips(current) {
+  const el = document.getElementById('phase-chips');
+  if (!el) return;
+  el.innerHTML = PHASES.map(([icon, name]) =>
+    `<button class="phase-chip${name === current ? ' active' : ''}" data-phase="${name}">${icon} ${name}</button>`
+  ).join('');
+  el.querySelectorAll('.phase-chip').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (!checkDjPin()) return;
+      const phase = btn.dataset.phase;
+      set(ref(db, 'info/phase'), phase).catch(() => {});
+      renderPhaseChips(phase);
+    });
+  });
+}
 
-  function dropIn() {
-    const wrap = appEl.querySelector('.art-wrap');
-    if (!wrap) return;
-    wrap.classList.remove('drop-in');
-    void wrap.offsetWidth; // reflow
-    wrap.classList.add('drop-in');
-    wrap.addEventListener('animationend', () => wrap.classList.remove('drop-in'), { once: true });
-  }
+// ── Icebreaker ────────────────────────────────────────────────────────
+const QUESTIONS = [
+  "Würdest du für 10.000 € einen Monat ohne Handy leben?",
+  "Hast du schon mal beim Monopoly geschummelt?",
+  "Glaubst du, dass du besser tanzt als du wirklich tanzt?",
+  "Würdest du deinen Ex zu deiner Hochzeit einladen?",
+  "Hast du schon mal aus Langeweile gegessen, obwohl du keinen Hunger hattest?",
+  "Würdest du für 100 € auf der Bühne hier singen?",
+  "Hast du schon mal bei einem Film weinen wollen, dich aber beherrscht?",
+  "Würdest du lieber ein Monat lang nur Pizza essen oder nie wieder Pizza?",
+  "Hast du schon mal etwas aus Versehen kaputt gemacht und jemand anderem die Schuld gegeben?",
+  "Würdest du für 500 € im Winter in einem See schwimmen?",
+  "Hast du schon mal heimlich eine Serie ohne deinen Partner weitergeschaut?",
+  "Würdest du lieber der lauteste oder der unsichtbarste Gast auf dieser Hochzeit sein?",
+  "Hast du schon mal einen Witz erzählt und selbst am meisten gelacht?",
+  "Würdest du für 50 € heute Nacht eine Stunde alleine auf der Tanzfläche durchhalten?",
+  "Hast du schon mal jemanden auf WhatsApp gelesen und absichtlich nicht geantwortet?",
+  "Glaubst du, dass du in einer Zombie-Apokalypse überleben würdest?",
+  "Würdest du lieber unsichtbar sein oder fliegen können?",
+  "Hast du schon mal ein Selfie gemacht und es sofort wieder gelöscht?",
+  "Würdest du dein Gehalt vollständig mit deinem Partner teilen?",
+  "Würdest du für 1.000 € eine Nacht in einem Spukhaus schlafen?",
+  "Hast du schon mal gelogen, dass du krank bist, um nicht zur Arbeit zu müssen?",
+  "Würdest du lieber immer zu früh oder immer zu spät ankommen?",
+  "Hast du schon mal bei Google etwas so Peinliches gesucht, dass du den Verlauf gelöscht hast?",
+  "Würdest du für 200 € 24 Stunden komplett offline bleiben?",
+  "Hast du schon mal jemanden auf Social Media gemuted, ohne es zu sagen?",
+  "Würdest du einen Blinddate-Urlaub buchen ohne das Ziel zu kennen?",
+  "Hast du schon mal so stark gekocht oder gebacken, dass der Rauchmelder anging?",
+  "Würdest du lieber eine Woche kein WLAN oder kein Warmwasser haben?",
+  "Hast du schon mal einen Witz nicht verstanden und trotzdem mitgelacht?",
+  "Hast du schon mal im Urlaub etwas gekauft, das du nie wieder benutzt hast?",
+  "Würdest du lieber alle deine Textnachrichten oder alle deine Fotos verlieren?",
+  "Hast du schon mal vergessen, wem du was über wen erzählt hast – und Panik bekommen?",
+  "Würdest du für 1.000 € deinen Vornamen für ein Jahr ändern?",
+  "Hast du schon mal auf einer Feier unabsichtlich jemanden beleidigt?",
+  "Würdest du lieber jeden Tag die gleichen Klamotten tragen oder nie wieder shoppen?",
+  "Würdest du für 5.000 € einen Monat in einer fremden Familie wohnen?",
+  "Hast du schon mal beim Kartenspiel so getan, als würdest du verlieren?",
+  "Würdest du lieber für einen Tag die Gedanken aller hören oder ein Jahr unsichtbar sein?",
+  "Hast du schon mal jemandem ein Kompliment gemacht, das du nicht so gemeint hast?",
+  "Hast du schon mal ein Geschenk bekommen, das du heimlich verschenkt hast?",
+  "Würdest du lieber der beste Tänzer oder der beste Witzeerzähler auf dieser Party sein?",
+  "Hast du schon mal beim Telefonieren so getan, als wärst du gleich im Tunnel?",
+  "Würdest du für 10.000 € ein Jahr lang keinen Alkohol trinken?",
+  "Hast du schon mal auf einer Hochzeit heimlich gegähnt?",
+  "Würdest du lieber perfektes Gedächtnis oder perfekten Schlaf haben?",
+  "Hast du schon mal das falsche WC benutzt – aus Versehen?",
+  "Hast du schon mal etwas so lange aufgeschoben, dass es sich von selbst erledigt hat?",
+  "Hast du schon mal laut gesungen und plötzlich gemerkt, dass du nicht allein bist?",
+  "Hast du schon mal absichtlich langsam getippt, damit du nicht antworten musst?",
+  "Hast du schon mal eine Alarmzeit gestellt und dann noch 10x auf Snooze gedrückt?",
+  "Hast du schon mal jemandem gesagt, dass sein Essen lecker war – und das war es wirklich nicht?",
+  "Würdest du lieber ein Jahr ohne Spiegel oder ein Jahr ohne Kameras leben?",
+  "Hast du schon mal einen Post geliket und es sofort bereut?",
+  "Würdest du für 1.000 € eine Stunde Breakdance auf einer Bühne versuchen?",
+  "Hast du schon mal gelogen, dass du gleich da bist, obwohl du noch 30 Min. weg warst?",
+  "Hast du schon mal jemanden auf Social Media gestalkt – und aus Versehen geliket?",
+  "Würdest du für 200 € eine Woche lang keine Süßigkeiten essen?",
+  "Hast du schon mal so getan, als würde dein Handy klingeln, nur um nicht angesprochen zu werden?",
+  "Würdest du lieber alle Lieder der Welt kennen oder alle Sprachen sprechen?",
+  "Hast du schon mal eine Veranstaltung abgesagt und dann doch etwas Schöneres gemacht?",
+  "Hast du schon mal eine Pflanze sterben lassen, obwohl du ihr einen Namen gegeben hattest?",
+  "Würdest du lieber dein Traumhaus oder dein Traumauto geschenkt bekommen?",
+  "Hast du schon mal einen Film nie zu Ende gesehen und trotzdem Spoiler gegeben?",
+  "Würdest du für 100 € den nächsten DJ-Song hier persönlich ansagen – mit voller Leidenschaft?",
+  "Hast du schon mal mit jemandem geredet und seinen Namen dabei komplett vergessen?",
+  "Würdest du lieber jeden Tag dieselbe Mahlzeit essen oder nie mehr ein Lieblingsessen haben?",
+  "Hast du schon mal jemanden zum Geburtstag einen Tag zu spät beglückwünscht und so getan, als wär's Absicht?",
+  "Würdest du für 500 € beim nächsten Song auf der Tanzfläche den Worm machen?",
+  "Hast du schon mal Chips unter der Decke gegessen, damit niemand das Rascheln hört?",
+  "Würdest du lieber immer die Wahrheit sagen müssen oder nie lügen können?",
+  "Hast du schon mal eine Nachricht an die falsche Person geschickt – und bereut?",
+  "Würdest du für 1.000 € eine Woche lang nur Komplimente sagen?",
+  "Hast du schon mal mitten im Satz vergessen, was du sagen wolltest?",
+  "Hast du schon mal jemandem auf WhatsApp eine Stunde nach einer Nachricht geantwortet, obwohl du sofort online warst?",
+  "Hast du schon mal absichtlich so getan, als würde dein Handy klingeln?",
+  "Würdest du lieber wissen, was alle wirklich über dich denken – oder es nie erfahren?",
+  "Hast du schon mal eine eigene Geschichte so oft erzählt, dass du selbst nicht mehr weißt, ob sie stimmt?",
+  "Glaubst du, dass du eine Folge deiner Lieblingserie in einer Nacht durchbingen könntest?",
+  "Würdest du für 2.000 € eine Woche ohne Klimaanlage im Sommer leben?",
+  "Hast du schon mal beim Sport so getan, als wärst du erschöpfter als du warst?",
+  "Würdest du lieber einmal im Jahr total pleite sein oder immer nur knapp über die Runden kommen?",
+  "Hast du schon mal versucht, jemanden zu ignorieren, der direkt neben dir stand?",
+  "Würdest du deinen Traumjob gegen mehr Freizeit eintauschen?",
+  "Hast du schon mal Essen bestellt und dann beim Abholen behauptet, es wäre nicht richtig?",
+  "Würdest du für 3.000 € einen Monat keine Musik hören?",
+  "Hast du schon mal eine Ausrede erfunden, die so gut war, dass du sie selbst geglaubt hast?",
+  "Würdest du lieber der Erste oder der Letzte auf der Tanzfläche sein?",
+  "Hast du schon mal bei einem Quiz absichtlich eine falsche Antwort gegeben?",
+  "Würdest du für 500 € heute Nacht mit einem kompletten Fremden tauschen – Job, Aussehen, alles?",
+  "Hast du schon mal heimlich nachts Eis aus dem Tiefkühlfach gegessen?",
+  "Würdest du lieber immer über alles informiert sein oder entspannt unwissend bleiben?",
+  "Hast du jemals einen Parkzettel bekommen und versucht, so zu tun, als hättest du ihn nicht gesehen?",
+  "Würdest du für 1.000 € eine Woche lang immer mit einer Sonnenbrille schlafen?",
+  "Hast du schon mal jemandem etwas Wichtiges beichtet, nur um danach zu sagen 'War nur ein Witz'?",
+  "Glaubst du, dass du lügen kannst, ohne dass es jemand merkt?",
+  "Würdest du für 200 € heute Nacht als letzter diese Hochzeit verlassen?",
+  "Hast du schon mal so laut gelacht, dass du etwas verschüttet hast?",
+  "Würdest du lieber für einen Tag Baris ERMN oder für eine Woche du selbst sein?",
+];
 
-  function render(data) {
-    if (!data || !data.title) {
-      bg.style.backgroundImage = '';
-      appEl.innerHTML = `<div class="idle">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M9 18V5l12-2v13M9 18a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm12 0a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+let ibQueue = JSON.parse(localStorage.getItem('ib-queue') || 'null');
+
+function getIbQueue() {
+  if (!ibQueue || ibQueue.length === 0) {
+    ibQueue = Array.from({length: QUESTIONS.length}, (_, i) => i);
+    for (let i = ibQueue.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [ibQueue[i], ibQueue[j]] = [ibQueue[j], ibQueue[i]];
+    }
+    localStorage.setItem('ib-queue', JSON.stringify(ibQueue));
+  }
+  return ibQueue;
+}
+
+function renderIcebreakerPanel(panel) {
+  const queue = getIbQueue();
+  const total = QUESTIONS.length;
+  const remaining = queue.length;
+  const answered = total - remaining;
+
+  panel.innerHTML = `<div class="icebreaker-panel">
+    <div class="ib-progress">
+      <span>${answered + 1}/${total}</span>
+      <div class="ib-progress-bar"><div class="ib-progress-fill" style="width:${(answered/total)*100}%"></div></div>
+    </div>
+    <div class="ib-card-wrap">
+      <div class="ib-card" id="ib-card">${esc(QUESTIONS[queue[queue.length - 1]])}</div>
+    </div>
+    <div class="ib-stats" id="ib-stats">…</div>
+    <div class="ib-actions">
+      <button class="ib-btn ib-btn-no"  id="ib-no">✕</button>
+      <button class="ib-btn ib-btn-yes" id="ib-yes">✓</button>
+    </div>
+  </div>`;
+
+  const qIdx = queue[queue.length - 1];
+  get(ref(db, `icebreaker/${qIdx}`)).then(snap => {
+    const statsEl = document.getElementById('ib-stats');
+    if (!statsEl) return;
+    const votes = snap.val() || {};
+    const vals = Object.values(votes);
+    const yes = vals.filter(Boolean).length;
+    const total = vals.length;
+    statsEl.innerHTML = total === 0 ? 'Sei der Erste!'
+      : `<strong>${Math.round((yes/total)*100)}%</strong> haben Ja gesagt <span style="color:#3f3f46">· ${total}</span>`;
+  }).catch(() => {});
+
+  let tx = null, ty = null;
+  const card = document.getElementById('ib-card');
+  card.addEventListener('touchstart', e => { tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, {passive:true});
+  card.addEventListener('touchend', e => {
+    if (tx === null) return;
+    const dx = e.changedTouches[0].clientX - tx;
+    const dy = e.changedTouches[0].clientY - ty;
+    if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy)) answerQ(dx > 0);
+    tx = null;
+  }, {passive:true});
+  document.getElementById('ib-no').addEventListener('click', () => answerQ(false));
+  document.getElementById('ib-yes').addEventListener('click', () => answerQ(true));
+}
+
+function answerQ(yes) {
+  const card = document.getElementById('ib-card');
+  if (!card) return;
+  card.classList.add(yes ? 'fly-right' : 'fly-left');
+  const qIdx = ibQueue[ibQueue.length - 1];
+  set(ref(db, `icebreaker/${qIdx}/${uid}`), yes).catch(() => {});
+  ibQueue.pop();
+  if (ibQueue.length === 0) {
+    ibQueue = null;
+    localStorage.removeItem('ib-queue');
+  } else {
+    localStorage.setItem('ib-queue', JSON.stringify(ibQueue));
+  }
+  setTimeout(() => {
+    if (activeTab === 'icebreaker') renderIcebreakerPanel(document.getElementById('games-panel'));
+  }, 340);
+}
+
+// ── Snake ─────────────────────────────────────────────────────────────
+function renderSnakePanel(panel) {
+  const size = Math.min(320, window.innerWidth - 60);
+  panel.innerHTML = `<div class="snake-panel">
+    <div class="snake-header">
+      <span class="snake-title">Me Time — Snake</span>
+      <span class="snake-score-display" id="snake-score">Score: 0</span>
+    </div>
+    <div class="snake-canvas-wrap" id="snake-wrap" style="width:${size}px;height:${size}px">
+      <canvas id="snake-canvas" width="${size}" height="${size}"></canvas>
+      <div class="snake-overlay" id="snake-overlay">
+        <div id="snake-gameover-score" style="display:none" class="snake-gameover-score"></div>
+        <button class="snake-start-btn" id="snake-start">Spielen ▶</button>
+      </div>
+    </div>
+    <div class="snake-dpad">
+      <button class="dpad-up" id="dpad-up">▲</button>
+      <button class="dpad-left" id="dpad-left">◀</button>
+      <button class="dpad-down" id="dpad-down">▼</button>
+      <button class="dpad-right" id="dpad-right">▶</button>
+    </div>
+  </div>`;
+
+  const canvas = document.getElementById('snake-canvas');
+  snakeGame = new SnakeGame(canvas, size,
+    (score) => { const el = document.getElementById('snake-score'); if (el) el.textContent = `Score: ${score}`; },
+    (final) => {
+      const ov = document.getElementById('snake-overlay');
+      const os = document.getElementById('snake-gameover-score');
+      if (ov) ov.style.display = 'flex';
+      if (os) { os.style.display = 'block'; os.textContent = `Score: ${final}`; }
+      const sb = document.getElementById('snake-start');
+      if (sb) sb.textContent = 'Nochmal ▶';
+    }
+  );
+  document.getElementById('snake-start').addEventListener('click', () => {
+    document.getElementById('snake-overlay').style.display = 'none';
+    document.getElementById('snake-gameover-score').style.display = 'none';
+    document.getElementById('snake-score').textContent = 'Score: 0';
+    snakeGame.start();
+  });
+  document.getElementById('dpad-up').addEventListener('click',    () => snakeGame?.setDir(0,-1));
+  document.getElementById('dpad-down').addEventListener('click',  () => snakeGame?.setDir(0,1));
+  document.getElementById('dpad-left').addEventListener('click',  () => snakeGame?.setDir(-1,0));
+  document.getElementById('dpad-right').addEventListener('click', () => snakeGame?.setDir(1,0));
+}
+
+class SnakeGame {
+  constructor(canvas, size, onScore, onGameOver) {
+    this.canvas = canvas; this.ctx = canvas.getContext('2d');
+    this.cols = 20; this.cs = size / 20;
+    this.onScore = onScore; this.onGameOver = onGameOver; this.interval = null;
+    this._keyHandler = (e) => {
+      const map = {'ArrowUp':[0,-1],'ArrowDown':[0,1],'ArrowLeft':[-1,0],'ArrowRight':[1,0]};
+      if (map[e.key]) { e.preventDefault(); this.setDir(...map[e.key]); }
+    };
+    document.addEventListener('keydown', this._keyHandler);
+    let tx, ty;
+    canvas.addEventListener('touchstart', e => { tx=e.touches[0].clientX; ty=e.touches[0].clientY; },{passive:true});
+    canvas.addEventListener('touchend', e => {
+      const dx=e.changedTouches[0].clientX-tx, dy=e.changedTouches[0].clientY-ty;
+      if(Math.abs(dx)>Math.abs(dy)) this.setDir(dx>0?1:-1,0); else this.setDir(0,dy>0?1:-1);
+    },{passive:true});
+    this.initState(); this.draw();
+  }
+  initState() {
+    const m = Math.floor(this.cols/2);
+    this.snake = [{x:m,y:m},{x:m-1,y:m},{x:m-2,y:m}];
+    this.dir = {x:1,y:0}; this.nextDir = {x:1,y:0};
+    this.food = this.randomFood(); this.score = 0; this.alive = true;
+  }
+  randomFood() {
+    let p;
+    do { p = {x:Math.floor(Math.random()*this.cols), y:Math.floor(Math.random()*this.cols)}; }
+    while (this.snake.some(s=>s.x===p.x&&s.y===p.y));
+    return p;
+  }
+  start() { if(this.interval) clearInterval(this.interval); this.initState(); this.interval=setInterval(()=>this.tick(),140); }
+  stop()  { clearInterval(this.interval); document.removeEventListener('keydown',this._keyHandler); }
+  setDir(dx,dy) {
+    if(dx!==0&&this.dir.x!==0) return; if(dy!==0&&this.dir.y!==0) return;
+    this.nextDir={x:dx,y:dy};
+  }
+  tick() {
+    this.dir=this.nextDir;
+    const h={x:this.snake[0].x+this.dir.x, y:this.snake[0].y+this.dir.y};
+    if(h.x<0||h.x>=this.cols||h.y<0||h.y>=this.cols||this.snake.some(s=>s.x===h.x&&s.y===h.y)) {
+      clearInterval(this.interval); this.alive=false; this.draw(); this.onGameOver?.(this.score); return;
+    }
+    this.snake.unshift(h);
+    if(h.x===this.food.x&&h.y===this.food.y) { this.score++; this.onScore?.(this.score); this.food=this.randomFood(); }
+    else this.snake.pop();
+    this.draw();
+  }
+  draw() {
+    const {ctx,cs,cols}=this;
+    ctx.fillStyle='#09090b'; ctx.fillRect(0,0,cols*cs,cols*cs);
+    ctx.fillStyle='rgba(255,255,255,0.025)';
+    for(let x=0;x<cols;x++) for(let y=0;y<cols;y++) { ctx.beginPath(); ctx.arc(x*cs+cs/2,y*cs+cs/2,1,0,Math.PI*2); ctx.fill(); }
+    ctx.fillStyle='#ef4444'; ctx.shadowColor='#ef4444'; ctx.shadowBlur=10;
+    ctx.beginPath(); ctx.arc(this.food.x*cs+cs/2,this.food.y*cs+cs/2,cs/2-2,0,Math.PI*2); ctx.fill(); ctx.shadowBlur=0;
+    this.snake.forEach((s,i)=>{
+      const a=Math.max(0.15,1-(i/this.snake.length)*0.75);
+      ctx.fillStyle=`rgba(74,222,128,${a})`;
+      ctx.beginPath(); ctx.arc(s.x*cs+cs/2,s.y*cs+cs/2,i===0?cs*0.42:cs*0.34,0,Math.PI*2); ctx.fill();
+    });
+  }
+}
+
+// ── Chat ──────────────────────────────────────────────────────────────
+function renderChatPanel(panel) {
+  panel.innerHTML = `<div class="chat-panel">
+    <div class="chat-messages" id="chat-messages">
+      <div class="chat-empty"><span class="chat-empty-icon">💬</span>Noch keine Nachrichten – sei der Erste!</div>
+    </div>
+    <div class="chat-counter" id="chat-counter">0 / 140</div>
+    <div class="chat-input-wrap">
+      <textarea class="chat-input" id="chat-input" placeholder="Schreib etwas…" maxlength="140" rows="1"></textarea>
+      <button class="chat-send-btn" id="chat-send" aria-label="Senden">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9l20-7z"/>
         </svg>
-        <h2>Warte auf ersten Song...</h2>
-        <p>DJERMN startet gleich</p>
-      </div>`;
-      return;
-    }
+      </button>
+    </div>
+  </div>`;
 
-    if (data.artwork) bg.style.backgroundImage = `url('${data.artwork}')`;
+  const messagesEl = document.getElementById('chat-messages');
+  const inputEl    = document.getElementById('chat-input');
+  const counterEl  = document.getElementById('chat-counter');
+  const sendBtn    = document.getElementById('chat-send');
+  let hasMessages  = false;
 
-    const art = data.artwork
-      ? `<img src="${esc(data.artwork)}" alt="Cover">`
-      : `<div class="art-shimmer"></div>`;
-
-    const bpm = data.bpm ? `<span class="badge badge-bpm">${data.bpm} BPM</span>` : '';
-    const key = data.key ? `<span class="badge badge-key">${esc(data.key)}</span>` : '';
-
-    appEl.innerHTML = `
-      ${DANCER}
-      <div class="art-wrap">${art}</div>
-      <div class="title">${esc(data.title)}</div>
-      <div class="artist">${esc(data.artist || '')}</div>
-      ${(bpm || key) ? `<div class="badges">${bpm}${key}</div>` : ''}
-      <div class="live"><span class="live-dot"></span>Live</div>`;
-
-    requestAnimationFrame(dropIn);
-  }
-
-  function swapArtwork(url) {
-    const wrap = appEl.querySelector('.art-wrap');
-    if (!wrap) return;
-    bg.style.backgroundImage = `url('${url}')`;
-    const img = document.createElement('img');
-    img.alt = 'Cover';
-    img.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity 0.6s';
-    img.onload = () => { img.style.opacity = '1'; };
-    img.src = url;
-    wrap.innerHTML = '';
-    wrap.appendChild(img);
-  }
-
-  refreshBtn.addEventListener('click', async () => {
-    refreshBtn.classList.add('spinning');
-    refreshBtn.addEventListener('transitionend', () => refreshBtn.classList.remove('spinning'), { once: true });
-    try {
-      const snapshot = await get(ref(db, 'now-playing'));
-      const data = snapshot.val() || {};
-      lastTitle = null;
-      lastArtwork = null;
-      appEl.classList.add('fading');
-      setTimeout(() => {
-        lastTitle   = data.title;
-        lastArtwork = data.artwork;
-        render(data);
-        appEl.classList.remove('fading');
-      }, 300);
-    } catch (_) {}
+  const chatQ = query(ref(db, 'chat/messages'), limitToLast(80));
+  panelUnsub = onChildAdded(chatQ, (snap) => {
+    const msg = snap.val();
+    if (!msg || !msg.text) return;
+    if (!hasMessages) { messagesEl.innerHTML = ''; hasMessages = true; }
+    const isMine = msg.uid === uid;
+    const div = document.createElement('div');
+    div.className = `chat-msg ${isMine ? 'mine' : 'theirs'}`;
+    if (isMine) div.style.background = msg.color || userColor;
+    div.textContent = msg.text;
+    messagesEl.appendChild(div);
+    requestAnimationFrame(() => { messagesEl.scrollTop = messagesEl.scrollHeight; });
   });
 
-  initMood();
-
-  onValue(ref(db, 'now-playing'), (snapshot) => {
-    clearTimeout(reloadTimer);
-    reloadTimer = setTimeout(() => location.reload(), 45000);
-
-    const data = snapshot.val() || {};
-    const titleChanged   = data.title !== lastTitle;
-    const artworkArrived = !lastArtwork && data.artwork && data.title === lastTitle;
-
-    if (titleChanged) {
-      appEl.classList.add('fading');
-      setTimeout(() => {
-        lastTitle   = data.title;
-        lastArtwork = data.artwork;
-        render(data);
-        appEl.classList.remove('fading');
-        if (data.title) showToast();
-      }, 300);
-    } else if (artworkArrived) {
-      lastArtwork = data.artwork;
-      swapArtwork(data.artwork);
-    }
+  inputEl.addEventListener('input', () => {
+    const len = inputEl.value.length;
+    counterEl.textContent = `${len} / 140`;
+    counterEl.className = 'chat-counter' + (len >= 140 ? ' over' : len >= 120 ? ' warn' : '');
+    inputEl.style.height = 'auto';
+    inputEl.style.height = Math.min(inputEl.scrollHeight, 80) + 'px';
   });
+
+  function send() {
+    const text = inputEl.value.trim();
+    if (!text) return;
+    push(ref(db, 'chat/messages'), { text, ts: Date.now(), color: userColor, uid }).catch(() => {});
+    inputEl.value = ''; inputEl.style.height = 'auto';
+    counterEl.textContent = '0 / 140'; counterEl.className = 'chat-counter';
+  }
+  sendBtn.addEventListener('click', send);
+  inputEl.addEventListener('keydown', e => { if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send();} });
+}
+
+// ── Boot ──────────────────────────────────────────────────────────────
+renderPanel();
 </script>
 </body>
 </html>
