@@ -339,7 +339,13 @@ let currentData = null;
 let activeTab = 'nowplaying';
 let panelUnsub = null;
 let snakeGame = null;
-let reloadTimer = setTimeout(() => location.reload(), 45000);
+let reloadTimer = null;
+
+function scheduleReload() {
+  clearTimeout(reloadTimer);
+  reloadTimer = setTimeout(() => { if (activeTab === 'nowplaying') location.reload(); }, 45000);
+}
+scheduleReload();
 
 const uid = (() => {
   let id = localStorage.getItem('djermn-uid');
@@ -422,7 +428,7 @@ refreshBtn.addEventListener('click', async () => {
 initMood();
 
 onValue(ref(db,'now-playing'), (snapshot) => {
-  clearTimeout(reloadTimer); reloadTimer=setTimeout(()=>location.reload(),45000);
+  scheduleReload();
   const data = snapshot.val()||{};
   currentData = data;
   if (activeTab !== 'nowplaying') return;
@@ -445,6 +451,7 @@ function switchToNowPlaying() {
   document.querySelectorAll('.game-tab').forEach(b=>b.classList.remove('active'));
   moodEl.style.display = '';
   lastTitle=null; lastArtwork=null;
+  scheduleReload();
   renderNowPlaying(currentData);
 }
 
@@ -453,6 +460,7 @@ document.querySelectorAll('.game-tab').forEach(btn => {
     const tab = btn.dataset.tab;
     if (panelUnsub) { panelUnsub(); panelUnsub=null; }
     if (snakeGame)  { snakeGame.stop(); snakeGame=null; }
+    clearTimeout(reloadTimer);
     activeTab = tab;
     document.querySelectorAll('.game-tab').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
