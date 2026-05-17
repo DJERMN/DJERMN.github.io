@@ -16,7 +16,7 @@
       background: #09090b; color: #f4f4f5;
       min-height: 100dvh;
       display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
-      padding: 28px 20px 120px;
+      padding: 28px 20px 140px;
       position: relative; overflow-x: hidden;
     }
 
@@ -81,7 +81,7 @@
     /* ── Mood ── */
     #mood-section {
       position: relative; z-index: 1;
-      width: 100%; max-width: 380px; margin-top: 20px; padding-top: 18px;
+      width: 100%; max-width: 380px; margin-top: 20px; margin-bottom: 4px; padding-top: 18px;
       border-top: 1px solid rgba(255,255,255,0.06);
       display: flex; flex-direction: column; align-items: center; gap: 8px;
     }
@@ -98,11 +98,16 @@
     .mood-avg { font-size: 0.6rem; font-weight: 700; color: #52525b; letter-spacing: 0.1em; text-transform: uppercase; }
     .mood-avg span { color: #71717a; }
 
-    /* ── Game Tab Buttons ── */
+    /* ── Game Tab Buttons (fixed bottom bar) ── */
     #game-tabs {
-      position: relative; z-index: 1;
-      width: 100%; max-width: 380px; margin-top: 18px;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 20;
       display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px;
+      padding: 8px 16px max(16px, env(safe-area-inset-bottom));
+      background: rgba(9,9,11,0.92);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(255,255,255,0.07);
     }
     .game-tab {
       background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);
@@ -260,7 +265,7 @@
 
     /* ── Utility ── */
     #refresh-btn {
-      position: fixed; bottom: 24px; right: 24px;
+      position: fixed; bottom: 88px; right: 16px;
       width: 44px; height: 44px; border-radius: 50%;
       background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
       color: rgba(255,255,255,0.35); display: flex; align-items: center; justify-content: center;
