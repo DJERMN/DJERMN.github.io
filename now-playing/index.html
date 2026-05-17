@@ -851,29 +851,35 @@ function renderChat() {
   const counterEl  = document.getElementById('chat-counter');
   const sendBtn    = document.getElementById('chat-send');
   const errorEl    = document.getElementById('chat-error');
-  let hasMessages  = false;
 
   function showChatError(msg) {
     if (!errorEl) return;
     errorEl.textContent = msg;
     errorEl.style.display = 'block';
-    setTimeout(() => { errorEl.style.display = 'none'; }, 4000);
   }
 
-  const chatQ = query(ref(db, 'chat/messages'), limitToLast(80));
-  panelUnsub = onChildAdded(chatQ, (snap) => {
-    const msg = snap.val();
-    if (!msg || !msg.text) return;
-    if (!hasMessages) { messagesEl.innerHTML = ''; hasMessages = true; }
-    const isMine = msg.uid === uid;
-    const div = document.createElement('div');
-    div.className = `chat-msg ${isMine ? 'mine' : 'theirs'}`;
-    if (isMine) div.style.background = msg.color || userColor;
-    div.textContent = msg.text;
-    messagesEl.appendChild(div);
+  // Render all messages via onValue (simpler + re-renders on any change)
+  panelUnsub = onValue(query(ref(db, 'chat/messages'), limitToLast(80)), (snap) => {
+    messagesEl.innerHTML = '';
+    const data = snap.val();
+    if (!data) {
+      messagesEl.innerHTML = '<div class="chat-empty"><span class="chat-empty-icon">💬</span>Noch keine Nachrichten – sei der Erste!</div>';
+      return;
+    }
+    Object.values(data)
+      .sort((a, b) => (a.ts || 0) - (b.ts || 0))
+      .forEach(msg => {
+        if (!msg.text) return;
+        const isMine = msg.uid === uid;
+        const div = document.createElement('div');
+        div.className = `chat-msg ${isMine ? 'mine' : 'theirs'}`;
+        if (isMine) div.style.background = msg.color || userColor;
+        div.textContent = msg.text;
+        messagesEl.appendChild(div);
+      });
     requestAnimationFrame(() => { messagesEl.scrollTop = messagesEl.scrollHeight; });
   }, (err) => {
-    showChatError('Lesen nicht möglich: ' + (err.code || err.message));
+    showChatError('⚠️ Lesefehler: ' + err.code + ' — Firebase Regeln prüfen');
   });
 
   inputEl.addEventListener('input', () => {
@@ -894,9 +900,10 @@ function renderChat() {
         inputEl.style.height = 'auto';
         counterEl.textContent = '0 / 140';
         counterEl.className = 'chat-counter';
+        if (errorEl) errorEl.style.display = 'none';
       })
       .catch(err => {
-        showChatError('Senden fehlgeschlagen: ' + (err.code || err.message));
+        showChatError('⚠️ Senden fehlgeschlagen: ' + err.code);
       })
       .finally(() => { sendBtn.disabled = false; });
   }
