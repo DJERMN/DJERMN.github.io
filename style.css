@@ -209,7 +209,8 @@ body {
 /* ── HERO ─────────────────────────────────────────── */
 .hero {
   position: relative;
-  min-height: 100vh;
+  min-height: 88vh;
+  padding: 4rem 1.5rem 3rem;
   display: flex; align-items: center; justify-content: center;
   text-align: center;
   background:
@@ -266,14 +267,21 @@ body {
 }
 
 .hero-tagline {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.35em 1.6em;
   font-size: clamp(0.72rem, 2.8vw, 1.1rem);
   letter-spacing: clamp(0.08em, 0.5vw, 0.22em);
   color: var(--muted); margin: 0 auto 2.5rem;
   text-transform: uppercase;
   padding: 0 1.25rem;
   line-height: 1.55;
-  max-width: 36ch;
+  max-width: 42ch;
 }
+
+.hero-tagline span { display: inline-block; }
 
 .hero-location {
   font-size: clamp(0.7rem, 2.4vw, 0.82rem);
@@ -353,8 +361,11 @@ body {
 
 @media (max-width: 700px) {
   .section { padding: 3rem 1rem; }
-  .hero { min-height: 88vh; }
+  .hero { min-height: 78vh; padding: 3rem 1rem 2rem; }
+  .hero + .section { padding-top: 2rem; }
 }
+
+.hero + .section { padding-top: 2.8rem; }
 
 .section-title {
   font-weight: 800; font-size: 1.9rem;
@@ -469,6 +480,75 @@ body {
 @keyframes fillBar { from { width: 0 !important; } }
 
 .bar-label { font-size: 0.78rem; color: var(--muted); }
+
+/* ── WARUM MICH (USPs) ─────────────────────────────── */
+.usp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.2rem;
+}
+
+.usp-card {
+  position: relative;
+  background: rgba(255,255,255,0.028);
+  border: 1px solid var(--border);
+  border-left: 2px solid rgba(255,255,255,0.18);
+  border-radius: 12px;
+  padding: 1.7rem 1.4rem 1.6rem;
+  transition: background 0.22s, border-color 0.22s, transform 0.22s;
+}
+
+.usp-card:hover {
+  background: rgba(255,255,255,0.05);
+  border-left-color: rgba(255,255,255,0.55);
+  transform: translateY(-2px);
+}
+
+.usp-card--hero {
+  background: linear-gradient(135deg, rgba(239,68,68,0.07) 0%, rgba(255,255,255,0.025) 60%);
+  border-left-color: rgba(239,68,68,0.6);
+}
+
+.usp-card--hero:hover { border-left-color: rgba(239,68,68,0.95); }
+
+.usp-icon {
+  display: inline-block;
+  font-size: 1.7rem;
+  margin-bottom: 0.7rem;
+  line-height: 1;
+}
+
+.usp-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.92rem; font-weight: 700; letter-spacing: 0.04em;
+  color: #fff; margin-bottom: 0.7rem; line-height: 1.35;
+}
+
+.usp-text {
+  font-size: 0.88rem; color: var(--muted); line-height: 1.7;
+}
+
+.usp-tag {
+  position: absolute; top: 0.95rem; right: 0.95rem;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.5rem; font-weight: 800; letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(239,68,68,0.95);
+  background: rgba(239,68,68,0.12);
+  border: 1px solid rgba(239,68,68,0.32);
+  padding: 4px 8px; border-radius: 4px;
+}
+
+.usp-footer {
+  margin-top: 2.5rem; text-align: center;
+}
+
+.usp-footer p {
+  font-size: 0.95rem; color: var(--muted); line-height: 1.7;
+  max-width: 640px; margin: 0 auto;
+}
+
+.usp-footer strong { color: #fff; }
 
 /* ── CONTACT ──────────────────────────────────────── */
 .contact-row {
