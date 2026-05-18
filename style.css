@@ -314,11 +314,20 @@ body {
   box-shadow: 0 4px 20px rgba(0,0,0,0.25);
 }
 
+@media (max-width: 700px) {
+  .hero-tagline   { margin-bottom: 1.4rem; }
+  .hero-label-wrap { margin-bottom: 1.1rem; }
+  .hero-location  { margin-bottom: 1.4rem; margin-top: 0.2rem; }
+}
+
 @media (max-width: 480px) {
   .hero-label {
     white-space: normal;
     line-height: 1.4;
+    font-size: 0.74rem;
+    padding: 0.5em 1em;
   }
+  .hero-label-wrap { margin-bottom: 1rem; }
 }
 
 .hero-location {
