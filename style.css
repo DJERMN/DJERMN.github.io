@@ -295,9 +295,7 @@ body {
 }
 
 .hero-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6em;
+  display: inline-block;
   font-family: 'Inter', sans-serif;
   font-size: clamp(0.7rem, 1.4vw, 0.85rem);
   font-weight: 500;
@@ -314,14 +312,6 @@ body {
   white-space: nowrap;
   max-width: 100%;
   box-shadow: 0 4px 20px rgba(0,0,0,0.25);
-}
-
-.hero-label::before {
-  content: '';
-  width: 5px; height: 5px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.6);
-  flex-shrink: 0;
 }
 
 @media (max-width: 480px) {
