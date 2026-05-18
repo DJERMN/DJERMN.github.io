@@ -287,6 +287,50 @@ body {
   white-space: nowrap;
 }
 
+.hero-label-wrap {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto 1.8rem;
+  padding: 0 1rem;
+}
+
+.hero-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(0.7rem, 1.4vw, 0.85rem);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: rgba(255,255,255,0.82);
+  padding: 0.55em 1.3em;
+  border: 1px solid rgba(255,255,255,0.16);
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  text-align: center;
+  line-height: 1.3;
+  white-space: nowrap;
+  max-width: 100%;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+}
+
+.hero-label::before {
+  content: '';
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.6);
+  flex-shrink: 0;
+}
+
+@media (max-width: 480px) {
+  .hero-label {
+    white-space: normal;
+    line-height: 1.4;
+  }
+}
+
 .hero-location {
   font-size: clamp(0.7rem, 2.4vw, 0.82rem);
   color: var(--accent);
