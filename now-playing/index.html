@@ -805,11 +805,19 @@ function playWish(btn, previewUrl) {
 
 async function lookupItunes(title, artist) {
   const strip = s => s.replace(/\s*[-–(].*?(remix|edit|mix|version|intro|outro|bootleg|vip|flip)[\s\S]*/gi, '').trim();
-  const base = artist ? [`${artist} ${strip(title)}`, `${strip(artist)} ${strip(title)}`] : [`${strip(title)}`, title];
-  const queries = [...new Set(base)];
-  for (const q of queries) {
+  const searches = artist
+    ? [
+        { q: `${artist} ${strip(title)}`,        attr: '' },
+        { q: `${strip(artist)} ${strip(title)}`, attr: '' },
+      ]
+    : [
+        { q: title,        attr: '&attribute=songTerm' },
+        { q: strip(title), attr: '&attribute=songTerm' },
+      ];
+  for (const { q, attr } of searches) {
+    if (!q.trim()) continue;
     try {
-      const r = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(q)}&media=music&limit=5`);
+      const r = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(q)}&media=music&entity=song&limit=5${attr}`);
       const d = await r.json();
       for (const item of (d.results || [])) {
         if (item.previewUrl) return {
