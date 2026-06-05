@@ -805,7 +805,8 @@ function playWish(btn, previewUrl) {
 
 async function lookupItunes(title, artist) {
   const strip = s => s.replace(/\s*[-–(].*?(remix|edit|mix|version|intro|outro|bootleg|vip|flip)[\s\S]*/gi, '').trim();
-  const queries = [...new Set([`${artist} ${strip(title)}`, `${strip(artist)} ${strip(title)}`])];
+  const base = artist ? [`${artist} ${strip(title)}`, `${strip(artist)} ${strip(title)}`] : [`${strip(title)}`, title];
+  const queries = [...new Set(base)];
   for (const q of queries) {
     try {
       const r = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(q)}&media=music&limit=5`);
@@ -859,7 +860,7 @@ function renderWishlist() {
     const submit = async () => {
       const title  = titleInput.value.trim();
       const artist = artistInput.value.trim();
-      if (!title || !artist) return;
+      if (!title) return;
       btn.disabled = true; btn.textContent = '…';
       const wishRef = push(ref(db, 'wishes'));
       set(wishRef, { title, artist, at: Date.now(), played: false }).catch(() => {});
