@@ -103,7 +103,7 @@
       position: fixed;
       bottom: 0; left: 0; right: 0;
       z-index: 20;
-      display: grid; grid-template-columns: repeat(2, 1fr); gap: 5px;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px;
       padding: 8px 16px max(16px, env(safe-area-inset-bottom));
       background: rgba(9,9,11,0.92);
       backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
@@ -209,6 +209,42 @@
     .ib-open-icon { font-size: 1.2rem; margin-bottom: 6px; display: block; }
 
 
+    /* ── Wishlist ── */
+    .wish-form { display: flex; gap: 8px; margin-bottom: 10px; }
+    .wish-input {
+      flex: 1; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px; color: #f4f4f5; font-family: 'Inter', sans-serif;
+      font-size: 0.85rem; padding: 10px 14px; outline: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .wish-input::placeholder { color: #52525b; }
+    .wish-input:focus { border-color: rgba(255,255,255,0.25); }
+    .wish-submit {
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 12px; color: #e4e4e7; font-family: 'Inter', sans-serif;
+      font-size: 0.82rem; font-weight: 700; padding: 10px 16px; cursor: pointer;
+      white-space: nowrap; -webkit-tap-highlight-color: transparent; transition: background 0.15s;
+    }
+    .wish-submit:active { background: rgba(255,255,255,0.18); }
+    .wish-list { display: flex; flex-direction: column; max-height: 52vh; overflow-y: auto; }
+    .wish-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .wish-item:last-child { border-bottom: none; }
+    .wish-check {
+      width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0;
+      background: rgba(255,255,255,0.04); border: 1.5px solid rgba(255,255,255,0.15);
+      color: transparent; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; font-size: 1rem; font-weight: 700; -webkit-tap-highlight-color: transparent;
+      transition: all 0.15s;
+    }
+    .wish-check.played { background: rgba(74,222,128,0.15); border-color: rgba(74,222,128,0.4); color: #4ade80; }
+    .wish-check:active { transform: scale(0.85); }
+    .wish-text { flex: 1; font-size: 0.82rem; color: #e4e4e7; line-height: 1.35; word-break: break-word; }
+    .wish-text.played { text-decoration: line-through; color: #52525b; }
+    .wish-empty { padding: 32px 16px; text-align: center; color: #52525b; font-size: 0.8rem; }
+
     /* ── Home Link ── */
     #home-link {
       position: fixed; top: 14px; left: 16px; z-index: 10;
@@ -276,11 +312,12 @@
 <div id="game-tabs">
   <button class="game-tab" data-tab="info"><span class="ti">💌</span>Info</button>
   <button class="game-tab" data-tab="icebreaker"><span class="ti">🃏</span>Icebreaker</button>
+  <button class="game-tab" data-tab="wishlist"><span class="ti">🎤</span>Wunschliste</button>
 </div>
 
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
-import { getDatabase, ref, onValue, get, set } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
+import { getDatabase, ref, onValue, get, set, push } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
 
 const app = initializeApp({
   apiKey: 'AIzaSyDB7qRbmUTU25sv4R8Db4SWjyc2FGaPQeE',
@@ -449,6 +486,7 @@ function attachBack() {
 function renderGame(tab) {
   if      (tab === 'info')        renderInfo();
   else if (tab === 'icebreaker')  renderIcebreaker();
+  else if (tab === 'wishlist')    renderWishlist();
 }
 
 // ── Info ──────────────────────────────────────────────────────────────
@@ -691,6 +729,65 @@ function answerQ(yes) {
   if (ibQueue.length===0) { ibQueue=null; localStorage.removeItem('ib-queue'); }
   else localStorage.setItem('ib-queue',JSON.stringify(ibQueue));
   setTimeout(()=>{ if(activeTab==='icebreaker') renderIcebreaker(); },340);
+}
+
+// ── Wishlist ──────────────────────────────────────────────────────────
+const WISH_MODE = new URLSearchParams(location.search).get('wish') === 'true';
+
+function renderWishlist() {
+  appEl.innerHTML = `<div class="game-view">
+    <div class="game-view-header">${backBtn()}<span class="game-view-title">Wunschliste</span></div>
+    ${WISH_MODE ? `<div class="wish-form">
+      <input class="wish-input" id="wish-input" placeholder="Song / Artist eingeben…" maxlength="120" autocomplete="off">
+      <button class="wish-submit" id="wish-btn">Senden</button>
+    </div>` : ''}
+    <div class="game-view-body">
+      <div class="wish-list" id="wish-list"><div class="wish-empty">Keine Wünsche bisher…</div></div>
+    </div>
+  </div>`;
+  attachBack();
+
+  if (WISH_MODE) {
+    const input = document.getElementById('wish-input');
+    const btn   = document.getElementById('wish-btn');
+    const submit = () => {
+      const text = input.value.trim();
+      if (!text) return;
+      push(ref(db, 'wishes'), { text, at: Date.now(), played: false }).catch(() => {});
+      input.value = '';
+    };
+    btn.addEventListener('click', submit);
+    input.addEventListener('keydown', e => { if (e.key === 'Enter') submit(); });
+  }
+
+  panelUnsub = onValue(ref(db, 'wishes'), snap => {
+    const el = document.getElementById('wish-list');
+    if (!el) return;
+    const raw = snap.val() || {};
+    const list = Object.entries(raw)
+      .map(([id, v]) => ({ id, text: v.text || '', at: v.at || 0, played: !!v.played }))
+      .sort((a, b) => a.played - b.played || b.at - a.at);
+
+    if (list.length === 0) {
+      el.innerHTML = '<div class="wish-empty">Noch keine Wünsche 🎤</div>';
+      return;
+    }
+
+    el.innerHTML = list.map(w => `
+      <div class="wish-item">
+        <button class="wish-check${w.played ? ' played' : ''}" data-id="${w.id}" aria-label="Als gespielt markieren">
+          ${w.played ? '✓' : ''}
+        </button>
+        <span class="wish-text${w.played ? ' played' : ''}">${esc(w.text)}</span>
+      </div>`).join('');
+
+    el.querySelectorAll('.wish-check').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const cur = btn.classList.contains('played');
+        set(ref(db, `wishes/${btn.dataset.id}/played`), !cur).catch(() => {});
+      });
+    });
+  });
 }
 
 </script>
