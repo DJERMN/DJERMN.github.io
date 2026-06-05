@@ -210,7 +210,8 @@
 
 
     /* ── Wishlist ── */
-    .wish-form { display: flex; gap: 8px; margin-bottom: 10px; }
+    .wish-form { display: flex; flex-direction: column; gap: 7px; margin-bottom: 10px; }
+    .wish-form-row { display: flex; gap: 7px; }
     .wish-input {
       flex: 1; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
       border-radius: 12px; color: #f4f4f5; font-family: 'Inter', sans-serif;
@@ -225,13 +226,49 @@
       font-size: 0.82rem; font-weight: 700; padding: 10px 16px; cursor: pointer;
       white-space: nowrap; -webkit-tap-highlight-color: transparent; transition: background 0.15s;
     }
-    .wish-submit:active { background: rgba(255,255,255,0.18); }
+    .wish-submit:disabled { opacity: 0.45; cursor: default; }
+    .wish-submit:not(:disabled):active { background: rgba(255,255,255,0.18); }
     .wish-list { display: flex; flex-direction: column; max-height: 52vh; overflow-y: auto; }
     .wish-item {
-      display: flex; align-items: center; gap: 12px;
-      padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.06);
+      display: flex; align-items: center; gap: 10px;
+      padding: 9px 14px; border-bottom: 1px solid rgba(255,255,255,0.06);
     }
     .wish-item:last-child { border-bottom: none; }
+    /* artwork */
+    .wish-art {
+      width: 44px; height: 44px; border-radius: 8px; flex-shrink: 0;
+      background: rgba(255,255,255,0.05); position: relative; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .wish-art img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .wish-art-icon { font-size: 1.3rem; opacity: 0.3; }
+    .wish-play-btn {
+      position: absolute; bottom: 2px; right: 2px;
+      width: 20px; height: 20px; border-radius: 50%;
+      background: rgba(0,0,0,0.82); border: 1px solid rgba(255,255,255,0.18);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; -webkit-tap-highlight-color: transparent;
+      transition: background 0.12s, transform 0.12s;
+    }
+    .wish-play-btn:active { transform: scale(0.84); }
+    .wish-play-btn svg { width: 8px; height: 8px; fill: #d4d4d4; flex-shrink: 0; }
+    .wish-play-btn.wbp-playing { background: #f59e0b; border-color: rgba(245,158,11,0.4); }
+    .wish-play-btn.wbp-playing svg { fill: #000; }
+    .wish-play-btn.wbp-error { background: rgba(185,28,28,0.9); border-color: transparent; }
+    .wish-play-btn.wbp-loading { border-color: transparent; }
+    .wish-play-btn.wbp-loading::before {
+      content: ''; position: absolute; inset: -2px; border-radius: 50%;
+      border: 1.5px solid transparent; border-top-color: #f59e0b;
+      animation: pb-spin 0.7s linear infinite;
+    }
+    @keyframes pb-spin { to { transform: rotate(360deg); } }
+    /* text info */
+    .wish-info { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+    .wish-title-text { font-size: 0.8rem; font-weight: 600; color: #e4e4e7; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .wish-artist-text { font-size: 0.67rem; color: #71717a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .wish-item.played .wish-title-text { text-decoration: line-through; color: #52525b; }
+    .wish-item.played .wish-artist-text { color: #3f3f46; }
+    /* check */
     .wish-check {
       width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0;
       background: rgba(255,255,255,0.04); border: 1.5px solid rgba(255,255,255,0.15);
@@ -241,14 +278,11 @@
     }
     .wish-check.played { background: rgba(74,222,128,0.15); border-color: rgba(74,222,128,0.4); color: #4ade80; }
     .wish-check:active { transform: scale(0.85); }
-    .wish-text { flex: 1; font-size: 0.82rem; color: #e4e4e7; line-height: 1.35; word-break: break-word; }
-    .wish-text.played { text-decoration: line-through; color: #52525b; }
     .wish-empty { padding: 32px 16px; text-align: center; color: #52525b; font-size: 0.8rem; }
     .wish-clear-btn {
       margin-left: auto; background: none; border: none; font-size: 1.1rem;
       color: #52525b; cursor: pointer; padding: 6px; border-radius: 8px;
-      -webkit-tap-highlight-color: transparent; transition: color 0.15s;
-      line-height: 1;
+      -webkit-tap-highlight-color: transparent; transition: color 0.15s; line-height: 1;
     }
     .wish-clear-btn:hover { color: #ef4444; }
 
@@ -324,7 +358,7 @@
 
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
-import { getDatabase, ref, onValue, get, set, push } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
+import { getDatabase, ref, onValue, get, set, push, update } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
 
 const app = initializeApp({
   apiKey: 'AIzaSyDB7qRbmUTU25sv4R8Db4SWjyc2FGaPQeE',
@@ -741,16 +775,68 @@ function answerQ(yes) {
 // ── Wishlist ──────────────────────────────────────────────────────────
 const WISH_MODE = new URLSearchParams(location.search).get('wish') === 'true';
 
+let currentWishAudio = null, currentWishPlayBtn = null;
+
+function playWish(btn, previewUrl) {
+  if (currentWishAudio && !currentWishAudio.paused) {
+    currentWishAudio.pause();
+    if (currentWishPlayBtn) currentWishPlayBtn.classList.remove('wbp-playing','wbp-loading','wbp-error');
+    if (currentWishPlayBtn === btn) { currentWishAudio = null; currentWishPlayBtn = null; return; }
+  }
+  btn.classList.remove('wbp-playing','wbp-error');
+  btn.classList.add('wbp-loading');
+  const audio = new Audio(previewUrl);
+  currentWishAudio = audio; currentWishPlayBtn = btn;
+  audio.addEventListener('canplay', () => {
+    if (currentWishAudio !== audio) return;
+    btn.classList.remove('wbp-loading'); btn.classList.add('wbp-playing'); audio.play();
+  });
+  audio.addEventListener('ended', () => {
+    btn.classList.remove('wbp-playing','wbp-loading');
+    currentWishAudio = null; currentWishPlayBtn = null;
+  });
+  audio.addEventListener('error', () => {
+    btn.classList.remove('wbp-loading','wbp-playing'); btn.classList.add('wbp-error');
+    setTimeout(() => btn.classList.remove('wbp-error'), 2000);
+    currentWishAudio = null; currentWishPlayBtn = null;
+  });
+  audio.load();
+}
+
+async function lookupItunes(title, artist) {
+  const strip = s => s.replace(/\s*[-–(].*?(remix|edit|mix|version|intro|outro|bootleg|vip|flip)[\s\S]*/gi, '').trim();
+  const queries = [...new Set([`${artist} ${strip(title)}`, `${strip(artist)} ${strip(title)}`])];
+  for (const q of queries) {
+    try {
+      const r = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(q)}&media=music&limit=5`);
+      const d = await r.json();
+      for (const item of (d.results || [])) {
+        if (item.previewUrl) return {
+          preview: item.previewUrl,
+          artwork: (item.artworkUrl100 || '').replace('100x100bb', '300x300bb'),
+        };
+      }
+    } catch(e) {}
+  }
+  return null;
+}
+
+const PLAY_ICON = `<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`;
+const PAUSE_ICON = `<svg viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>`;
+
 function renderWishlist() {
   appEl.innerHTML = `<div class="game-view">
     <div class="game-view-header">
       ${backBtn()}
       <span class="game-view-title">Wunschliste</span>
-      <button class="wish-clear-btn" id="wish-clear" aria-label="Liste leeren">🗑</button>
+      ${WISH_MODE ? `<button class="wish-clear-btn" id="wish-clear" aria-label="Liste leeren">🗑</button>` : ''}
     </div>
     ${WISH_MODE ? `<div class="wish-form">
-      <input class="wish-input" id="wish-input" placeholder="Song / Artist eingeben…" maxlength="120" autocomplete="off">
-      <button class="wish-submit" id="wish-btn">Senden</button>
+      <input class="wish-input" id="wish-title" placeholder="Songtitel…" maxlength="120" autocomplete="off">
+      <div class="wish-form-row">
+        <input class="wish-input" id="wish-artist" placeholder="Artist…" maxlength="80" autocomplete="off">
+        <button class="wish-submit" id="wish-btn">Senden</button>
+      </div>
     </div>` : ''}
     <div class="game-view-body">
       <div class="wish-list" id="wish-list"><div class="wish-empty">Keine Wünsche bisher…</div></div>
@@ -758,23 +844,37 @@ function renderWishlist() {
   </div>`;
   attachBack();
 
-  document.getElementById('wish-clear').addEventListener('click', () => {
-    if (!checkDjPin()) return;
-    if (!confirm('Gesamte Wunschliste löschen?')) return;
-    set(ref(db, 'wishes'), null).catch(() => {});
-  });
-
   if (WISH_MODE) {
-    const input = document.getElementById('wish-input');
-    const btn   = document.getElementById('wish-btn');
-    const submit = () => {
-      const text = input.value.trim();
-      if (!text) return;
-      push(ref(db, 'wishes'), { text, at: Date.now(), played: false }).catch(() => {});
-      input.value = '';
+    document.getElementById('wish-clear').addEventListener('click', () => {
+      if (!checkDjPin()) return;
+      if (!confirm('Gesamte Wunschliste löschen?')) return;
+      if (currentWishAudio) { currentWishAudio.pause(); currentWishAudio = null; }
+      set(ref(db, 'wishes'), null).catch(() => {});
+    });
+
+    const titleInput  = document.getElementById('wish-title');
+    const artistInput = document.getElementById('wish-artist');
+    const btn         = document.getElementById('wish-btn');
+
+    const submit = async () => {
+      const title  = titleInput.value.trim();
+      const artist = artistInput.value.trim();
+      if (!title || !artist) return;
+      btn.disabled = true; btn.textContent = '…';
+      const wishRef = push(ref(db, 'wishes'));
+      set(wishRef, { title, artist, at: Date.now(), played: false }).catch(() => {});
+      titleInput.value = ''; artistInput.value = '';
+      btn.disabled = false; btn.textContent = 'Senden';
+      titleInput.focus();
+      lookupItunes(title, artist).then(meta => {
+        if (meta) update(wishRef, meta).catch(() => {});
+      }).catch(() => {});
     };
+
     btn.addEventListener('click', submit);
-    input.addEventListener('keydown', e => { if (e.key === 'Enter') submit(); });
+    [titleInput, artistInput].forEach(inp =>
+      inp.addEventListener('keydown', e => { if (e.key === 'Enter') submit(); })
+    );
   }
 
   panelUnsub = onValue(ref(db, 'wishes'), snap => {
@@ -782,7 +882,15 @@ function renderWishlist() {
     if (!el) return;
     const raw = snap.val() || {};
     const list = Object.entries(raw)
-      .map(([id, v]) => ({ id, text: v.text || '', at: v.at || 0, played: !!v.played }))
+      .map(([id, v]) => ({
+        id,
+        title:   v.title  || v.text || '',
+        artist:  v.artist || '',
+        at:      v.at || 0,
+        played:  !!v.played,
+        preview: v.preview || '',
+        artwork: v.artwork || '',
+      }))
       .sort((a, b) => a.played - b.played || b.at - a.at);
 
     if (list.length === 0) {
@@ -790,14 +898,31 @@ function renderWishlist() {
       return;
     }
 
-    el.innerHTML = list.map(w => `
-      <div class="wish-item">
-        <button class="wish-check${w.played ? ' played' : ''}" data-id="${w.id}" aria-label="Als gespielt markieren">
+    el.innerHTML = list.map(w => {
+      const artImg = w.artwork
+        ? `<img src="${esc(w.artwork)}" alt="" loading="lazy">`
+        : `<span class="wish-art-icon">🎵</span>`;
+      const playBtn = w.preview
+        ? `<button class="wish-play-btn" data-preview="${esc(w.preview)}" aria-label="Vorschau">${PLAY_ICON}</button>`
+        : '';
+      return `<div class="wish-item${w.played ? ' played' : ''}">
+        <div class="wish-art">${artImg}${playBtn}</div>
+        <div class="wish-info">
+          <span class="wish-title-text">${esc(w.title)}</span>
+          ${w.artist ? `<span class="wish-artist-text">${esc(w.artist)}</span>` : ''}
+        </div>
+        <button class="wish-check${w.played ? ' played' : ''}" data-id="${w.id}" aria-label="Gespielt">
           ${w.played ? '✓' : ''}
         </button>
-        <span class="wish-text${w.played ? ' played' : ''}">${esc(w.text)}</span>
-      </div>`).join('');
+      </div>`;
+    }).join('');
 
+    el.querySelectorAll('.wish-play-btn').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        playWish(btn, btn.dataset.preview);
+      });
+    });
     el.querySelectorAll('.wish-check').forEach(btn => {
       btn.addEventListener('click', () => {
         const cur = btn.classList.contains('played');
