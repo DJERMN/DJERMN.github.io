@@ -244,6 +244,13 @@
     .wish-text { flex: 1; font-size: 0.82rem; color: #e4e4e7; line-height: 1.35; word-break: break-word; }
     .wish-text.played { text-decoration: line-through; color: #52525b; }
     .wish-empty { padding: 32px 16px; text-align: center; color: #52525b; font-size: 0.8rem; }
+    .wish-clear-btn {
+      margin-left: auto; background: none; border: none; font-size: 1.1rem;
+      color: #52525b; cursor: pointer; padding: 6px; border-radius: 8px;
+      -webkit-tap-highlight-color: transparent; transition: color 0.15s;
+      line-height: 1;
+    }
+    .wish-clear-btn:hover { color: #ef4444; }
 
     /* ── Home Link ── */
     #home-link {
@@ -736,7 +743,11 @@ const WISH_MODE = new URLSearchParams(location.search).get('wish') === 'true';
 
 function renderWishlist() {
   appEl.innerHTML = `<div class="game-view">
-    <div class="game-view-header">${backBtn()}<span class="game-view-title">Wunschliste</span></div>
+    <div class="game-view-header">
+      ${backBtn()}
+      <span class="game-view-title">Wunschliste</span>
+      <button class="wish-clear-btn" id="wish-clear" aria-label="Liste leeren">🗑</button>
+    </div>
     ${WISH_MODE ? `<div class="wish-form">
       <input class="wish-input" id="wish-input" placeholder="Song / Artist eingeben…" maxlength="120" autocomplete="off">
       <button class="wish-submit" id="wish-btn">Senden</button>
@@ -746,6 +757,12 @@ function renderWishlist() {
     </div>
   </div>`;
   attachBack();
+
+  document.getElementById('wish-clear').addEventListener('click', () => {
+    if (!checkDjPin()) return;
+    if (!confirm('Gesamte Wunschliste löschen?')) return;
+    set(ref(db, 'wishes'), null).catch(() => {});
+  });
 
   if (WISH_MODE) {
     const input = document.getElementById('wish-input');
