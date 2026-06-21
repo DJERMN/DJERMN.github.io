@@ -52,6 +52,29 @@
 
   .filters { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
 
+  .alpha-bar {
+    display: flex;
+    gap: 3px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+  .alpha-btn {
+    padding: 3px 7px;
+    border: 1px solid #2a2a2a;
+    border-radius: 5px;
+    background: transparent;
+    color: #555;
+    font-size: 0.72rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.12s;
+    min-width: 26px;
+    text-align: center;
+  }
+  .alpha-btn:hover { border-color: #444; color: #aaa; }
+  .alpha-btn.active { background: #e0e0e0; color: #000; border-color: #e0e0e0; }
+  .alpha-btn.inactive { opacity: 0.25; pointer-events: none; }
+
   .genre-btn {
     padding: 4px 10px;
     border: 1px solid #333;
@@ -175,6 +198,7 @@
       <button class="sort-btn" data-sort="bpm">BPM</button>
     </div>
   </div>
+  <div class="alpha-bar" id="alpha-bar"></div>
 </header>
 
 <div id="loading"><div class="spinner"></div>Library wird geladen…</div>
@@ -203,9 +227,10 @@ const PAGE = 100;
 
 let TRACKS = [];
 let TRACKS_LC = [];
-let activeGenre = '';
-let activeSort  = 'artist';
-let query       = '';
+let activeGenre  = '';
+let activeSort   = 'artist';
+let activeLetter = '';
+let query        = '';
 let visibleCount = PAGE;
 let filteredList = [];
 
@@ -244,13 +269,46 @@ function init(tracks) {
   table.style.display = '';
   searchEl.disabled = false;
   searchEl.focus();
+  buildAlphaBar();
   render();
+}
+
+function buildAlphaBar() {
+  const field = activeSort === 'title' ? '_t' : '_a';
+  const available = new Set(TRACKS_LC.map(t => {
+    const ch = t[field].trimStart()[0];
+    return ch >= 'a' && ch <= 'z' ? ch.toUpperCase() : '#';
+  }));
+  const bar = document.getElementById('alpha-bar');
+  bar.innerHTML = '';
+  const letters = ['Alle', '#', ...'ABCDEFGHIJKLMNOPQRSTUVWXYZ'];
+  letters.forEach(l => {
+    const btn = document.createElement('button');
+    btn.className = 'alpha-btn' + (l === (activeLetter || 'Alle') ? ' active' : '');
+    if (l !== 'Alle' && !available.has(l)) btn.classList.add('inactive');
+    btn.textContent = l;
+    btn.addEventListener('click', () => {
+      activeLetter = l === 'Alle' ? '' : l;
+      bar.querySelectorAll('.alpha-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      render();
+    });
+    bar.appendChild(btn);
+  });
 }
 
 function applyFilter() {
   const q = query.trim().toLowerCase();
+  const field = activeSort === 'title' ? '_t' : '_a';
   let list = TRACKS_LC;
   if (activeGenre) list = list.filter(t => t.src.genre === activeGenre);
+  if (activeLetter) {
+    list = list.filter(t => {
+      const ch = t[field].trimStart()[0];
+      if (activeLetter === '#') return !(ch >= 'a' && ch <= 'z');
+      return ch === activeLetter.toLowerCase();
+    });
+  }
   if (q) list = list.filter(t => t._a.includes(q) || t._t.includes(q) || t._g.includes(q));
   list = [...list].sort((a, b) => {
     if (activeSort === 'bpm') return (b.src.bpm||0) - (a.src.bpm||0);
@@ -322,6 +380,8 @@ document.querySelectorAll('.sort-btn').forEach(btn => {
     document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     activeSort = btn.dataset.sort;
+    activeLetter = '';
+    buildAlphaBar();
     render();
   });
 });
