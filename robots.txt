@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /p/
 
-Sitemap: https://DJERMN.github.io/sitemap.xml
+Sitemap: https://djermn.github.io/sitemap.xml
