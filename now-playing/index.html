@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="theme-color" content="#0c0c0c">
   <title>Now Playing — DJERMN</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -941,6 +941,10 @@ function renderWishlist() {
   });
 }
 
+</script>
+<script>
+  document.addEventListener('touchmove', e => { if (e.touches.length > 1) e.preventDefault(); }, { passive: false });
+  document.addEventListener('gesturestart', e => e.preventDefault());
 </script>
 </body>
 </html>
