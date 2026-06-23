@@ -891,12 +891,21 @@ function renderWishlist() {
 
     function hideSuggestions() { sugBox.style.display = 'none'; sugBox.innerHTML = ''; }
 
-    async function searchItunes(q) {
-      try {
-        const r = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(q)}&media=music&entity=song&limit=5`);
-        const d = await r.json();
-        return (d.results || []).filter(i => i.trackName && i.artistName);
-      } catch(e) { return []; }
+    function searchItunes(q) {
+      return new Promise(resolve => {
+        const cb = '__itunes_' + Date.now();
+        const script = document.createElement('script');
+        const done = (results) => {
+          clearTimeout(timer); delete window[cb];
+          if (script.parentNode) script.parentNode.removeChild(script);
+          resolve(results);
+        };
+        const timer = setTimeout(() => done([]), 6000);
+        window[cb] = data => done((data.results || []).filter(i => i.trackName && i.artistName));
+        script.onerror = () => done([]);
+        script.src = `https://itunes.apple.com/search?term=${encodeURIComponent(q)}&media=music&entity=song&limit=5&callback=${cb}`;
+        document.head.appendChild(script);
+      });
     }
 
     titleInput.addEventListener('input', () => {
@@ -933,7 +942,8 @@ function renderWishlist() {
       }, 380);
     });
 
-    titleInput.addEventListener('blur', () => setTimeout(hideSuggestions, 150));
+    sugBox.addEventListener('touchstart', e => e.preventDefault(), { passive: false });
+    titleInput.addEventListener('blur', () => setTimeout(hideSuggestions, 300));
 
     const submit = async () => {
       const title  = titleInput.value.trim();
