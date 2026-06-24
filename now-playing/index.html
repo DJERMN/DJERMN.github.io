@@ -207,6 +207,21 @@
     .ib-btn-next { width: auto; height: 44px; padding: 0 28px; border-radius: 12px; background: rgba(255,255,255,0.09); border: 1px solid rgba(255,255,255,0.15); color: #e4e4e7; font-family:'Inter',sans-serif; font-size: 0.82rem; font-weight: 700; }
     .ib-card-open { background: rgba(96,165,250,0.07); border-color: rgba(96,165,250,0.18); }
     .ib-open-icon { font-size: 1.2rem; margin-bottom: 6px; display: block; }
+    .ib-spicy-toggle {
+      margin-left: auto; display: flex; align-items: center; gap: 5px;
+      background: none; border: 1px solid rgba(255,255,255,0.1); border-radius: 999px;
+      padding: 4px 10px 4px 6px; cursor: pointer; -webkit-tap-highlight-color: transparent;
+      font-family: 'Inter', sans-serif; font-size: 0.55rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase; color: #52525b;
+      transition: all 0.15s;
+    }
+    .ib-spicy-toggle.active { border-color: rgba(239,68,68,0.4); color: #ef4444; }
+    .ib-spicy-toggle:active { transform: scale(0.93); }
+    .ib-spicy-dot {
+      width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+      background: #3f3f46; transition: background 0.15s;
+    }
+    .ib-spicy-toggle.active .ib-spicy-dot { background: #ef4444; box-shadow: 0 0 6px rgba(239,68,68,0.5); }
 
 
     /* ── Wishlist ── */
@@ -705,12 +720,39 @@ const QUESTIONS = [
   { q: "Wofür bist du heute dankbar?", yn: false },
 ];
 
+const QUESTIONS_SPICY = [
+  { q: "Hast du schon mal jemanden auf einer Hochzeit angebaggert?", yn: true },
+  { q: "Was ist das Erste, das du an einer Person körperlich bemerkst?", yn: false },
+  { q: "Hast du schon mal jemanden geküsst, den du am selben Tag erst kennengelernt hast?", yn: true },
+  { q: "Was ist dein schlüpfrigstes Geheimnis, das du gerade noch teilen würdest?", yn: false },
+  { q: "Hast du schon mal ein One-Night-Stand gehabt?", yn: true },
+  { q: "Was ist das Mutigste, das du je aus reiner Lust heraus getan hast?", yn: false },
+  { q: "Würdest du für 10.000 € einen Monat lang keinen Sex haben?", yn: true },
+  { q: "Beschreib deinen perfekten romantischen Abend in einem Satz.", yn: false },
+  { q: "Hast du schon mal jemanden nur wegen des Aussehens gedatet?", yn: true },
+  { q: "Was ist dein heimliches Flirt-Signal, das kaum jemand kennt?", yn: false },
+  { q: "Hast du schon mal an einem öffentlichen Ort Dinge getan, die eigentlich ins Schlafzimmer gehören?", yn: true },
+  { q: "Was war dein kühnster Flirt-Move – und hat er funktioniert?", yn: false },
+  { q: "Hast du schon mal jemandem eine Fantasie erzählt und es sofort bereut?", yn: true },
+  { q: "Was würde dein Partner sagen, wenn er dein schlimmstes Geheimnis kennen würde?", yn: false },
+  { q: "Hast du schon mal jemanden über Social Media angeschrieben, weil du ihn attraktiv fandest?", yn: true },
+  { q: "Was ist das Anzüglichste, das du je in einer Textnachricht geschrieben hast?", yn: false },
+  { q: "Würdest du lieber immer der beste Küsser sein oder immer geküsst werden?", yn: true },
+  { q: "Was findest du am attraktivsten an der Person, mit der du heute hier bist?", yn: false },
+  { q: "Hast du schon mal beim Ausgehen eine falsche Nummer gegeben – oder bekommen?", yn: true },
+  { q: "Was war dein peinlichster Moment beim Flirten?", yn: false },
+];
+
+let ibSpicy = localStorage.getItem('ib-spicy') === '1';
 let ibQueue = JSON.parse(localStorage.getItem('ib-queue') || 'null');
 
+function activeQuestions() { return ibSpicy ? [...QUESTIONS, ...QUESTIONS_SPICY] : QUESTIONS; }
+
 function getIbQueue() {
+  const pool = activeQuestions();
   if (!ibQueue || ibQueue.length === 0) {
-    ibQueue = Array.from({length:QUESTIONS.length},(_,i)=>i);
-    for (let i=ibQueue.length-1; i>0; i--) { const j=Math.floor(Math.random()*(i+1)); [ibQueue[i],ibQueue[j]]=[ibQueue[j],ibQueue[i]]; }
+    ibQueue = Array.from({length: pool.length}, (_, i) => i);
+    for (let i = ibQueue.length-1; i > 0; i--) { const j = Math.floor(Math.random()*(i+1)); [ibQueue[i],ibQueue[j]]=[ibQueue[j],ibQueue[i]]; }
     localStorage.setItem('ib-queue', JSON.stringify(ibQueue));
   }
   return ibQueue;
@@ -718,10 +760,11 @@ function getIbQueue() {
 
 function renderIcebreaker() {
   const queue = getIbQueue();
-  const total = QUESTIONS.length;
+  const pool  = activeQuestions();
+  const total = pool.length;
   const answered = total - queue.length;
   const qIdx = queue[queue.length - 1];
-  const q = QUESTIONS[qIdx];
+  const q = pool[qIdx];
   const isYN = q.yn;
 
   const actions = isYN
@@ -735,7 +778,13 @@ function renderIcebreaker() {
        </div>`;
 
   appEl.innerHTML = `<div class="game-view">
-    <div class="game-view-header">${backBtn()}<span class="game-view-title">Icebreaker</span></div>
+    <div class="game-view-header">
+      ${backBtn()}
+      <span class="game-view-title">Icebreaker</span>
+      <button class="ib-spicy-toggle${ibSpicy ? ' active' : ''}" id="ib-spicy-btn">
+        <span class="ib-spicy-dot"></span>Explicit
+      </button>
+    </div>
     <div class="game-view-body">
       <div class="icebreaker-panel">
         <div class="ib-progress">
@@ -779,6 +828,13 @@ function renderIcebreaker() {
   } else {
     document.getElementById('ib-next').addEventListener('click', advanceQ);
   }
+
+  document.getElementById('ib-spicy-btn').addEventListener('click', () => {
+    ibSpicy = !ibSpicy;
+    localStorage.setItem('ib-spicy', ibSpicy ? '1' : '0');
+    ibQueue = null; localStorage.removeItem('ib-queue');
+    renderIcebreaker();
+  });
 }
 
 function advanceQ() {
