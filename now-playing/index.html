@@ -873,7 +873,7 @@ function renderWishlist() {
         <button class="wish-search-btn" id="wish-search-btn" aria-label="Suchen">🔍</button>
       </div>
       <div id="wish-suggestions"></div>
-      <div class="wish-form-row" id="wish-send-row" style="display:none">
+      <div class="wish-form-row">
         <input class="wish-input" id="wish-artist" placeholder="Artist… (optional)" maxlength="80" autocomplete="off">
         <button class="wish-submit" id="wish-btn">Senden</button>
       </div>
@@ -893,26 +893,23 @@ function renderWishlist() {
     });
 
     const titleInput  = document.getElementById('wish-title');
+    const artistInput = document.getElementById('wish-artist');
+    const btn         = document.getElementById('wish-btn');
     const searchBtn   = document.getElementById('wish-search-btn');
     const sugBox      = document.getElementById('wish-suggestions');
-    const sendRow     = document.getElementById('wish-send-row');
 
-    // btn and artistInput only exist after a suggestion is selected or search done
-    let sugMeta = null;
-    let debounceTimer = null;
-    let lastSearchQ = '';
+    let sugMeta = null, debounceTimer = null, searchGen = 0;
 
     function searchItunes(q) {
       return new Promise(resolve => {
         const cb = '__itunes_' + Date.now();
         const script = document.createElement('script');
         const done = results => {
-          clearTimeout(timeoutId);
-          delete window[cb];
+          clearTimeout(tid); delete window[cb];
           if (script.parentNode) script.parentNode.removeChild(script);
           resolve(results);
         };
-        const timeoutId = setTimeout(() => done([]), 7000);
+        const tid = setTimeout(() => done([]), 7000);
         window[cb] = data => done((data.results || []).filter(i => i.trackName));
         script.onerror = () => done([]);
         script.src = `https://itunes.apple.com/search?term=${encodeURIComponent(q)}&media=music&entity=song&limit=6&callback=${cb}`;
@@ -920,21 +917,16 @@ function renderWishlist() {
       });
     }
 
-    function showSendRow(title, artist, meta) {
-      sugMeta = meta;
-      titleInput.value = title;
-      sendRow.style.display = '';
-      const artistInput = document.getElementById('wish-artist');
-      if (artist) artistInput.value = artist;
-      artistInput.focus();
-    }
-
-    function renderSuggestions(results) {
-      if (!results.length) {
-        sugBox.innerHTML = `<div style="padding:10px 12px;font-size:0.75rem;color:#52525b">Keine Treffer — tippe Titel manuell ein</div>`;
-        sendRow.style.display = '';
-        return;
-      }
+    async function doSearch() {
+      const q = titleInput.value.trim();
+      if (q.length < 2) { sugBox.innerHTML = ''; return; }
+      const gen = ++searchGen;
+      sugBox.innerHTML = `<div style="padding:10px 12px;font-size:0.75rem;color:#71717a">Suche…</div>`;
+      searchBtn.style.opacity = '0.45';
+      const results = await searchItunes(q);
+      searchBtn.style.opacity = '';
+      if (gen !== searchGen) return; // stale — newer search already running
+      if (!results.length) { sugBox.innerHTML = ''; return; }
       sugBox.innerHTML = results.map((item, i) => `
         <div class="wish-suggestion" data-i="${i}">
           <img class="wish-sug-art" src="${esc((item.artworkUrl100||'').replace('100x100bb','60x60bb'))}" alt="" loading="lazy">
@@ -946,45 +938,31 @@ function renderWishlist() {
       sugBox.querySelectorAll('.wish-suggestion').forEach((el, i) => {
         el.addEventListener('click', () => {
           const item = results[i];
-          sugBox.innerHTML = '';
-          showSendRow(item.trackName, item.artistName || '', {
+          titleInput.value  = item.trackName;
+          artistInput.value = item.artistName || '';
+          sugMeta = {
             preview: item.previewUrl || '',
             artwork: (item.artworkUrl100 || '').replace('100x100bb', '300x300bb'),
-          });
+          };
+          sugBox.innerHTML = '';
+          searchGen++; // prevent any pending search from overwriting
+          btn.focus();
         });
       });
     }
 
-    async function doSearch() {
-      const q = titleInput.value.trim();
-      if (!q) return;
-      if (q === lastSearchQ) return;
-      lastSearchQ = q;
-      sugBox.innerHTML = `<div style="padding:10px 12px;font-size:0.75rem;color:#52525b">Suche…</div>`;
-      sendRow.style.display = 'none';
-      searchBtn.style.opacity = '0.5';
-      const results = await searchItunes(q);
-      searchBtn.style.opacity = '';
-      renderSuggestions(results);
-    }
-
-    searchBtn.addEventListener('click', () => { lastSearchQ = ''; doSearch(); });
-    titleInput.addEventListener('keydown', e => { if (e.key === 'Enter') { lastSearchQ = ''; doSearch(); } });
+    searchBtn.addEventListener('click', () => { searchGen++; doSearch(); });
+    titleInput.addEventListener('keydown', e => { if (e.key === 'Enter') { searchGen++; doSearch(); } });
     titleInput.addEventListener('input', () => {
-      sugMeta = null; lastSearchQ = '';
+      sugMeta = null;
       clearTimeout(debounceTimer);
-      sendRow.style.display = 'none';
-      const q = titleInput.value.trim();
-      if (q.length < 3) { sugBox.innerHTML = ''; return; }
+      if (titleInput.value.trim().length < 2) { sugBox.innerHTML = ''; searchGen++; return; }
       debounceTimer = setTimeout(doSearch, 500);
     });
 
-    // submit is attached after sendRow becomes visible
-    sendRow.addEventListener('click', async e => {
-      const btn = document.getElementById('wish-btn');
-      if (!btn || e.target !== btn) return;
+    const submit = async () => {
       const title  = titleInput.value.trim();
-      const artist = (document.getElementById('wish-artist') || {}).value?.trim() || '';
+      const artist = artistInput.value.trim();
       if (!title) return;
       btn.disabled = true; btn.textContent = '…';
       const wishRef = push(ref(db, 'wishes'));
@@ -992,19 +970,15 @@ function renderWishlist() {
       const hadMeta = !!sugMeta;
       if (sugMeta) { entry.preview = sugMeta.preview; entry.artwork = sugMeta.artwork; }
       set(wishRef, entry).catch(() => {});
-      titleInput.value = ''; sugBox.innerHTML = ''; sendRow.style.display = 'none';
-      sugMeta = null; lastSearchQ = '';
+      titleInput.value = ''; artistInput.value = ''; sugBox.innerHTML = '';
+      sugMeta = null; searchGen++;
       btn.disabled = false; btn.textContent = 'Senden';
       titleInput.focus();
-      if (!hadMeta) {
-        lookupItunes(title, artist).then(meta => {
-          if (meta) update(wishRef, meta).catch(() => {});
-        }).catch(() => {});
-      }
-    });
-    sendRow.addEventListener('keydown', e => {
-      if (e.key === 'Enter') sendRow.dispatchEvent(new MouseEvent('click', { bubbles: true }));
-    });
+      if (!hadMeta) lookupItunes(title, artist).then(meta => { if (meta) update(wishRef, meta).catch(()=>{}); }).catch(()=>{});
+    };
+
+    btn.addEventListener('click', submit);
+    [titleInput, artistInput].forEach(inp => inp.addEventListener('keydown', e => { if (e.key === 'Enter') submit(); }));
   }
 
   panelUnsub = onValue(ref(db, 'wishes'), snap => {
