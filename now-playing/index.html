@@ -831,30 +831,26 @@ function playWish(btn, previewUrl) {
   audio.load();
 }
 
-async function lookupItunes(title, artist) {
+function lookupItunes(title, artist) {
   const strip = s => s.replace(/\s*[-–(].*?(remix|edit|mix|version|intro|outro|bootleg|vip|flip)[\s\S]*/gi, '').trim();
-  const searches = artist
-    ? [
-        { q: `${artist} ${strip(title)}`,        attr: '' },
-        { q: `${strip(artist)} ${strip(title)}`, attr: '' },
-      ]
-    : [
-        { q: title,        attr: '&attribute=songTerm' },
-        { q: strip(title), attr: '&attribute=songTerm' },
-      ];
-  for (const { q, attr } of searches) {
-    if (!q.trim()) continue;
-    try {
-      const r = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(q)}&media=music&entity=song&limit=5${attr}`);
-      const d = await r.json();
-      const best = (d.results || []).find(i => i.previewUrl) || (d.results || [])[0];
-      if (best && best.artworkUrl100) return {
-        preview: best.previewUrl || '',
-        artwork: best.artworkUrl100.replace('100x100bb', '300x300bb'),
-      };
-    } catch(e) {}
-  }
-  return null;
+  const q = artist ? `${strip(artist)} ${strip(title)}` : strip(title);
+  return new Promise(resolve => {
+    const cb = '__dzlook_' + Date.now();
+    const script = document.createElement('script');
+    const done = val => {
+      clearTimeout(tid); delete window[cb];
+      if (script.parentNode) script.parentNode.removeChild(script);
+      resolve(val);
+    };
+    const tid = setTimeout(() => done(null), 7000);
+    window[cb] = data => {
+      const hit = (data.data || [])[0];
+      done(hit ? { preview: hit.preview || '', artwork: hit.album?.cover_medium || '' } : null);
+    };
+    script.onerror = () => done(null);
+    script.src = `https://api.deezer.com/search?q=${encodeURIComponent(q)}&limit=1&output=jsonp&callback=${cb}`;
+    document.head.appendChild(script);
+  });
 }
 
 const PLAY_ICON = `<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`;
@@ -900,9 +896,9 @@ function renderWishlist() {
 
     let sugMeta = null, debounceTimer = null, searchGen = 0;
 
-    function searchItunes(q) {
+    function searchMusic(q) {
       return new Promise(resolve => {
-        const cb = '__itunes_' + Date.now();
+        const cb = '__dz_' + Date.now();
         const script = document.createElement('script');
         const done = results => {
           clearTimeout(tid); delete window[cb];
@@ -910,9 +906,9 @@ function renderWishlist() {
           resolve(results);
         };
         const tid = setTimeout(() => done([]), 7000);
-        window[cb] = data => done((data.results || []).filter(i => i.trackName));
+        window[cb] = data => done((data.data || []).filter(i => i.title));
         script.onerror = () => done([]);
-        script.src = `https://itunes.apple.com/search?term=${encodeURIComponent(q)}&media=music&entity=song&limit=6&callback=${cb}`;
+        script.src = `https://api.deezer.com/search?q=${encodeURIComponent(q)}&limit=6&output=jsonp&callback=${cb}`;
         document.head.appendChild(script);
       });
     }
@@ -923,29 +919,29 @@ function renderWishlist() {
       const gen = ++searchGen;
       sugBox.innerHTML = `<div style="padding:10px 12px;font-size:0.75rem;color:#71717a">Suche…</div>`;
       searchBtn.style.opacity = '0.45';
-      const results = await searchItunes(q);
+      const results = await searchMusic(q);
       searchBtn.style.opacity = '';
       if (gen !== searchGen) return; // stale — newer search already running
       if (!results.length) { sugBox.innerHTML = ''; return; }
       sugBox.innerHTML = results.map((item, i) => `
         <div class="wish-suggestion" data-i="${i}">
-          <img class="wish-sug-art" src="${esc((item.artworkUrl100||'').replace('100x100bb','60x60bb'))}" alt="" loading="lazy">
+          <img class="wish-sug-art" src="${esc(item.album?.cover_small || item.album?.cover || '')}" alt="" loading="lazy">
           <div class="wish-sug-info">
-            <div class="wish-sug-title">${esc(item.trackName)}</div>
-            <div class="wish-sug-artist">${esc(item.artistName||'')}</div>
+            <div class="wish-sug-title">${esc(item.title)}</div>
+            <div class="wish-sug-artist">${esc(item.artist?.name||'')}</div>
           </div>
         </div>`).join('');
       sugBox.querySelectorAll('.wish-suggestion').forEach((el, i) => {
         el.addEventListener('click', () => {
           const item = results[i];
-          titleInput.value  = item.trackName;
-          artistInput.value = item.artistName || '';
+          titleInput.value  = item.title;
+          artistInput.value = item.artist?.name || '';
           sugMeta = {
-            preview: item.previewUrl || '',
-            artwork: (item.artworkUrl100 || '').replace('100x100bb', '300x300bb'),
+            preview: item.preview || '',
+            artwork: item.album?.cover_medium || item.album?.cover || '',
           };
           sugBox.innerHTML = '';
-          searchGen++; // prevent any pending search from overwriting
+          searchGen++;
           btn.focus();
         });
       });
