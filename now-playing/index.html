@@ -103,7 +103,7 @@
       position: fixed;
       bottom: 0; left: 0; right: 0;
       z-index: 20;
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px;
       padding: 8px 16px max(16px, env(safe-area-inset-bottom));
       background: rgba(9,9,11,0.92);
       backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
@@ -113,12 +113,12 @@
       background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);
       border-radius: 12px; color: #52525b; font-family: 'Inter', sans-serif;
       font-size: 0.5rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
-      padding: 9px 4px 7px; cursor: pointer;
-      display: flex; flex-direction: column; align-items: center; gap: 4px;
+      padding: 9px 4px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
       transition: all 0.15s; -webkit-tap-highlight-color: transparent;
     }
-    .game-tab .ti { font-size: 1.3rem; line-height: 1; }
     .game-tab.active { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.15); color: #e4e4e7; }
+    .game-tab.active[data-tab="live"] { background: rgba(239,68,68,0.12); border-color: rgba(239,68,68,0.3); color: #ef4444; }
     .game-tab:active { transform: scale(0.93); }
 
     /* ── Game Panel (inside #app) ── */
@@ -395,9 +395,10 @@
 <div id="mood-section"></div>
 
 <div id="game-tabs">
-  <button class="game-tab" data-tab="info"><span class="ti">💌</span>Info</button>
-  <button class="game-tab" data-tab="icebreaker"><span class="ti">🃏</span>Icebreaker</button>
-  <button class="game-tab" data-tab="wishlist"><span class="ti">🎤</span>Wunschliste</button>
+  <button class="game-tab active" data-tab="live">Live</button>
+  <button class="game-tab" data-tab="info">Info</button>
+  <button class="game-tab" data-tab="icebreaker">Icebreaker</button>
+  <button class="game-tab" data-tab="wishlist">Wunschliste</button>
 </div>
 
 <script type="module">
@@ -534,6 +535,7 @@ function switchToNowPlaying() {
   if (panelUnsub) { panelUnsub(); panelUnsub=null; }
   activeTab = 'nowplaying';
   document.querySelectorAll('.game-tab').forEach(b=>b.classList.remove('active'));
+  document.querySelector('.game-tab[data-tab="live"]')?.classList.add('active');
   moodEl.style.display = '';
   document.getElementById('home-link').style.display = '';
   lastTitle=null; lastArtwork=null;
@@ -544,6 +546,7 @@ function switchToNowPlaying() {
 document.querySelectorAll('.game-tab').forEach(btn => {
   btn.addEventListener('click', () => {
     const tab = btn.dataset.tab;
+    if (tab === 'live') { switchToNowPlaying(); return; }
     if (panelUnsub) { panelUnsub(); panelUnsub=null; }
     clearTimeout(reloadTimer);
     activeTab = tab;
