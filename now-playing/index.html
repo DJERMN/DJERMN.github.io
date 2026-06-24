@@ -756,7 +756,7 @@ const QUESTIONS_SPICY = [
 let ibSpicy = localStorage.getItem('ib-spicy') === '1';
 let ibQueue = JSON.parse(localStorage.getItem('ib-queue') || 'null');
 
-function activeQuestions() { return ibSpicy ? [...QUESTIONS, ...QUESTIONS_SPICY] : QUESTIONS; }
+function activeQuestions() { return ibSpicy ? QUESTIONS_SPICY : QUESTIONS; }
 
 function getIbQueue() {
   const pool = activeQuestions();
