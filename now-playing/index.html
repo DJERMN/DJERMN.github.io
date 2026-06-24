@@ -57,13 +57,13 @@
     .badge { font-size: 0.6rem; font-weight: 700; padding: 3px 10px; border-radius: 4px; }
     .badge-bpm { background: #451a03; color: #fbbf24; }
     .badge-key { background: #022c22; color: #34d399; }
-    .live { display: flex; align-items: center; gap: 7px; font-size: 0.6rem; font-weight: 700; color: #52525b; letter-spacing: 0.18em; text-transform: uppercase; }
+    .live { display: flex; align-items: center; gap: 7px; font-size: 0.6rem; font-weight: 700; color: #a1a1aa; letter-spacing: 0.18em; text-transform: uppercase; }
     .live-dot { width: 6px; height: 6px; border-radius: 50%; background: #ef4444; box-shadow: 0 0 6px #ef4444; animation: blink 2s ease-in-out infinite; }
     @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
     .idle { text-align: center; color: #52525b; }
     .idle svg { width: 48px; height: 48px; margin-bottom: 20px; opacity: 0.2; }
-    .idle h2 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; color: #71717a; }
-    .idle p { font-size: 0.8rem; color: #52525b; }
+    .idle h2 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; color: #a1a1aa; }
+    .idle p { font-size: 0.8rem; color: #71717a; }
     .note-wrap { display: flex; flex-direction: column; align-items: center; gap: 6px; margin-bottom: 10px; }
     .note-hint { font-size: 0.58rem; color: rgba(255,255,255,0.22); text-align: center; }
     .note-icon { font-size: 2rem; animation: pulse-note 1.1s ease-in-out infinite; display: block; line-height: 1; }
@@ -85,7 +85,7 @@
       border-top: 1px solid rgba(255,255,255,0.06);
       display: flex; flex-direction: column; align-items: center; gap: 8px;
     }
-    .mood-label { font-size: 0.55rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #3f3f46; }
+    .mood-label { font-size: 0.55rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #71717a; }
     .mood-emojis { display: flex; gap: 2px; }
     .mood-btn {
       font-size: 1.5rem; background: none; border: none; cursor: pointer;
@@ -95,8 +95,8 @@
     }
     .mood-btn:active { transform: scale(0.86); }
     .mood-btn.mood-selected { opacity: 1; background: rgba(255,255,255,0.09); }
-    .mood-avg { font-size: 0.6rem; font-weight: 700; color: #52525b; letter-spacing: 0.1em; text-transform: uppercase; }
-    .mood-avg span { color: #71717a; }
+    .mood-avg { font-size: 0.6rem; font-weight: 700; color: #a1a1aa; letter-spacing: 0.1em; text-transform: uppercase; }
+    .mood-avg span { color: #a1a1aa; }
 
     /* ── Game Tab Buttons (fixed bottom bar) ── */
     #game-tabs {
@@ -162,7 +162,7 @@
       align-self: stretch; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06);
       display: flex; flex-direction: column; gap: 10px; align-items: center;
     }
-    .phase-label { font-size: 0.55rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #3f3f46; }
+    .phase-label { font-size: 0.55rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #71717a; }
     .phase-chips { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
     .phase-chip {
       padding: 5px 13px; border-radius: 999px; font-size: 0.65rem; font-weight: 700;
@@ -178,7 +178,7 @@
       display: flex; flex-direction: column; align-items: center; gap: 14px;
     }
     .ib-progress {
-      font-size: 0.55rem; font-weight: 700; color: #3f3f46; letter-spacing: 0.12em; text-transform: uppercase;
+      font-size: 0.55rem; font-weight: 700; color: #71717a; letter-spacing: 0.12em; text-transform: uppercase;
       align-self: stretch; display: flex; align-items: center; gap: 8px;
     }
     .ib-progress-bar { flex: 1; height: 3px; background: rgba(255,255,255,0.06); border-radius: 2px; }
@@ -193,7 +193,7 @@
     }
     .ib-card.fly-left  { transform: translateX(-140%) rotate(-18deg); opacity: 0; pointer-events: none; }
     .ib-card.fly-right { transform: translateX(140%)  rotate(18deg);  opacity: 0; pointer-events: none; }
-    .ib-stats { font-size: 0.7rem; font-weight: 500; color: #71717a; text-align: center; min-height: 18px; }
+    .ib-stats { font-size: 0.7rem; font-weight: 500; color: #a1a1aa; text-align: center; min-height: 18px; }
     .ib-stats strong { color: #a1a1aa; }
     .ib-actions { display: flex; gap: 24px; align-items: center; }
     .ib-btn {
@@ -262,7 +262,7 @@
     }
     .wish-sug-info { flex: 1; min-width: 0; }
     .wish-sug-title { font-size: 0.8rem; font-weight: 600; color: #e4e4e7; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .wish-sug-artist { font-size: 0.67rem; color: #71717a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .wish-sug-artist { font-size: 0.67rem; color: #a1a1aa; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .wish-submit {
       background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15);
       border-radius: 12px; color: #e4e4e7; font-family: 'Inter', sans-serif;
@@ -308,7 +308,7 @@
     /* text info */
     .wish-info { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
     .wish-title-text { font-size: 0.8rem; font-weight: 600; color: #e4e4e7; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .wish-artist-text { font-size: 0.67rem; color: #71717a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; align-items: center; gap: 5px; }
+    .wish-artist-text { font-size: 0.67rem; color: #a1a1aa; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; align-items: center; gap: 5px; }
     .wish-bpm { font-size: 0.55rem; font-weight: 700; padding: 1px 5px; border-radius: 3px; background: #451a03; color: #fbbf24; flex-shrink: 0; }
     .wish-item.played .wish-title-text { text-decoration: line-through; color: #52525b; }
     .wish-item.played .wish-artist-text { color: #3f3f46; }
@@ -322,7 +322,7 @@
     }
     .wish-check.played { background: rgba(74,222,128,0.15); border-color: rgba(74,222,128,0.4); color: #4ade80; }
     .wish-check:active { transform: scale(0.85); }
-    .wish-empty { padding: 32px 16px; text-align: center; color: #52525b; font-size: 0.8rem; }
+    .wish-empty { padding: 32px 16px; text-align: center; color: #71717a; font-size: 0.8rem; }
     .wish-clear-btn {
       margin-left: auto; background: none; border: none; font-size: 1.1rem;
       color: #52525b; cursor: pointer; padding: 6px; border-radius: 8px;
@@ -821,7 +821,7 @@ function renderIcebreaker() {
       const el=document.getElementById('ib-stats'); if(!el) return;
       const votes=s.val()||{}; const vals=Object.values(votes);
       const yes=vals.filter(Boolean).length; const n=vals.length;
-      el.innerHTML=n===0?'Sei der Erste!':`<strong>${Math.round((yes/n)*100)}%</strong> haben Ja gesagt <span style="color:#3f3f46">· ${n}</span>`;
+      el.innerHTML=n===0?'Sei der Erste!':`<strong>${Math.round((yes/n)*100)}%</strong> haben Ja gesagt <span style="color:#71717a">· ${n}</span>`;
     }).catch(()=>{});
   }
 
@@ -998,7 +998,7 @@ function renderWishlist() {
       const q = titleInput.value.trim();
       if (q.length < 2) { sugBox.innerHTML = ''; return; }
       const gen = ++searchGen;
-      sugBox.innerHTML = `<div style="padding:10px 12px;font-size:0.75rem;color:#71717a">Suche…</div>`;
+      sugBox.innerHTML = `<div style="padding:10px 12px;font-size:0.75rem;color:#a1a1aa">Suche…</div>`;
       searchBtn.style.opacity = '0.45';
       const results = await searchMusic(q);
       searchBtn.style.opacity = '';
