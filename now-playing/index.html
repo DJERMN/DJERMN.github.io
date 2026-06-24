@@ -293,7 +293,8 @@
     /* text info */
     .wish-info { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
     .wish-title-text { font-size: 0.8rem; font-weight: 600; color: #e4e4e7; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .wish-artist-text { font-size: 0.67rem; color: #71717a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .wish-artist-text { font-size: 0.67rem; color: #71717a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; align-items: center; gap: 5px; }
+    .wish-bpm { font-size: 0.55rem; font-weight: 700; padding: 1px 5px; border-radius: 3px; background: #451a03; color: #fbbf24; flex-shrink: 0; }
     .wish-item.played .wish-title-text { text-decoration: line-through; color: #52525b; }
     .wish-item.played .wish-artist-text { color: #3f3f46; }
     /* check */
@@ -831,26 +832,37 @@ function playWish(btn, previewUrl) {
   audio.load();
 }
 
-function lookupItunes(title, artist) {
-  const strip = s => s.replace(/\s*[-–(].*?(remix|edit|mix|version|intro|outro|bootleg|vip|flip)[\s\S]*/gi, '').trim();
-  const q = artist ? `${strip(artist)} ${strip(title)}` : strip(title);
+function deezerJsonp(url) {
   return new Promise(resolve => {
-    const cb = '__dzlook_' + Date.now();
+    const cb = '__dz_' + Date.now();
     const script = document.createElement('script');
-    const done = val => {
-      clearTimeout(tid); delete window[cb];
-      if (script.parentNode) script.parentNode.removeChild(script);
-      resolve(val);
-    };
+    const done = val => { clearTimeout(tid); delete window[cb]; if (script.parentNode) script.parentNode.removeChild(script); resolve(val); };
     const tid = setTimeout(() => done(null), 7000);
-    window[cb] = data => {
-      const hit = (data.data || [])[0];
-      done(hit ? { preview: hit.preview || '', artwork: hit.album?.cover_medium || '' } : null);
-    };
+    window[cb] = data => done(data.error ? null : data);
     script.onerror = () => done(null);
-    script.src = `https://api.deezer.com/search?q=${encodeURIComponent(q)}&limit=1&output=jsonp&callback=${cb}`;
+    script.src = url + (url.includes('?') ? '&' : '?') + `output=jsonp&callback=${cb}`;
     document.head.appendChild(script);
   });
+}
+
+async function enrichWish(wishRef, title, artist, deezerId) {
+  const strip = s => s.replace(/\s*[-–(].*?(remix|edit|mix|version|intro|outro|bootleg|vip|flip)[\s\S]*/gi, '').trim();
+  let id = deezerId;
+  const updates = {};
+
+  if (!id) {
+    const q = artist ? `${strip(artist)} ${strip(title)}` : strip(title);
+    const data = await deezerJsonp(`https://api.deezer.com/search?q=${encodeURIComponent(q)}&limit=1`);
+    const hit = data?.data?.[0];
+    if (!hit) return;
+    id = hit.id;
+    updates.artwork = hit.album?.cover_medium || '';
+    updates.preview = hit.preview || '';
+  }
+
+  const track = await deezerJsonp(`https://api.deezer.com/track/${id}`);
+  if (track?.bpm && track.bpm > 0) updates.bpm = Math.round(track.bpm);
+  if (Object.keys(updates).length) update(wishRef, updates).catch(() => {});
 }
 
 const PLAY_ICON = `<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`;
@@ -937,6 +949,7 @@ function renderWishlist() {
           titleInput.value  = item.title;
           artistInput.value = item.artist?.name || '';
           sugMeta = {
+            deezerId: item.id,
             preview: item.preview || '',
             artwork: item.album?.cover_medium || item.album?.cover || '',
           };
@@ -964,13 +977,14 @@ function renderWishlist() {
       const wishRef = push(ref(db, 'wishes'));
       const entry = { title, artist, at: Date.now(), played: false };
       const hadMeta = !!sugMeta;
+      const deezerId = sugMeta?.deezerId || null;
       if (sugMeta) { entry.preview = sugMeta.preview; entry.artwork = sugMeta.artwork; }
       set(wishRef, entry).catch(() => {});
       titleInput.value = ''; artistInput.value = ''; sugBox.innerHTML = '';
       sugMeta = null; searchGen++;
       btn.disabled = false; btn.textContent = 'Senden';
       titleInput.focus();
-      if (!hadMeta) lookupItunes(title, artist).then(meta => { if (meta) update(wishRef, meta).catch(()=>{}); }).catch(()=>{});
+      enrichWish(wishRef, title, artist, deezerId);
     };
 
     btn.addEventListener('click', submit);
@@ -990,6 +1004,7 @@ function renderWishlist() {
         played:  !!v.played,
         preview: v.preview || '',
         artwork: v.artwork || '',
+        bpm:     v.bpm || null,
       }))
       .sort((a, b) => a.played - b.played || b.at - a.at);
 
@@ -1009,7 +1024,7 @@ function renderWishlist() {
         <div class="wish-art">${artImg}${playBtn}</div>
         <div class="wish-info">
           <span class="wish-title-text">${esc(w.title)}</span>
-          ${w.artist ? `<span class="wish-artist-text">${esc(w.artist)}</span>` : ''}
+          <span class="wish-artist-text">${w.artist ? esc(w.artist) : ''}${w.bpm ? `<span class="wish-bpm">${w.bpm} BPM</span>` : ''}</span>
         </div>
         <button class="wish-check${w.played ? ' played' : ''}" data-id="${w.id}" aria-label="Gespielt">
           ${w.played ? '✓' : ''}
