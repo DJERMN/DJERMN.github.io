@@ -26,7 +26,7 @@
 
   .header-top {
     display: flex;
-    align-items: baseline;
+    align-items: center;
     gap: 12px;
     margin-bottom: 14px;
   }
@@ -467,6 +467,11 @@ document.getElementById('qr-close').addEventListener('click', () => {
 document.getElementById('qr-overlay').addEventListener('click', e => {
   if (e.target === e.currentTarget) e.currentTarget.classList.remove('show');
 });
+</script>
+
+<script>
+  document.addEventListener('touchmove', e => { if (e.touches.length > 1) e.preventDefault(); }, { passive: false });
+  document.addEventListener('gesturestart', e => e.preventDefault());
 </script>
 
 <div id="qr-overlay">
