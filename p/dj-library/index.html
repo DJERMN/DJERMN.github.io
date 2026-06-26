@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="robots" content="noindex, nofollow">
 <title>DJERMN Library</title>
 <style>
@@ -167,6 +167,41 @@
     .td-bpm, .td-key { font-size: 0.7rem; padding: 9px 6px; }
     .td-artist, .td-title, .td-genre { padding: 9px 8px; }
   }
+
+  #qr-btn {
+    margin-left: auto;
+    width: 32px; height: 32px;
+    background: transparent; border: 1px solid #333;
+    border-radius: 8px; color: #666;
+    cursor: pointer; display: flex;
+    align-items: center; justify-content: center;
+    transition: color 0.15s, border-color 0.15s;
+    flex-shrink: 0;
+  }
+  #qr-btn:hover { color: #e0e0e0; border-color: #555; }
+
+  #qr-overlay {
+    display: none; position: fixed; inset: 0; z-index: 100;
+    background: rgba(0,0,0,0.82); backdrop-filter: blur(10px);
+    align-items: center; justify-content: center;
+  }
+  #qr-overlay.show { display: flex; }
+  #qr-modal {
+    background: #111; border: 1px solid #2a2a2a;
+    border-radius: 20px; padding: 28px 24px;
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
+    max-width: 280px; width: 90%; text-align: center;
+  }
+  #qr-modal h2 { font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: #555; font-weight: 700; }
+  #qr-modal img { width: 220px; height: 220px; border-radius: 12px; display: block; background: #fff; }
+  #qr-modal p { font-size: 0.72rem; color: #555; line-height: 1.55; }
+  #qr-close {
+    margin-top: 4px; padding: 8px 24px;
+    background: rgba(255,255,255,0.05); border: 1px solid #333;
+    border-radius: 8px; color: #888; font-size: 0.8rem;
+    cursor: pointer; transition: background 0.15s, color 0.15s;
+  }
+  #qr-close:hover { background: rgba(255,255,255,0.12); color: #e0e0e0; }
 </style>
 </head>
 <body>
@@ -175,6 +210,11 @@
   <div class="header-top">
     <h1>DJERMN LIBRARY</h1>
     <span id="count"></span>
+    <button id="qr-btn" title="QR-Code">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M3 3h7v7H3V3zm2 2v3h3V5H5zm9-2h7v7h-7V3zm2 2v3h3V5h-3zM3 14h7v7H3v-7zm2 2v3h3v-3H5zm11-2h2v2h-2v-2zm2 2h2v2h-2v-2zm-4 2h2v2h-2v-2zm2 2h2v2h-2v-2zm2-4h2v2h-2v-2z"/>
+      </svg>
+    </button>
   </div>
   <input type="search" id="search" placeholder="Artist, Song oder Genre suchen…" autocomplete="off" disabled>
   <div class="filters">
@@ -417,6 +457,25 @@ try {
 } catch(e) {
   fetchFromFirebase();
 }
+
+document.getElementById('qr-btn').addEventListener('click', () => {
+  document.getElementById('qr-overlay').classList.add('show');
+});
+document.getElementById('qr-close').addEventListener('click', () => {
+  document.getElementById('qr-overlay').classList.remove('show');
+});
+document.getElementById('qr-overlay').addEventListener('click', e => {
+  if (e.target === e.currentTarget) e.currentTarget.classList.remove('show');
+});
 </script>
+
+<div id="qr-overlay">
+  <div id="qr-modal">
+    <h2>DJERMN Library</h2>
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&color=000000&bgcolor=ffffff&data=https%3A%2F%2Fdjermn.github.io%2Fp%2Fdj-library%2F" alt="QR Code" loading="lazy">
+    <p>QR-Code abfotografieren und<br>Library auf dem Handy öffnen</p>
+    <button id="qr-close">Schließen</button>
+  </div>
+</div>
 </body>
 </html>
