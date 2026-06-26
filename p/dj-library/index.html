@@ -458,15 +458,6 @@ try {
   fetchFromFirebase();
 }
 
-document.getElementById('qr-btn').addEventListener('click', () => {
-  document.getElementById('qr-overlay').classList.add('show');
-});
-document.getElementById('qr-close').addEventListener('click', () => {
-  document.getElementById('qr-overlay').classList.remove('show');
-});
-document.getElementById('qr-overlay').addEventListener('click', e => {
-  if (e.target === e.currentTarget) e.currentTarget.classList.remove('show');
-});
 </script>
 
 <script>
@@ -482,5 +473,17 @@ document.getElementById('qr-overlay').addEventListener('click', e => {
     <button id="qr-close">Schließen</button>
   </div>
 </div>
+
+<script>
+document.getElementById('qr-btn').addEventListener('click', () => {
+  document.getElementById('qr-overlay').classList.add('show');
+});
+document.getElementById('qr-close').addEventListener('click', () => {
+  document.getElementById('qr-overlay').classList.remove('show');
+});
+document.getElementById('qr-overlay').addEventListener('click', e => {
+  if (e.target === e.currentTarget) e.currentTarget.classList.remove('show');
+});
+</script>
 </body>
 </html>
