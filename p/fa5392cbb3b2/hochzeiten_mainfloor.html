@@ -80,6 +80,25 @@
     .short-section h2 { @apply text-amber-400/80; }
     .toast { @apply fixed z-[200] bg-zinc-900 border border-zinc-700 text-amber-400 text-xs font-semibold rounded whitespace-nowrap; top: 20px; left: 50%; padding: 10px 20px; transform: translateX(-50%) translateY(-80px); transition: transform 0.28s cubic-bezier(0.34,1.56,0.64,1); }
     .toast.show { transform: translateX(-50%) translateY(0); }
+    .reel-wrap { border: 1px solid #3f3f46; border-radius: 12px; overflow: hidden; max-width: 520px; }
+    .reel-poster { background: linear-gradient(160deg, #1c1c1e 0%, #0c0c0e 100%); padding: clamp(36px,8vw,56px) clamp(24px,6vw,40px) clamp(28px,6vw,40px); text-align: center; border-bottom: 1px solid #3f3f46; }
+    .reel-eyebrow { color: #f59e0b; font-size: 0.6rem; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 18px; }
+    .reel-couple { color: #fff; font-size: clamp(1.7rem,7vw,2.4rem); font-weight: 800; letter-spacing: -0.5px; line-height: 1.1; }
+    .reel-date-disp { color: #a1a1aa; font-size: 0.85rem; font-weight: 500; margin-top: 8px; }
+    .reel-stat { color: #52525b; font-size: 0.65rem; margin-top: 10px; letter-spacing: 1px; }
+    .reel-share-row { margin-top: 22px; }
+    .reel-share-btn { background: transparent; border: 1px solid #52525b; color: #a1a1aa; border-radius: 6px; padding: 8px 22px; font-size: 0.75rem; font-weight: 600; font-family: inherit; cursor: pointer; transition: border-color 0.15s, color 0.15s; }
+    .reel-share-btn:hover { border-color: #f59e0b; color: #fbbf24; }
+    .reel-list { list-style: none; background: #09090b; }
+    .reel-item { display: flex; align-items: flex-start; gap: 12px; padding: 9px 16px; border-bottom: 1px solid #18181b; }
+    .reel-item:last-child { border-bottom: none; }
+    .reel-num { color: #3f3f46; font-size: 0.6rem; font-family: monospace; min-width: 22px; text-align: right; margin-top: 3px; flex-shrink: 0; }
+    .reel-body { flex: 1; min-width: 0; }
+    .reel-title { color: #e4e4e7; font-size: 0.82rem; font-weight: 600; line-height: 1.3; }
+    .reel-artist { color: #52525b; font-size: 0.7rem; margin-top: 2px; }
+    .reel-phase { display: flex; align-items: center; gap: 8px; padding: 8px 16px 5px; color: #3f3f46; font-size: 0.55rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; list-style: none; }
+    .reel-phase::before, .reel-phase::after { content: ''; flex: 1; height: 1px; background: #18181b; }
+    .reel-footer { text-align: center; padding: 14px; color: #3f3f46; font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; background: #09090b; border-top: 1px solid #18181b; }
   }
 </style>
 </head>
@@ -88,9 +107,137 @@
   <h1>Hochzeiten Mainfloor — Playlists</h1>
   <p>Rekordbox Library · 8 Playlists + 5 Kurzversionen</p>
   <p class="hint">Tippe auf einen Song, der nicht passt — dann teile deine Auswahl.</p>
-  <nav class="nav"><a href="#Startup--Feeling">Startup - Feeling</a><a href="#Startup--Feeling-Short">⏱ Feeling Short</a><a href="#Startup--II-Act">Startup - II Act</a><a href="#Startup--II-Act-Short">⏱ II Act Short</a><a href="#Startup--Alman-Whitelist">Startup - Alman Whitelist</a><a href="#Startup--III-Act">Startup - III Act</a><a href="#Startup--III-Act-Short">⏱ III Act Short</a><a href="#Startup--Hello-Tomorrow-Land">Startup - Hello Tomorrow Land</a><a href="#Startup--Hello-TL-Short">⏱ Hello TL Short</a><a href="#Startup--Good-Feel-Latin-Night">Startup - Good Feel Latin Night</a><a href="#Startup--Good-Feel-Short">⏱ Good Feel Short</a><a href="#Startup--Barbreak">Startup - Barbreak</a><a href="#Startup--Escalate">Startup - Escalate</a></nav>
+  <nav class="nav"><a href="#abend-2026-06-26" style="background:rgba(251,191,36,0.07);border-color:rgba(251,191,36,0.3);color:#d97706;font-weight:700">26. Juni 2026</a><a href="#Startup--Feeling">Startup - Feeling</a><a href="#Startup--Feeling-Short">⏱ Feeling Short</a><a href="#Startup--II-Act">Startup - II Act</a><a href="#Startup--II-Act-Short">⏱ II Act Short</a><a href="#Startup--Alman-Whitelist">Startup - Alman Whitelist</a><a href="#Startup--III-Act">Startup - III Act</a><a href="#Startup--III-Act-Short">⏱ III Act Short</a><a href="#Startup--Hello-Tomorrow-Land">Startup - Hello Tomorrow Land</a><a href="#Startup--Hello-TL-Short">⏱ Hello TL Short</a><a href="#Startup--Good-Feel-Latin-Night">Startup - Good Feel Latin Night</a><a href="#Startup--Good-Feel-Short">⏱ Good Feel Short</a><a href="#Startup--Barbreak">Startup - Barbreak</a><a href="#Startup--Escalate">Startup - Escalate</a></nav>
 </header>
 <main>
+<section class="playlist-section" id="abend-2026-06-26">
+  <h2>Was lief · 26. Juni 2026 <span class="count">106 Songs</span></h2>
+  <div class="reel-wrap">
+    <div class="reel-poster">
+      <div class="reel-eyebrow">Mainfloor · Setlist</div>
+      <div class="reel-couple">Martin &amp; Stephi</div>
+      <div class="reel-date-disp">26. Juni 2026</div>
+      <div class="reel-stat">106 Songs · DJERMN</div>
+      <div class="reel-share-row">
+        <button class="reel-share-btn" onclick="copySetlistLink()">Link teilen</button>
+      </div>
+    </div>
+    <ol class="reel-list">
+      <li class="reel-item"><span class="reel-num">1</span><div class="reel-body"><div class="reel-title">(It Goes Like) Nanana</div><div class="reel-artist">Peggy Gou</div></div></li>
+      <li class="reel-item"><span class="reel-num">2</span><div class="reel-body"><div class="reel-title">One Dance</div><div class="reel-artist">Drake ft. Wizkid &amp; Kyla</div></div></li>
+      <li class="reel-item"><span class="reel-num">3</span><div class="reel-body"><div class="reel-title">Shinjuku</div><div class="reel-artist">Franky Rizardo</div></div></li>
+      <li class="reel-item"><span class="reel-num">4</span><div class="reel-body"><div class="reel-title">Music, Life</div><div class="reel-artist">George Smeddles</div></div></li>
+      <li class="reel-item"><span class="reel-num">5</span><div class="reel-body"><div class="reel-title">Cami's House</div><div class="reel-artist">Hector Couto</div></div></li>
+      <li class="reel-phase"><span>Party</span></li>
+      <li class="reel-item"><span class="reel-num">6</span><div class="reel-body"><div class="reel-title">Can't Stop the Feeling!</div><div class="reel-artist">Justin Timberlake</div></div></li>
+      <li class="reel-item"><span class="reel-num">7</span><div class="reel-body"><div class="reel-title">Uptown Funk</div><div class="reel-artist">Mark Ronson ft. Bruno Mars</div></div></li>
+      <li class="reel-item"><span class="reel-num">8</span><div class="reel-body"><div class="reel-title">Geiles Leben</div><div class="reel-artist">Klaus Hallen Tanzorchester</div></div></li>
+      <li class="reel-item"><span class="reel-num">9</span><div class="reel-body"><div class="reel-title">Waiting For Love</div><div class="reel-artist">Avicii</div></div></li>
+      <li class="reel-item"><span class="reel-num">10</span><div class="reel-body"><div class="reel-title">Levels</div><div class="reel-artist">Avicii</div></div></li>
+      <li class="reel-item"><span class="reel-num">11</span><div class="reel-body"><div class="reel-title">Blurred Lines</div><div class="reel-artist">Robin Thicke ft. Pharrell Williams</div></div></li>
+      <li class="reel-item"><span class="reel-num">12</span><div class="reel-body"><div class="reel-title">LET'S GO</div><div class="reel-artist">Jaden Bojsen &amp; Sami Brielle</div></div></li>
+      <li class="reel-item"><span class="reel-num">13</span><div class="reel-body"><div class="reel-title">No Broke Boys</div><div class="reel-artist">Disco Lines &amp; Tinashe</div></div></li>
+      <li class="reel-item"><span class="reel-num">14</span><div class="reel-body"><div class="reel-title">S&amp;M</div><div class="reel-artist">Rihanna</div></div></li>
+      <li class="reel-item"><span class="reel-num">15</span><div class="reel-body"><div class="reel-title">DtMF</div><div class="reel-artist">Bad Bunny</div></div></li>
+      <li class="reel-item"><span class="reel-num">16</span><div class="reel-body"><div class="reel-title">I Love It</div><div class="reel-artist">Icona Pop ft. Charli XCX</div></div></li>
+      <li class="reel-item"><span class="reel-num">17</span><div class="reel-body"><div class="reel-title">Right Now (Na Na Na)</div><div class="reel-artist">Akon</div></div></li>
+      <li class="reel-item"><span class="reel-num">18</span><div class="reel-body"><div class="reel-title">You Make Me</div><div class="reel-artist">Avicii</div></div></li>
+      <li class="reel-item"><span class="reel-num">19</span><div class="reel-body"><div class="reel-title">We Found Love</div><div class="reel-artist">Rihanna &amp; Calvin Harris</div></div></li>
+      <li class="reel-item"><span class="reel-num">20</span><div class="reel-body"><div class="reel-title">Somebody Told Me</div><div class="reel-artist">The Killers</div></div></li>
+      <li class="reel-item"><span class="reel-num">21</span><div class="reel-body"><div class="reel-title">Viva La Vida</div><div class="reel-artist">Coldplay</div></div></li>
+      <li class="reel-item"><span class="reel-num">22</span><div class="reel-body"><div class="reel-title">Rock Right Now</div><div class="reel-artist">Firbeatz &amp; Madison Mars</div></div></li>
+      <li class="reel-phase"><span>Maindance</span></li>
+      <li class="reel-item"><span class="reel-num">23</span><div class="reel-body"><div class="reel-title">Désenchantée 3000</div><div class="reel-artist">Blasterjaxxx &amp; Kate Ryan</div></div></li>
+      <li class="reel-item"><span class="reel-num">24</span><div class="reel-body"><div class="reel-title">Do It All Night 2k12</div><div class="reel-artist">Darius &amp; Finlay ft. Carlprit &amp; Nicco</div></div></li>
+      <li class="reel-item"><span class="reel-num">25</span><div class="reel-body"><div class="reel-title">Blank Space</div><div class="reel-artist">Taylor Swift</div></div></li>
+      <li class="reel-item"><span class="reel-num">26</span><div class="reel-body"><div class="reel-title">What Is Love</div><div class="reel-artist">Haddaway</div></div></li>
+      <li class="reel-item"><span class="reel-num">27</span><div class="reel-body"><div class="reel-title">Scream &amp; Shout</div><div class="reel-artist">will.i.am ft. Britney Spears</div></div></li>
+      <li class="reel-item"><span class="reel-num">28</span><div class="reel-body"><div class="reel-title">How Deep Is Your Love</div><div class="reel-artist">Calvin Harris &amp; Disciples</div></div></li>
+      <li class="reel-item"><span class="reel-num">29</span><div class="reel-body"><div class="reel-title">Ooouuu</div><div class="reel-artist">Young M.A</div></div></li>
+      <li class="reel-item"><span class="reel-num">30</span><div class="reel-body"><div class="reel-title">Paint The Town Red</div><div class="reel-artist">Doja Cat</div></div></li>
+      <li class="reel-item"><span class="reel-num">31</span><div class="reel-body"><div class="reel-title">L-O-V-E</div><div class="reel-artist">Nat King Cole</div></div></li>
+      <li class="reel-item"><span class="reel-num">32</span><div class="reel-body"><div class="reel-title">Wake Me Up</div><div class="reel-artist">Avicii</div></div></li>
+      <li class="reel-item"><span class="reel-num">33</span><div class="reel-body"><div class="reel-title">A Bar Song (Tipsy)</div><div class="reel-artist">Shaboozey</div></div></li>
+      <li class="reel-item"><span class="reel-num">34</span><div class="reel-body"><div class="reel-title">Right Round</div><div class="reel-artist">Flo Rida ft. Ke$ha</div></div></li>
+      <li class="reel-item"><span class="reel-num">35</span><div class="reel-body"><div class="reel-title">Play Hard</div><div class="reel-artist">David Guetta ft. Ne-Yo &amp; Akon</div></div></li>
+      <li class="reel-item"><span class="reel-num">36</span><div class="reel-body"><div class="reel-title">Where Is My Husband</div><div class="reel-artist">RAYE</div></div></li>
+      <li class="reel-item"><span class="reel-num">37</span><div class="reel-body"><div class="reel-title">Love Tonight</div><div class="reel-artist">Shouse</div></div></li>
+      <li class="reel-item"><span class="reel-num">38</span><div class="reel-body"><div class="reel-title">Memories</div><div class="reel-artist">David Guetta ft. Kid Cudi</div></div></li>
+      <li class="reel-item"><span class="reel-num">39</span><div class="reel-body"><div class="reel-title">LET'S GO</div><div class="reel-artist">Jaden Bojsen &amp; Sami Brielle</div></div></li>
+      <li class="reel-item"><span class="reel-num">40</span><div class="reel-body"><div class="reel-title">Hotel Room Service</div><div class="reel-artist">Pitbull ft. Nicole Scherzinger</div></div></li>
+      <li class="reel-item"><span class="reel-num">41</span><div class="reel-body"><div class="reel-title">My House</div><div class="reel-artist">Flo Rida</div></div></li>
+      <li class="reel-item"><span class="reel-num">42</span><div class="reel-body"><div class="reel-title">If You Had My Love</div><div class="reel-artist">Paul Schulze &amp; FiNKENSTEIN LEVII</div></div></li>
+      <li class="reel-item"><span class="reel-num">43</span><div class="reel-body"><div class="reel-title">boy you turn me</div><div class="reel-artist">Felix Jaehn &amp; Cascada</div></div></li>
+      <li class="reel-item"><span class="reel-num">44</span><div class="reel-body"><div class="reel-title">Back To Black</div><div class="reel-artist">Amy Winehouse</div></div></li>
+      <li class="reel-item"><span class="reel-num">45</span><div class="reel-body"><div class="reel-title">Where You Are</div><div class="reel-artist">John Summit &amp; HAYLA</div></div></li>
+      <li class="reel-item"><span class="reel-num">46</span><div class="reel-body"><div class="reel-title">Mwaki</div><div class="reel-artist">Zerb &amp; Sofiya Nzau</div></div></li>
+      <li class="reel-item"><span class="reel-num">47</span><div class="reel-body"><div class="reel-title">Crazy In Love</div><div class="reel-artist">MATTN &amp; Noel Holler</div></div></li>
+      <li class="reel-item"><span class="reel-num">48</span><div class="reel-body"><div class="reel-title">Espresso</div><div class="reel-artist">Sabrina Carpenter</div></div></li>
+      <li class="reel-item"><span class="reel-num">49</span><div class="reel-body"><div class="reel-title">Anti-Hero</div><div class="reel-artist">Taylor Swift</div></div></li>
+      <li class="reel-item"><span class="reel-num">50</span><div class="reel-body"><div class="reel-title">Low</div><div class="reel-artist">Flo Rida ft. T-Pain</div></div></li>
+      <li class="reel-item"><span class="reel-num">51</span><div class="reel-body"><div class="reel-title">It's That Time</div><div class="reel-artist">Marlon Hoffstadt &amp; DJ Daddy Trance</div></div></li>
+      <li class="reel-item"><span class="reel-num">52</span><div class="reel-body"><div class="reel-title">One More Time</div><div class="reel-artist">Daft Punk</div></div></li>
+      <li class="reel-item"><span class="reel-num">53</span><div class="reel-body"><div class="reel-title">Down</div><div class="reel-artist">Jay Sean</div></div></li>
+      <li class="reel-item"><span class="reel-num">54</span><div class="reel-body"><div class="reel-title">Party Up (Up In Here)</div><div class="reel-artist">DMX</div></div></li>
+      <li class="reel-item"><span class="reel-num">55</span><div class="reel-body"><div class="reel-title">EoO</div><div class="reel-artist">Bad Bunny</div></div></li>
+      <li class="reel-item"><span class="reel-num">56</span><div class="reel-body"><div class="reel-title">Un Gatito Me Llamó</div><div class="reel-artist">KAROL G</div></div></li>
+      <li class="reel-item"><span class="reel-num">57</span><div class="reel-body"><div class="reel-title">Jamaican (Bam Bam)</div><div class="reel-artist">HUGEL &amp; SOLTO</div></div></li>
+      <li class="reel-item"><span class="reel-num">58</span><div class="reel-body"><div class="reel-title">Tití Me Preguntó</div><div class="reel-artist">Bad Bunny</div></div></li>
+      <li class="reel-item"><span class="reel-num">59</span><div class="reel-body"><div class="reel-title">Gasolina</div><div class="reel-artist">Daddy Yankee</div></div></li>
+      <li class="reel-item"><span class="reel-num">60</span><div class="reel-body"><div class="reel-title">Despacito</div><div class="reel-artist">Luis Fonsi &amp; Daddy Yankee</div></div></li>
+      <li class="reel-phase"><span>Landpartie</span></li>
+      <li class="reel-item"><span class="reel-num">61</span><div class="reel-body"><div class="reel-title">Chicken Fried</div><div class="reel-artist">Zac Brown Band</div></div></li>
+      <li class="reel-item"><span class="reel-num">62</span><div class="reel-body"><div class="reel-title">Love on the Weekend</div><div class="reel-artist">John Mayer</div></div></li>
+      <li class="reel-item"><span class="reel-num">63</span><div class="reel-body"><div class="reel-title">All My Ex's Live In Texas</div><div class="reel-artist">George Strait</div></div></li>
+      <li class="reel-item"><span class="reel-num">64</span><div class="reel-body"><div class="reel-title">Tirol</div><div class="reel-artist">DJ Ötzi</div></div></li>
+      <li class="reel-item"><span class="reel-num">65</span><div class="reel-body"><div class="reel-title">Hulapalú</div><div class="reel-artist">Andreas Gabalier</div></div></li>
+      <li class="reel-item"><span class="reel-num">66</span><div class="reel-body"><div class="reel-title">Wackelkontakt</div><div class="reel-artist">Oimara</div></div></li>
+      <li class="reel-item"><span class="reel-num">67</span><div class="reel-body"><div class="reel-title">Mädchen Auf Dem Pferd</div><div class="reel-artist">Luca-Dante Spadafora, Niklas Dee u.a.</div></div></li>
+      <li class="reel-item"><span class="reel-num">68</span><div class="reel-body"><div class="reel-title">Major Tom (Völlig losgelöst)</div><div class="reel-artist">Playapuls u.a.</div></div></li>
+      <li class="reel-item"><span class="reel-num">69</span><div class="reel-body"><div class="reel-title">Dorfkinder</div><div class="reel-artist">Finnel</div></div></li>
+      <li class="reel-item"><span class="reel-num">70</span><div class="reel-body"><div class="reel-title">Pyrotechnik Ist Doch Kein Verbrechen</div><div class="reel-artist">The Holy Santa Barbara &amp; Beats by Luca</div></div></li>
+      <li class="reel-item"><span class="reel-num">71</span><div class="reel-body"><div class="reel-title">Gute Laune</div><div class="reel-artist">Killermichel &amp; selina</div></div></li>
+      <li class="reel-item"><span class="reel-num">72</span><div class="reel-body"><div class="reel-title">Friesenjung</div><div class="reel-artist">Ski Aggu, Joost &amp; Otto Waalkes</div></div></li>
+      <li class="reel-phase"><span>Vollgas</span></li>
+      <li class="reel-item"><span class="reel-num">73</span><div class="reel-body"><div class="reel-title">Vielleicht Vielleicht</div><div class="reel-artist">MilleniumKid &amp; jbs</div></div></li>
+      <li class="reel-item"><span class="reel-num">74</span><div class="reel-body"><div class="reel-title">Freaks</div><div class="reel-artist">Timmy Trumpet &amp; Savage</div></div></li>
+      <li class="reel-item"><span class="reel-num">75</span><div class="reel-body"><div class="reel-title">Satisfaction</div><div class="reel-artist">Benny Benassi</div></div></li>
+      <li class="reel-item"><span class="reel-num">76</span><div class="reel-body"><div class="reel-title">Fuck What U Heard</div><div class="reel-artist">Ralvero</div></div></li>
+      <li class="reel-item"><span class="reel-num">77</span><div class="reel-body"><div class="reel-title">Blah Blah Blah</div><div class="reel-artist">Armin Van Buuren</div></div></li>
+      <li class="reel-item"><span class="reel-num">78</span><div class="reel-body"><div class="reel-title">Walk With Me</div><div class="reel-artist">Felix Jaehn &amp; Shouse</div></div></li>
+      <li class="reel-item"><span class="reel-num">79</span><div class="reel-body"><div class="reel-title">Jackie Chan</div><div class="reel-artist">Tiësto &amp; Dzeko ft. Post Malone</div></div></li>
+      <li class="reel-item"><span class="reel-num">80</span><div class="reel-body"><div class="reel-title">I Hate Your Ex-Girlfriend</div><div class="reel-artist">BANKS ft. Doechii</div></div></li>
+      <li class="reel-item"><span class="reel-num">81</span><div class="reel-body"><div class="reel-title">Pursuit Of Happiness</div><div class="reel-artist">Kid Cudi, MGMT &amp; Ratatat</div></div></li>
+      <li class="reel-item"><span class="reel-num">82</span><div class="reel-body"><div class="reel-title">Ready For Your Love</div><div class="reel-artist">Felix Jaehn ft. Sophie Ellis-Bextor</div></div></li>
+      <li class="reel-item"><span class="reel-num">83</span><div class="reel-body"><div class="reel-title">Let Me Love You</div><div class="reel-artist">DJ Snake ft. Justin Bieber</div></div></li>
+      <li class="reel-item"><span class="reel-num">84</span><div class="reel-body"><div class="reel-title">All The Things She Said</div><div class="reel-artist">t.A.T.u</div></div></li>
+      <li class="reel-item"><span class="reel-num">85</span><div class="reel-body"><div class="reel-title">Drums</div><div class="reel-artist">James Hype, Kim Petras &amp; Tiësto</div></div></li>
+      <li class="reel-item"><span class="reel-num">86</span><div class="reel-body"><div class="reel-title">Can You English Please</div><div class="reel-artist">Fäaschtbänkler</div></div></li>
+      <li class="reel-item"><span class="reel-num">87</span><div class="reel-body"><div class="reel-title">Mama Laudaaa</div><div class="reel-artist">Almklausi &amp; Specktagel</div></div></li>
+      <li class="reel-item"><span class="reel-num">88</span><div class="reel-body"><div class="reel-title">Too Cool To Be Careless</div><div class="reel-artist">PAWSA</div></div></li>
+      <li class="reel-item"><span class="reel-num">89</span><div class="reel-body"><div class="reel-title">Bella Napoli</div><div class="reel-artist">Roy Bianco &amp; Die Abbrunzati Boys</div></div></li>
+      <li class="reel-item"><span class="reel-num">90</span><div class="reel-body"><div class="reel-title">Atemlos durch die Nacht</div><div class="reel-artist">Helene Fischer</div></div></li>
+      <li class="reel-item"><span class="reel-num">91</span><div class="reel-body"><div class="reel-title">Wir sind alle gestört aber geil</div><div class="reel-artist">Tim Toupet</div></div></li>
+      <li class="reel-item"><span class="reel-num">92</span><div class="reel-body"><div class="reel-title">Bisschen Spass</div><div class="reel-artist">HBz, LIZOT &amp; 2 Engel &amp; Charlie</div></div></li>
+      <li class="reel-phase"><span>Klassiker</span></li>
+      <li class="reel-item"><span class="reel-num">93</span><div class="reel-body"><div class="reel-title">I'm Good (Blue)</div><div class="reel-artist">David Guetta &amp; Bebe Rexha</div></div></li>
+      <li class="reel-item"><span class="reel-num">94</span><div class="reel-body"><div class="reel-title">Take on Me</div><div class="reel-artist">a-ha</div></div></li>
+      <li class="reel-item"><span class="reel-num">95</span><div class="reel-body"><div class="reel-title">It's My Life</div><div class="reel-artist">Dr Alban</div></div></li>
+      <li class="reel-item"><span class="reel-num">96</span><div class="reel-body"><div class="reel-title">Livin' On A Prayer</div><div class="reel-artist">Bon Jovi</div></div></li>
+      <li class="reel-item"><span class="reel-num">97</span><div class="reel-body"><div class="reel-title">Adieu Us</div><div class="reel-artist">Massane</div></div></li>
+      <li class="reel-item"><span class="reel-num">98</span><div class="reel-body"><div class="reel-title">Voyage Voyage</div><div class="reel-artist">November Kid</div></div></li>
+      <li class="reel-item"><span class="reel-num">99</span><div class="reel-body"><div class="reel-title">Désenchantée 3000</div><div class="reel-artist">Blasterjaxxx &amp; Kate Ryan</div></div></li>
+      <li class="reel-item"><span class="reel-num">100</span><div class="reel-body"><div class="reel-title">L'Amour Toujours</div><div class="reel-artist">Gigi D'Agostino</div></div></li>
+      <li class="reel-item"><span class="reel-num">101</span><div class="reel-body"><div class="reel-title">Pedro</div><div class="reel-artist">Jaxomy, Raffaella Carrà u.a.</div></div></li>
+      <li class="reel-item"><span class="reel-num">102</span><div class="reel-body"><div class="reel-title">Sarà Perché Ti Amo</div><div class="reel-artist">Nik Stone, Tonec &amp; Lazard</div></div></li>
+      <li class="reel-item"><span class="reel-num">103</span><div class="reel-body"><div class="reel-title">99 Luftballons</div><div class="reel-artist">Harris &amp; Ford</div></div></li>
+      <li class="reel-item"><span class="reel-num">104</span><div class="reel-body"><div class="reel-title">Ein Kompliment</div><div class="reel-artist">Sportfreunde Stiller</div></div></li>
+      <li class="reel-item"><span class="reel-num">105</span><div class="reel-body"><div class="reel-title">Komet</div><div class="reel-artist">Udo Lindenberg &amp; Apache 207</div></div></li>
+      <li class="reel-item"><span class="reel-num">106</span><div class="reel-body"><div class="reel-title">Wonder</div><div class="reel-artist">Kaption</div></div></li>
+    </ol>
+    <div class="reel-footer">Ende der Nacht</div>
+  </div>
+</section>
 <section class="playlist-section" id="Startup--Feeling">
       <h2>Startup - Feeling <span class="count">26 Songs</span></h2>
       <div class="cards"><div class="card" onclick="toggleSong(this)" data-title="Waiting For Love" data-artist="Avicii" data-playlist="Startup - Feeling" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/c0/69/ab/c069ab0f-1f89-8636-8579-2e5df6e62a68/mzaf_16059040705385155103.plus.aac.p.m4a">
@@ -2254,6 +2401,15 @@ function shareSelection() {
       showToast('In Zwischenablage kopiert!');
     });
   }
+}
+function copySetlistLink() {
+  const url = location.origin + location.pathname + '#abend-2026-06-26';
+  navigator.clipboard.writeText(url).then(() => showToast('Link kopiert!')).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = url; document.body.appendChild(ta); ta.select();
+    document.execCommand('copy'); document.body.removeChild(ta);
+    showToast('Link kopiert!');
+  });
 }
 function showToast(msg) {
   const t = document.getElementById('toast');
