@@ -925,7 +925,8 @@ function answerQ(yes) {
 }
 
 // ── Wishlist ──────────────────────────────────────────────────────────
-const WISH_MODE = new URLSearchParams(location.search).get('wish') === 'true';
+const WISH_MODE  = new URLSearchParams(location.search).get('wish') === 'true';
+const TIDAL_MODE = WISH_MODE && new URLSearchParams(location.search).get('dj') === '1';
 
 if (WISH_MODE) {
   const qrBtn = document.getElementById('qr-wish-btn');
@@ -1156,7 +1157,7 @@ function renderWishlist() {
         ? `<button class="wish-play-btn" data-preview="${esc(w.preview)}" aria-label="Vorschau">${PLAY_ICON}</button>`
         : '';
       let tidalBtn = '';
-      if (WISH_MODE) {
+      if (TIDAL_MODE) {
         if (w.tidalAdded === true)          tidalBtn = `<button class="wish-tidal-btn wt-done" disabled title="In Tidal-Playlist">✓</button>`;
         else if (w.tidalAdded === 'nf')     tidalBtn = `<button class="wish-tidal-btn wt-err"  disabled title="Nicht auf Tidal gefunden">✕</button>`;
         else if (w.tidalQueued)             tidalBtn = `<button class="wish-tidal-btn wt-queued" disabled title="Wird hinzugefügt…">◌</button>`;
@@ -1181,12 +1182,14 @@ function renderWishlist() {
         playWish(btn, btn.dataset.preview);
       });
     });
-    el.querySelectorAll('.wish-tidal-btn:not([disabled])').forEach(btn => {
-      btn.addEventListener('click', () => {
-        btn.textContent = '◌'; btn.disabled = true; btn.classList.add('wt-queued');
-        update(ref(db, `wishes/${btn.dataset.id}`), { tidalQueued: true }).catch(() => {});
+    if (TIDAL_MODE) {
+      el.querySelectorAll('.wish-tidal-btn:not([disabled])').forEach(btn => {
+        btn.addEventListener('click', () => {
+          btn.textContent = '◌'; btn.disabled = true; btn.classList.add('wt-queued');
+          update(ref(db, `wishes/${btn.dataset.id}`), { tidalQueued: true }).catch(() => {});
+        });
       });
-    });
+    }
     el.querySelectorAll('.wish-check').forEach(btn => {
       btn.addEventListener('click', () => {
         const cur = btn.classList.contains('played');
