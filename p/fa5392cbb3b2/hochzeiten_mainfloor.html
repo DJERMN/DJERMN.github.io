@@ -101,6 +101,30 @@
     .reel-footer { text-align: center; padding: 14px; color: #3f3f46; font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; background: #09090b; border-top: 1px solid #18181b; }
   }
 </style>
+<style>
+@media print {
+  header, .share-bar, .toast { display: none !important; }
+  .playlist-section:not(#abend-2026-06-26) { display: none !important; }
+  #abend-2026-06-26 > h2 { display: none !important; }
+  .reel-share-row { display: none !important; }
+  body { background: #fff !important; }
+  main { padding: 12px !important; }
+  .reel-wrap { border: 1px solid #e5e5e5; max-width: 100%; border-radius: 0; }
+  .reel-poster { background: #fff !important; border-bottom: 1px solid #e5e5e5 !important; padding: 28px 24px !important; }
+  .reel-eyebrow { color: #999 !important; }
+  .reel-couple { color: #111 !important; }
+  .reel-date-disp { color: #555 !important; }
+  .reel-stat { color: #bbb !important; }
+  .reel-list { background: #fff !important; }
+  .reel-item { border-bottom-color: #f0f0f0 !important; break-inside: avoid; padding: 5px 12px !important; }
+  .reel-num { color: #ccc !important; }
+  .reel-title { color: #111 !important; }
+  .reel-artist { color: #888 !important; }
+  .reel-phase { color: #ccc !important; }
+  .reel-phase::before, .reel-phase::after { background: #f0f0f0 !important; }
+  .reel-footer { background: #fff !important; color: #ccc !important; border-top-color: #f0f0f0 !important; }
+}
+</style>
 </head>
 <body>
 <header>
@@ -120,6 +144,7 @@
       <div class="reel-stat">106 Songs · DJERMN</div>
       <div class="reel-share-row">
         <button class="reel-share-btn" onclick="copySetlistLink()">Link teilen</button>
+        <button class="reel-share-btn" onclick="window.print()" style="margin-left:8px">PDF Export</button>
       </div>
     </div>
     <ol class="reel-list">
