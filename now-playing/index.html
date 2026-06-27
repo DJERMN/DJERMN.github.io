@@ -330,6 +330,19 @@
     }
     .wish-clear-btn:hover { color: #ef4444; }
 
+    /* ── Tidal Add Button ── */
+    .wish-tidal-btn {
+      width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0;
+      background: rgba(0,208,132,0.07); border: 1.5px solid rgba(0,208,132,0.22);
+      color: rgba(0,208,132,0.7); display: flex; align-items: center; justify-content: center;
+      cursor: pointer; font-size: 0.85rem; font-weight: 700;
+      -webkit-tap-highlight-color: transparent; transition: all 0.15s;
+    }
+    .wish-tidal-btn:not([disabled]):active { transform: scale(0.85); background: rgba(0,208,132,0.18); }
+    .wish-tidal-btn.wt-done { background: rgba(0,208,132,0.18); border-color: rgba(0,208,132,0.6); color: #00d084; cursor: default; }
+    .wish-tidal-btn.wt-queued { opacity: 0.5; cursor: default; animation: pb-spin 1s linear infinite; }
+    .wish-tidal-btn.wt-err { background: rgba(239,68,68,0.08); border-color: rgba(239,68,68,0.3); color: #ef4444; cursor: default; }
+
     /* ── Home Link ── */
     #home-link {
       position: fixed; top: 14px; left: 16px; z-index: 10;
@@ -1118,13 +1131,15 @@ function renderWishlist() {
     const list = Object.entries(raw)
       .map(([id, v]) => ({
         id,
-        title:   v.title  || v.text || '',
-        artist:  v.artist || '',
-        at:      v.at || 0,
-        played:  !!v.played,
-        preview: v.preview || '',
-        artwork: v.artwork || '',
-        bpm:     v.bpm || null,
+        title:       v.title  || v.text || '',
+        artist:      v.artist || '',
+        at:          v.at || 0,
+        played:      !!v.played,
+        preview:     v.preview || '',
+        artwork:     v.artwork || '',
+        bpm:         v.bpm || null,
+        tidalQueued: !!v.tidalQueued,
+        tidalAdded:  v.tidalAdded ?? null,
       }))
       .sort((a, b) => a.played - b.played || b.at - a.at);
 
@@ -1140,12 +1155,20 @@ function renderWishlist() {
       const playBtn = w.preview
         ? `<button class="wish-play-btn" data-preview="${esc(w.preview)}" aria-label="Vorschau">${PLAY_ICON}</button>`
         : '';
+      let tidalBtn = '';
+      if (WISH_MODE) {
+        if (w.tidalAdded === true)          tidalBtn = `<button class="wish-tidal-btn wt-done" disabled title="In Tidal-Playlist">✓</button>`;
+        else if (w.tidalAdded === 'nf')     tidalBtn = `<button class="wish-tidal-btn wt-err"  disabled title="Nicht auf Tidal gefunden">✕</button>`;
+        else if (w.tidalQueued)             tidalBtn = `<button class="wish-tidal-btn wt-queued" disabled title="Wird hinzugefügt…">◌</button>`;
+        else                                tidalBtn = `<button class="wish-tidal-btn" data-id="${w.id}" title="Zu Tidal-Playlist">+</button>`;
+      }
       return `<div class="wish-item${w.played ? ' played' : ''}">
         <div class="wish-art">${artImg}${playBtn}</div>
         <div class="wish-info">
           <span class="wish-title-text">${esc(w.title)}</span>
           <span class="wish-artist-text">${w.artist ? esc(w.artist) : ''}${w.bpm ? `<span class="wish-bpm">${w.bpm} BPM</span>` : ''}</span>
         </div>
+        ${tidalBtn}
         <button class="wish-check${w.played ? ' played' : ''}" data-id="${w.id}" aria-label="Gespielt">
           ${w.played ? '✓' : ''}
         </button>
@@ -1156,6 +1179,12 @@ function renderWishlist() {
       btn.addEventListener('click', e => {
         e.stopPropagation();
         playWish(btn, btn.dataset.preview);
+      });
+    });
+    el.querySelectorAll('.wish-tidal-btn:not([disabled])').forEach(btn => {
+      btn.addEventListener('click', () => {
+        btn.textContent = '◌'; btn.disabled = true; btn.classList.add('wt-queued');
+        update(ref(db, `wishes/${btn.dataset.id}`), { tidalQueued: true }).catch(() => {});
       });
     });
     el.querySelectorAll('.wish-check').forEach(btn => {
