@@ -24,48 +24,35 @@
     header h1 { @apply font-extrabold text-white tracking-tight leading-tight; font-size: clamp(1.4rem,5vw,2.2rem); }
     header p { @apply mt-1.5 text-zinc-400; font-size: clamp(0.75rem,2.5vw,0.85rem); }
     .hint { @apply mt-2 text-zinc-500; font-size: clamp(0.72rem,2.2vw,0.8rem); }
-
     .nav { @apply flex mt-5 overflow-x-auto pb-0.5; flex-wrap: nowrap; gap: 6px; scrollbar-width: none; }
     .nav::-webkit-scrollbar { display: none; }
     .nav a { @apply text-zinc-500 no-underline font-medium border border-zinc-800 rounded shrink-0 whitespace-nowrap transition-colors duration-150; font-size: 0.72rem; padding: 5px 13px; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
     .nav a:hover { @apply text-amber-400; border-color: rgba(251,191,36,0.3); }
-
     main { @apply max-w-[1440px] mx-auto; padding: clamp(32px,5vw,56px) clamp(12px,4vw,36px) 40px; }
-
     .playlist-section { @apply mb-12; scroll-margin-top: 16px; }
     .playlist-section h2 { @apply text-amber-400 font-semibold mb-3.5 pb-3 border-b border-zinc-800 flex items-center flex-wrap gap-2.5; font-size: clamp(0.82rem,3vw,0.95rem); }
     .count { @apply text-zinc-600 font-normal text-xs; }
-
     .cards { @apply border border-zinc-800 rounded-lg overflow-hidden; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 290px), 1fr)); gap: 1px; background-color: #27272a; }
-
     .card { @apply bg-zinc-900 flex items-center gap-3 cursor-pointer relative transition-colors duration-100; padding: 11px 12px; border-radius: 0; -webkit-tap-highlight-color: transparent; touch-action: manipulation; user-select: none; }
-    @media (hover: hover) {
-      .card:hover { @apply bg-zinc-800; }
-      .card.selected:hover { background-color: #200a0a; }
-    }
-
+    @media (hover: hover) { .card:hover { @apply bg-zinc-800; } .card.selected:hover { background-color: #200a0a; } }
     .card-check { @apply absolute top-2.5 right-2.5 w-5 h-5 rounded border border-zinc-700 flex items-center justify-center shrink-0 transition-all duration-150; }
     .check-icon { @apply leading-none transition-colors duration-150; font-size: 0.6rem; color: transparent; font-weight: 900; }
     .card.selected { background-color: #1c0808; }
     .card.selected .card-check { @apply bg-red-700 border-red-700; }
     .card.selected .check-icon { @apply text-white; }
     .card.selected .card-title { @apply text-red-300; }
-
     .cover-wrap { @apply relative shrink-0; width: 52px; height: 52px; }
     .cover-wrap .cover { @apply w-full h-full; flex-shrink: unset; }
     .cover { @apply rounded-md object-cover shrink-0 bg-zinc-800; width: 52px; height: 52px; pointer-events: none; }
     .no-cover { @apply flex items-center justify-center text-xl bg-zinc-800; }
-
     .play-btn { @apply absolute rounded-full flex items-center justify-center p-0 cursor-pointer transition-all duration-150; bottom: 3px; right: 3px; width: 22px; height: 22px; background: rgba(0,0,0,0.85); border: 1px solid rgba(255,255,255,0.18); -webkit-tap-highlight-color: transparent; }
     .play-btn:active { transform: scale(0.86); }
     .play-btn svg { @apply shrink-0; width: 9px; height: 9px; fill: #d4d4d4; }
     .play-btn.pb-playing { background: #f59e0b; border-color: rgba(245,158,11,0.35); }
     .play-btn.pb-playing svg { fill: #000; }
-    .play-btn.pb-error { background: rgba(185,28,28,0.9); border-color: transparent; }
     .play-btn.pb-loading { border-color: transparent; }
     @keyframes pb-spin { to { transform: rotate(360deg); } }
     .play-btn.pb-loading::before { content: ''; position: absolute; inset: -2px; border-radius: 50%; border: 1.5px solid transparent; border-top-color: #f59e0b; animation: pb-spin 0.7s linear infinite; }
-
     .card-info { @apply flex-1 min-w-0; padding-right: 26px; }
     .card-title { @apply text-sm font-semibold text-zinc-100 truncate mb-0.5 leading-snug transition-colors duration-150; }
     .card-artist { @apply text-xs text-zinc-400 truncate leading-snug; margin-bottom: 6px; }
@@ -75,7 +62,6 @@
     .key { @apply bg-emerald-950 text-emerald-400 ring-1 ring-emerald-900/50; }
     .dur { @apply bg-zinc-800 text-zinc-500 ring-1 ring-zinc-700/50; }
     .genre { @apply bg-zinc-800 text-zinc-400 ring-1 ring-zinc-700/50; }
-
     .share-bar { @apply fixed bottom-0 left-0 right-0 z-50 bg-zinc-900 border-t border-zinc-800 flex items-center justify-between gap-3; padding: clamp(12px,3vw,16px) clamp(16px,5vw,32px); transform: translateY(100%); transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1); }
     .share-bar.visible { transform: translateY(0); }
     .share-bar-info { @apply flex-1 min-w-0; }
@@ -85,7 +71,6 @@
     .btn-reset { @apply text-xs font-semibold border border-zinc-700 text-zinc-400 bg-transparent rounded cursor-pointer whitespace-nowrap; padding: 9px 14px; font-family: inherit; -webkit-tap-highlight-color: transparent; }
     .btn-share { @apply text-xs font-semibold bg-green-500 text-white rounded cursor-pointer flex items-center gap-1.5 whitespace-nowrap border-0; padding: 9px 18px; font-family: inherit; -webkit-tap-highlight-color: transparent; }
     .btn-share:active { @apply opacity-80; }
-
     .toast { @apply fixed z-[200] bg-zinc-900 border border-zinc-700 text-amber-400 text-xs font-semibold rounded whitespace-nowrap; top: 20px; left: 50%; padding: 10px 20px; transform: translateX(-50%) translateY(-80px); transition: transform 0.28s cubic-bezier(0.34,1.56,0.64,1); }
     .toast.show { transform: translateX(-50%) translateY(0); }
   }
@@ -100,7 +85,7 @@
 </header>
 <main>
 <section class="playlist-section" id="Reggaeton-Venga-Mode">
-      <h2>Reggaeton Venga Mode <span style="font-weight:400;color:#52525b;font-size:0.72rem;">(Reggaeton/ Latin Collection)</span> <span class="count">12 Songs</span></h2>
+      <h2>Reggaeton Venga Mode <span class="count">12 Songs</span></h2>
       <div class="cards">
 <div class="card" onclick="toggleSong(this)" data-title="Gasolina - Spryte vs Tropkillaz PELÉ Edit" data-artist="Daddy Yankee" data-playlist="Reggaeton Venga Mode" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/6c/56/33/6c5633cf-a5f0-d489-f3e2-4fdd9b821ef3/mzaf_417409533127729756.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
@@ -113,7 +98,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Suavemente" data-artist="(MJX &amp; Pasku Remix Extended)" data-playlist="Reggaeton Venga Mode">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/dfdaf98a-1881-4b32-aab6-b5f57f822208/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Suavemente">Suavemente</div>
         <div class="card-artist">(MJX &amp; Pasku Remix Extended)</div>
@@ -122,7 +107,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="La Fiesta" data-artist="Manu Rubio" data-playlist="Reggaeton Venga Mode">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/605e859a-d644-40ef-9b61-0e52fafbfcde/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="La Fiesta">La Fiesta</div>
         <div class="card-artist">Manu Rubio</div>
@@ -131,7 +116,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="All I Do Is Win - Afro Bros Remix (Clean)" data-artist="DJ Khaled ft. T-Pain" data-playlist="Reggaeton Venga Mode">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/a59a6bf2-e6da-4859-bd11-4d3a479144d8/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="All I Do Is Win - Afro Bros Remix (Clean)">All I Do Is Win - Afro Bros Remix (Clean)</div>
         <div class="card-artist">DJ Khaled ft. T-Pain</div>
@@ -149,7 +134,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Jamaican (Bam Bam) - DJ Mag Guaracha Remix" data-artist="HUGEL &amp; SOLTO (FR)" data-playlist="Reggaeton Venga Mode">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/cf035d2f-afdb-4703-929f-f557fd3ac7a8/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Jamaican (Bam Bam) - DJ Mag Guaracha Remix">Jamaican (Bam Bam) - DJ Mag Guaracha Remix</div>
         <div class="card-artist">HUGEL &amp; SOLTO (FR)</div>
@@ -176,7 +161,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Bamboléo - Uncle &amp; Baker &amp; Los Banderos Remix" data-artist="Gipsy Kings" data-playlist="Reggaeton Venga Mode">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/84a9416c-27cb-4ce1-8897-920d581d8aa2/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Bamboléo - Uncle &amp; Baker &amp; Los Banderos Remix">Bamboléo - Uncle &amp; Baker &amp; Los Banderos Remix</div>
         <div class="card-artist">Gipsy Kings</div>
@@ -203,7 +188,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Better Off Alone - DISSO Remix" data-artist="Alice Deejay" data-playlist="Reggaeton Venga Mode">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/17c7671f-97c1-4059-837c-35cdc778da9f/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Better Off Alone - DISSO Remix">Better Off Alone - DISSO Remix</div>
         <div class="card-artist">Alice Deejay</div>
@@ -212,7 +197,7 @@
     </div>
       </div>
     </section><section class="playlist-section" id="Reggaeton-Slow">
-      <h2>Reggaeton Slow <span style="font-weight:400;color:#52525b;font-size:0.72rem;">(Reggaeton/ Latin Collection)</span> <span class="count">11 Songs</span></h2>
+      <h2>Reggaeton Slow <span class="count">11 Songs</span></h2>
       <div class="cards">
 <div class="card" onclick="toggleSong(this)" data-title="Pobre Diabla" data-artist="Don Omar" data-playlist="Reggaeton Slow" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/ae/cc/fb/aeccfb8a-5c08-72ef-ba6a-339a828f2dc4/mzaf_4414705973674209814.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
@@ -270,7 +255,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="EoO (DJcity Intro - Dirty)" data-artist="Bad Bunny" data-playlist="Reggaeton Slow">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/ec036d64-8ee6-4715-9e9e-f1e6fbdd856f/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="EoO (DJcity Intro - Dirty)">EoO (DJcity Intro - Dirty)</div>
         <div class="card-artist">Bad Bunny</div>
@@ -279,7 +264,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="La Vida Es Un Carnaval - DJ Mag 2020 Re-Drum" data-artist="Celia Cruz" data-playlist="Reggaeton Slow">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/ec88e76b-ac60-4cbd-b833-dea1cc2cd259/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="La Vida Es Un Carnaval - DJ Mag 2020 Re-Drum">La Vida Es Un Carnaval - DJ Mag 2020 Re-Drum</div>
         <div class="card-artist">Celia Cruz</div>
@@ -306,7 +291,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="MIAMI (DJcity Intro - Dirty)" data-artist="Tokischa" data-playlist="Reggaeton Slow">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/07e9263f-638c-432f-8949-016dcc0649f4/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="MIAMI (DJcity Intro - Dirty)">MIAMI (DJcity Intro - Dirty)</div>
         <div class="card-artist">Tokischa</div>
@@ -315,11 +300,11 @@
     </div>
       </div>
     </section><section class="playlist-section" id="Reggaeton-High">
-      <h2>Reggaeton High <span style="font-weight:400;color:#52525b;font-size:0.72rem;">(Reggaeton/ Latin Collection)</span> <span class="count">19 Songs</span></h2>
+      <h2>Reggaeton High <span class="count">19 Songs</span></h2>
       <div class="cards">
 <div class="card" onclick="toggleSong(this)" data-title="Memories - Manuferz, Cortex_o &amp; Peace Remix (Dirty)" data-artist="David Guetta ft. Kid Cudi" data-playlist="Reggaeton High">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/ec09ccae-12ea-435f-8c42-93ca98831b68/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Memories - Manuferz, Cortex_o &amp; Peace Remix (Dirty)">Memories - Manuferz, Cortex_o &amp; Peace Remix (Dirty)</div>
         <div class="card-artist">David Guetta ft. Kid Cudi</div>
@@ -337,7 +322,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Dame Un Grrr - Gael Borrego Remix" data-artist="Fantomel &amp; KATE LINN" data-playlist="Reggaeton High">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/1575d905-90b6-4416-bc8f-c23da4ae66ac/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Dame Un Grrr - Gael Borrego Remix">Dame Un Grrr - Gael Borrego Remix</div>
         <div class="card-artist">Fantomel &amp; KATE LINN</div>
@@ -391,7 +376,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="NUEVAYoL - Da Phonk Club Edit (Dirty)" data-artist="Bad Bunny" data-playlist="Reggaeton High">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/ec036d64-8ee6-4715-9e9e-f1e6fbdd856f/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="NUEVAYoL - Da Phonk Club Edit (Dirty)">NUEVAYoL - Da Phonk Club Edit (Dirty)</div>
         <div class="card-artist">Bad Bunny</div>
@@ -400,7 +385,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="NUEVAYol - CAVALLI Remix (Dirty)" data-artist="Bad Bunny" data-playlist="Reggaeton High">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/ec036d64-8ee6-4715-9e9e-f1e6fbdd856f/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="NUEVAYol - CAVALLI Remix (Dirty)">NUEVAYol - CAVALLI Remix (Dirty)</div>
         <div class="card-artist">Bad Bunny</div>
@@ -409,7 +394,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="NUEVAYoL - DJ LG Hype Intro (Dirty)" data-artist="Bad Bunny" data-playlist="Reggaeton High">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/ec036d64-8ee6-4715-9e9e-f1e6fbdd856f/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="NUEVAYoL - DJ LG Hype Intro (Dirty)">NUEVAYoL - DJ LG Hype Intro (Dirty)</div>
         <div class="card-artist">Bad Bunny</div>
@@ -418,7 +403,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="NUEVAYoL (Dirty)" data-artist="Bad Bunny" data-playlist="Reggaeton High">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/ec036d64-8ee6-4715-9e9e-f1e6fbdd856f/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="NUEVAYoL (Dirty)">NUEVAYoL (Dirty)</div>
         <div class="card-artist">Bad Bunny</div>
@@ -427,7 +412,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Mi Gente - ATCG Remix" data-artist="J Balvin &amp; Willy William" data-playlist="Reggaeton High">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/26395553-7382-46f1-afd8-3f2ffc42310c/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Mi Gente - ATCG Remix">Mi Gente - ATCG Remix</div>
         <div class="card-artist">J Balvin &amp; Willy William</div>
@@ -490,11 +475,11 @@
     </div>
       </div>
     </section><section class="playlist-section" id="Deutsch-Rap">
-      <h2>Deutsch Rap <span style="font-weight:400;color:#52525b;font-size:0.72rem;">(Hip Hop)</span> <span class="count">8 Songs</span></h2>
+      <h2>Deutsch Rap <span class="count">8 Songs</span></h2>
       <div class="cards">
 <div class="card" onclick="toggleSong(this)" data-title="069 - DJ Katch Zombie Nation Edit" data-artist="Haftbefehl" data-playlist="Deutsch Rap">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/83c99026-bac9-48a6-a951-a7ec790ddbb1/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="069 - DJ Katch Zombie Nation Edit">069 - DJ Katch Zombie Nation Edit</div>
         <div class="card-artist">Haftbefehl</div>
@@ -566,11 +551,11 @@
     </div>
       </div>
     </section><section class="playlist-section" id="Old-But-Gold---Slow">
-      <h2>Old But Gold - Slow <span style="font-weight:400;color:#52525b;font-size:0.72rem;">(Hip Hop)</span> <span class="count">15 Songs</span></h2>
+      <h2>Old But Gold - Slow <span class="count">15 Songs</span></h2>
       <div class="cards">
 <div class="card" onclick="toggleSong(this)" data-title="Lean Back (feat. Lil Jon, Eminem, Mase &amp; Remy Martin) [Remix]" data-artist="Fat Joe" data-playlist="Old But Gold - Slow">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/94bf63a3-f247-4dc5-b94c-ab6885508ff1/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Lean Back (feat. Lil Jon, Eminem, Mase &amp; Remy Martin) [Remix]">Lean Back (feat. Lil Jon, Eminem, Mase &amp; Remy Martin) [Remix]</div>
         <div class="card-artist">Fat Joe</div>
@@ -588,7 +573,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="To My Ladies - Puro Pari Party Break (Dirty)" data-artist="Big Syphe" data-playlist="Old But Gold - Slow">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/84ac37ab-00ca-4020-98b2-b1347ed4c1d6/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="To My Ladies - Puro Pari Party Break (Dirty)">To My Ladies - Puro Pari Party Break (Dirty)</div>
         <div class="card-artist">Big Syphe</div>
@@ -606,7 +591,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Who&#x27;s That Girl? - KidCutUp vs Richastic 97-125 Throwback Transition" data-artist="Eve" data-playlist="Old But Gold - Slow">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/223cb692-601f-43ec-8af5-efe4fbdd5f09/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Who&#x27;s That Girl? - KidCutUp vs Richastic 97-125 Throwback Transition">Who&#x27;s That Girl? - KidCutUp vs Richastic 97-125 Throwback Transition</div>
         <div class="card-artist">Eve</div>
@@ -615,7 +600,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Pure Water - DJ Stressy Remix (Dirty)" data-artist="Mustard &amp; Migos" data-playlist="Old But Gold - Slow">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/edd1df4c-2287-4d52-bc20-c80e2e69faa9/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Pure Water - DJ Stressy Remix (Dirty)">Pure Water - DJ Stressy Remix (Dirty)</div>
         <div class="card-artist">Mustard &amp; Migos</div>
@@ -624,7 +609,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Freaky Friday - Anthem Kingz vs PeteDown Set Starter Edit (Dirty)" data-artist="Lil Dicky ft. Chris Brown" data-playlist="Old But Gold - Slow">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/9753fb61-17f4-4c25-b039-310c36fcbc8d/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Freaky Friday - Anthem Kingz vs PeteDown Set Starter Edit (Dirty)">Freaky Friday - Anthem Kingz vs PeteDown Set Starter Edit (Dirty)</div>
         <div class="card-artist">Lil Dicky ft. Chris Brown</div>
@@ -633,7 +618,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Still D.R.E. - Tall Boys Still Wiz Edit (DJcity Intro - Dirty)" data-artist="Dr. Dre ft. Snoop Dogg" data-playlist="Old But Gold - Slow">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/4aa84377-4f63-4f5c-98e0-6c90b2cb5776/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Still D.R.E. - Tall Boys Still Wiz Edit (DJcity Intro - Dirty)">Still D.R.E. - Tall Boys Still Wiz Edit (DJcity Intro - Dirty)</div>
         <div class="card-artist">Dr. Dre ft. Snoop Dogg</div>
@@ -642,7 +627,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="I Wanna Love You - Thombs Puro Pari Remix (Dirty)" data-artist="Akon ft. Snoop Dogg" data-playlist="Old But Gold - Slow">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/8e5cfe88-87af-49b7-b480-7a0276a8c4b5/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="I Wanna Love You - Thombs Puro Pari Remix (Dirty)">I Wanna Love You - Thombs Puro Pari Remix (Dirty)</div>
         <div class="card-artist">Akon ft. Snoop Dogg</div>
@@ -651,7 +636,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Never Leave You - Stavros Martina, Kevin D, &amp; Superior" data-artist="Lumidee" data-playlist="Old But Gold - Slow">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/a17f4488-b328-472b-a4a2-5036e5574478/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Never Leave You - Stavros Martina, Kevin D, &amp; Superior">Never Leave You - Stavros Martina, Kevin D, &amp; Superior</div>
         <div class="card-artist">Lumidee</div>
@@ -660,7 +645,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Work It" data-artist="Missy Elliott" data-playlist="Old But Gold - Slow">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/54e04dab-f3ea-42a1-b76e-a529f3a652d6/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Work It">Work It</div>
         <div class="card-artist">Missy Elliott</div>
@@ -669,7 +654,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Work It (DJ Edit)" data-artist="Kendrick Lamar ft. AzChike" data-playlist="Old But Gold - Slow">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/a34c5f40-56d5-4d7c-aa25-4831c9c7b4bd/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Work It (DJ Edit)">Work It (DJ Edit)</div>
         <div class="card-artist">Kendrick Lamar ft. AzChike</div>
@@ -678,7 +663,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Rack City - Richastic &amp; AT-80 Remix (Intro - Dirty)" data-artist="Tyga" data-playlist="Old But Gold - Slow">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/adef0587-2aef-47af-afa9-eb146d65fe8c/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Rack City - Richastic &amp; AT-80 Remix (Intro - Dirty)">Rack City - Richastic &amp; AT-80 Remix (Intro - Dirty)</div>
         <div class="card-artist">Tyga</div>
@@ -687,7 +672,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Candy Shop - DJ Serg Remix (Dirty)" data-artist="50 Cent ft. Olivia" data-playlist="Old But Gold - Slow">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/746eed2a-08a9-42fe-aace-de1f6827588a/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Candy Shop - DJ Serg Remix (Dirty)">Candy Shop - DJ Serg Remix (Dirty)</div>
         <div class="card-artist">50 Cent ft. Olivia</div>
@@ -696,7 +681,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="LOVER GIRL - MarkCutz Remix (Dirty)" data-artist="Megan Thee Stallion" data-playlist="Old But Gold - Slow">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/951ac2ee-83b1-47d2-bbf2-514f1f8c6931/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="LOVER GIRL - MarkCutz Remix (Dirty)">LOVER GIRL - MarkCutz Remix (Dirty)</div>
         <div class="card-artist">Megan Thee Stallion</div>
@@ -705,11 +690,11 @@
     </div>
       </div>
     </section><section class="playlist-section" id="Mid">
-      <h2>Mid <span style="font-weight:400;color:#52525b;font-size:0.72rem;">(House&Techno&Fun)</span> <span class="count">23 Songs</span></h2>
+      <h2>Mid <span class="count">23 Songs</span></h2>
       <div class="cards">
 <div class="card" onclick="toggleSong(this)" data-title="Better Off Alone - Josh Hunter Remix" data-artist="Alice Deejay" data-playlist="Mid">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/17c7671f-97c1-4059-837c-35cdc778da9f/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Better Off Alone - Josh Hunter Remix">Better Off Alone - Josh Hunter Remix</div>
         <div class="card-artist">Alice Deejay</div>
@@ -718,7 +703,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="World Hold On - Freejak Shooting Stars Remix (Main)" data-artist="Bob Sinclar ft. Steve Edwards" data-playlist="Mid">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/b8401a21-d631-4d82-a211-0e379a0abf51/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="World Hold On - Freejak Shooting Stars Remix (Main)">World Hold On - Freejak Shooting Stars Remix (Main)</div>
         <div class="card-artist">Bob Sinclar ft. Steve Edwards</div>
@@ -727,7 +712,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="No Broke Boys (Intro - Dirty)" data-artist="Disco Lines &amp; Tinashe" data-playlist="Mid">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/c9b43245-11af-4949-ad75-7f21de3a5877/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="No Broke Boys (Intro - Dirty)">No Broke Boys (Intro - Dirty)</div>
         <div class="card-artist">Disco Lines &amp; Tinashe</div>
@@ -736,7 +721,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Memories - Kealen Remix (Dirty)" data-artist="David Guetta" data-playlist="Mid">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/ec09ccae-12ea-435f-8c42-93ca98831b68/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Memories - Kealen Remix (Dirty)">Memories - Kealen Remix (Dirty)</div>
         <div class="card-artist">David Guetta</div>
@@ -745,7 +730,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Sky and Sand" data-artist="Paul Kalkbrenner" data-playlist="Mid">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/03c841e8-1d96-4997-9755-2001c23b1b8c/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Sky and Sand">Sky and Sand</div>
         <div class="card-artist">Paul Kalkbrenner</div>
@@ -754,7 +739,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Don&#x27;t Phunk With My Heart - WOODERSON Remix" data-artist="Black Eyed Peas" data-playlist="Mid">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/9c3a32b5-f28c-435e-8179-d1a03dc77f0b/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Don&#x27;t Phunk With My Heart - WOODERSON Remix">Don&#x27;t Phunk With My Heart - WOODERSON Remix</div>
         <div class="card-artist">Black Eyed Peas</div>
@@ -763,7 +748,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Rattle" data-artist="Bingo Players" data-playlist="Mid">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/e5b89b15-052c-4b75-902e-0c9b8e90d441/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Rattle">Rattle</div>
         <div class="card-artist">Bingo Players</div>
@@ -772,7 +757,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="TARAKA (Tiësto Remix)" data-artist="Gordo" data-playlist="Mid">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/3a45535c-f05d-4127-aec1-20206c92103c/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="TARAKA (Tiësto Remix)">TARAKA (Tiësto Remix)</div>
         <div class="card-artist">Gordo</div>
@@ -781,7 +766,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Five Hours" data-artist="Deorro" data-playlist="Mid">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/dc21272d-e8bf-4ccd-acc8-0d206c31c704/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Five Hours">Five Hours</div>
         <div class="card-artist">Deorro</div>
@@ -790,7 +775,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Kernkraft 400 - Freejak Remix (Clean)" data-artist="Zombie Nation" data-playlist="Mid">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/73a57885-279b-4455-bab5-86548dc7bb47/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Kernkraft 400 - Freejak Remix (Clean)">Kernkraft 400 - Freejak Remix (Clean)</div>
         <div class="card-artist">Zombie Nation</div>
@@ -808,7 +793,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="(It Goes Like) Nanana" data-artist="Peggy Gou" data-playlist="Mid">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/18d8c24f-5fd9-44d3-8e3f-1d8ba97189eb/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="(It Goes Like) Nanana">(It Goes Like) Nanana</div>
         <div class="card-artist">Peggy Gou</div>
@@ -817,7 +802,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="I&#x27;m Good (Blue) - KidCutUp Throwback Intro (Dirty)" data-artist="David Guetta &amp; Bebe Rexha" data-playlist="Mid">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/2ed0e945-bba4-4a63-b36b-9ddff439bbf2/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="I&#x27;m Good (Blue) - KidCutUp Throwback Intro (Dirty)">I&#x27;m Good (Blue) - KidCutUp Throwback Intro (Dirty)</div>
         <div class="card-artist">David Guetta &amp; Bebe Rexha</div>
@@ -826,7 +811,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="leavemealone - SUBSHIFT Remix" data-artist="Fred again.. &amp; Baby Keem" data-playlist="Mid">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/1d84d8c4-12bf-406b-83c3-524dc64ae8ee/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="leavemealone - SUBSHIFT Remix">leavemealone - SUBSHIFT Remix</div>
         <div class="card-artist">Fred again.. &amp; Baby Keem</div>
@@ -835,7 +820,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="One More Time - Valmer Remix" data-artist="Daft Punk" data-playlist="Mid">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/7d3b9810-5634-400c-ad89-50609e0ce800/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="One More Time - Valmer Remix">One More Time - Valmer Remix</div>
         <div class="card-artist">Daft Punk</div>
@@ -844,7 +829,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Tsunami (Jump) [feat. Tinie Tempah] (Radio Edit)" data-artist="DVBBS Borgeous Tinie Tempah" data-playlist="Mid">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/717a4536-b7bb-489f-aec6-6eadf52a2720/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Tsunami (Jump) [feat. Tinie Tempah] (Radio Edit)">Tsunami (Jump) [feat. Tinie Tempah] (Radio Edit)</div>
         <div class="card-artist">DVBBS Borgeous Tinie Tempah</div>
@@ -862,7 +847,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Day &#x27;N&#x27; Nite - Rogerson Remix" data-artist="Kid Cudi" data-playlist="Mid">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/6d20e7de-a15b-4a9a-b1f2-d428df013fea/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Day &#x27;N&#x27; Nite - Rogerson Remix">Day &#x27;N&#x27; Nite - Rogerson Remix</div>
         <div class="card-artist">Kid Cudi</div>
@@ -871,7 +856,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="If I Lose Myself - Daevo &amp; Jost Remix" data-artist="OneRepublic" data-playlist="Mid">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/1d72f0c8-381c-4af7-9ddb-4acd5f536bfc/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="If I Lose Myself - Daevo &amp; Jost Remix">If I Lose Myself - Daevo &amp; Jost Remix</div>
         <div class="card-artist">OneRepublic</div>
@@ -880,7 +865,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Close Your Eyes" data-artist="Felix Jaehn &amp; VIZE ft. Miss Li" data-playlist="Mid">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/273e4a9b-1c6a-42ec-906a-518253a1da3f/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Close Your Eyes">Close Your Eyes</div>
         <div class="card-artist">Felix Jaehn &amp; VIZE ft. Miss Li</div>
@@ -889,7 +874,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Rumble - Anthem Kingz Who Edit" data-artist="Skrillex, Fred Again.. &amp; Flowdan" data-playlist="Mid">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/2bba93c1-7d16-4db8-b8ef-527e3dd50918/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Rumble - Anthem Kingz Who Edit">Rumble - Anthem Kingz Who Edit</div>
         <div class="card-artist">Skrillex, Fred Again.. &amp; Flowdan</div>
@@ -907,7 +892,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Voices In My Head - J Medina Tremor Halloween Edit" data-artist="Anyma, Argy &amp; Son Of Son" data-playlist="Mid">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/fffc765f-6a16-4f27-aedb-28229e91861a/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Voices In My Head - J Medina Tremor Halloween Edit">Voices In My Head - J Medina Tremor Halloween Edit</div>
         <div class="card-artist">Anyma, Argy &amp; Son Of Son</div>
@@ -916,11 +901,11 @@
     </div>
       </div>
     </section><section class="playlist-section" id="High">
-      <h2>High <span style="font-weight:400;color:#52525b;font-size:0.72rem;">(House&Techno&Fun)</span> <span class="count">17 Songs</span></h2>
+      <h2>High <span class="count">17 Songs</span></h2>
       <div class="cards">
 <div class="card" onclick="toggleSong(this)" data-title="I Run - James Da Cruz Remix" data-artist="HAVEN. &amp; Kaitlin Aragon" data-playlist="High">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/3564cd57-617b-4337-b475-2c1fa6a11533/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="I Run - James Da Cruz Remix">I Run - James Da Cruz Remix</div>
         <div class="card-artist">HAVEN. &amp; Kaitlin Aragon</div>
@@ -947,7 +932,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Crying On The Dancefloor (feat. Endless Summer &amp; Violet Days) (R3HAB Remix)" data-artist="Sam Feldt; Jonas Blue; R3HAB; Endless Summer; Violet Days" data-playlist="High">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/322eabcb-edda-40f0-9076-f92c66b866fe/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Crying On The Dancefloor (feat. Endless Summer &amp; Violet Days) (R3HAB Remix)">Crying On The Dancefloor (feat. Endless Summer &amp; Violet Days) (R3HAB Remix)</div>
         <div class="card-artist">Sam Feldt; Jonas Blue; R3HAB; Endless Summer; Violet Days</div>
@@ -956,7 +941,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Voices In My Head (Amelie Lens Remix)" data-artist="Anyma; Argy; Son Of Son; Amelie Lens" data-playlist="High">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/fffc765f-6a16-4f27-aedb-28229e91861a/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Voices In My Head (Amelie Lens Remix)">Voices In My Head (Amelie Lens Remix)</div>
         <div class="card-artist">Anyma; Argy; Son Of Son; Amelie Lens</div>
@@ -965,7 +950,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Forever - LUSSO &amp; KYROS Remix" data-artist="HUGEL &amp; Diplo ft. Malou &amp; Yuna" data-playlist="High">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/5974cbd4-2555-4969-b741-d2389c259d59/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Forever - LUSSO &amp; KYROS Remix">Forever - LUSSO &amp; KYROS Remix</div>
         <div class="card-artist">HUGEL &amp; Diplo ft. Malou &amp; Yuna</div>
@@ -974,7 +959,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Shiver - 21SWINGS &amp; GABEREAL Remix" data-artist="John Summit &amp; Hayla" data-playlist="High">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/06284cce-ec43-4444-9da4-f1a59d6da61c/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Shiver - 21SWINGS &amp; GABEREAL Remix">Shiver - 21SWINGS &amp; GABEREAL Remix</div>
         <div class="card-artist">John Summit &amp; Hayla</div>
@@ -983,7 +968,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Weekends (DJcity Intro - Dirty)" data-artist="Jonas Blue &amp; Felix Jaehn" data-playlist="High">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/af423461-95b0-44c2-8ed5-2f48a7ab5771/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Weekends (DJcity Intro - Dirty)">Weekends (DJcity Intro - Dirty)</div>
         <div class="card-artist">Jonas Blue &amp; Felix Jaehn</div>
@@ -992,7 +977,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Losing Control" data-artist="Kiki &amp; Marlon Hoffstadt" data-playlist="High">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/caef87f2-1f52-4cb5-b8ec-58cd9239c523/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Losing Control">Losing Control</div>
         <div class="card-artist">Kiki &amp; Marlon Hoffstadt</div>
@@ -1001,7 +986,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Atlantis (Edit)" data-artist="Netherworld" data-playlist="High">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/abe343a7-ae0f-4627-8e2a-5d84a5d1a39b/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Atlantis (Edit)">Atlantis (Edit)</div>
         <div class="card-artist">Netherworld</div>
@@ -1010,7 +995,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Wanna Play?" data-artist="elMefti;Holy Priest" data-playlist="High">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/c8b7e99d-81d6-4144-b7d5-d425eef9fe9a/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Wanna Play?">Wanna Play?</div>
         <div class="card-artist">elMefti;Holy Priest</div>
@@ -1019,7 +1004,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Get Ur Freak On - BEAUZ, JKRS &amp; NIVEK Remix" data-artist="Missy Elliott" data-playlist="High">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/9d5ac786-b070-4016-a15c-5fc944ba3b11/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Get Ur Freak On - BEAUZ, JKRS &amp; NIVEK Remix">Get Ur Freak On - BEAUZ, JKRS &amp; NIVEK Remix</div>
         <div class="card-artist">Missy Elliott</div>
@@ -1028,7 +1013,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Mockingbird" data-artist="Tiësto Dimitri Vegas &amp; Like Mike Gabry Ponte" data-playlist="High">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/d4ed0e86-0215-4fa5-bb6d-7fd2029d782f/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Mockingbird">Mockingbird</div>
         <div class="card-artist">Tiësto Dimitri Vegas &amp; Like Mike Gabry Ponte</div>
@@ -1037,7 +1022,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Meet Her At The Love Parade" data-artist="ALFONS" data-playlist="High">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/a823e756-cf8c-49c6-83a7-eb136fedf5ca/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Meet Her At The Love Parade">Meet Her At The Love Parade</div>
         <div class="card-artist">ALFONS</div>
@@ -1046,7 +1031,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Pedro (W&amp;W Remix)" data-artist="Jaxomy; Agatino Romero; Raffaella Carrà; W&amp;W" data-playlist="High">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/950fe68a-5eb5-49df-a0e3-3e63ea4b4709/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Pedro (W&amp;W Remix)">Pedro (W&amp;W Remix)</div>
         <div class="card-artist">Jaxomy; Agatino Romero; Raffaella Carrà; W&amp;W</div>
@@ -1055,7 +1040,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Thank You (Not So Bad)" data-artist="Dimitri Vegas &amp; Like Mike Tiësto Dido W&amp;W Dimitri Vegas Like Mike" data-playlist="High">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/612901a6-0062-4aa0-90b1-b8a426b6b498/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Thank You (Not So Bad)">Thank You (Not So Bad)</div>
         <div class="card-artist">Dimitri Vegas &amp; Like Mike Tiësto Dido W&amp;W Dimitri Vegas Like Mike</div>
@@ -1064,7 +1049,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Willst Du - Achtabahn Remix" data-artist="Achtabahn ft. Alligatoah" data-playlist="High">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/4c93041b-b523-411f-8227-b656c5862a88/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Willst Du - Achtabahn Remix">Willst Du - Achtabahn Remix</div>
         <div class="card-artist">Achtabahn ft. Alligatoah</div>
@@ -1073,11 +1058,11 @@
     </div>
       </div>
     </section><section class="playlist-section" id="Low">
-      <h2>Low <span style="font-weight:400;color:#52525b;font-size:0.72rem;">(House&Techno&Fun)</span> <span class="count">26 Songs</span></h2>
+      <h2>Low <span class="count">26 Songs</span></h2>
       <div class="cards">
 <div class="card" onclick="toggleSong(this)" data-title="You &amp; Me - Rivo Remix" data-artist="Disclosure Rivo Eliza Doolittle" data-playlist="Low">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/9f11fd7a-518d-46b0-ab9e-8315e166f37c/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="You &amp; Me - Rivo Remix">You &amp; Me - Rivo Remix</div>
         <div class="card-artist">Disclosure Rivo Eliza Doolittle</div>
@@ -1086,7 +1071,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Piece Of Your Heart (Alok Remix)" data-artist="Meduza Alok GOODBOYS" data-playlist="Low">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/71b74245-a60b-4952-b43b-001fbc050cb5/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Piece Of Your Heart (Alok Remix)">Piece Of Your Heart (Alok Remix)</div>
         <div class="card-artist">Meduza Alok GOODBOYS</div>
@@ -1095,7 +1080,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="In My Mind" data-artist="Dynoro Gigi D&#x27;Agostino" data-playlist="Low">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/e4b6106b-09ef-4d71-b74f-628a0308edb1/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="In My Mind">In My Mind</div>
         <div class="card-artist">Dynoro Gigi D&#x27;Agostino</div>
@@ -1104,7 +1089,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="No Broke Boys (DJcity Intro - Dirty)" data-artist="Tinashe" data-playlist="Low">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/c9b43245-11af-4949-ad75-7f21de3a5877/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="No Broke Boys (DJcity Intro - Dirty)">No Broke Boys (DJcity Intro - Dirty)</div>
         <div class="card-artist">Tinashe</div>
@@ -1113,7 +1098,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Willst Du - Achtabahn Remix" data-artist="Achtabahn ft. Alligatoah" data-playlist="Low">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/4c93041b-b523-411f-8227-b656c5862a88/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Willst Du - Achtabahn Remix">Willst Du - Achtabahn Remix</div>
         <div class="card-artist">Achtabahn ft. Alligatoah</div>
@@ -1122,7 +1107,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Still D.R.E. - Sir Marcus &amp; Lincoln Baio Remix (Intro - Dirty)" data-artist="Dr. Dre ft. Snoop Dogg" data-playlist="Low">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/4aa84377-4f63-4f5c-98e0-6c90b2cb5776/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Still D.R.E. - Sir Marcus &amp; Lincoln Baio Remix (Intro - Dirty)">Still D.R.E. - Sir Marcus &amp; Lincoln Baio Remix (Intro - Dirty)</div>
         <div class="card-artist">Dr. Dre ft. Snoop Dogg</div>
@@ -1131,7 +1116,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Kernkraft 400 - James Hype Remix" data-artist="Zombie Nation" data-playlist="Low">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/73a57885-279b-4455-bab5-86548dc7bb47/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Kernkraft 400 - James Hype Remix">Kernkraft 400 - James Hype Remix</div>
         <div class="card-artist">Zombie Nation</div>
@@ -1140,7 +1125,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Una Noche Con Hugel" data-artist="HUGEL, Alleh &amp; Yorghaki" data-playlist="Low">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/55b79cbb-9d09-43a6-b0de-15239816de75/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Una Noche Con Hugel">Una Noche Con Hugel</div>
         <div class="card-artist">HUGEL, Alleh &amp; Yorghaki</div>
@@ -1149,7 +1134,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="I Run - James Da Cruz Remix" data-artist="HAVEN. &amp; Kaitlin Aragon" data-playlist="Low">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/3564cd57-617b-4337-b475-2c1fa6a11533/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="I Run - James Da Cruz Remix">I Run - James Da Cruz Remix</div>
         <div class="card-artist">HAVEN. &amp; Kaitlin Aragon</div>
@@ -1158,7 +1143,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Love Tonight - David Guetta Remix" data-artist="Shouse" data-playlist="Low">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/331b56b0-b81d-4f4e-9550-4c3013bb1034/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Love Tonight - David Guetta Remix">Love Tonight - David Guetta Remix</div>
         <div class="card-artist">Shouse</div>
@@ -1167,7 +1152,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Love Tonight - Hypelezz Be My Lover Edit" data-artist="Shouse" data-playlist="Low">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/331b56b0-b81d-4f4e-9550-4c3013bb1034/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Love Tonight - Hypelezz Be My Lover Edit">Love Tonight - Hypelezz Be My Lover Edit</div>
         <div class="card-artist">Shouse</div>
@@ -1176,7 +1161,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Billie (Loving Arms) - GUMMiBEAR Remix" data-artist="Fred again.." data-playlist="Low">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/bb7f55b2-191f-4898-85c6-943b532e73fe/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Billie (Loving Arms) - GUMMiBEAR Remix">Billie (Loving Arms) - GUMMiBEAR Remix</div>
         <div class="card-artist">Fred again..</div>
@@ -1185,7 +1170,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Baianá" data-artist="Bakermat" data-playlist="Low">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/ec9fabc6-bc44-4f9e-9059-20155c46b79c/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Baianá">Baianá</div>
         <div class="card-artist">Bakermat</div>
@@ -1194,7 +1179,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Losing Control" data-artist="Kiki &amp; Marlon Hoffstadt" data-playlist="Low">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/caef87f2-1f52-4cb5-b8ec-58cd9239c523/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Losing Control">Losing Control</div>
         <div class="card-artist">Kiki &amp; Marlon Hoffstadt</div>
@@ -1203,7 +1188,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Where You Are" data-artist="John Summit HAYLA" data-playlist="Low">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/cacf7975-4522-4223-a7a9-bb71b6bed088/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Where You Are">Where You Are</div>
         <div class="card-artist">John Summit HAYLA</div>
@@ -1212,7 +1197,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="adore u" data-artist="Fred again.. Obongjayar" data-playlist="Low">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/e16b79cf-6775-42c0-af46-8884bfdaa8e6/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="adore u">adore u</div>
         <div class="card-artist">Fred again.. Obongjayar</div>
@@ -1221,7 +1206,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Next to Me (Vintage Culture Remix)" data-artist="RÜFÜS DU SOL" data-playlist="Low">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/f0e8a44c-710a-40d3-85b2-1b7c8be2102e/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Next to Me (Vintage Culture Remix)">Next to Me (Vintage Culture Remix)</div>
         <div class="card-artist">RÜFÜS DU SOL</div>
@@ -1230,7 +1215,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Don&#x27;t You Worry Child - 5HOURS Remix" data-artist="Swedish House Mafia ft. John Martin" data-playlist="Low">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/2b1289e1-a1f2-4e2f-a4b8-6c92c09c9b7c/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Don&#x27;t You Worry Child - 5HOURS Remix">Don&#x27;t You Worry Child - 5HOURS Remix</div>
         <div class="card-artist">Swedish House Mafia ft. John Martin</div>
@@ -1239,7 +1224,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="What Girls Do" data-artist="Keys N Krates" data-playlist="Low">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/1ec56383-a904-4e4e-9935-5ae0021c1792/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="What Girls Do">What Girls Do</div>
         <div class="card-artist">Keys N Krates</div>
@@ -1248,7 +1233,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="I Adore You - Goshfather Remix" data-artist="HUGEL, Topic &amp; Arash ft. Daecolm" data-playlist="Low">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/4e3cb9f9-169d-43ae-b95e-856391b4d183/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="I Adore You - Goshfather Remix">I Adore You - Goshfather Remix</div>
         <div class="card-artist">HUGEL, Topic &amp; Arash ft. Daecolm</div>
@@ -1266,7 +1251,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Forever - LUSSO &amp; KYROS Remix" data-artist="HUGEL &amp; Diplo ft. Malou &amp; Yuna" data-playlist="Low">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/5974cbd4-2555-4969-b741-d2389c259d59/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Forever - LUSSO &amp; KYROS Remix">Forever - LUSSO &amp; KYROS Remix</div>
         <div class="card-artist">HUGEL &amp; Diplo ft. Malou &amp; Yuna</div>
@@ -1275,7 +1260,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Ferrari" data-artist="James Hype Miggy Dela Rosa" data-playlist="Low">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/b147a8e8-a4cc-4678-b35c-97a78d242b70/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Ferrari">Ferrari</div>
         <div class="card-artist">James Hype Miggy Dela Rosa</div>
@@ -1284,7 +1269,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Turn On The Lights again.. (feat. Future &amp; Fred again..) [Austin Millz Remix]" data-artist="Swedish House Mafia, Future, Fred again.." data-playlist="Low">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/f5468314-1a6a-4cb6-ac58-fe510168e5e3/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Turn On The Lights again.. (feat. Future &amp; Fred again..) [Austin Millz Remix]">Turn On The Lights again.. (feat. Future &amp; Fred again..) [Austin Millz Remix]</div>
         <div class="card-artist">Swedish House Mafia, Future, Fred again..</div>
@@ -1293,7 +1278,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Shiver - 21SWINGS &amp; GABEREAL Remix" data-artist="John Summit &amp; Hayla" data-playlist="Low">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/06284cce-ec43-4444-9da4-f1a59d6da61c/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Shiver - 21SWINGS &amp; GABEREAL Remix">Shiver - 21SWINGS &amp; GABEREAL Remix</div>
         <div class="card-artist">John Summit &amp; Hayla</div>
@@ -1302,7 +1287,7 @@
     </div>
 <div class="card" onclick="toggleSong(this)" data-title="Mockingbird" data-artist="Tiësto Dimitri Vegas &amp; Like Mike Gabry Ponte" data-playlist="Low">
       <div class="card-check"><span class="check-icon">&#x2715;</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">&#x1F3B5;</div></div>
+      <div class="cover-wrap"><img src="https://resources.tidal.com/images/d4ed0e86-0215-4fa5-bb6d-7fd2029d782f/640x640.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
         <div class="card-title" title="Mockingbird">Mockingbird</div>
         <div class="card-artist">Tiësto Dimitri Vegas &amp; Like Mike Gabry Ponte</div>
@@ -1321,15 +1306,8 @@
   <div class="share-actions">
     <button class="btn-reset" onclick="resetAll()">Zur&uuml;cksetzen</button>
     <button class="btn-share" onclick="shareSelection()">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297.149-1.758.867-2.03 1.028a175.28 175.28 0 00-1.174.578c-.364.18-.558.27-.58.245-.023-.027.06-.535.186-1.128.126-.593.383-1.801.572-2.684.19-.882.346-1.637.346-1.677 0-.09-.125-.136-.676-.224-.315-.05-.9-.15-1.298-.22-.4-.07-.758-.127-.797-.138l-.07-.02.04-.066a13.498 13.498 0 01.387-.627c.235-.366.93-1.385 1.263-1.85.12-.167.22-.31.22-.316 0-.007-.13-.03-.29-.05-.16-.02-.598-.09-.975-.16-.375-.07-.844-.158-1.04-.194l-.356-.063.114-.092c.062-.05.493-.406.957-.79.463-.384.86-.71.89-.727.057-.03.075.004.213.36.084.22.33.883.548 1.474.218.59.756 2.056.972 2.65l.05.14.19-.1c.104-.054.177-.082.163-.063-.015.02-.076 1.065-.17 2.365-.096 1.427-.157 2.393-.167 2.655l-.01.27.076.085c.05.054.132.117.173.14.058.033.274.038.75.017.35-.016.894-.053 1.208-.084.316-.03.817-.082 1.114-.112.718-.073 1.1-.1 1.08-.074-.015.02-.728.386-1.585.816zM19.078 3.61c-.167-.632-.376-1.098-.497-1.098-.046 0-.85.107-1.788.24L15 3.04v1.954c0 1.074.013 2.22.03 2.546l.03.59.476-.09c.262-.048.833-.157 1.27-.24.436-.084.794-.16.794-.17 0-.028-.214-.878-.32-1.48-.072-.408-.163-1.002-.202-1.32zm-2.88-1.32c-.162-.17-.282-.272-.3-.253-.017.02.427 1.323.553 1.624l.12.287.677-.13c.372-.07.745-.138.826-.15l.147-.02v-.133c0-.355-.235-1.22-.4-1.45-.06-.087-.16-.008-.28.203-.07.12-.16.134-.6.085-.69-.077-.7-.075-.744-.067zM13.463 7.42c-.23-.06-.32-.127-.27-.2.024-.032.15-.112.28-.178.27-.136.393-.167.598-.152.225.016.27.042.19.108-.126.106-.354.19-.35.29.004.097-.06.198-.14.215-.058.012-.152-.014-.308-.084zm.434-.352c.195-.2.166-.23-.137-.14-.26.078-.397.105-.42.082-.023-.023.088-.18.247-.347l.287-.306-.108.02c-.06.01-.115-.006-.122-.036-.01-.04.07-.095.23-.158l.242-.093-.114-.023c-.137-.028-.154-.08-.05-.153.19-.133.168-.128-.177.04-.416.2-.637.266-.688.203-.043-.053.24-.307.5-.447.092-.05.162-.098.154-.108-.01-.013-.1.005-.202.04-.1.034-.348.116-.547.182-.45.148-.5.194-.5.456 0 .098.046.283.102.41.057.128.102.266.102.308 0 .063-.063.042-.243-.08-.132-.09-.22-.136-.195-.1.06.08.303.52.318.576.01.037-.036.01-.1-.06-.18-.193-.305-.258-.24-.124.055.113.286.626.31.688.017.044-.034-.053-.113-.215-.08-.164-.157-.27-.172-.24-.025.052.177.757.243.85.04.056-.083-.254-.19-.477-.08-.17-.124-.265-.098-.213.05.102.488 1.21.51 1.29.013.044-.068-.162-.177-.458-.11-.296-.176-.485-.148-.42.028.065.155.456.28.868.127.412.254.824.282.913l.05.162h.035l.07-.052c.062-.047.067-.078.03-.194a193.428 193.428 0 00-.487-1.656z"/>
-  </svg>
-      Teilen
-    </button>
-  </div>
-</div>
-
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297.149-1.758.867-2.03 1.028a175.28 175.28 0 00-1.174.578c-.364.18-.558.27-.58.245-.023-.027.06-.535.186-1.128.126-.593.383-1.801.572-2.684.19-.882.346-1.637.346-1.677 0-.09-.125-.136-.676-.224-.315-.05-.9-.15-1.298-.22-.4-.07-.758-.127-.797-.138l-.07-.02.04-.066a13.498 13.498 0 01.387-.627c.235-.366.93-1.385 1.263-1.85.12-.167.22-.31.22-.316 0-.007-.13-.03-.29-.05-.16-.02-.598-.09-.975-.16-.375-.07-.844-.158-1.04-.194l-.356-.063.114-.092c.062-.05.493-.406.957-.79.463-.384.86-.71.89-.727.057-.03.075.004.213.36.084.22.33.883.548 1.474.218.59.756 2.056.972 2.65l.05.14.19-.1c.104-.054.177-.082.163-.063-.015.02-.076 1.065-.17 2.365-.096 1.427-.157 2.393-.167 2.655l-.01.27.076.085c.05.054.132.117.173.14.058.033.274.038.75.017.35-.016.894-.053 1.208-.084.316-.03.817-.082 1.114-.112.718-.073 1.1-.1 1.08-.074-.015.02-.728.386-1.585.816zM19.078 3.61c-.167-.632-.376-1.098-.497-1.098-.046 0-.85.107-1.788.24L15 3.04v1.954c0 1.074.013 2.22.03 2.546l.03.59.476-.09c.262-.048.833-.157 1.27-.24.436-.084.794-.16.794-.17 0-.028-.214-.878-.32-1.48-.072-.408-.163-1.002-.202-1.32zm-2.88-1.32c-.162-.17-.282-.272-.3-.253-.017.02.427 1.323.553 1.624l.12.287.677-.13c.372-.07.745-.138.826-.15l.147-.02v-.133c0-.355-.235-1.22-.4-1.45-.06-.087-.16-.008-.28.203-.07.12-.16.134-.6.085-.69-.077-.7-.075-.744-.067zM13.463 7.42c-.23-.06-.32-.127-.27-.2.024-.032.15-.112.28-.178.27-.136.393-.167.598-.152.225.016.27.042.19.108-.126.106-.354.19-.35.29.004.097-.06.198-.14.215-.058.012-.152-.014-.308-.084zm.434-.352c.195-.2.166-.23-.137-.14-.26.078-.397.105-.42.082-.023-.023.088-.18.247-.347l.287-.306-.108.02c-.06.01-.115-.006-.122-.036-.01-.04.07-.095.23-.158l.242-.093-.114-.023c-.137-.028-.154-.08-.05-.153.19-.133.168-.128-.177.04-.416.2-.637.266-.688.203-.043-.053.24-.307.5-.447.092-.05.162-.098.154-.108-.01-.013-.1.005-.202.04-.1.034-.348.116-.547.182-.45.148-.5.194-.5.456 0 .098.046.283.102.41.057.128.102.266.102.308 0 .063-.063.042-.243-.08-.132-.09-.22-.136-.195-.1.06.08.303.52.318.576.01.037-.036.01-.1-.06-.18-.193-.305-.258-.24-.124.055.113.286.626.31.688.017.044-.034-.053-.113-.215-.08-.164-.157-.27-.172-.24-.025.052.177.757.243.85.04.056-.083-.254-.19-.477-.08-.17-.124-.265-.098-.213.05.102.488 1.21.51 1.29.013.044-.068-.162-.177-.458-.11-.296-.176-.485-.148-.42.028.065.155.456.28.868.127.412.254.824.282.913l.05.162h.035l.07-.052c.062-.047.067-.078.03-.194a193.428 193.428 0 00-.487-1.656z"/></svg>Teilen</button></div></div>
 <div class="toast" id="toast">&#x2713; In Zwischenablage kopiert!</div>
-
 <script>
   let selected = new Set();
   function toggleSong(card) {
@@ -1359,48 +1337,22 @@
     }
   }
   function showToast() {
-    const t = document.getElementById('toast');
-    t.classList.add('show');
+    const t = document.getElementById('toast'); t.classList.add('show');
     setTimeout(() => t.classList.remove('show'), 2500);
   }
-
-  const _PLAY  = '<path d="M8 5v14l11-7z"/>';
-  const _PAUSE = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
-  let _aud = null, _btn = null;
-  function _icon(b, p) { b.querySelector('svg').innerHTML = p; }
-  function _setState(b, state) {
-    b.classList.remove('pb-loading','pb-playing');
-    if (state) b.classList.add('pb-' + state);
-  }
-  function _stop() {
-    if (_aud) { _aud.pause(); _aud = null; }
-    if (_btn) { _icon(_btn, _PLAY); _setState(_btn, null); _btn = null; }
-  }
-  document.querySelectorAll('.card:not([data-preview]) .play-btn').forEach(b => b.style.display = 'none');
-  function playPreview(e, btn) {
-    e.stopPropagation();
-    const card = btn.closest('.card');
-    const url  = card.dataset.preview;
-    if (!url) return;
-    if (_btn === btn) {
-      if (_aud.paused) { _aud.play(); _icon(btn, _PAUSE); _setState(btn, 'playing'); }
-      else             { _aud.pause(); _icon(btn, _PLAY);  _setState(btn, null); }
-      return;
-    }
-    _stop();
-    _btn = btn;
-    _icon(btn, '');
-    _setState(btn, 'loading');
-    _aud = new Audio(url);
-    _aud.play();
-    _icon(btn, _PAUSE);
-    _setState(btn, 'playing');
-    _aud.onended = () => {
-      if (_btn === btn) { _icon(btn, _PLAY); _setState(btn, null); _btn = null; _aud = null; }
-    };
-    _aud.onerror = () => {
-      if (_btn === btn) { _icon(btn, _PLAY); _setState(btn, null); _btn = null; _aud = null; }
-    };
+  const _PLAY='<path d="M8 5v14l11-7z"/>', _PAUSE='<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+  let _aud=null,_btn=null;
+  function _icon(b,p){b.querySelector('svg').innerHTML=p}
+  function _setState(b,s){b.classList.remove('pb-loading','pb-playing');if(s)b.classList.add('pb-'+s)}
+  function _stop(){if(_aud){_aud.pause();_aud=null}if(_btn){_icon(_btn,_PLAY);_setState(_btn,null);_btn=null}}
+  document.querySelectorAll('.card:not([data-preview]) .play-btn').forEach(b=>b.style.display='none');
+  function playPreview(e,btn){e.stopPropagation();
+    const url=btn.closest('.card').dataset.preview;if(!url)return;
+    if(_btn===btn){if(_aud.paused){_aud.play();_icon(btn,_PAUSE);_setState(btn,'playing')}else{_aud.pause();_icon(btn,_PLAY);_setState(btn,null)}return}
+    _stop();_btn=btn;_icon(btn,'');_setState(btn,'loading');_aud=new Audio(url);_aud.play();
+    _icon(btn,_PAUSE);_setState(btn,'playing');
+    _aud.onended=()=>{if(_btn===btn){_icon(btn,_PLAY);_setState(btn,null);_btn=null;_aud=null}};
+    _aud.onerror=()=>{if(_btn===btn){_icon(btn,_PLAY);_setState(btn,null);_btn=null;_aud=null}}
   }
 </script>
 </body>
