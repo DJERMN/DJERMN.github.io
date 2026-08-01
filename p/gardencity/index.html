@@ -33,10 +33,7 @@
     .count { @apply text-zinc-600 font-normal text-xs; }
     .cards { @apply border border-zinc-800 rounded-lg overflow-hidden; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 290px), 1fr)); gap: 1px; background-color: #27272a; }
     .card { @apply bg-zinc-900 flex items-center gap-3 cursor-pointer relative transition-colors duration-100; padding: 11px 12px; border-radius: 0; -webkit-tap-highlight-color: transparent; touch-action: manipulation; user-select: none; }
-    @media (hover: hover) {
-      .card:hover { @apply bg-zinc-800; }
-      .card.selected:hover { background-color: #200a0a; }
-    }
+    @media (hover: hover) { .card:hover { @apply bg-zinc-800; } .card.selected:hover { background-color: #200a0a; } }
     .card-check { @apply absolute top-2.5 right-2.5 w-5 h-5 rounded border border-zinc-700 flex items-center justify-center shrink-0 transition-all duration-150; }
     .check-icon { @apply leading-none transition-colors duration-150; font-size: 0.6rem; color: transparent; font-weight: 900; }
     .card.selected { background-color: #1c0808; }
@@ -81,7 +78,7 @@
 <header>
   <h1>Hochzeiten GardenCity — Playlists</h1>
   <p>Rekordbox Library · 62 Songs in 4 Playlists</p>
-  <p class="hint">Tippe auf einen Song, der nicht passt — dann teile deine Auswahl.</p>
+  <p class="hint">▶ Vorschau per Klick auf den Play-Button</p>
   <nav class="nav"><a href="#Alman---Phase-1">Alman - Phase #1</a><a href="#Banger---Phase-1">Banger - Phase #1</a><a href="#Alman---TekSchlag-2">Alman - TekSchlag #2</a><a href="#MJ-x-Groove">MJ x Groove</a></nav>
 </header>
 <main><section class="playlist-section" id="Alman---Phase-1">
@@ -94,17 +91,17 @@
         <div class="card-artist">Nina Chuba</div>
         <div class="card-meta"><span class="badge bpm">103</span><span class="badge key">3A</span><span class="badge dur">2:14</span></div>
       </div>
-    </div><div class="card" onclick="toggleSong(this)" data-title="Roller" data-artist="Apache 207" data-playlist="Alman - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/9f/3f/89/9f3f8944-e239-0e15-e72c-61d1ad447bc5/mzaf_5444136477323979547.plus.aac.p.m4a">
+    </div><div class="card" onclick="toggleSong(this)" data-title="Roller" data-artist="Apache 207" data-playlist="Alman - Phase #1">
       <div class="card-check"><span class="check-icon">✕</span></div>
-      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/8d/13/90/8d139053-1dee-d79c-7807-2943d9d56275/886447635384.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
       <div class="card-info">
         <div class="card-title" title="Roller">Roller</div>
         <div class="card-artist">Apache 207</div>
         <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">3A</span><span class="badge dur">2:37</span></div>
       </div>
-    </div><div class="card" onclick="toggleSong(this)" data-title="Neunzig" data-artist="Apache 207" data-playlist="Alman - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/06/a8/c2/06a8c241-4a84-a9ab-47dd-28c537b385be/mzaf_15344699037962019122.plus.aac.p.m4a">
+    </div><div class="card" onclick="toggleSong(this)" data-title="Neunzig" data-artist="Apache 207" data-playlist="Alman - Phase #1">
       <div class="card-check"><span class="check-icon">✕</span></div>
-      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/96/a0/e5/96a0e52d-1e00-ac1f-b787-d63d0f0052f2/196589952349.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
       <div class="card-info">
         <div class="card-title" title="Neunzig">Neunzig</div>
         <div class="card-artist">Apache 207</div>
@@ -126,9 +123,9 @@
         <div class="card-artist">Udo Lindenberg &amp; Apache 207</div>
         <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">6A</span><span class="badge dur">3:39</span></div>
       </div>
-    </div><div class="card" onclick="toggleSong(this)" data-title="Rap über Hass" data-artist="K.I.Z" data-playlist="Alman - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/35/02/04/35020470-68b4-6b2a-9161-f9a2969d5db5/mzaf_7051125217494374595.plus.aac.p.m4a">
+    </div><div class="card" onclick="toggleSong(this)" data-title="Rap über Hass" data-artist="K.I.Z" data-playlist="Alman - Phase #1">
       <div class="card-check"><span class="check-icon">✕</span></div>
-      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/40/d3/a1/40d3a19a-5f08-c230-40bf-8c5742bf1a91/5054197824333.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
       <div class="card-info">
         <div class="card-title" title="Rap über Hass">Rap über Hass</div>
         <div class="card-artist">K.I.Z</div>
@@ -166,17 +163,17 @@
         <div class="card-artist">CRO</div>
         <div class="card-meta"><span class="badge bpm">160</span><span class="badge key">10A</span><span class="badge dur">2:21</span></div>
       </div>
-    </div><div class="card" onclick="toggleSong(this)" data-title="Bauch Beine Po" data-artist="Shirin David" data-playlist="Alman - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/9d/1a/c7/9d1ac7fb-4f41-b49d-566a-dc88ca1be86d/mzaf_11071714867058821724.plus.aac.p.m4a">
+    </div><div class="card" onclick="toggleSong(this)" data-title="Bauch Beine Po" data-artist="Shirin David" data-playlist="Alman - Phase #1">
       <div class="card-check"><span class="check-icon">✕</span></div>
-      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/95/ba/74/95ba7435-5ec9-0856-1782-caa88558fa70/ticket.bcypgguw.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
       <div class="card-info">
         <div class="card-title" title="Bauch Beine Po">Bauch Beine Po</div>
         <div class="card-artist">Shirin David</div>
         <div class="card-meta"><span class="badge bpm">124</span><span class="badge key">9A</span><span class="badge dur">2:13</span></div>
       </div>
-    </div><div class="card" onclick="toggleSong(this)" data-title="Ein Affe und ein Pferd" data-artist="K.I.Z" data-playlist="Alman - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/c7/89/61/c78961f4-6989-d015-7bba-fda8a37efb49/mzaf_9342187573599376142.plus.aac.p.m4a">
+    </div><div class="card" onclick="toggleSong(this)" data-title="Ein Affe und ein Pferd" data-artist="K.I.Z" data-playlist="Alman - Phase #1">
       <div class="card-check"><span class="check-icon">✕</span></div>
-      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/01/5c/ec/015cec9b-bebc-37e5-b98a-a9e84d4e8518/00602557315813.rgb.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
       <div class="card-info">
         <div class="card-title" title="Ein Affe und ein Pferd">Ein Affe und ein Pferd</div>
         <div class="card-artist">K.I.Z</div>
@@ -289,9 +286,9 @@
         <div class="card-artist">Tory Lanez</div>
         <div class="card-meta"><span class="badge bpm">127</span><span class="badge key">10A</span><span class="badge dur">4:49</span></div>
       </div>
-    </div><div class="card" onclick="toggleSong(this)" data-title="Numb/Encore (James Hype Remix (Dirty))" data-artist="JAY-Z &amp; Linkin Park" data-playlist="Banger - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/d3/8f/de/d38fde51-ef60-1e9b-4657-1e9c76aa38ab/mzaf_12252124278080100584.plus.aac.p.m4a">
+    </div><div class="card" onclick="toggleSong(this)" data-title="Numb/Encore (James Hype Remix (Dirty))" data-artist="JAY-Z &amp; Linkin Park" data-playlist="Banger - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/20/a4/2d/20a42dfd-2b27-a989-437a-8621c8cf0613/mzaf_18258224880031331606.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
-      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/8c/b2/85/8cb28589-a74d-1961-894c-6d7662ee90da/mzi.eaqqjnzg.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music/y2004/m11/d29/h19/s06.xuwrqyll.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
       <div class="card-info">
         <div class="card-title" title="Numb/Encore (James Hype Remix (Dirty))">Numb/Encore (James Hype Remix (Dirty))</div>
         <div class="card-artist">JAY-Z &amp; Linkin Park</div>
@@ -324,9 +321,9 @@
         <div class="card-artist">Finnel</div>
         <div class="card-meta"><span class="badge bpm">140</span><span class="badge key">1A</span><span class="badge dur">2:27</span></div>
       </div>
-    </div><div class="card" onclick="toggleSong(this)" data-title="Willst Du - Achtabahn Remix" data-artist="Achtabahn ft. Alligatoah" data-playlist="Alman - TekSchlag #2" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/d9/f3/8b/d9f38b71-443a-85c5-6955-9498f442f380/mzaf_863519826131859335.plus.aac.p.m4a">
+    </div><div class="card" onclick="toggleSong(this)" data-title="Willst Du - Achtabahn Remix" data-artist="Achtabahn ft. Alligatoah" data-playlist="Alman - TekSchlag #2">
       <div class="card-check"><span class="check-icon">✕</span></div>
-      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/29/c5/1b/29c51bde-077f-68fa-61ff-99500f5596a3/00602567769866.rgb.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
       <div class="card-info">
         <div class="card-title" title="Willst Du - Achtabahn Remix">Willst Du - Achtabahn Remix</div>
         <div class="card-artist">Achtabahn ft. Alligatoah</div>
@@ -428,9 +425,9 @@
         <div class="card-artist">Harris &amp; Ford</div>
         <div class="card-meta"><span class="badge bpm">100</span><span class="badge key">11A</span><span class="badge dur">2:05</span></div>
       </div>
-    </div><div class="card" onclick="toggleSong(this)" data-title="Bisschen Spass" data-artist="HBz, LIZOT &amp; 2 Engel &amp; Charlie" data-playlist="Alman - TekSchlag #2" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/36/30/51/36305114-7fef-11d1-fe9e-6a2eaf46b4e9/mzaf_675667624740602504.plus.aac.p.m4a">
+    </div><div class="card" onclick="toggleSong(this)" data-title="Bisschen Spass" data-artist="HBz, LIZOT &amp; 2 Engel &amp; Charlie" data-playlist="Alman - TekSchlag #2">
       <div class="card-check"><span class="check-icon">✕</span></div>
-      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/5a/1d/ea/5a1deae2-af19-4e12-579d-f7de1626a25e/cover.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
       <div class="card-info">
         <div class="card-title" title="Bisschen Spass">Bisschen Spass</div>
         <div class="card-artist">HBz, LIZOT &amp; 2 Engel &amp; Charlie</div>
@@ -463,9 +460,9 @@
     </div></div>
     </section><section class="playlist-section" id="MJ-x-Groove">
       <h2>MJ x Groove <span class="count">16 Songs</span></h2>
-      <div class="cards"><div class="card" onclick="toggleSong(this)" data-title="S&amp;M - Jablonski vs James Hype Alone Edit" data-artist="Rihanna" data-playlist="MJ x Groove" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/02/a8/4d/02a84d1b-e538-ade2-bcae-cb9548c9c13f/mzaf_665222301792604031.plus.aac.p.m4a">
+      <div class="cards"><div class="card" onclick="toggleSong(this)" data-title="S&amp;M - Jablonski vs James Hype Alone Edit" data-artist="Rihanna" data-playlist="MJ x Groove">
       <div class="card-check"><span class="check-icon">✕</span></div>
-      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/1c/8c/06/1c8c06c4-56e0-c89a-6936-3b4871e05917/11UMGIM10184.rgb.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
       <div class="card-info">
         <div class="card-title" title="S&amp;M - Jablonski vs James Hype Alone Edit">S&amp;M - Jablonski vs James Hype Alone Edit</div>
         <div class="card-artist">Rihanna</div>
@@ -495,9 +492,9 @@
         <div class="card-artist">Rihanna</div>
         <div class="card-meta"><span class="badge bpm">124</span><span class="badge key">3A</span><span class="badge dur">3:39</span></div>
       </div>
-    </div><div class="card" onclick="toggleSong(this)" data-title="The Way You Make Me Feel (Anthem Kingz Refresh) (Anthem Kingz Refresh)" data-artist="Michael Jackson, Anthem Kingz" data-playlist="MJ x Groove" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/98/d1/b5/98d1b53c-26d4-8dd5-c23d-8964e1559b90/mzaf_15859473497408041250.plus.aac.p.m4a">
+    </div><div class="card" onclick="toggleSong(this)" data-title="The Way You Make Me Feel (Anthem Kingz Refresh) (Anthem Kingz Refresh)" data-artist="Michael Jackson, Anthem Kingz" data-playlist="MJ x Groove">
       <div class="card-check"><span class="check-icon">✕</span></div>
-      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/b1/17/b7/b117b716-070e-ea8e-3a88-12bf60084d70/f1af1909-75fe-45f9-89a5-a705312ac51a.png/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
       <div class="card-info">
         <div class="card-title" title="The Way You Make Me Feel (Anthem Kingz Refresh) (Anthem Kingz Refresh)">The Way You Make Me Feel (Anthem Kingz Refresh) (Anthem Kingz Refresh)</div>
         <div class="card-artist">Michael Jackson, Anthem Kingz</div>
@@ -559,9 +556,9 @@
         <div class="card-artist">Rihanna</div>
         <div class="card-meta"><span class="badge bpm">132</span><span class="badge key">10A</span><span class="badge dur">4:26</span></div>
       </div>
-    </div><div class="card" onclick="toggleSong(this)" data-title="Don&#39;t Stop The Music - Denero Remix" data-artist="Rihanna" data-playlist="MJ x Groove" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/26/44/95/264495ff-a80b-25fd-5b15-49ff2196bd8d/mzaf_5406960914278850389.plus.aac.p.m4a">
+    </div><div class="card" onclick="toggleSong(this)" data-title="Don&#39;t Stop The Music - Denero Remix" data-artist="Rihanna" data-playlist="MJ x Groove">
       <div class="card-check"><span class="check-icon">✕</span></div>
-      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/fc/57/da/fc57da34-d446-924b-f67e-478dced0471f/11UMGIM10443.rgb.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
       <div class="card-info">
         <div class="card-title" title="Don&#39;t Stop The Music - Denero Remix">Don&#39;t Stop The Music - Denero Remix</div>
         <div class="card-artist">Rihanna</div>
