@@ -1,27 +1,7 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="noindex,nofollow">
-<title>Hochzeiten Vida — Playlists</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
-<script>tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','system-ui','sans-serif']}}}}</script>
-<style type="text/tailwindcss">
-@layer base{*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}body{@apply font-sans bg-zinc-950 text-zinc-100 min-h-screen;padding-bottom:100px;-webkit-text-size-adjust:100%}}
-@layer components{header{@apply bg-zinc-900 border-b border-zinc-800;padding:clamp(28px,6vw,52px) clamp(16px,5vw,48px) clamp(20px,4vw,36px)}header h1{@apply font-extrabold text-white tracking-tight leading-tight;font-size:clamp(1.4rem,5vw,2.2rem)}header p{@apply mt-1.5 text-zinc-400;font-size:clamp(.75rem,2.5vw,.85rem)}.hint{@apply mt-2 text-zinc-500;font-size:clamp(.72rem,2.2vw,.8rem)}.nav{@apply flex mt-5 overflow-x-auto pb-0.5;flex-wrap:nowrap;gap:6px;scrollbar-width:none}.nav::-webkit-scrollbar{display:none}.nav a{@apply text-zinc-500 no-underline font-medium border border-zinc-800 rounded shrink-0 whitespace-nowrap transition-colors duration-150;font-size:.72rem;padding:5px 13px;-webkit-tap-highlight-color:transparent;touch-action:manipulation}.nav a:hover{@apply text-amber-400;border-color:rgba(251,191,36,.3)}main{@apply max-w-[1440px] mx-auto;padding:clamp(32px,5vw,56px) clamp(12px,4vw,36px) 40px}.playlist-section{@apply mb-12;scroll-margin-top:16px}.playlist-section h2{@apply text-amber-400 font-semibold mb-3.5 pb-3 border-b border-zinc-800 flex items-center flex-wrap gap-2.5;font-size:clamp(.82rem,3vw,.95rem)}.count{@apply text-zinc-600 font-normal text-xs}.cards{@apply border border-zinc-800 rounded-lg overflow-hidden;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr));gap:1px;background-color:#27272a}.card{@apply bg-zinc-900 flex items-center gap-3 cursor-pointer relative transition-colors duration-100;padding:11px 12px;border-radius:0;-webkit-tap-highlight-color:transparent;touch-action:manipulation;user-select:none}@media(hover:hover){.card:hover{@apply bg-zinc-800}.card.selected:hover{background-color:#200a0a}}.card-check{@apply absolute top-2.5 right-2.5 w-5 h-5 rounded border border-zinc-700 flex items-center justify-center shrink-0 transition-all duration-150}.check-icon{@apply leading-none transition-colors duration-150;font-size:.6rem;color:transparent;font-weight:900}.card.selected{background-color:#1c0808}.card.selected .card-check{@apply bg-red-700 border-red-700}.card.selected .check-icon{@apply text-white}.card.selected .card-title{@apply text-red-300}.cover-wrap{@apply relative shrink-0;width:52px;height:52px}.cover{@apply rounded-md object-cover bg-zinc-800;width:52px;height:52px;pointer-events:none}.no-cover{@apply flex items-center justify-center text-xl}.play-btn{@apply absolute rounded-full flex items-center justify-center p-0 cursor-pointer transition-all duration-150;bottom:3px;right:3px;width:22px;height:22px;background:rgba(0,0,0,.85);border:1px solid rgba(255,255,255,.18);-webkit-tap-highlight-color:transparent}.play-btn:active{transform:scale(.86)}.play-btn svg{@apply shrink-0;width:9px;height:9px;fill:#d4d4d4}.play-btn.pb-playing{background:#f59e0b;border-color:rgba(245,158,11,.35)}.play-btn.pb-playing svg{fill:#000}.play-btn.pb-error{background:rgba(185,28,28,.9);border-color:transparent}.play-btn.pb-loading{border-color:transparent}@keyframes pb-spin{to{transform:rotate(360deg)}}.play-btn.pb-loading::before{content:'';position:absolute;inset:-2px;border-radius:50%;border:1.5px solid transparent;border-top-color:#f59e0b;animation:pb-spin .7s linear infinite}.card-info{@apply flex-1 min-w-0;padding-right:26px}.card-title{@apply text-sm font-semibold text-zinc-100 truncate mb-0.5 leading-snug transition-colors duration-150}.card-artist{@apply text-xs text-zinc-400 truncate leading-snug;margin-bottom:6px}.card-meta{@apply flex flex-wrap gap-1}.badge{@apply text-[0.6rem] font-semibold px-1.5 py-0.5 rounded whitespace-nowrap;letter-spacing:.2px}.bpm{@apply bg-amber-950 text-amber-400 ring-1 ring-amber-900/50}.key{@apply bg-emerald-950 text-emerald-400 ring-1 ring-emerald-900/50}.dur{@apply bg-zinc-800 text-zinc-500 ring-1 ring-zinc-700/50}.share-bar{@apply fixed bottom-0 left-0 right-0 z-50 bg-zinc-900 border-t border-zinc-800 flex items-center justify-between gap-3;padding:clamp(12px,3vw,16px) clamp(16px,5vw,32px);transform:translateY(100%);transition:transform .22s cubic-bezier(.34,1.56,.64,1)}.share-bar.visible{transform:translateY(0)}.share-bar-info{@apply flex-1 min-w-0}.share-bar-count{@apply font-bold text-red-400;font-size:clamp(.85rem,3vw,.95rem)}.share-bar-sub{@apply text-xs text-zinc-500 mt-0.5}.share-actions{@apply flex gap-2 shrink-0}.btn-reset{@apply text-xs font-semibold border border-zinc-700 text-zinc-400 bg-transparent rounded cursor-pointer whitespace-nowrap;padding:9px 14px;font-family:inherit;-webkit-tap-highlight-color:transparent}.btn-share{@apply text-xs font-semibold bg-green-500 text-white rounded cursor-pointer flex items-center gap-1.5 whitespace-nowrap border-0;padding:9px 18px;font-family:inherit;-webkit-tap-highlight-color:transparent}.btn-share:active{opacity:.8}.toast{@apply fixed z-[200] bg-zinc-900 border border-zinc-700 text-amber-400 text-xs font-semibold rounded whitespace-nowrap;top:20px;left:50%;padding:10px 20px;transform:translateX(-50%) translateY(-80px);transition:transform .28s cubic-bezier(.34,1.56,.64,1)}.toast.show{transform:translateX(-50%) translateY(0)}}
-</style>
-</head>
-<body>
-<header>
-  <h1>Hochzeiten Vida — Playlists</h1>
-  <p>Rekordbox Library · 249 Songs in 11 Playlists</p>
-  <p class="hint">▶ Vorschau per Klick auf den Play-Button</p>
-  <nav class="nav"><a href="#Reggaeton-Venga-Mode">Reggaeton Venga Mode</a><a href="#Reggaeton-Slow">Reggaeton Slow</a><a href="#Reggaeton-High">Reggaeton High</a><a href="#Deutsch-Rap">Deutsch Rap</a><a href="#Old-But-Gold---Slow">Old But Gold - Slow</a><a href="#Mid">Mid</a><a href="#High">High</a><a href="#Low">Low</a><a href="#Tek">Tek</a><a href="#Bass">Bass</a><a href="#Festival-Vibe">Festival Vibe</a></nav>
-</header>
+<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><meta name="robots" content="noindex,nofollow"><title>Hochzeiten Vida — Playlists</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><script src="https://cdn.tailwindcss.com"></script><script>tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','system-ui','sans-serif']}}}}</script>
+<style type="text/tailwindcss">@layer base{*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}body{@apply font-sans bg-zinc-950 text-zinc-100 min-h-screen;padding-bottom:100px;-webkit-text-size-adjust:100%}}@layer components{header{@apply bg-zinc-900 border-b border-zinc-800;padding:clamp(28px,6vw,52px) clamp(16px,5vw,48px) clamp(20px,4vw,36px)}header h1{@apply font-extrabold text-white tracking-tight leading-tight;font-size:clamp(1.4rem,5vw,2.2rem)}header p{@apply mt-1.5 text-zinc-400;font-size:clamp(.75rem,2.5vw,.85rem)}.hint{@apply mt-2 text-zinc-500;font-size:clamp(.72rem,2.2vw,.8rem)}.nav{@apply flex mt-5 overflow-x-auto pb-0.5;flex-wrap:nowrap;gap:6px;scrollbar-width:none}.nav::-webkit-scrollbar{display:none}.nav a{@apply text-zinc-500 no-underline font-medium border border-zinc-800 rounded shrink-0 whitespace-nowrap transition-colors duration-150;font-size:.72rem;padding:5px 13px;-webkit-tap-highlight-color:transparent;touch-action:manipulation}.nav a:hover{@apply text-amber-400;border-color:rgba(251,191,36,.3)}main{@apply max-w-[1440px] mx-auto;padding:clamp(32px,5vw,56px) clamp(12px,4vw,36px) 40px}.playlist-section{@apply mb-12;scroll-margin-top:16px}.playlist-section h2{@apply text-amber-400 font-semibold mb-3.5 pb-3 border-b border-zinc-800 flex items-center flex-wrap gap-2.5;font-size:clamp(.82rem,3vw,.95rem)}.count{@apply text-zinc-600 font-normal text-xs}.cards{@apply border border-zinc-800 rounded-lg overflow-hidden;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr));gap:1px;background-color:#27272a}.card{@apply bg-zinc-900 flex items-center gap-3 cursor-pointer relative transition-colors duration-100;padding:11px 12px;border-radius:0;-webkit-tap-highlight-color:transparent;touch-action:manipulation;user-select:none}@media(hover:hover){.card:hover{@apply bg-zinc-800}.card.selected:hover{background-color:#200a0a}}.card-check{@apply absolute top-2.5 right-2.5 w-5 h-5 rounded border border-zinc-700 flex items-center justify-center shrink-0 transition-all duration-150}.check-icon{@apply leading-none transition-colors duration-150;font-size:.6rem;color:transparent;font-weight:900}.card.selected{background-color:#1c0808}.card.selected .card-check{@apply bg-red-700 border-red-700}.card.selected .check-icon{@apply text-white}.card.selected .card-title{@apply text-red-300}.cover-wrap{@apply relative shrink-0;width:52px;height:52px}.cover{@apply rounded-md object-cover bg-zinc-800;width:52px;height:52px;pointer-events:none}.no-cover{@apply flex items-center justify-center text-xl}.play-btn{@apply absolute rounded-full flex items-center justify-center p-0 cursor-pointer transition-all duration-150;bottom:3px;right:3px;width:22px;height:22px;background:rgba(0,0,0,.85);border:1px solid rgba(255,255,255,.18);-webkit-tap-highlight-color:transparent}.play-btn:active{transform:scale(.86)}.play-btn svg{@apply shrink-0;width:9px;height:9px;fill:#d4d4d4}.play-btn.pb-playing{background:#f59e0b;border-color:rgba(245,158,11,.35)}.play-btn.pb-playing svg{fill:#000}.play-btn.pb-error{background:rgba(185,28,28,.9);border-color:transparent}.play-btn.pb-loading{border-color:transparent}@keyframes pb-spin{to{transform:rotate(360deg)}}.play-btn.pb-loading::before{content:'';position:absolute;inset:-2px;border-radius:50%;border:1.5px solid transparent;border-top-color:#f59e0b;animation:pb-spin .7s linear infinite}.card-info{@apply flex-1 min-w-0;padding-right:26px}.card-title{@apply text-sm font-semibold text-zinc-100 truncate mb-0.5 leading-snug transition-colors duration-150}.card-artist{@apply text-xs text-zinc-400 truncate leading-snug;margin-bottom:6px}.card-meta{@apply flex flex-wrap gap-1}.badge{@apply text-[0.6rem] font-semibold px-1.5 py-0.5 rounded whitespace-nowrap;letter-spacing:.2px}.bpm{@apply bg-amber-950 text-amber-400 ring-1 ring-amber-900/50}.key{@apply bg-emerald-950 text-emerald-400 ring-1 ring-emerald-900/50}.dur{@apply bg-zinc-800 text-zinc-500 ring-1 ring-zinc-700/50}.share-bar{@apply fixed bottom-0 left-0 right-0 z-50 bg-zinc-900 border-t border-zinc-800 flex items-center justify-between gap-3;padding:clamp(12px,3vw,16px) clamp(16px,5vw,32px);transform:translateY(100%);transition:transform .22s cubic-bezier(.34,1.56,.64,1)}.share-bar.visible{transform:translateY(0)}.share-bar-info{@apply flex-1 min-w-0}.share-bar-count{@apply font-bold text-red-400;font-size:clamp(.85rem,3vw,.95rem)}.share-bar-sub{@apply text-xs text-zinc-500 mt-0.5}.share-actions{@apply flex gap-2 shrink-0}.btn-reset{@apply text-xs font-semibold border border-zinc-700 text-zinc-400 bg-transparent rounded cursor-pointer whitespace-nowrap;padding:9px 14px;font-family:inherit;-webkit-tap-highlight-color:transparent}.btn-share{@apply text-xs font-semibold bg-green-500 text-white rounded cursor-pointer flex items-center gap-1.5 whitespace-nowrap border-0;padding:9px 18px;font-family:inherit;-webkit-tap-highlight-color:transparent}.btn-share:active{opacity:.8}.toast{@apply fixed z-[200] bg-zinc-900 border border-zinc-700 text-amber-400 text-xs font-semibold rounded whitespace-nowrap;top:20px;left:50%;padding:10px 20px;transform:translateX(-50%) translateY(-80px);transition:transform .28s cubic-bezier(.34,1.56,.64,1)}.toast.show{transform:translateX(-50%) translateY(0)}}</style></head><body>
+<header><h1>Hochzeiten Vida — Playlists</h1><p>Rekordbox Library · 292 Songs in 12 Playlists</p><p class="hint">▶ Vorschau per Klick auf den Play-Button</p><nav class="nav"><a href="#Reggaeton-Venga-Mode">Reggaeton Venga Mode</a><a href="#Reggaeton-Slow">Reggaeton Slow</a><a href="#Reggaeton-High">Reggaeton High</a><a href="#Deutsch-Rap">Deutsch Rap</a><a href="#Old-But-Gold---Slow">Old But Gold - Slow</a><a href="#Mid">Mid</a><a href="#High">High</a><a href="#Low">Low</a><a href="#Funky">Funky</a><a href="#Tek">Tek</a><a href="#Bass">Bass</a><a href="#Festival-Vibe">Festival Vibe</a></nav></header>
 <main><section class="playlist-section" id="Reggaeton-Venga-Mode">
       <h2>Reggaeton Venga Mode <span class="count">12 Songs</span></h2>
       <div class="cards"><div class="card" onclick="toggleSong(this)" data-title="Gasolina - Spryte vs Tropkillaz PELÉ Edit" data-artist="Daddy Yankee" data-playlist="Reggaeton Venga Mode" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/6c/56/33/6c5633cf-a5f0-d489-f3e2-4fdd9b821ef3/mzaf_417409533127729756.plus.aac.p.m4a">
@@ -1126,6 +1106,353 @@
         <div class="card-meta"><span class="badge bpm">155</span><span class="badge key">11A</span><span class="badge dur">2:34</span></div>
       </div>
     </div></div>
+    </section><section class="playlist-section" id="Funky">
+      <h2>Funky <span class="count">43 Songs</span></h2>
+      <div class="cards"><div class="card" onclick="toggleSong(this)" data-title="La Verdolaga (Extended Mix)" data-artist="Ale Kuma, Simon Fava, Yvvan Back" data-playlist="Funky" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/45/13/c3/4513c3fc-d3d4-405a-a212-c4bb243ec91f/mzaf_2473960270555892593.plus.aac.p.m4a">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/60/59/60/60596085-c5f4-1fb0-f131-04093ee9fc92/3617387689574_cover.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="La Verdolaga (Extended Mix)">La Verdolaga (Extended Mix)</div>
+        <div class="card-artist">Ale Kuma, Simon Fava, Yvvan Back</div>
+        <div class="card-meta"><span class="badge bpm">127</span><span class="badge key">10A</span><span class="badge dur">4:09</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Arranca (Remixes) (Sam Feldt Remix (Main) (Intro Edit))" data-artist="Becky G, Omega" data-playlist="Funky" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/21/4d/e2/214de27a-073c-c628-62a0-d9a282bd7962/mzaf_8615781040614954364.plus.aac.p.m4a">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/6b/b5/9a/6bb59a78-aebf-667f-09dd-45c427aa7cc6/196589849861.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Arranca (Remixes) (Sam Feldt Remix (Main) (Intro Edit))">Arranca (Remixes) (Sam Feldt Remix (Main) (Intro Edit))</div>
+        <div class="card-artist">Becky G, Omega</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">5A</span><span class="badge dur">2:51</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Kisses (Ape Rave Club Bootleg)" data-artist="BL3SS, CamrinWatsin, bbyclose" data-playlist="Funky">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Kisses (Ape Rave Club Bootleg)">Kisses (Ape Rave Club Bootleg)</div>
+        <div class="card-artist">BL3SS, CamrinWatsin, bbyclose</div>
+        <div class="card-meta"><span class="badge bpm">130</span><span class="badge key">7A</span><span class="badge dur">3:54</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Get Lucky (Remix) (Twin Diplomacy Remix)" data-artist="Daft Punk, Pharrell Williams" data-playlist="Funky" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/72/53/10/725310b8-0e82-9d20-8898-0f1fc47b4cd9/mzaf_13147817334462660235.plus.aac.p.m4a">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/86/b1/92/86b192cf-ceb6-6e51-9361-dc4a35e95d22/196589921154.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Get Lucky (Remix) (Twin Diplomacy Remix)">Get Lucky (Remix) (Twin Diplomacy Remix)</div>
+        <div class="card-artist">Daft Punk, Pharrell Williams</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">10A</span><span class="badge dur">5:00</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="No Broke Boys X Just Feels Tight (REVIIBE Mashup) (REVIIBE Mashup)" data-artist="Disco Lines, Tinashe" data-playlist="Funky">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="No Broke Boys X Just Feels Tight (REVIIBE Mashup) (REVIIBE Mashup)">No Broke Boys X Just Feels Tight (REVIIBE Mashup) (REVIIBE Mashup)</div>
+        <div class="card-artist">Disco Lines, Tinashe</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">1A</span><span class="badge dur">3:33</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Contigo Banger (Steveo Cappas Mashup)" data-artist="Dj Snake, J Balvin, Dannic, Deviz Bang, Edshock, Riccardo Falconelli, Leonard" data-playlist="Funky">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Contigo Banger (Steveo Cappas Mashup)">Contigo Banger (Steveo Cappas Mashup)</div>
+        <div class="card-artist">Dj Snake, J Balvin, Dannic, Deviz Bang, Edshock, Riccardo Falconelli, Leonard</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">11A</span><span class="badge dur">2:34</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Still D.R.E. (Howl Remix)" data-artist="Dr. Dre" data-playlist="Funky" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/27/90/e3/2790e3a9-e59f-f29c-2120-c05fdaa962c0/mzaf_4100723799671175546.plus.aac.p.m4a">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/27/6b/4c/276b4c69-99cb-6209-2fd8-3edd17ccfd06/00602517641228.rgb.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Still D.R.E. (Howl Remix)">Still D.R.E. (Howl Remix)</div>
+        <div class="card-artist">Dr. Dre</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">3A</span><span class="badge dur">4:53</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="The Monster (Dirty Pop Deconstruction Mix)" data-artist="Eminem ft. Rihanna" data-playlist="Funky" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/84/a4/80/84a48021-81db-3437-4404-61259b4f9348/mzaf_1985670315792687174.plus.aac.p.m4a">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/f4/ae/5c/f4ae5c21-bfe1-e99e-4732-a2b6cf006848/00602537542727.rgb.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="The Monster (Dirty Pop Deconstruction Mix)">The Monster (Dirty Pop Deconstruction Mix)</div>
+        <div class="card-artist">Eminem ft. Rihanna</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">12A</span><span class="badge dur">5:09</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="The Real Slim Shady (2Checks Remix) (Original Mix)" data-artist="Eminem" data-playlist="Funky" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/c7/72/db/c772dbca-97f5-af21-e9a8-9b794973b17f/mzaf_7645639045496345300.plus.aac.p.m4a">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/74/2c/87/742c8794-2a24-9672-dc81-bc6bd2992589/25UMGIM74636.rgb.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="The Real Slim Shady (2Checks Remix) (Original Mix)">The Real Slim Shady (2Checks Remix) (Original Mix)</div>
+        <div class="card-artist">Eminem</div>
+        <div class="card-meta"><span class="badge bpm">130</span><span class="badge key">4A</span><span class="badge dur">5:10</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Without Me (Joe Stone Remix Clean)" data-artist="Eminem" data-playlist="Funky" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/7d/38/ff/7d38ff16-b52c-063a-a34d-767e836befcc/mzaf_13413071545825673354.plus.aac.p.m4a">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/dd/5c/e6/dd5ce621-f7d2-f767-7a08-e7a7eaa7870b/00602537526994.rgb.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Without Me (Joe Stone Remix Clean)">Without Me (Joe Stone Remix Clean)</div>
+        <div class="card-artist">Eminem</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">6A</span><span class="badge dur">3:59</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Delilah (Pull Me Out Of This) (Avi Sic Remix)" data-artist="Fred Again.., Delilah Montagu" data-playlist="Funky" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/b7/52/49/b75249d5-f30c-15bd-b6b6-2b2592a8273f/mzaf_16220054371150220513.plus.aac.p.m4a">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/b0/9c/b7/b09cb72c-cca9-5d66-bc9d-a9b5e5f86b22/5054197236389.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Delilah (Pull Me Out Of This) (Avi Sic Remix)">Delilah (Pull Me Out Of This) (Avi Sic Remix)</div>
+        <div class="card-artist">Fred Again.., Delilah Montagu</div>
+        <div class="card-meta"><span class="badge bpm">127</span><span class="badge key">6A</span><span class="badge dur">4:03</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Delilah (pull me out of this) (DJ Intro Dirty)" data-artist="Fred Again, Delilah Montagu" data-playlist="Funky" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/b7/52/49/b75249d5-f30c-15bd-b6b6-2b2592a8273f/mzaf_16220054371150220513.plus.aac.p.m4a">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/b0/9c/b7/b09cb72c-cca9-5d66-bc9d-a9b5e5f86b22/5054197236389.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Delilah (pull me out of this) (DJ Intro Dirty)">Delilah (pull me out of this) (DJ Intro Dirty)</div>
+        <div class="card-artist">Fred Again, Delilah Montagu</div>
+        <div class="card-meta"><span class="badge bpm">134</span><span class="badge key">6A</span><span class="badge dur">4:20</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Peace U Need (Original Club Mix)" data-artist="Fred Again.., Joy Anonymous" data-playlist="Funky" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/ab/2c/21/ab2c21ec-1788-8e4a-a55d-afb758da4996/mzaf_18199361927291513823.plus.aac.p.m4a">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/bb/00/6b/bb006b8e-2d17-7f1c-cedc-f76a70b3af1f/5021732456847.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Peace U Need (Original Club Mix)">Peace U Need (Original Club Mix)</div>
+        <div class="card-artist">Fred Again.., Joy Anonymous</div>
+        <div class="card-meta"><span class="badge bpm">120</span><span class="badge key">9A</span><span class="badge dur">5:44</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Adore U (DJ Intro - DJ Outro Clean)" data-artist="Fred Again.., Obongjayar" data-playlist="Funky" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/d2/bb/35/d2bb35e8-cc43-fef6-bbcb-2ccb6e49b786/mzaf_10723061851435265005.plus.aac.p.m4a">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/7f/97/dd/7f97ddab-43e6-6e83-923a-e243d37d722c/5054197770555.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Adore U (DJ Intro - DJ Outro Clean)">Adore U (DJ Intro - DJ Outro Clean)</div>
+        <div class="card-artist">Fred Again.., Obongjayar</div>
+        <div class="card-meta"><span class="badge bpm">124</span><span class="badge key">5A</span><span class="badge dur">4:02</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Wünsch Dir Was (Club Edit)" data-artist="Gestört aber Geil" data-playlist="Funky" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/4c/ee/64/4cee64d3-cfc2-aec3-2d92-282a8cba9177/mzaf_11909425210942588532.plus.aac.p.m4a">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music113/v4/96/f7/81/96f781f3-10c0-68d5-904e-e8196620db7a/19UM1IM03025.rgb.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Wünsch Dir Was (Club Edit)">Wünsch Dir Was (Club Edit)</div>
+        <div class="card-artist">Gestört aber Geil</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">7A</span><span class="badge dur">4:52</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Somebody That I Used To Know (Mashup) (Cream Turn It Up Edit (Intro Clean))" data-artist="Goyte, SMACK, Eleganto" data-playlist="Funky">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Somebody That I Used To Know (Mashup) (Cream Turn It Up Edit (Intro Clean))">Somebody That I Used To Know (Mashup) (Cream Turn It Up Edit (Intro Clean))</div>
+        <div class="card-artist">Goyte, SMACK, Eleganto</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">7A</span><span class="badge dur">3:24</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Hollaback Girl After Midnight (Jean Luc Mashup)" data-artist="Gwen Stefani, Lucas &amp; Steve, Yves V, Xoro" data-playlist="Funky">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Hollaback Girl After Midnight (Jean Luc Mashup)">Hollaback Girl After Midnight (Jean Luc Mashup)</div>
+        <div class="card-artist">Gwen Stefani, Lucas &amp; Steve, Yves V, Xoro</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">4A</span><span class="badge dur">2:44</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Watermelon Sugar x Move Your Body (LE x KNDR Mashup)" data-artist="Harry Styles" data-playlist="Funky">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Watermelon Sugar x Move Your Body (LE x KNDR Mashup)">Watermelon Sugar x Move Your Body (LE x KNDR Mashup)</div>
+        <div class="card-artist">Harry Styles</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">7A</span><span class="badge dur">2:09</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="La Verdolaga (Extended Mix)" data-artist="Hugel, Toto La Momposina" data-playlist="Funky" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/2c/5e/73/2c5e73b3-ea3e-46cf-ac7b-898bf85b427e/mzaf_9450507517377739200.plus.aac.p.m4a">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/35/5d/70/355d7085-bb8c-6497-07d1-c5b7df3b59b7/826194670696.png/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="La Verdolaga (Extended Mix)">La Verdolaga (Extended Mix)</div>
+        <div class="card-artist">Hugel, Toto La Momposina</div>
+        <div class="card-meta"><span class="badge bpm">124</span><span class="badge key">10A</span><span class="badge dur">5:13</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Let&#39;s Go x Everybody (WILLO Mashup)" data-artist="Jaden Bojsen, David Guetta, Backstreet Boys" data-playlist="Funky">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Let&#39;s Go x Everybody (WILLO Mashup)">Let&#39;s Go x Everybody (WILLO Mashup)</div>
+        <div class="card-artist">Jaden Bojsen, David Guetta, Backstreet Boys</div>
+        <div class="card-meta"><span class="badge bpm">130</span><span class="badge key">8A</span><span class="badge dur">3:41</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Fantasy Girl (Tom Pulse Remix) (Tom Pulse Remix)" data-artist="Johnny O." data-playlist="Funky" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/5e/03/13/5e031303-5da7-045b-2b84-1ccc5ad5e39d/mzaf_6341431856304994627.plus.aac.p.m4a">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music/y2005/m07/d27/h22/mzi.tsusisxn.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Fantasy Girl (Tom Pulse Remix) (Tom Pulse Remix)">Fantasy Girl (Tom Pulse Remix) (Tom Pulse Remix)</div>
+        <div class="card-artist">Johnny O.</div>
+        <div class="card-meta"><span class="badge bpm">122</span><span class="badge key">8A</span><span class="badge dur">5:34</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Gold Digger Bel Mercy (Kent Mashup Banger)" data-artist="Kanye West, Jengi" data-playlist="Funky">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Gold Digger Bel Mercy (Kent Mashup Banger)">Gold Digger Bel Mercy (Kent Mashup Banger)</div>
+        <div class="card-artist">Kanye West, Jengi</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">9A</span><span class="badge dur">3:09</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="You Out Of My Head (Original Mix)" data-artist="Kruzh" data-playlist="Funky">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="You Out Of My Head (Original Mix)">You Out Of My Head (Original Mix)</div>
+        <div class="card-artist">Kruzh</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">9A</span><span class="badge dur">4:07</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Ice Cold Dealer (Extended Mix)" data-artist="Loco Dice, Haftbefehl" data-playlist="Funky">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Ice Cold Dealer (Extended Mix)">Ice Cold Dealer (Extended Mix)</div>
+        <div class="card-artist">Loco Dice, Haftbefehl</div>
+        <div class="card-meta"><span class="badge bpm">129</span><span class="badge key">12B</span><span class="badge dur">5:05</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Trippin (Original Mix)" data-artist="Mapei, Bunt" data-playlist="Funky" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/9e/05/ee/9e05ee83-be6b-d9ef-4a8e-4ee98b001fb5/mzaf_1368487875478511753.plus.aac.p.m4a">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/63/fb/00/63fb000d-d9f8-ba0c-a38b-8dc3e21beaa6/196872172379.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Trippin (Original Mix)">Trippin (Original Mix)</div>
+        <div class="card-artist">Mapei, Bunt</div>
+        <div class="card-meta"><span class="badge bpm">175</span><span class="badge key">10B</span><span class="badge dur">3:22</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Are You Ready? (Extended Mix)" data-artist="Medesen" data-playlist="Funky" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/ab/7a/54/ab7a545d-bf85-7835-5c28-a954713646c8/mzaf_16331008889789695173.plus.aac.p.m4a">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/62/33/34/62333451-eaf1-71ec-97c8-8e553f25f8c9/cover.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Are You Ready? (Extended Mix)">Are You Ready? (Extended Mix)</div>
+        <div class="card-artist">Medesen</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">9A</span><span class="badge dur">5:01</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Pretty Fly (Original Mix)" data-artist="Mr. Saccardo" data-playlist="Funky">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Pretty Fly (Original Mix)">Pretty Fly (Original Mix)</div>
+        <div class="card-artist">Mr. Saccardo</div>
+        <div class="card-meta"><span class="badge bpm">124</span><span class="badge key">7A</span><span class="badge dur">4:11</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="How Deep Is Amsterdam (Johnny de City Mashup)" data-artist="Nicky Romero, Mau P, Calvin Harris" data-playlist="Funky" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/3d/76/ed/3d76edab-ccd2-4d9b-6b24-4197fdd568c1/mzaf_5685738290184468769.plus.aac.p.m4a">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/04/5c/85/045c85d9-94cb-a9c7-f39b-aa5b7e803c04/dj.dkdebfmh.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="How Deep Is Amsterdam (Johnny de City Mashup)">How Deep Is Amsterdam (Johnny de City Mashup)</div>
+        <div class="card-artist">Nicky Romero, Mau P, Calvin Harris</div>
+        <div class="card-meta"><span class="badge bpm">125</span><span class="badge key">9A</span><span class="badge dur">4:22</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Push To Start vs. Get Busy (Remix Mashup)" data-artist="Noizu, Westend, Sean Paul, WeDamnz" data-playlist="Funky">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Push To Start vs. Get Busy (Remix Mashup)">Push To Start vs. Get Busy (Remix Mashup)</div>
+        <div class="card-artist">Noizu, Westend, Sean Paul, WeDamnz</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">2A</span><span class="badge dur">5:23</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Pump Up The Jam (Original Mix)" data-artist="Provi" data-playlist="Funky" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/c1/65/ec/c165ec76-2066-e09d-f834-ca41f670150d/mzaf_5269612410470638816.plus.aac.p.m4a">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/fa/e3/0c/fae30c34-0372-9aa9-5b80-79f07b4cb0d3/cover.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Pump Up The Jam (Original Mix)">Pump Up The Jam (Original Mix)</div>
+        <div class="card-artist">Provi</div>
+        <div class="card-meta"><span class="badge bpm">124</span><span class="badge key">5A</span><span class="badge dur">5:21</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Macarena (Extended Mix)" data-artist="Raf Marchesini, Mario Donsi, Tommy Enfasy" data-playlist="Funky">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Macarena (Extended Mix)">Macarena (Extended Mix)</div>
+        <div class="card-artist">Raf Marchesini, Mario Donsi, Tommy Enfasy</div>
+        <div class="card-meta"><span class="badge bpm">124</span><span class="badge key">1A</span><span class="badge dur">4:04</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Innerbloom x Leaving x Without You (WILL Mashup)" data-artist="RUFUS DU SOL, Blinders, The Kid Laroi" data-playlist="Funky">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Innerbloom x Leaving x Without You (WILL Mashup)">Innerbloom x Leaving x Without You (WILL Mashup)</div>
+        <div class="card-artist">RUFUS DU SOL, Blinders, The Kid Laroi</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">8A</span><span class="badge dur">2:41</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="WTF (Original Mix)" data-artist="SCRIPT" data-playlist="Funky">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="WTF (Original Mix)">WTF (Original Mix)</div>
+        <div class="card-artist">SCRIPT</div>
+        <div class="card-meta"><span class="badge bpm">130</span><span class="badge key">4A</span><span class="badge dur">4:56</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Get Busy (Odd Mob Extended Club Mix)" data-artist="Sean Paul, Odd Mob" data-playlist="Funky" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/59/8e/84/598e8431-af34-6f54-61cc-ab6b2e269cd8/mzaf_17690110272751622994.plus.aac.p.m4a">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/d9/69/18/d9691884-3221-8f25-fb26-ec9f73bed021/075679656438.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Get Busy (Odd Mob Extended Club Mix)">Get Busy (Odd Mob Extended Club Mix)</div>
+        <div class="card-artist">Sean Paul, Odd Mob</div>
+        <div class="card-meta"><span class="badge bpm">132</span><span class="badge key">6A</span><span class="badge dur">3:41</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Fire Fire X Innerbloom (Mashup) (Federiggio Coachella Mashup)" data-artist="Shimza, Kasango, AR/Co, RUFUS DU SOL" data-playlist="Funky">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Fire Fire X Innerbloom (Mashup) (Federiggio Coachella Mashup)">Fire Fire X Innerbloom (Mashup) (Federiggio Coachella Mashup)</div>
+        <div class="card-artist">Shimza, Kasango, AR/Co, RUFUS DU SOL</div>
+        <div class="card-meta"><span class="badge bpm">125</span><span class="badge key">6A</span><span class="badge dur">5:22</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Without Bla (Jean Luc Mashup) (Intro Clean)" data-artist="SMACK, Eminem" data-playlist="Funky">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Without Bla (Jean Luc Mashup) (Intro Clean)">Without Bla (Jean Luc Mashup) (Intro Clean)</div>
+        <div class="card-artist">SMACK, Eminem</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">11A</span><span class="badge dur">3:29</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Sweet Nothing (Remix) (SIDEPIECE Treat)" data-artist="Taylor Swift" data-playlist="Funky">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Sweet Nothing (Remix) (SIDEPIECE Treat)">Sweet Nothing (Remix) (SIDEPIECE Treat)</div>
+        <div class="card-artist">Taylor Swift</div>
+        <div class="card-meta"><span class="badge bpm">132</span><span class="badge key">1A</span><span class="badge dur">4:43</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Beat The Drum (Original Mix)" data-artist="Timbee" data-playlist="Funky" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/e6/ea/fe/e6eafe3b-ff5a-04de-7df4-392562277785/mzaf_14323347038315326218.plus.aac.p.m4a">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/c3/fd/97/c3fd9717-8c1c-76e9-2d38-101ed10b99f5/5057272908447_cover.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Beat The Drum (Original Mix)">Beat The Drum (Original Mix)</div>
+        <div class="card-artist">Timbee</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">6A</span><span class="badge dur">4:38</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Disturbing Paradise (Original Mix)" data-artist="Ueberrest" data-playlist="Funky" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/fe/77/db/fe77db9f-dffc-7309-24b0-b14afe1d42cc/mzaf_17239621781684048097.plus.aac.p.m4a">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/8d/79/ba/8d79ba13-2c3e-a95a-ecc8-02f3046fcfa3/820200508621.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Disturbing Paradise (Original Mix)">Disturbing Paradise (Original Mix)</div>
+        <div class="card-artist">Ueberrest</div>
+        <div class="card-meta"><span class="badge bpm">152</span><span class="badge key">8A</span><span class="badge dur">3:50</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Yeah! (The Scene Kings Remix) (The Scene Kings Remix)" data-artist="Usher" data-playlist="Funky" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/94/52/3c/94523c88-f5f9-16f4-dbd7-f284ca168048/mzaf_7184891920196479048.plus.aac.p.m4a">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/02/c6/e1/02c6e1cd-8d57-97b4-6ef1-77d2be004509/mzi.sjrqsmrq.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Yeah! (The Scene Kings Remix) (The Scene Kings Remix)">Yeah! (The Scene Kings Remix) (The Scene Kings Remix)</div>
+        <div class="card-artist">Usher</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">6A</span><span class="badge dur">3:34</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Surrounded x Waka Waka (WILLO Mashup)" data-artist="Vincent, Shakira" data-playlist="Funky">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Surrounded x Waka Waka (WILLO Mashup)">Surrounded x Waka Waka (WILLO Mashup)</div>
+        <div class="card-artist">Vincent, Shakira</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">10A</span><span class="badge dur">3:15</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Want My Love (Extended Mix)" data-artist="WOLTERS, Malugi" data-playlist="Funky" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/14/c3/8f/14c38f47-8630-edb7-3e2b-a2fd98d2318e/mzaf_1417104005668368354.plus.aac.p.m4a">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/30/8d/c5/308dc547-59f7-42c0-0219-4c5484484b21/196872788129.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Want My Love (Extended Mix)">Want My Love (Extended Mix)</div>
+        <div class="card-artist">WOLTERS, Malugi</div>
+        <div class="card-meta"><span class="badge bpm">144</span><span class="badge key">9A</span><span class="badge dur">4:52</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Another Star (Original mix)" data-artist="Zetaphunk" data-playlist="Funky" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/5b/a6/08/5ba608e8-f231-e658-0161-f85cfbe7bc8b/mzaf_3591558231268221286.plus.aac.p.m4a">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/7a/e4/c3/7ae4c344-5dfb-36fb-772c-c9c289e4bb42/8012861047577.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Another Star (Original mix)">Another Star (Original mix)</div>
+        <div class="card-artist">Zetaphunk</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">11A</span><span class="badge dur">5:48</span></div>
+      </div>
+    </div></div>
     </section><section class="playlist-section" id="Tek">
       <h2>Tek <span class="count">31 Songs</span></h2>
       <div class="cards"><div class="card" onclick="toggleSong(this)" data-title="Holy Rosary (ISN Remix)" data-artist="2CROW" data-playlist="Tek">
@@ -2048,30 +2375,7 @@
       </div>
     </div></div>
     </section></main>
-
-<div class="share-bar" id="shareBar">
-  <div class="share-bar-info">
-    <div class="share-bar-count" id="shareCount">0 Songs markiert</div>
-    <div class="share-bar-sub">Diese Songs passen nicht</div>
-  </div>
-  <div class="share-actions">
-    <button class="btn-reset" onclick="resetAll()">Zurücksetzen</button>
-    <button class="btn-share" onclick="shareSelection()">
-      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-      Teilen
-    </button>
-  </div>
-</div>
+<div class="share-bar" id="shareBar"><div class="share-bar-info"><div class="share-bar-count" id="shareCount">0 Songs markiert</div><div class="share-bar-sub">Diese Songs passen nicht</div></div><div class="share-actions"><button class="btn-reset" onclick="resetAll()">Zurücksetzen</button><button class="btn-share" onclick="shareSelection()"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg> Teilen</button></div></div>
 <div class="toast" id="toast"></div>
-
-<script>
-let currentAudio=null,currentBtn=null;
-function playPreview(e,btn){e.stopPropagation();const url=btn.closest('.card').dataset.preview;if(!url)return;if(currentAudio&&!currentAudio.paused){currentAudio.pause();if(currentBtn)currentBtn.classList.remove('pb-playing','pb-loading','pb-error');if(currentBtn===btn){currentAudio=null;currentBtn=null;return}}btn.classList.remove('pb-playing','pb-error');btn.classList.add('pb-loading');const audio=new Audio(url);currentAudio=audio;currentBtn=btn;audio.addEventListener('canplay',()=>{if(currentAudio!==audio)return;btn.classList.remove('pb-loading');btn.classList.add('pb-playing');audio.play()});audio.addEventListener('ended',()=>{btn.classList.remove('pb-playing','pb-loading');currentAudio=null;currentBtn=null});audio.addEventListener('error',()=>{btn.classList.remove('pb-loading','pb-playing');btn.classList.add('pb-error');setTimeout(()=>btn.classList.remove('pb-error'),2000);currentAudio=null;currentBtn=null});audio.load()}
-function toggleSong(card){card.classList.toggle('selected');updateShareBar()}
-function updateShareBar(){const sel=document.querySelectorAll('.card.selected');document.getElementById('shareCount').textContent=sel.length+' Song'+(sel.length!==1?'s':'')+' markiert';document.getElementById('shareBar').classList.toggle('visible',sel.length>0)}
-function resetAll(){document.querySelectorAll('.card.selected').forEach(c=>c.classList.remove('selected'));updateShareBar()}
-function shareSelection(){const selected=[...document.querySelectorAll('.card.selected')];if(!selected.length)return;const byPlaylist={};selected.forEach(card=>{const pl=card.dataset.playlist;if(!byPlaylist[pl])byPlaylist[pl]=[];byPlaylist[pl].push(card.dataset.title+' — '+card.dataset.artist)});let text='Diese Songs passen nicht zur Hochzeit Vida:\n\n';for(const[pl,songs]of Object.entries(byPlaylist)){text+=pl+':\n';songs.forEach(s=>text+='  ✕ '+s+'\n');text+='\n'}if(navigator.share){navigator.share({title:'Hochzeiten Vida — Nicht-Wunschliste',text}).catch(()=>{})}else{navigator.clipboard.writeText(text).then(()=>showToast('In Zwischenablage kopiert!')).catch(()=>{const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);showToast('In Zwischenablage kopiert!')})}}
-function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500)}
-</script>
-</body>
-</html>
+<script>let currentAudio=null,currentBtn=null;function playPreview(e,btn){e.stopPropagation();const url=btn.closest('.card').dataset.preview;if(!url)return;if(currentAudio&&!currentAudio.paused){currentAudio.pause();if(currentBtn)currentBtn.classList.remove('pb-playing','pb-loading','pb-error');if(currentBtn===btn){currentAudio=null;currentBtn=null;return}}btn.classList.remove('pb-playing','pb-error');btn.classList.add('pb-loading');const audio=new Audio(url);currentAudio=audio;currentBtn=btn;audio.addEventListener('canplay',()=>{if(currentAudio!==audio)return;btn.classList.remove('pb-loading');btn.classList.add('pb-playing');audio.play()});audio.addEventListener('ended',()=>{btn.classList.remove('pb-playing','pb-loading');currentAudio=null;currentBtn=null});audio.addEventListener('error',()=>{btn.classList.remove('pb-loading','pb-playing');btn.classList.add('pb-error');setTimeout(()=>btn.classList.remove('pb-error'),2000);currentAudio=null;currentBtn=null});audio.load()}function toggleSong(card){card.classList.toggle('selected');updateShareBar()}function updateShareBar(){const sel=document.querySelectorAll('.card.selected');document.getElementById('shareCount').textContent=sel.length+' Song'+(sel.length!==1?'s':'')+' markiert';document.getElementById('shareBar').classList.toggle('visible',sel.length>0)}function resetAll(){document.querySelectorAll('.card.selected').forEach(c=>c.classList.remove('selected'));updateShareBar()}function shareSelection(){const selected=[...document.querySelectorAll('.card.selected')];if(!selected.length)return;const byPlaylist={};selected.forEach(card=>{const pl=card.dataset.playlist;if(!byPlaylist[pl])byPlaylist[pl]=[];byPlaylist[pl].push(card.dataset.title+' — '+card.dataset.artist)});let text='Diese Songs passen nicht zur Hochzeit Vida:\n\n';for(const[pl,songs]of Object.entries(byPlaylist)){text+=pl+':\n';songs.forEach(s=>text+='  ✕ '+s+'\n');text+='\n'}if(navigator.share){navigator.share({title:'Hochzeiten Vida — Nicht-Wunschliste',text}).catch(()=>{})}else{navigator.clipboard.writeText(text).then(()=>showToast('In Zwischenablage kopiert!')).catch(()=>{const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);showToast('In Zwischenablage kopiert!')})}}function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500)}</script>
+</body></html>
