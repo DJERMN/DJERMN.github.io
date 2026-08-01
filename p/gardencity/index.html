@@ -8,82 +8,38 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
-<script>
-  tailwind.config = {
-    theme: { extend: { fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] } } }
-  }
-</script>
+<script>tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','system-ui','sans-serif']}}}}</script>
 <style type="text/tailwindcss">
-  @layer base {
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { @apply font-sans bg-zinc-950 text-zinc-100 min-h-screen; padding-bottom: 100px; -webkit-text-size-adjust: 100%; }
-  }
-  @layer components {
-    header { @apply bg-zinc-900 border-b border-zinc-800; padding: clamp(28px,6vw,52px) clamp(16px,5vw,48px) clamp(20px,4vw,36px); }
-    header h1 { @apply font-extrabold text-white tracking-tight leading-tight; font-size: clamp(1.4rem,5vw,2.2rem); }
-    header p { @apply mt-1.5 text-zinc-400; font-size: clamp(0.75rem,2.5vw,0.85rem); }
-    .hint { @apply mt-2 text-zinc-500; font-size: clamp(0.72rem,2.2vw,0.8rem); }
-    .nav { @apply flex mt-5 overflow-x-auto pb-0.5; flex-wrap: nowrap; gap: 6px; scrollbar-width: none; }
-    .nav::-webkit-scrollbar { display: none; }
-    .nav a { @apply text-zinc-500 no-underline font-medium border border-zinc-800 rounded shrink-0 whitespace-nowrap transition-colors duration-150; font-size: 0.72rem; padding: 5px 13px; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
-    .nav a:hover { @apply text-amber-400; border-color: rgba(251,191,36,0.3); }
-    main { @apply max-w-[1440px] mx-auto; padding: clamp(32px,5vw,56px) clamp(12px,4vw,36px) 40px; }
-    .playlist-section { @apply mb-12; scroll-margin-top: 16px; }
-    .playlist-section h2 { @apply text-amber-400 font-semibold mb-3.5 pb-3 border-b border-zinc-800 flex items-center flex-wrap gap-2.5; font-size: clamp(0.82rem,3vw,0.95rem); }
-    .count { @apply text-zinc-600 font-normal text-xs; }
-    .cards { @apply border border-zinc-800 rounded-lg overflow-hidden; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 290px), 1fr)); gap: 1px; background-color: #27272a; }
-    .card { @apply bg-zinc-900 flex items-center gap-3 cursor-pointer relative transition-colors duration-100; padding: 11px 12px; border-radius: 0; -webkit-tap-highlight-color: transparent; touch-action: manipulation; user-select: none; }
-    @media (hover: hover) { .card:hover { @apply bg-zinc-800; } .card.selected:hover { background-color: #200a0a; } }
-    .card-check { @apply absolute top-2.5 right-2.5 w-5 h-5 rounded border border-zinc-700 flex items-center justify-center shrink-0 transition-all duration-150; }
-    .check-icon { @apply leading-none transition-colors duration-150; font-size: 0.6rem; color: transparent; font-weight: 900; }
-    .card.selected { background-color: #1c0808; }
-    .card.selected .card-check { @apply bg-red-700 border-red-700; }
-    .card.selected .check-icon { @apply text-white; }
-    .card.selected .card-title { @apply text-red-300; }
-    .cover-wrap { @apply relative shrink-0; width: 52px; height: 52px; }
-    .cover { @apply rounded-md object-cover bg-zinc-800; width: 52px; height: 52px; pointer-events: none; }
-    .no-cover { @apply flex items-center justify-center text-xl; }
-    .play-btn { @apply absolute rounded-full flex items-center justify-center p-0 cursor-pointer transition-all duration-150; bottom: 3px; right: 3px; width: 22px; height: 22px; background: rgba(0,0,0,0.85); border: 1px solid rgba(255,255,255,0.18); -webkit-tap-highlight-color: transparent; }
-    .play-btn:active { transform: scale(0.86); }
-    .play-btn svg { @apply shrink-0; width: 9px; height: 9px; fill: #d4d4d4; }
-    .play-btn.pb-playing { background: #f59e0b; border-color: rgba(245,158,11,0.35); }
-    .play-btn.pb-playing svg { fill: #000; }
-    .play-btn.pb-error { background: rgba(185,28,28,0.9); border-color: transparent; }
-    .play-btn.pb-loading { border-color: transparent; }
-    @keyframes pb-spin { to { transform: rotate(360deg); } }
-    .play-btn.pb-loading::before { content: ''; position: absolute; inset: -2px; border-radius: 50%; border: 1.5px solid transparent; border-top-color: #f59e0b; animation: pb-spin 0.7s linear infinite; }
-    .card-info { @apply flex-1 min-w-0; padding-right: 26px; }
-    .card-title { @apply text-sm font-semibold text-zinc-100 truncate mb-0.5 leading-snug transition-colors duration-150; }
-    .card-artist { @apply text-xs text-zinc-400 truncate leading-snug; margin-bottom: 6px; }
-    .card-meta { @apply flex flex-wrap gap-1; }
-    .badge { @apply text-[0.6rem] font-semibold px-1.5 py-0.5 rounded whitespace-nowrap; letter-spacing: 0.2px; }
-    .bpm { @apply bg-amber-950 text-amber-400 ring-1 ring-amber-900/50; }
-    .key { @apply bg-emerald-950 text-emerald-400 ring-1 ring-emerald-900/50; }
-    .dur { @apply bg-zinc-800 text-zinc-500 ring-1 ring-zinc-700/50; }
-    .share-bar { @apply fixed bottom-0 left-0 right-0 z-50 bg-zinc-900 border-t border-zinc-800 flex items-center justify-between gap-3; padding: clamp(12px,3vw,16px) clamp(16px,5vw,32px); transform: translateY(100%); transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1); }
-    .share-bar.visible { transform: translateY(0); }
-    .share-bar-info { @apply flex-1 min-w-0; }
-    .share-bar-count { @apply font-bold text-red-400; font-size: clamp(0.85rem,3vw,0.95rem); }
-    .share-bar-sub { @apply text-xs text-zinc-500 mt-0.5; }
-    .share-actions { @apply flex gap-2 shrink-0; }
-    .btn-reset { @apply text-xs font-semibold border border-zinc-700 text-zinc-400 bg-transparent rounded cursor-pointer whitespace-nowrap; padding: 9px 14px; font-family: inherit; -webkit-tap-highlight-color: transparent; }
-    .btn-share { @apply text-xs font-semibold bg-green-500 text-white rounded cursor-pointer flex items-center gap-1.5 whitespace-nowrap border-0; padding: 9px 18px; font-family: inherit; -webkit-tap-highlight-color: transparent; }
-    .btn-share:active { opacity: 0.8; }
-    .toast { @apply fixed z-[200] bg-zinc-900 border border-zinc-700 text-amber-400 text-xs font-semibold rounded whitespace-nowrap; top: 20px; left: 50%; padding: 10px 20px; transform: translateX(-50%) translateY(-80px); transition: transform 0.28s cubic-bezier(0.34,1.56,0.64,1); }
-    .toast.show { transform: translateX(-50%) translateY(0); }
-  }
+@layer base{*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}body{@apply font-sans bg-zinc-950 text-zinc-100 min-h-screen;padding-bottom:100px;-webkit-text-size-adjust:100%}}
+@layer components{header{@apply bg-zinc-900 border-b border-zinc-800;padding:clamp(28px,6vw,52px) clamp(16px,5vw,48px) clamp(20px,4vw,36px)}header h1{@apply font-extrabold text-white tracking-tight leading-tight;font-size:clamp(1.4rem,5vw,2.2rem)}header p{@apply mt-1.5 text-zinc-400;font-size:clamp(.75rem,2.5vw,.85rem)}.hint{@apply mt-2 text-zinc-500;font-size:clamp(.72rem,2.2vw,.8rem)}.nav{@apply flex mt-5 overflow-x-auto pb-0.5;flex-wrap:nowrap;gap:6px;scrollbar-width:none}.nav::-webkit-scrollbar{display:none}.nav a{@apply text-zinc-500 no-underline font-medium border border-zinc-800 rounded shrink-0 whitespace-nowrap transition-colors duration-150;font-size:.72rem;padding:5px 13px;-webkit-tap-highlight-color:transparent;touch-action:manipulation}.nav a:hover{@apply text-amber-400;border-color:rgba(251,191,36,.3)}main{@apply max-w-[1440px] mx-auto;padding:clamp(32px,5vw,56px) clamp(12px,4vw,36px) 40px}.playlist-section{@apply mb-12;scroll-margin-top:16px}.playlist-section h2{@apply text-amber-400 font-semibold mb-3.5 pb-3 border-b border-zinc-800 flex items-center flex-wrap gap-2.5;font-size:clamp(.82rem,3vw,.95rem)}.count{@apply text-zinc-600 font-normal text-xs}.cards{@apply border border-zinc-800 rounded-lg overflow-hidden;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr));gap:1px;background-color:#27272a}.card{@apply bg-zinc-900 flex items-center gap-3 cursor-pointer relative transition-colors duration-100;padding:11px 12px;border-radius:0;-webkit-tap-highlight-color:transparent;touch-action:manipulation;user-select:none}@media(hover:hover){.card:hover{@apply bg-zinc-800}.card.selected:hover{background-color:#200a0a}}.card-check{@apply absolute top-2.5 right-2.5 w-5 h-5 rounded border border-zinc-700 flex items-center justify-center shrink-0 transition-all duration-150}.check-icon{@apply leading-none transition-colors duration-150;font-size:.6rem;color:transparent;font-weight:900}.card.selected{background-color:#1c0808}.card.selected .card-check{@apply bg-red-700 border-red-700}.card.selected .check-icon{@apply text-white}.card.selected .card-title{@apply text-red-300}.cover-wrap{@apply relative shrink-0;width:52px;height:52px}.cover{@apply rounded-md object-cover bg-zinc-800;width:52px;height:52px;pointer-events:none}.no-cover{@apply flex items-center justify-center text-xl}.play-btn{@apply absolute rounded-full flex items-center justify-center p-0 cursor-pointer transition-all duration-150;bottom:3px;right:3px;width:22px;height:22px;background:rgba(0,0,0,.85);border:1px solid rgba(255,255,255,.18);-webkit-tap-highlight-color:transparent}.play-btn:active{transform:scale(.86)}.play-btn svg{@apply shrink-0;width:9px;height:9px;fill:#d4d4d4}.play-btn.pb-playing{background:#f59e0b;border-color:rgba(245,158,11,.35)}.play-btn.pb-playing svg{fill:#000}.play-btn.pb-error{background:rgba(185,28,28,.9);border-color:transparent}.play-btn.pb-loading{border-color:transparent}@keyframes pb-spin{to{transform:rotate(360deg)}}.play-btn.pb-loading::before{content:'';position:absolute;inset:-2px;border-radius:50%;border:1.5px solid transparent;border-top-color:#f59e0b;animation:pb-spin .7s linear infinite}.card-info{@apply flex-1 min-w-0;padding-right:26px}.card-title{@apply text-sm font-semibold text-zinc-100 truncate mb-0.5 leading-snug transition-colors duration-150}.card-artist{@apply text-xs text-zinc-400 truncate leading-snug;margin-bottom:6px}.card-meta{@apply flex flex-wrap gap-1}.badge{@apply text-[0.6rem] font-semibold px-1.5 py-0.5 rounded whitespace-nowrap;letter-spacing:.2px}.bpm{@apply bg-amber-950 text-amber-400 ring-1 ring-amber-900/50}.key{@apply bg-emerald-950 text-emerald-400 ring-1 ring-emerald-900/50}.dur{@apply bg-zinc-800 text-zinc-500 ring-1 ring-zinc-700/50}.share-bar{@apply fixed bottom-0 left-0 right-0 z-50 bg-zinc-900 border-t border-zinc-800 flex items-center justify-between gap-3;padding:clamp(12px,3vw,16px) clamp(16px,5vw,32px);transform:translateY(100%);transition:transform .22s cubic-bezier(.34,1.56,.64,1)}.share-bar.visible{transform:translateY(0)}.share-bar-info{@apply flex-1 min-w-0}.share-bar-count{@apply font-bold text-red-400;font-size:clamp(.85rem,3vw,.95rem)}.share-bar-sub{@apply text-xs text-zinc-500 mt-0.5}.share-actions{@apply flex gap-2 shrink-0}.btn-reset{@apply text-xs font-semibold border border-zinc-700 text-zinc-400 bg-transparent rounded cursor-pointer whitespace-nowrap;padding:9px 14px;font-family:inherit;-webkit-tap-highlight-color:transparent}.btn-share{@apply text-xs font-semibold bg-green-500 text-white rounded cursor-pointer flex items-center gap-1.5 whitespace-nowrap border-0;padding:9px 18px;font-family:inherit;-webkit-tap-highlight-color:transparent}.btn-share:active{opacity:.8}.toast{@apply fixed z-[200] bg-zinc-900 border border-zinc-700 text-amber-400 text-xs font-semibold rounded whitespace-nowrap;top:20px;left:50%;padding:10px 20px;transform:translateX(-50%) translateY(-80px);transition:transform .28s cubic-bezier(.34,1.56,.64,1)}.toast.show{transform:translateX(-50%) translateY(0)}}
 </style>
 </head>
 <body>
 <header>
   <h1>Hochzeiten GardenCity — Playlists</h1>
-  <p>Rekordbox Library · 62 Songs in 4 Playlists</p>
+  <p>Rekordbox Library · 77 Songs in 4 Playlists</p>
   <p class="hint">▶ Vorschau per Klick auf den Play-Button</p>
   <nav class="nav"><a href="#Alman---Phase-1">Alman - Phase #1</a><a href="#Banger---Phase-1">Banger - Phase #1</a><a href="#Alman---TekSchlag-2">Alman - TekSchlag #2</a><a href="#MJ-x-Groove">MJ x Groove</a></nav>
 </header>
 <main><section class="playlist-section" id="Alman---Phase-1">
-      <h2>Alman - Phase #1 <span class="count">16 Songs</span></h2>
-      <div class="cards"><div class="card" onclick="toggleSong(this)" data-title="Mangos mit Chili" data-artist="Nina Chuba" data-playlist="Alman - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/6e/b9/c4/6eb9c483-09b9-27d5-19a6-14f7fc9731a3/mzaf_475130360355311048.plus.aac.p.m4a">
+      <h2>Alman - Phase #1 <span class="count">26 Songs</span></h2>
+      <div class="cards"><div class="card" onclick="toggleSong(this)" data-title="Nur ein Wort" data-artist="Wir Sind Helden" data-playlist="Alman - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/be/16/18/be16185a-8729-64fb-97a0-5e5eb03c7ca5/mzaf_8894170273939000752.plus.aac.p.m4a">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/25/67/89/256789d3-53d2-dace-6fe9-6d2f9e421a9a/13UABIM51051.rgb.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Nur ein Wort">Nur ein Wort</div>
+        <div class="card-artist">Wir Sind Helden</div>
+        <div class="card-meta"><span class="badge bpm">92.3</span><span class="badge key">1B</span><span class="badge dur">3:55</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Sommerregen" data-artist="Joris" data-playlist="Alman - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/c3/85/e1/c385e1ec-1c4a-bcd3-e897-33a306f3a013/mzaf_5004608132903976757.plus.aac.p.m4a">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/c3/0d/7d/c30d7d24-9e0d-5a81-b66f-2225da6cad00/mzm.jjewfsuy.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Sommerregen">Sommerregen</div>
+        <div class="card-artist">Joris</div>
+        <div class="card-meta"><span class="badge bpm">137</span><span class="badge key">2B</span><span class="badge dur">3:26</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Mangos mit Chili" data-artist="Nina Chuba" data-playlist="Alman - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/6e/b9/c4/6eb9c483-09b9-27d5-19a6-14f7fc9731a3/mzaf_475130360355311048.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
       <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/ec/25/d7/ec25d7f7-3751-6c45-f975-1e78a59a98c3/196589628183.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
       <div class="card-info">
@@ -99,6 +55,14 @@
         <div class="card-artist">Apache 207</div>
         <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">3A</span><span class="badge dur">2:37</span></div>
       </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Einfach Sein" data-artist="Die Fantastischen Vier" data-playlist="Alman - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/dc/a5/13/dca51358-5272-2147-b84b-5a64c0695cd2/mzaf_18071399735749531715.plus.aac.p.m4a">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music/03/0d/ea/mzi.rkudpusq.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Einfach Sein">Einfach Sein</div>
+        <div class="card-artist">Die Fantastischen Vier</div>
+        <div class="card-meta"><span class="badge bpm">147.1</span><span class="badge key">4A</span><span class="badge dur">3:36</span></div>
+      </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Neunzig" data-artist="Apache 207" data-playlist="Alman - Phase #1">
       <div class="card-check"><span class="check-icon">✕</span></div>
       <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
@@ -106,6 +70,14 @@
         <div class="card-title" title="Neunzig">Neunzig</div>
         <div class="card-artist">Apache 207</div>
         <div class="card-meta"><span class="badge bpm">129</span><span class="badge key">4A</span><span class="badge dur">2:25</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Wohin willst du" data-artist="Gestört Aber GeiL LEA" data-playlist="Alman - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/b8/fc/08/b8fc0873-a9ab-fc3b-854f-0b6f5b3bd499/mzaf_15883926080588393690.plus.aac.p.m4a">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/83/32/a9/8332a9ab-39ac-ee31-bd4e-0d4bae956930/cover.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Wohin willst du">Wohin willst du</div>
+        <div class="card-artist">Gestört Aber GeiL LEA</div>
+        <div class="card-meta"><span class="badge bpm">122</span><span class="badge key">5A</span><span class="badge dur">3:30</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Breaking your heart" data-artist="Apache 207" data-playlist="Alman - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/06/a8/c2/06a8c241-4a84-a9ab-47dd-28c537b385be/mzaf_15344699037962019122.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -131,6 +103,14 @@
         <div class="card-artist">K.I.Z</div>
         <div class="card-meta"><span class="badge bpm">92</span><span class="badge key">7A</span><span class="badge dur">3:15</span></div>
       </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Ding (Single Version)" data-artist="Seeed" data-playlist="Alman - Phase #1" data-preview="https://video-ssl.itunes.apple.com/itunes-assets/Video221/v4/70/85/99/7085995d-a500-17cb-100d-bca5d29f44d5/mzvf_9895330175016887834.720w.h264lc.U.p.m4v">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Video221/v4/17/f4/c6/17f4c62b-6019-49ab-8e49-81f697160b97/5051011280269.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Ding (Single Version)">Ding (Single Version)</div>
+        <div class="card-artist">Seeed</div>
+        <div class="card-meta"><span class="badge bpm">117</span><span class="badge key">7A</span><span class="badge dur">3:27</span></div>
+      </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="BIER" data-artist="Drunken Masters Maxim K.I.Z K.I.Z" data-playlist="Alman - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/d4/37/fd/d437fdae-764d-d13b-ff0d-069fe7245325/mzaf_6602652818472115989.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
       <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/0a/79/0b/0a790bcb-5d4e-730b-70d5-f610d6bb528b/20UMGIM84348.rgb.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
@@ -138,6 +118,14 @@
         <div class="card-title" title="BIER">BIER</div>
         <div class="card-artist">Drunken Masters Maxim K.I.Z K.I.Z</div>
         <div class="card-meta"><span class="badge bpm">140</span><span class="badge key">7A</span><span class="badge dur">2:09</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Schrei nach Liebe" data-artist="Die Ärzte" data-playlist="Alman - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/f4/a6/0b/f4a60bfc-bf5b-c3df-ea42-25959eb8f638/mzaf_7844264264115953563.plus.aac.p.m4a">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/db/50/23/db50239e-dfdf-c886-d43b-c1d5f660a947/0731452101723_3000.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Schrei nach Liebe">Schrei nach Liebe</div>
+        <div class="card-artist">Die Ärzte</div>
+        <div class="card-meta"><span class="badge bpm">168</span><span class="badge key">7A</span><span class="badge dur">4:12</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Ich glaub ich will heut nicht mehr gehen" data-artist="Nina Chuba Provinz" data-playlist="Alman - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/55/e8/df/55e8df7a-90c4-8304-2534-167dc211f6a4/mzaf_271640859164885357.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -147,29 +135,13 @@
         <div class="card-artist">Nina Chuba Provinz</div>
         <div class="card-meta"><span class="badge bpm">122</span><span class="badge key">8A</span><span class="badge dur">2:55</span></div>
       </div>
-    </div><div class="card" onclick="toggleSong(this)" data-title="Easy" data-artist="CRO" data-playlist="Alman - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/fc/24/81/fc2481c3-102c-89e7-769c-002b7521a97e/mzaf_15052243314814946591.plus.aac.p.m4a">
+    </div><div class="card" onclick="toggleSong(this)" data-title="Oh Jonny" data-artist="Jan Delay" data-playlist="Alman - Phase #1">
       <div class="card-check"><span class="check-icon">✕</span></div>
-      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/76/8d/c2/768dc2b1-120a-87b8-a803-c1dc06e35055/4018939224325.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Video113/v4/52/18/d4/5218d4cd-f3ce-94ff-6743-8cc359a5e452/dj.ailhebvj.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"></div>
       <div class="card-info">
-        <div class="card-title" title="Easy">Easy</div>
-        <div class="card-artist">CRO</div>
-        <div class="card-meta"><span class="badge bpm">95.5</span><span class="badge key">9A</span><span class="badge dur">2:53</span></div>
-      </div>
-    </div><div class="card" onclick="toggleSong(this)" data-title="Einmal um die Welt" data-artist="CRO" data-playlist="Alman - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/12/c6/70/12c6701a-294e-50d1-a490-d2a3bd91ffa9/mzaf_15225202634199766013.plus.aac.p.m4a">
-      <div class="card-check"><span class="check-icon">✕</span></div>
-      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/c0/ef/30/c0ef306e-8bf7-7072-dc33-4bb8a63ceddf/4018939228545.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
-      <div class="card-info">
-        <div class="card-title" title="Einmal um die Welt">Einmal um die Welt</div>
-        <div class="card-artist">CRO</div>
-        <div class="card-meta"><span class="badge bpm">160</span><span class="badge key">10A</span><span class="badge dur">2:21</span></div>
-      </div>
-    </div><div class="card" onclick="toggleSong(this)" data-title="Bauch Beine Po" data-artist="Shirin David" data-playlist="Alman - Phase #1">
-      <div class="card-check"><span class="check-icon">✕</span></div>
-      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
-      <div class="card-info">
-        <div class="card-title" title="Bauch Beine Po">Bauch Beine Po</div>
-        <div class="card-artist">Shirin David</div>
-        <div class="card-meta"><span class="badge bpm">124</span><span class="badge key">9A</span><span class="badge dur">2:13</span></div>
+        <div class="card-title" title="Oh Jonny">Oh Jonny</div>
+        <div class="card-artist">Jan Delay</div>
+        <div class="card-meta"><span class="badge bpm">91</span><span class="badge key">8A</span><span class="badge dur">3:39</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Ein Affe und ein Pferd" data-artist="K.I.Z" data-playlist="Alman - Phase #1">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -179,6 +151,38 @@
         <div class="card-artist">K.I.Z</div>
         <div class="card-meta"><span class="badge bpm">138</span><span class="badge key">8A</span><span class="badge dur">3:45</span></div>
       </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Irgendwie, irgendwo, irgendwann (Special 12&quot; Dance Mix)" data-artist="Nena" data-playlist="Alman - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview118/v4/97/89/d7/9789d797-d6a4-8cb8-0076-6391db1fb315/mzaf_5245214130501300114.plus.aac.p.m4a">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/74/34/9f/74349f2e-bb58-77cd-74bc-7cbfe50303f8/0859381160984.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Irgendwie, irgendwo, irgendwann (Special 12&quot; Dance Mix)">Irgendwie, irgendwo, irgendwann (Special 12&quot; Dance Mix)</div>
+        <div class="card-artist">Nena</div>
+        <div class="card-meta"><span class="badge bpm">101.2</span><span class="badge key">9A</span><span class="badge dur">7:15</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Easy" data-artist="CRO" data-playlist="Alman - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/fc/24/81/fc2481c3-102c-89e7-769c-002b7521a97e/mzaf_15052243314814946591.plus.aac.p.m4a">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/76/8d/c2/768dc2b1-120a-87b8-a803-c1dc06e35055/4018939224325.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Easy">Easy</div>
+        <div class="card-artist">CRO</div>
+        <div class="card-meta"><span class="badge bpm">95.5</span><span class="badge key">9A</span><span class="badge dur">2:53</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Bauch Beine Po" data-artist="Shirin David" data-playlist="Alman - Phase #1">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Bauch Beine Po">Bauch Beine Po</div>
+        <div class="card-artist">Shirin David</div>
+        <div class="card-meta"><span class="badge bpm">124</span><span class="badge key">9A</span><span class="badge dur">2:13</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Ein Kompliment" data-artist="Sportfreunde Stiller" data-playlist="Alman - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/57/9a/9e/579a9eca-a9a3-a403-7fbd-7f25b7c70910/mzaf_10306102830693564888.plus.aac.p.m4a">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/92/c1/9e/92c19ed3-0bbe-de26-7f83-e8d953441530/22UMGIM43785.rgb.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Ein Kompliment">Ein Kompliment</div>
+        <div class="card-artist">Sportfreunde Stiller</div>
+        <div class="card-meta"><span class="badge bpm">159</span><span class="badge key">9A</span><span class="badge dur">3:17</span></div>
+      </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Was du Liebe nennst" data-artist="Bausa" data-playlist="Alman - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/10/43/ab/1043ab56-caae-9c6d-32ac-6112ba45ad76/mzaf_7030068956618894615.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
       <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/78/b3/dd/78b3dd18-1363-33db-0a8c-809c9bee513c/190295732172.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
@@ -186,6 +190,30 @@
         <div class="card-title" title="Was du Liebe nennst">Was du Liebe nennst</div>
         <div class="card-artist">Bausa</div>
         <div class="card-meta"><span class="badge bpm">145</span><span class="badge key">10B</span><span class="badge dur">3:23</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Einmal um die Welt" data-artist="CRO" data-playlist="Alman - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/12/c6/70/12c6701a-294e-50d1-a490-d2a3bd91ffa9/mzaf_15225202634199766013.plus.aac.p.m4a">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/c0/ef/30/c0ef306e-8bf7-7072-dc33-4bb8a63ceddf/4018939228545.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Einmal um die Welt">Einmal um die Welt</div>
+        <div class="card-artist">CRO</div>
+        <div class="card-meta"><span class="badge bpm">160</span><span class="badge key">10A</span><span class="badge dur">2:21</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Bella Napoli" data-artist="Roy Bianco &amp; Die Abbrunzati Boys" data-playlist="Alman - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/3c/a0/8e/3ca08e89-9c9c-03ad-d0fe-d9dee768556b/mzaf_8381272217601833669.plus.aac.p.m4a">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/66/fd/0e/66fd0eef-7d0c-8bff-b079-e5319d41757e/21UM1IM27773.rgb.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Bella Napoli">Bella Napoli</div>
+        <div class="card-artist">Roy Bianco &amp; Die Abbrunzati Boys</div>
+        <div class="card-meta"><span class="badge bpm">135</span><span class="badge key">10B</span><span class="badge dur">3:55</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Chöre" data-artist="Mark Forster" data-playlist="Alman - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/65/b6/cb/65b6cb7e-5c94-b75b-f66f-951f764266ad/mzaf_12731977082350312115.plus.aac.p.m4a">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music69/v4/c5/8b/55/c58b5520-4752-5cb5-3686-f43f094cd3e2/886445832143.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Chöre">Chöre</div>
+        <div class="card-artist">Mark Forster</div>
+        <div class="card-meta"><span class="badge bpm">130</span><span class="badge key">11A</span><span class="badge dur">3:27</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Madonna" data-artist="Bausa Apache 207" data-playlist="Alman - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/55/ca/2c/55ca2c54-0156-2101-35fb-4499e2579a96/mzaf_7085618974054916183.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -203,17 +231,9 @@
         <div class="card-artist">Nina Chuba</div>
         <div class="card-meta"><span class="badge bpm">140</span><span class="badge key">11A</span><span class="badge dur">2:11</span></div>
       </div>
-    </div><div class="card" onclick="toggleSong(this)" data-title="Bella Napoli" data-artist="Roy Bianco &amp; Die Abbrunzati Boys" data-playlist="Alman - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/3c/a0/8e/3ca08e89-9c9c-03ad-d0fe-d9dee768556b/mzaf_8381272217601833669.plus.aac.p.m4a">
-      <div class="card-check"><span class="check-icon">✕</span></div>
-      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/66/fd/0e/66fd0eef-7d0c-8bff-b079-e5319d41757e/21UM1IM27773.rgb.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
-      <div class="card-info">
-        <div class="card-title" title="Bella Napoli">Bella Napoli</div>
-        <div class="card-artist">Roy Bianco &amp; Die Abbrunzati Boys</div>
-        <div class="card-meta"><span class="badge bpm">135</span><span class="badge key">10B</span><span class="badge dur">3:55</span></div>
-      </div>
     </div></div>
     </section><section class="playlist-section" id="Banger---Phase-1">
-      <h2>Banger - Phase #1 <span class="count">11 Songs</span></h2>
+      <h2>Banger - Phase #1 <span class="count">14 Songs</span></h2>
       <div class="cards"><div class="card" onclick="toggleSong(this)" data-title="In The End (Remix) (Malaa Remix)" data-artist="Linkin Park" data-playlist="Banger - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/3f/cb/c7/3fcbc7cc-0606-7f6e-7fc3-793318cfd1ed/mzaf_16081918663584534594.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
       <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/53/a7/7f/53a77fab-c54c-a57b-8130-248fc12d0c80/093624948995.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
@@ -229,6 +249,14 @@
         <div class="card-title" title="In the Moment (Remix) (Adriatique Club Mix)">In the Moment (Remix) (Adriatique Club Mix)</div>
         <div class="card-artist">RUFUS DU SOL</div>
         <div class="card-meta"><span class="badge bpm">124</span><span class="badge key">3A</span><span class="badge dur">5:12</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Blinding Lights - Chunky Dip &amp; Jesse James More Than You Know Edit" data-artist="The Weeknd" data-playlist="Banger - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/17/b4/8f/17b48f9a-0b93-6bb8-fe1d-3a16623c2cfb/mzaf_9560252727299052414.plus.aac.p.m4a">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/a6/6e/bf/a66ebf79-5008-8948-b352-a790fc87446b/19UM1IM04638.rgb.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Blinding Lights - Chunky Dip &amp; Jesse James More Than You Know Edit">Blinding Lights - Chunky Dip &amp; Jesse James More Than You Know Edit</div>
+        <div class="card-artist">The Weeknd</div>
+        <div class="card-meta"><span class="badge bpm">123</span><span class="badge key">4A</span><span class="badge dur">2:22</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Moth To A Flame (Kue Remix)" data-artist="Swedish House Mafia, The Weeknd" data-playlist="Banger - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/26/33/d2/2633d2b9-58f1-f9c0-7b43-b9d5ab1e5005/mzaf_15573204222455676396.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -261,6 +289,14 @@
         <div class="card-title" title="Unwritten (Anthem Kingz Epic Intro Refresh) (Anthem Kingz Epic Intro Refresh)">Unwritten (Anthem Kingz Epic Intro Refresh) (Anthem Kingz Epic Intro Refresh)</div>
         <div class="card-artist">Natasha Bedingfield</div>
         <div class="card-meta"><span class="badge bpm">124</span><span class="badge key">7B</span><span class="badge dur">3:55</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="The Fate Of Ophelia - Loud Luxury Remix" data-artist="Taylor Swift" data-playlist="Banger - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/4b/07/28/4b07285f-b50c-7aff-cb40-2d732256b703/mzaf_16739866530441939982.plus.aac.p.m4a">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/2d/46/e0/2d46e0bc-8ab9-85dd-4b56-ee6951351034/25UM1IM19577.rgb.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="The Fate Of Ophelia - Loud Luxury Remix">The Fate Of Ophelia - Loud Luxury Remix</div>
+        <div class="card-artist">Taylor Swift</div>
+        <div class="card-meta"><span class="badge bpm">130</span><span class="badge key">8B</span><span class="badge dur">3:30</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Golden (David Guetta Remix) (David Guetta Extended Remix)" data-artist="Huntrix, Ejae, Audrey Nuna, Rei Ami, KPop Demon Hunters Cast" data-playlist="Banger - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/4a/9d/a1/4a9da1c4-096f-8f45-4a3b-c883c45ca451/mzaf_3059921854949935161.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -302,9 +338,17 @@
         <div class="card-artist">Linkin Park</div>
         <div class="card-meta"><span class="badge bpm">130</span><span class="badge key">11A</span><span class="badge dur">3:34</span></div>
       </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="HUMBLE. (SKRILLEX REMIX)" data-artist="Skrillex, Kendrick Lamar" data-playlist="Banger - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/1c/c3/74/1cc37441-d51c-755e-3805-0c8042579782/mzaf_2255295071365958312.plus.aac.p.m4a">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/94/28/36/94283609-93bb-db1c-e997-44e82c157e90/00602567261216.rgb.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="HUMBLE. (SKRILLEX REMIX)">HUMBLE. (SKRILLEX REMIX)</div>
+        <div class="card-artist">Skrillex, Kendrick Lamar</div>
+        <div class="card-meta"><span class="badge bpm">150</span><span class="badge key">12A</span><span class="badge dur">2:36</span></div>
+      </div>
     </div></div>
     </section><section class="playlist-section" id="Alman---TekSchlag-2">
-      <h2>Alman - TekSchlag #2 <span class="count">19 Songs</span></h2>
+      <h2>Alman - TekSchlag #2 <span class="count">21 Songs</span></h2>
       <div class="cards"><div class="card" onclick="toggleSong(this)" data-title="Atemlos durch die Nacht" data-artist="Helene Fischer" data-playlist="Alman - TekSchlag #2" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/de/96/b0/de96b0e2-457f-80ab-8deb-483074b3f964/mzaf_13820032290883879872.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
       <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/b5/62/d5/b562d519-360b-834d-2a88-571035735c3a/13UAEIM18097.rgb.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
@@ -344,6 +388,14 @@
         <div class="card-title" title="Pink">Pink</div>
         <div class="card-artist">Vanessa Mai &amp; HBz</div>
         <div class="card-meta"><span class="badge bpm">150</span><span class="badge key">5A</span><span class="badge dur">3:31</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Cordula Grün" data-artist="Die Draufgänger" data-playlist="Alman - TekSchlag #2" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/61/03/15/6103156a-b1af-3241-6d7a-abc0fe394f0c/mzaf_4227383606542163979.plus.aac.p.m4a">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/f0/78/53/f07853ca-2889-b5ae-2f62-447cf8468a51/00602577137839.rgb.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Cordula Grün">Cordula Grün</div>
+        <div class="card-artist">Die Draufgänger</div>
+        <div class="card-meta"><span class="badge bpm">123</span><span class="badge key">6B</span><span class="badge dur">3:09</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Gute Laune" data-artist="Killermichel; selina" data-playlist="Alman - TekSchlag #2" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/42/d7/07/42d70715-404a-53ec-04a5-475a28598ff1/mzaf_8981072719752534468.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -416,6 +468,14 @@
         <div class="card-title" title="Nur geträumt">Nur geträumt</div>
         <div class="card-artist">Nena</div>
         <div class="card-meta"><span class="badge bpm">177</span><span class="badge key">9B</span><span class="badge dur">3:38</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Friesenjung - PRIDE &amp; PARKER Remix" data-artist="Ski Aggu, Joost &amp; Otto Waalkes" data-playlist="Alman - TekSchlag #2" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/26/7c/ca/267cca09-57e0-fbf7-d343-cc2d98465d1f/mzaf_16653790302217645094.plus.aac.p.m4a">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/98/d3/3e/98d33e00-01b7-5351-0a3c-3e0e92a49899/197902569183.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Friesenjung - PRIDE &amp; PARKER Remix">Friesenjung - PRIDE &amp; PARKER Remix</div>
+        <div class="card-artist">Ski Aggu, Joost &amp; Otto Waalkes</div>
+        <div class="card-meta"><span class="badge bpm">140</span><span class="badge key">10A</span><span class="badge dur">4:06</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="99 Luftballons" data-artist="Harris &amp; Ford" data-playlist="Alman - TekSchlag #2" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview112/v4/1b/97/46/1b97469b-0c16-3340-b4ef-3f86fe79623f/mzaf_12254257881416524540.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -590,87 +650,7 @@
       </div>
     </div></div>
     </section></main>
-
-<div class="share-bar" id="shareBar">
-  <div class="share-bar-info">
-    <div class="share-bar-count" id="shareCount">0 Songs markiert</div>
-    <div class="share-bar-sub">Diese Songs passen nicht</div>
-  </div>
-  <div class="share-actions">
-    <button class="btn-reset" onclick="resetAll()">Zurücksetzen</button>
-    <button class="btn-share" onclick="shareSelection()">
-      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-      Teilen
-    </button>
-  </div>
-</div>
+<div class="share-bar" id="shareBar"><div class="share-bar-info"><div class="share-bar-count" id="shareCount">0 Songs markiert</div><div class="share-bar-sub">Diese Songs passen nicht</div></div><div class="share-actions"><button class="btn-reset" onclick="resetAll()">Zurücksetzen</button><button class="btn-share" onclick="shareSelection()"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg> Teilen</button></div></div>
 <div class="toast" id="toast"></div>
-
-<script>
-let currentAudio = null, currentBtn = null;
-function playPreview(e, btn) {
-  e.stopPropagation();
-  const url = btn.closest('.card').dataset.preview;
-  if (!url) return;
-  if (currentAudio && !currentAudio.paused) {
-    currentAudio.pause();
-    if (currentBtn) currentBtn.classList.remove('pb-playing','pb-loading','pb-error');
-    if (currentBtn === btn) { currentAudio = null; currentBtn = null; return; }
-  }
-  btn.classList.remove('pb-playing','pb-error');
-  btn.classList.add('pb-loading');
-  const audio = new Audio(url);
-  currentAudio = audio; currentBtn = btn;
-  audio.addEventListener('canplay', () => {
-    if (currentAudio !== audio) return;
-    btn.classList.remove('pb-loading'); btn.classList.add('pb-playing'); audio.play();
-  });
-  audio.addEventListener('ended', () => { btn.classList.remove('pb-playing','pb-loading'); currentAudio = null; currentBtn = null; });
-  audio.addEventListener('error', () => {
-    btn.classList.remove('pb-loading','pb-playing'); btn.classList.add('pb-error');
-    setTimeout(() => btn.classList.remove('pb-error'), 2000);
-    currentAudio = null; currentBtn = null;
-  });
-  audio.load();
-}
-function toggleSong(card) { card.classList.toggle('selected'); updateShareBar(); }
-function updateShareBar() {
-  const sel = document.querySelectorAll('.card.selected');
-  document.getElementById('shareCount').textContent = sel.length + ' Song' + (sel.length !== 1 ? 's' : '') + ' markiert';
-  document.getElementById('shareBar').classList.toggle('visible', sel.length > 0);
-}
-function resetAll() { document.querySelectorAll('.card.selected').forEach(c => c.classList.remove('selected')); updateShareBar(); }
-function shareSelection() {
-  const selected = [...document.querySelectorAll('.card.selected')];
-  if (!selected.length) return;
-  const byPlaylist = {};
-  selected.forEach(card => {
-    const pl = card.dataset.playlist;
-    if (!byPlaylist[pl]) byPlaylist[pl] = [];
-    byPlaylist[pl].push(card.dataset.title + ' — ' + card.dataset.artist);
-  });
-  let text = 'Diese Songs passen nicht zur Hochzeit GardenCity:\n\n';
-  for (const [pl, songs] of Object.entries(byPlaylist)) {
-    text += pl + ':\n';
-    songs.forEach(s => text += '  ✕ ' + s + '\n');
-    text += '\n';
-  }
-  if (navigator.share) {
-    navigator.share({ title: 'Hochzeiten GardenCity — Nicht-Wunschliste', text }).catch(() => {});
-  } else {
-    navigator.clipboard.writeText(text).then(() => showToast('In Zwischenablage kopiert!')).catch(() => {
-      const ta = document.createElement('textarea');
-      ta.value = text; document.body.appendChild(ta); ta.select();
-      document.execCommand('copy'); document.body.removeChild(ta);
-      showToast('In Zwischenablage kopiert!');
-    });
-  }
-}
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2500);
-}
-</script>
-</body>
-</html>
+<script>let currentAudio=null,currentBtn=null;function playPreview(e,btn){e.stopPropagation();const url=btn.closest('.card').dataset.preview;if(!url)return;if(currentAudio&&!currentAudio.paused){currentAudio.pause();if(currentBtn)currentBtn.classList.remove('pb-playing','pb-loading','pb-error');if(currentBtn===btn){currentAudio=null;currentBtn=null;return}}btn.classList.remove('pb-playing','pb-error');btn.classList.add('pb-loading');const audio=new Audio(url);currentAudio=audio;currentBtn=btn;audio.addEventListener('canplay',()=>{if(currentAudio!==audio)return;btn.classList.remove('pb-loading');btn.classList.add('pb-playing');audio.play()});audio.addEventListener('ended',()=>{btn.classList.remove('pb-playing','pb-loading');currentAudio=null;currentBtn=null});audio.addEventListener('error',()=>{btn.classList.remove('pb-loading','pb-playing');btn.classList.add('pb-error');setTimeout(()=>btn.classList.remove('pb-error'),2000);currentAudio=null;currentBtn=null});audio.load()}function toggleSong(card){card.classList.toggle('selected');updateShareBar()}function updateShareBar(){const sel=document.querySelectorAll('.card.selected');document.getElementById('shareCount').textContent=sel.length+' Song'+(sel.length!==1?'s':'')+' markiert';document.getElementById('shareBar').classList.toggle('visible',sel.length>0)}function resetAll(){document.querySelectorAll('.card.selected').forEach(c=>c.classList.remove('selected'));updateShareBar()}function shareSelection(){const selected=[...document.querySelectorAll('.card.selected')];if(!selected.length)return;const byPlaylist={};selected.forEach(card=>{const pl=card.dataset.playlist;if(!byPlaylist[pl])byPlaylist[pl]=[];byPlaylist[pl].push(card.dataset.title+' — '+card.dataset.artist)});let text='Diese Songs passen nicht zur Hochzeit GardenCity:\n\n';for(const[pl,songs]of Object.entries(byPlaylist)){text+=pl+':\n';songs.forEach(s=>text+='  ✕ '+s+'\n');text+='\n'}if(navigator.share){navigator.share({title:'Hochzeiten GardenCity — Nicht-Wunschliste',text}).catch(()=>{})}else{navigator.clipboard.writeText(text).then(()=>showToast('In Zwischenablage kopiert!')).catch(()=>{const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);showToast('In Zwischenablage kopiert!')})}}function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500)}</script>
+</body></html>
