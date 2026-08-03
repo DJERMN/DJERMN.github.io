@@ -10,18 +10,21 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','system-ui','sans-serif']}}}}</script>
 <style type="text/tailwindcss">
+
 @layer base{*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}body{@apply font-sans bg-zinc-950 text-zinc-100 min-h-screen;padding-bottom:100px;-webkit-text-size-adjust:100%}}
 @layer components{header{@apply bg-zinc-900 border-b border-zinc-800;padding:clamp(28px,6vw,52px) clamp(16px,5vw,48px) clamp(20px,4vw,36px)}header h1{@apply font-extrabold text-white tracking-tight leading-tight;font-size:clamp(1.4rem,5vw,2.2rem)}header p{@apply mt-1.5 text-zinc-400;font-size:clamp(.75rem,2.5vw,.85rem)}.hint{@apply mt-2 text-zinc-500;font-size:clamp(.72rem,2.2vw,.8rem)}.nav{@apply flex mt-5 overflow-x-auto pb-0.5;flex-wrap:nowrap;gap:6px;scrollbar-width:none}.nav::-webkit-scrollbar{display:none}.nav a{@apply text-zinc-500 no-underline font-medium border border-zinc-800 rounded shrink-0 whitespace-nowrap transition-colors duration-150;font-size:.72rem;padding:5px 13px;-webkit-tap-highlight-color:transparent;touch-action:manipulation}.nav a:hover{@apply text-amber-400;border-color:rgba(251,191,36,.3)}main{@apply max-w-[1440px] mx-auto;padding:clamp(32px,5vw,56px) clamp(12px,4vw,36px) 40px}.playlist-section{@apply mb-12;scroll-margin-top:16px}.playlist-section h2{@apply text-amber-400 font-semibold mb-3.5 pb-3 border-b border-zinc-800 flex items-center flex-wrap gap-2.5;font-size:clamp(.82rem,3vw,.95rem)}.count{@apply text-zinc-600 font-normal text-xs}.cards{@apply border border-zinc-800 rounded-lg overflow-hidden;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr));gap:1px;background-color:#27272a}.card{@apply bg-zinc-900 flex items-center gap-3 cursor-pointer relative transition-colors duration-100;padding:11px 12px;border-radius:0;-webkit-tap-highlight-color:transparent;touch-action:manipulation;user-select:none}@media(hover:hover){.card:hover{@apply bg-zinc-800}.card.selected:hover{background-color:#200a0a}}.card-check{@apply absolute top-2.5 right-2.5 w-5 h-5 rounded border border-zinc-700 flex items-center justify-center shrink-0 transition-all duration-150}.check-icon{@apply leading-none transition-colors duration-150;font-size:.6rem;color:transparent;font-weight:900}.card.selected{background-color:#1c0808}.card.selected .card-check{@apply bg-red-700 border-red-700}.card.selected .check-icon{@apply text-white}.card.selected .card-title{@apply text-red-300}.cover-wrap{@apply relative shrink-0;width:52px;height:52px}.cover{@apply rounded-md object-cover bg-zinc-800;width:52px;height:52px;pointer-events:none}.no-cover{@apply flex items-center justify-center text-xl}.play-btn{@apply absolute rounded-full flex items-center justify-center p-0 cursor-pointer transition-all duration-150;bottom:3px;right:3px;width:22px;height:22px;background:rgba(0,0,0,.85);border:1px solid rgba(255,255,255,.18);-webkit-tap-highlight-color:transparent}.play-btn:active{transform:scale(.86)}.play-btn svg{@apply shrink-0;width:9px;height:9px;fill:#d4d4d4}.play-btn.pb-playing{background:#f59e0b;border-color:rgba(245,158,11,.35)}.play-btn.pb-playing svg{fill:#000}.play-btn.pb-error{background:rgba(185,28,28,.9);border-color:transparent}.play-btn.pb-loading{border-color:transparent}@keyframes pb-spin{to{transform:rotate(360deg)}}.play-btn.pb-loading::before{content:'';position:absolute;inset:-2px;border-radius:50%;border:1.5px solid transparent;border-top-color:#f59e0b;animation:pb-spin .7s linear infinite}.card-info{@apply flex-1 min-w-0;padding-right:26px}.card-title{@apply text-sm font-semibold text-zinc-100 truncate mb-0.5 leading-snug transition-colors duration-150}.card-artist{@apply text-xs text-zinc-400 truncate leading-snug;margin-bottom:6px}.card-meta{@apply flex flex-wrap gap-1}.badge{@apply text-[0.6rem] font-semibold px-1.5 py-0.5 rounded whitespace-nowrap;letter-spacing:.2px}.bpm{@apply bg-amber-950 text-amber-400 ring-1 ring-amber-900/50}.key{@apply bg-emerald-950 text-emerald-400 ring-1 ring-emerald-900/50}.dur{@apply bg-zinc-800 text-zinc-500 ring-1 ring-zinc-700/50}.share-bar{@apply fixed bottom-0 left-0 right-0 z-50 bg-zinc-900 border-t border-zinc-800 flex items-center justify-between gap-3;padding:clamp(12px,3vw,16px) clamp(16px,5vw,32px);transform:translateY(100%);transition:transform .22s cubic-bezier(.34,1.56,.64,1)}.share-bar.visible{transform:translateY(0)}.share-bar-info{@apply flex-1 min-w-0}.share-bar-count{@apply font-bold text-red-400;font-size:clamp(.85rem,3vw,.95rem)}.share-bar-sub{@apply text-xs text-zinc-500 mt-0.5}.share-actions{@apply flex gap-2 shrink-0}.btn-reset{@apply text-xs font-semibold border border-zinc-700 text-zinc-400 bg-transparent rounded cursor-pointer whitespace-nowrap;padding:9px 14px;font-family:inherit;-webkit-tap-highlight-color:transparent}.btn-share{@apply text-xs font-semibold bg-green-500 text-white rounded cursor-pointer flex items-center gap-1.5 whitespace-nowrap border-0;padding:9px 18px;font-family:inherit;-webkit-tap-highlight-color:transparent}.btn-share:active{opacity:.8}.toast{@apply fixed z-[200] bg-zinc-900 border border-zinc-700 text-amber-400 text-xs font-semibold rounded whitespace-nowrap;top:20px;left:50%;padding:10px 20px;transform:translateX(-50%) translateY(-80px);transition:transform .28s cubic-bezier(.34,1.56,.64,1)}.toast.show{transform:translateX(-50%) translateY(0)}}
+
 </style>
 </head>
 <body>
 <header>
   <h1>Hochzeiten GardenCity — Playlists</h1>
-  <p>Rekordbox Library · 80 Songs in 4 Playlists</p>
+  <p>Rekordbox Library · 169 Songs in 9 Playlists</p>
   <p class="hint">▶ Vorschau per Klick auf den Play-Button</p>
-  <nav class="nav"><a href="#Alman---Phase-1">Alman - Phase #1</a><a href="#Banger---Phase-1">Banger - Phase #1</a><a href="#Alman---TekSchlag-2">Alman - TekSchlag #2</a><a href="#MJ-x-Groove">MJ x Groove</a></nav>
+  <nav class="nav"><a href="#Alman---Phase-1">Alman - Phase #1</a><a href="#Banger---Phase-1">Banger - Phase #1</a><a href="#Banger---Phase-2">Banger - Phase #2</a><a href="#Alman---TekSchlag-2">Alman - TekSchlag #2</a><a href="#MJ-x-Groove">MJ x Groove</a><a href="#Festival-Flash">Festival-Flash</a><a href="#80-bis-X-Dance">80-bis-X-Dance</a><a href="#Rap---Mix">Rap - Mix</a><a href="#Latin-Mix">Latin-Mix</a></nav>
 </header>
-<main><section class="playlist-section" id="Alman---Phase-1">
+<main>
+<section class="playlist-section" id="Alman---Phase-1">
       <h2>Alman - Phase #1 <span class="count">27 Songs</span></h2>
       <div class="cards"><div class="card" onclick="toggleSong(this)" data-title="Nur ein Wort" data-artist="Wir Sind Helden" data-playlist="Alman - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/be/16/18/be16185a-8729-64fb-97a0-5e5eb03c7ca5/mzaf_8894170273939000752.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -45,7 +48,7 @@
       <div class="card-info">
         <div class="card-title" title="Mangos mit Chili">Mangos mit Chili</div>
         <div class="card-artist">Nina Chuba</div>
-        <div class="card-meta"><span class="badge bpm">103.0</span><span class="badge key">3A</span><span class="badge dur">2:14</span></div>
+        <div class="card-meta"><span class="badge bpm">103</span><span class="badge key">3A</span><span class="badge dur">2:14</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Roller" data-artist="Apache 207" data-playlist="Alman - Phase #1">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -53,7 +56,7 @@
       <div class="card-info">
         <div class="card-title" title="Roller">Roller</div>
         <div class="card-artist">Apache 207</div>
-        <div class="card-meta"><span class="badge bpm">128.0</span><span class="badge key">3A</span><span class="badge dur">2:37</span></div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">3A</span><span class="badge dur">2:37</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Einfach Sein" data-artist="Die Fantastischen Vier" data-playlist="Alman - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/dc/a5/13/dca51358-5272-2147-b84b-5a64c0695cd2/mzaf_18071399735749531715.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -69,7 +72,7 @@
       <div class="card-info">
         <div class="card-title" title="Neunzig">Neunzig</div>
         <div class="card-artist">Apache 207</div>
-        <div class="card-meta"><span class="badge bpm">129.0</span><span class="badge key">4A</span><span class="badge dur">2:25</span></div>
+        <div class="card-meta"><span class="badge bpm">129</span><span class="badge key">4A</span><span class="badge dur">2:25</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Wohin willst du" data-artist="Gestört Aber GeiL LEA" data-playlist="Alman - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/b8/fc/08/b8fc0873-a9ab-fc3b-854f-0b6f5b3bd499/mzaf_15883926080588393690.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -77,7 +80,7 @@
       <div class="card-info">
         <div class="card-title" title="Wohin willst du">Wohin willst du</div>
         <div class="card-artist">Gestört Aber GeiL LEA</div>
-        <div class="card-meta"><span class="badge bpm">122.0</span><span class="badge key">5A</span><span class="badge dur">3:30</span></div>
+        <div class="card-meta"><span class="badge bpm">122</span><span class="badge key">5A</span><span class="badge dur">3:30</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Breaking your heart" data-artist="Apache 207" data-playlist="Alman - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/06/a8/c2/06a8c241-4a84-a9ab-47dd-28c537b385be/mzaf_15344699037962019122.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -85,7 +88,7 @@
       <div class="card-info">
         <div class="card-title" title="Breaking your heart">Breaking your heart</div>
         <div class="card-artist">Apache 207</div>
-        <div class="card-meta"><span class="badge bpm">165.0</span><span class="badge key">5A</span><span class="badge dur">2:50</span></div>
+        <div class="card-meta"><span class="badge bpm">165</span><span class="badge key">5A</span><span class="badge dur">2:50</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Komet - Scotty Remix" data-artist="Udo Lindenberg &amp; Apache 207" data-playlist="Alman - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/c8/4b/3b/c84b3b17-a6d1-bb27-f307-567b5437a81c/mzaf_1931028906472802154.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -93,7 +96,7 @@
       <div class="card-info">
         <div class="card-title" title="Komet - Scotty Remix">Komet - Scotty Remix</div>
         <div class="card-artist">Udo Lindenberg &amp; Apache 207</div>
-        <div class="card-meta"><span class="badge bpm">128.0</span><span class="badge key">6A</span><span class="badge dur">3:39</span></div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">6A</span><span class="badge dur">3:39</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Rap über Hass" data-artist="K.I.Z" data-playlist="Alman - Phase #1">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -101,7 +104,7 @@
       <div class="card-info">
         <div class="card-title" title="Rap über Hass">Rap über Hass</div>
         <div class="card-artist">K.I.Z</div>
-        <div class="card-meta"><span class="badge bpm">92.0</span><span class="badge key">7A</span><span class="badge dur">3:15</span></div>
+        <div class="card-meta"><span class="badge bpm">92</span><span class="badge key">7A</span><span class="badge dur">3:15</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Ding (Single Version)" data-artist="Seeed" data-playlist="Alman - Phase #1" data-preview="https://video-ssl.itunes.apple.com/itunes-assets/Video221/v4/70/85/99/7085995d-a500-17cb-100d-bca5d29f44d5/mzvf_9895330175016887834.720w.h264lc.U.p.m4v">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -109,7 +112,7 @@
       <div class="card-info">
         <div class="card-title" title="Ding (Single Version)">Ding (Single Version)</div>
         <div class="card-artist">Seeed</div>
-        <div class="card-meta"><span class="badge bpm">117.0</span><span class="badge key">7A</span><span class="badge dur">3:27</span></div>
+        <div class="card-meta"><span class="badge bpm">117</span><span class="badge key">7A</span><span class="badge dur">3:27</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="BIER" data-artist="Drunken Masters Maxim K.I.Z K.I.Z" data-playlist="Alman - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/d4/37/fd/d437fdae-764d-d13b-ff0d-069fe7245325/mzaf_6602652818472115989.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -117,7 +120,7 @@
       <div class="card-info">
         <div class="card-title" title="BIER">BIER</div>
         <div class="card-artist">Drunken Masters Maxim K.I.Z K.I.Z</div>
-        <div class="card-meta"><span class="badge bpm">140.0</span><span class="badge key">7A</span><span class="badge dur">2:09</span></div>
+        <div class="card-meta"><span class="badge bpm">140</span><span class="badge key">7A</span><span class="badge dur">2:09</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Schrei nach Liebe" data-artist="Die Ärzte" data-playlist="Alman - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/f4/a6/0b/f4a60bfc-bf5b-c3df-ea42-25959eb8f638/mzaf_7844264264115953563.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -133,7 +136,7 @@
       <div class="card-info">
         <div class="card-title" title="Ich glaub ich will heut nicht mehr gehen">Ich glaub ich will heut nicht mehr gehen</div>
         <div class="card-artist">Nina Chuba Provinz</div>
-        <div class="card-meta"><span class="badge bpm">122.0</span><span class="badge key">8A</span><span class="badge dur">2:55</span></div>
+        <div class="card-meta"><span class="badge bpm">122</span><span class="badge key">8A</span><span class="badge dur">2:55</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Oh Jonny" data-artist="Jan Delay" data-playlist="Alman - Phase #1">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -141,7 +144,7 @@
       <div class="card-info">
         <div class="card-title" title="Oh Jonny">Oh Jonny</div>
         <div class="card-artist">Jan Delay</div>
-        <div class="card-meta"><span class="badge bpm">91.0</span><span class="badge key">8A</span><span class="badge dur">3:39</span></div>
+        <div class="card-meta"><span class="badge bpm">91</span><span class="badge key">8A</span><span class="badge dur">3:39</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Ein Affe und ein Pferd" data-artist="K.I.Z" data-playlist="Alman - Phase #1">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -149,7 +152,7 @@
       <div class="card-info">
         <div class="card-title" title="Ein Affe und ein Pferd">Ein Affe und ein Pferd</div>
         <div class="card-artist">K.I.Z</div>
-        <div class="card-meta"><span class="badge bpm">138.0</span><span class="badge key">8A</span><span class="badge dur">3:45</span></div>
+        <div class="card-meta"><span class="badge bpm">138</span><span class="badge key">8A</span><span class="badge dur">3:45</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Irgendwie, irgendwo, irgendwann (Special 12&quot; Dance Mix)" data-artist="Nena" data-playlist="Alman - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview118/v4/97/89/d7/9789d797-d6a4-8cb8-0076-6391db1fb315/mzaf_5245214130501300114.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -173,7 +176,7 @@
       <div class="card-info">
         <div class="card-title" title="Bauch Beine Po">Bauch Beine Po</div>
         <div class="card-artist">Shirin David</div>
-        <div class="card-meta"><span class="badge bpm">124.0</span><span class="badge key">9A</span><span class="badge dur">2:13</span></div>
+        <div class="card-meta"><span class="badge bpm">124</span><span class="badge key">9A</span><span class="badge dur">2:13</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Ein Kompliment" data-artist="Sportfreunde Stiller" data-playlist="Alman - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/57/9a/9e/579a9eca-a9a3-a403-7fbd-7f25b7c70910/mzaf_10306102830693564888.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -181,7 +184,7 @@
       <div class="card-info">
         <div class="card-title" title="Ein Kompliment">Ein Kompliment</div>
         <div class="card-artist">Sportfreunde Stiller</div>
-        <div class="card-meta"><span class="badge bpm">159.0</span><span class="badge key">9A</span><span class="badge dur">3:17</span></div>
+        <div class="card-meta"><span class="badge bpm">159</span><span class="badge key">9A</span><span class="badge dur">3:17</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Fata Morgana" data-artist="Nina Chuba" data-playlist="Alman - Phase #1">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -189,7 +192,7 @@
       <div class="card-info">
         <div class="card-title" title="Fata Morgana">Fata Morgana</div>
         <div class="card-artist">Nina Chuba</div>
-        <div class="card-meta"><span class="badge bpm">118.0</span><span class="badge key">9A</span><span class="badge dur">2:43</span></div>
+        <div class="card-meta"><span class="badge bpm">118</span><span class="badge key">9A</span><span class="badge dur">2:43</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Was du Liebe nennst" data-artist="Bausa" data-playlist="Alman - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/10/43/ab/1043ab56-caae-9c6d-32ac-6112ba45ad76/mzaf_7030068956618894615.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -197,7 +200,7 @@
       <div class="card-info">
         <div class="card-title" title="Was du Liebe nennst">Was du Liebe nennst</div>
         <div class="card-artist">Bausa</div>
-        <div class="card-meta"><span class="badge bpm">145.0</span><span class="badge key">10B</span><span class="badge dur">3:23</span></div>
+        <div class="card-meta"><span class="badge bpm">145</span><span class="badge key">10B</span><span class="badge dur">3:23</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Einmal um die Welt" data-artist="CRO" data-playlist="Alman - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/12/c6/70/12c6701a-294e-50d1-a490-d2a3bd91ffa9/mzaf_15225202634199766013.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -205,7 +208,7 @@
       <div class="card-info">
         <div class="card-title" title="Einmal um die Welt">Einmal um die Welt</div>
         <div class="card-artist">CRO</div>
-        <div class="card-meta"><span class="badge bpm">160.0</span><span class="badge key">10A</span><span class="badge dur">2:21</span></div>
+        <div class="card-meta"><span class="badge bpm">160</span><span class="badge key">10A</span><span class="badge dur">2:21</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Bella Napoli" data-artist="Roy Bianco &amp; Die Abbrunzati Boys" data-playlist="Alman - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/3c/a0/8e/3ca08e89-9c9c-03ad-d0fe-d9dee768556b/mzaf_8381272217601833669.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -221,7 +224,7 @@
       <div class="card-info">
         <div class="card-title" title="Chöre">Chöre</div>
         <div class="card-artist">Mark Forster</div>
-        <div class="card-meta"><span class="badge bpm">130.0</span><span class="badge key">11A</span><span class="badge dur">3:27</span></div>
+        <div class="card-meta"><span class="badge bpm">130</span><span class="badge key">11A</span><span class="badge dur">3:27</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Madonna" data-artist="Bausa Apache 207" data-playlist="Alman - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/55/ca/2c/55ca2c54-0156-2101-35fb-4499e2579a96/mzaf_7085618974054916183.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -229,7 +232,7 @@
       <div class="card-info">
         <div class="card-title" title="Madonna">Madonna</div>
         <div class="card-artist">Bausa Apache 207</div>
-        <div class="card-meta"><span class="badge bpm">117.0</span><span class="badge key">11A</span><span class="badge dur">3:15</span></div>
+        <div class="card-meta"><span class="badge bpm">117</span><span class="badge key">11A</span><span class="badge dur">3:15</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Wildberry Lillet" data-artist="Nina Chuba" data-playlist="Alman - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/d5/86/54/d5865462-c9f2-cc50-d05d-445e51c47e02/mzaf_16302937918757418972.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -237,7 +240,7 @@
       <div class="card-info">
         <div class="card-title" title="Wildberry Lillet">Wildberry Lillet</div>
         <div class="card-artist">Nina Chuba</div>
-        <div class="card-meta"><span class="badge bpm">140.0</span><span class="badge key">11A</span><span class="badge dur">2:11</span></div>
+        <div class="card-meta"><span class="badge bpm">140</span><span class="badge key">11A</span><span class="badge dur">2:11</span></div>
       </div>
     </div></div>
     </section><section class="playlist-section" id="Banger---Phase-1">
@@ -248,7 +251,7 @@
       <div class="card-info">
         <div class="card-title" title="In the Moment (Remix) (Adriatique Club Mix)">In the Moment (Remix) (Adriatique Club Mix)</div>
         <div class="card-artist">RUFUS DU SOL</div>
-        <div class="card-meta"><span class="badge bpm">124.0</span><span class="badge key">3A</span><span class="badge dur">5:12</span></div>
+        <div class="card-meta"><span class="badge bpm">124</span><span class="badge key">3A</span><span class="badge dur">5:12</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="In The End (Remix) (Malaa Remix)" data-artist="Linkin Park" data-playlist="Banger - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/3f/cb/c7/3fcbc7cc-0606-7f6e-7fc3-793318cfd1ed/mzaf_16081918663584534594.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -256,7 +259,7 @@
       <div class="card-info">
         <div class="card-title" title="In The End (Remix) (Malaa Remix)">In The End (Remix) (Malaa Remix)</div>
         <div class="card-artist">Linkin Park</div>
-        <div class="card-meta"><span class="badge bpm">124.0</span><span class="badge key">3A</span><span class="badge dur">4:07</span></div>
+        <div class="card-meta"><span class="badge bpm">124</span><span class="badge key">3A</span><span class="badge dur">4:07</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Blinding Lights - Chunky Dip &amp; Jesse James More Than You Know Edit" data-artist="The Weeknd" data-playlist="Banger - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/17/b4/8f/17b48f9a-0b93-6bb8-fe1d-3a16623c2cfb/mzaf_9560252727299052414.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -264,7 +267,7 @@
       <div class="card-info">
         <div class="card-title" title="Blinding Lights - Chunky Dip &amp; Jesse James More Than You Know Edit">Blinding Lights - Chunky Dip &amp; Jesse James More Than You Know Edit</div>
         <div class="card-artist">The Weeknd</div>
-        <div class="card-meta"><span class="badge bpm">123.0</span><span class="badge key">4A</span><span class="badge dur">2:22</span></div>
+        <div class="card-meta"><span class="badge bpm">123</span><span class="badge key">4A</span><span class="badge dur">2:22</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Moth To A Flame (Kue Remix)" data-artist="Swedish House Mafia, The Weeknd" data-playlist="Banger - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/26/33/d2/2633d2b9-58f1-f9c0-7b43-b9d5ab1e5005/mzaf_15573204222455676396.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -272,7 +275,7 @@
       <div class="card-info">
         <div class="card-title" title="Moth To A Flame (Kue Remix)">Moth To A Flame (Kue Remix)</div>
         <div class="card-artist">Swedish House Mafia, The Weeknd</div>
-        <div class="card-meta"><span class="badge bpm">128.0</span><span class="badge key">5A</span><span class="badge dur">4:15</span></div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">5A</span><span class="badge dur">4:15</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Self Control (Remix) (Fraser Club Mix)" data-artist="Laura Branigan" data-playlist="Banger - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/96/18/44/96184486-ec6c-962b-9eb6-794c7badd3b7/mzaf_17815347605035653275.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -280,7 +283,7 @@
       <div class="card-info">
         <div class="card-title" title="Self Control (Remix) (Fraser Club Mix)">Self Control (Remix) (Fraser Club Mix)</div>
         <div class="card-artist">Laura Branigan</div>
-        <div class="card-meta"><span class="badge bpm">126.0</span><span class="badge key">6A</span><span class="badge dur">3:37</span></div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">6A</span><span class="badge dur">3:37</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="What I&#39;ve Done (Original Mix)" data-artist="Linkin Park" data-playlist="Banger - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview112/v4/a2/65/ea/a265ea31-5403-afb9-d32c-00a2bed6adc9/mzaf_14470032920014838408.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -296,7 +299,7 @@
       <div class="card-info">
         <div class="card-title" title="Unwritten (Anthem Kingz Epic Intro Refresh) (Anthem Kingz Epic Intro Refresh)">Unwritten (Anthem Kingz Epic Intro Refresh) (Anthem Kingz Epic Intro Refresh)</div>
         <div class="card-artist">Natasha Bedingfield</div>
-        <div class="card-meta"><span class="badge bpm">124.0</span><span class="badge key">7B</span><span class="badge dur">3:55</span></div>
+        <div class="card-meta"><span class="badge bpm">124</span><span class="badge key">7B</span><span class="badge dur">3:55</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="The Fate Of Ophelia - Loud Luxury Remix" data-artist="Taylor Swift" data-playlist="Banger - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/4b/07/28/4b07285f-b50c-7aff-cb40-2d732256b703/mzaf_16739866530441939982.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -304,7 +307,7 @@
       <div class="card-info">
         <div class="card-title" title="The Fate Of Ophelia - Loud Luxury Remix">The Fate Of Ophelia - Loud Luxury Remix</div>
         <div class="card-artist">Taylor Swift</div>
-        <div class="card-meta"><span class="badge bpm">130.0</span><span class="badge key">8B</span><span class="badge dur">3:30</span></div>
+        <div class="card-meta"><span class="badge bpm">130</span><span class="badge key">8B</span><span class="badge dur">3:30</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Golden (David Guetta Remix) (David Guetta Extended Remix)" data-artist="Huntrix, Ejae, Audrey Nuna, Rei Ami, KPop Demon Hunters Cast" data-playlist="Banger - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/4a/9d/a1/4a9da1c4-096f-8f45-4a3b-c883c45ca451/mzaf_3059921854949935161.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -312,7 +315,7 @@
       <div class="card-info">
         <div class="card-title" title="Golden (David Guetta Remix) (David Guetta Extended Remix)">Golden (David Guetta Remix) (David Guetta Extended Remix)</div>
         <div class="card-artist">Huntrix, Ejae, Audrey Nuna, Rei Ami, KPop Demon Hunters Cast</div>
-        <div class="card-meta"><span class="badge bpm">128.0</span><span class="badge key">9A</span><span class="badge dur">3:55</span></div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">9A</span><span class="badge dur">3:55</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Alright (Remix) (Shaq &amp; egnever Remix (Dirty))" data-artist="Kendrick Lamar" data-playlist="Banger - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/45/26/fa/4526fa9f-f70d-abc6-25bf-1594b9dfdb13/mzaf_14854083311939736968.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -320,7 +323,7 @@
       <div class="card-info">
         <div class="card-title" title="Alright (Remix) (Shaq &amp; egnever Remix (Dirty))">Alright (Remix) (Shaq &amp; egnever Remix (Dirty))</div>
         <div class="card-artist">Kendrick Lamar</div>
-        <div class="card-meta"><span class="badge bpm">112.0</span><span class="badge key">10A</span><span class="badge dur">2:30</span></div>
+        <div class="card-meta"><span class="badge bpm">112</span><span class="badge key">10A</span><span class="badge dur">2:30</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="The Color Violet (JONIS AFTRHRS MIX) (Clean Extended)" data-artist="Tory Lanez" data-playlist="Banger - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/d4/17/4c/d4174c04-b1ad-75fa-a33a-f2c41ca08f82/mzaf_15967459334367970818.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -328,7 +331,7 @@
       <div class="card-info">
         <div class="card-title" title="The Color Violet (JONIS AFTRHRS MIX) (Clean Extended)">The Color Violet (JONIS AFTRHRS MIX) (Clean Extended)</div>
         <div class="card-artist">Tory Lanez</div>
-        <div class="card-meta"><span class="badge bpm">127.0</span><span class="badge key">10A</span><span class="badge dur">4:49</span></div>
+        <div class="card-meta"><span class="badge bpm">127</span><span class="badge key">10A</span><span class="badge dur">4:49</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Numb/Encore (James Hype Remix (Dirty))" data-artist="JAY-Z &amp; Linkin Park" data-playlist="Banger - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/20/a4/2d/20a42dfd-2b27-a989-437a-8621c8cf0613/mzaf_18258224880031331606.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -336,7 +339,7 @@
       <div class="card-info">
         <div class="card-title" title="Numb/Encore (James Hype Remix (Dirty))">Numb/Encore (James Hype Remix (Dirty))</div>
         <div class="card-artist">JAY-Z &amp; Linkin Park</div>
-        <div class="card-meta"><span class="badge bpm">126.0</span><span class="badge key">11A</span><span class="badge dur">4:04</span></div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">11A</span><span class="badge dur">4:04</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Numb (Remix) (Rye &amp; Josh Stylez The Ride Edit)" data-artist="Linkin Park" data-playlist="Banger - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/bb/13/76/bb1376a7-4db0-ed68-c1a6-d0278cc4b320/mzaf_17832584344687833283.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -344,7 +347,7 @@
       <div class="card-info">
         <div class="card-title" title="Numb (Remix) (Rye &amp; Josh Stylez The Ride Edit)">Numb (Remix) (Rye &amp; Josh Stylez The Ride Edit)</div>
         <div class="card-artist">Linkin Park</div>
-        <div class="card-meta"><span class="badge bpm">130.0</span><span class="badge key">11A</span><span class="badge dur">3:34</span></div>
+        <div class="card-meta"><span class="badge bpm">130</span><span class="badge key">11A</span><span class="badge dur">3:34</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="HUMBLE. (SKRILLEX REMIX)" data-artist="Skrillex, Kendrick Lamar" data-playlist="Banger - Phase #1" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/1c/c3/74/1cc37441-d51c-755e-3805-0c8042579782/mzaf_2255295071365958312.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -352,7 +355,7 @@
       <div class="card-info">
         <div class="card-title" title="HUMBLE. (SKRILLEX REMIX)">HUMBLE. (SKRILLEX REMIX)</div>
         <div class="card-artist">Skrillex, Kendrick Lamar</div>
-        <div class="card-meta"><span class="badge bpm">150.0</span><span class="badge key">12A</span><span class="badge dur">2:36</span></div>
+        <div class="card-meta"><span class="badge bpm">150</span><span class="badge key">12A</span><span class="badge dur">2:36</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="WHERE IS MY HUSBAND! - Mark Anthony Shivers Edit" data-artist="RAYE" data-playlist="Banger - Phase #1">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -360,7 +363,7 @@
       <div class="card-info">
         <div class="card-title" title="WHERE IS MY HUSBAND! - Mark Anthony Shivers Edit">WHERE IS MY HUSBAND! - Mark Anthony Shivers Edit</div>
         <div class="card-artist">RAYE</div>
-        <div class="card-meta"><span class="badge bpm">125.0</span><span class="badge key">4A</span><span class="badge dur">3:35</span></div>
+        <div class="card-meta"><span class="badge bpm">125</span><span class="badge key">4A</span><span class="badge dur">3:35</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Singapur (Intro)" data-artist="El Alfa  " data-playlist="Banger - Phase #1">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -368,7 +371,162 @@
       <div class="card-info">
         <div class="card-title" title="Singapur (Intro)">Singapur (Intro)</div>
         <div class="card-artist">El Alfa  </div>
-        <div class="card-meta"><span class="badge bpm">113.0</span><span class="badge key">7A</span><span class="badge dur">3:36</span></div>
+        <div class="card-meta"><span class="badge bpm">113</span><span class="badge key">7A</span><span class="badge dur">3:36</span></div>
+      </div>
+    </div></div>
+    </section><section class="playlist-section" id="Banger---Phase-2">
+      <h2>Banger - Phase #2 <span class="count">19 Songs</span></h2>
+      <div class="cards"><div class="card" onclick="toggleSong(this)" data-title="CWWDBI (Original Mix)" data-artist="Somewhen, Haftbefehl" data-playlist="Banger - Phase #2">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="CWWDBI (Original Mix)">CWWDBI (Original Mix)</div>
+        <div class="card-artist">Somewhen, Haftbefehl</div>
+        <div class="card-meta"><span class="badge bpm">160</span><span class="badge key">11A</span><span class="badge dur">3:19</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="I Adore You - Goshfather Remix" data-artist="HUGEL, Topic &amp; Arash ft. Daecolm" data-playlist="Banger - Phase #2">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="I Adore You - Goshfather Remix">I Adore You - Goshfather Remix</div>
+        <div class="card-artist">HUGEL, Topic &amp; Arash ft. Daecolm</div>
+        <div class="card-meta"><span class="badge bpm">125</span><span class="badge key">12A</span><span class="badge dur">4:25</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Empire State Of Mind - Krooner Remix" data-artist="JAY-Z ft. Alicia Keys" data-playlist="Banger - Phase #2">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Empire State Of Mind - Krooner Remix">Empire State Of Mind - Krooner Remix</div>
+        <div class="card-artist">JAY-Z ft. Alicia Keys</div>
+        <div class="card-meta"><span class="badge bpm">120</span><span class="badge key">2A</span><span class="badge dur">4:07</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="On The Floor - Bryan Salu &amp; JUDO Massive Remix" data-artist="Jennifer Lopez" data-playlist="Banger - Phase #2">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="On The Floor - Bryan Salu &amp; JUDO Massive Remix">On The Floor - Bryan Salu &amp; JUDO Massive Remix</div>
+        <div class="card-artist">Jennifer Lopez</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">5B</span><span class="badge dur">4:02</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Bad Dreams - Effendi Remix" data-artist="Teddy Swims" data-playlist="Banger - Phase #2">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Bad Dreams - Effendi Remix">Bad Dreams - Effendi Remix</div>
+        <div class="card-artist">Teddy Swims</div>
+        <div class="card-meta"><span class="badge bpm">124</span><span class="badge key">5A</span><span class="badge dur">6:31</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Tití Me Preguntó - Esther Anaya &amp; Altruist Remix (Dirty)" data-artist="Bad Bunny" data-playlist="Banger - Phase #2">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Tití Me Preguntó - Esther Anaya &amp; Altruist Remix (Dirty)">Tití Me Preguntó - Esther Anaya &amp; Altruist Remix (Dirty)</div>
+        <div class="card-artist">Bad Bunny</div>
+        <div class="card-meta"><span class="badge bpm">125</span><span class="badge key">5A</span><span class="badge dur">4:30</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="EoO (Juos Edit) (Juos Edit)" data-artist="Bad Bunny" data-playlist="Banger - Phase #2">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="EoO (Juos Edit) (Juos Edit)">EoO (Juos Edit) (Juos Edit)</div>
+        <div class="card-artist">Bad Bunny</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">5A</span><span class="badge dur">5:11</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Without Me - Joe Stone Remix (Clean)" data-artist="Eminem" data-playlist="Banger - Phase #2">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Without Me - Joe Stone Remix (Clean)">Without Me - Joe Stone Remix (Clean)</div>
+        <div class="card-artist">Eminem</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">6A</span><span class="badge dur">3:59</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Scream &amp; Shout - LOOZBONE Remix (Dirty)" data-artist="will.i.am ft. Britney Spears" data-playlist="Banger - Phase #2">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Scream &amp; Shout - LOOZBONE Remix (Dirty)">Scream &amp; Shout - LOOZBONE Remix (Dirty)</div>
+        <div class="card-artist">will.i.am ft. Britney Spears</div>
+        <div class="card-meta"><span class="badge bpm">130</span><span class="badge key">6A</span><span class="badge dur">5:25</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="First Class - Gin &amp; Sonic Remix (Dirty)" data-artist="Jack Harlow" data-playlist="Banger - Phase #2">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="First Class - Gin &amp; Sonic Remix (Dirty)">First Class - Gin &amp; Sonic Remix (Dirty)</div>
+        <div class="card-artist">Jack Harlow</div>
+        <div class="card-meta"><span class="badge bpm">124</span><span class="badge key">6A</span><span class="badge dur">4:12</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Shut Up - MATEK Remix (Dirty)" data-artist="Black Eyed Peas" data-playlist="Banger - Phase #2">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Shut Up - MATEK Remix (Dirty)">Shut Up - MATEK Remix (Dirty)</div>
+        <div class="card-artist">Black Eyed Peas</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">7A</span><span class="badge dur">3:56</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Watermelon Sugar x Move Your Body (LE x KNDR Mashup)" data-artist="Harry Styles" data-playlist="Banger - Phase #2">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Watermelon Sugar x Move Your Body (LE x KNDR Mashup)">Watermelon Sugar x Move Your Body (LE x KNDR Mashup)</div>
+        <div class="card-artist">Harry Styles</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">7A</span><span class="badge dur">2:09</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Crazy In Love" data-artist="MATTN &amp; Noel Holler" data-playlist="Banger - Phase #2">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Crazy In Love">Crazy In Love</div>
+        <div class="card-artist">MATTN &amp; Noel Holler</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">7A</span><span class="badge dur">3:20</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Show Me Love - Ced vs Emmaculate Remix" data-artist="Robin S." data-playlist="Banger - Phase #2">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Show Me Love - Ced vs Emmaculate Remix">Show Me Love - Ced vs Emmaculate Remix</div>
+        <div class="card-artist">Robin S.</div>
+        <div class="card-meta"><span class="badge bpm">125</span><span class="badge key">7A</span><span class="badge dur">6:31</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Le Freak - ATCG Remix" data-artist="CHIC" data-playlist="Banger - Phase #2">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Le Freak - ATCG Remix">Le Freak - ATCG Remix</div>
+        <div class="card-artist">CHIC</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">8A</span><span class="badge dur">3:59</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Pepas (Remixes) (Tiesto Remix)" data-artist="Farruko" data-playlist="Banger - Phase #2">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Pepas (Remixes) (Tiesto Remix)">Pepas (Remixes) (Tiesto Remix)</div>
+        <div class="card-artist">Farruko</div>
+        <div class="card-meta"><span class="badge bpm">130</span><span class="badge key">8A</span><span class="badge dur">3:42</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Let&#39;s Go x Everybody (WILLO Mashup)" data-artist="Jaden Bojsen, David Guetta, Backstreet Boys" data-playlist="Banger - Phase #2">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Let&#39;s Go x Everybody (WILLO Mashup)">Let&#39;s Go x Everybody (WILLO Mashup)</div>
+        <div class="card-artist">Jaden Bojsen, David Guetta, Backstreet Boys</div>
+        <div class="card-meta"><span class="badge bpm">130</span><span class="badge key">8A</span><span class="badge dur">3:41</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="The Time (Dirty Bit)" data-artist="Black Eyed Peas" data-playlist="Banger - Phase #2">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="The Time (Dirty Bit)">The Time (Dirty Bit)</div>
+        <div class="card-artist">Black Eyed Peas</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">9A</span><span class="badge dur">5:07</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="One More Time - Valmer Remix" data-artist="Daft Punk" data-playlist="Banger - Phase #2">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="One More Time - Valmer Remix">One More Time - Valmer Remix</div>
+        <div class="card-artist">Daft Punk</div>
+        <div class="card-meta"><span class="badge bpm">129</span><span class="badge key">9B</span><span class="badge dur">5:12</span></div>
       </div>
     </div></div>
     </section><section class="playlist-section" id="Alman---TekSchlag-2">
@@ -379,7 +537,7 @@
       <div class="card-info">
         <div class="card-title" title="Pink">Pink</div>
         <div class="card-artist">Vanessa Mai &amp; HBz</div>
-        <div class="card-meta"><span class="badge bpm">150.0</span><span class="badge key">5A</span><span class="badge dur">3:31</span></div>
+        <div class="card-meta"><span class="badge bpm">150</span><span class="badge key">5A</span><span class="badge dur">3:31</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Cordula Grün" data-artist="Die Draufgänger" data-playlist="Alman - TekSchlag #2" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/61/03/15/6103156a-b1af-3241-6d7a-abc0fe394f0c/mzaf_4227383606542163979.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -387,7 +545,7 @@
       <div class="card-info">
         <div class="card-title" title="Cordula Grün">Cordula Grün</div>
         <div class="card-artist">Die Draufgänger</div>
-        <div class="card-meta"><span class="badge bpm">123.0</span><span class="badge key">6B</span><span class="badge dur">3:09</span></div>
+        <div class="card-meta"><span class="badge bpm">123</span><span class="badge key">6B</span><span class="badge dur">3:09</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="APRE SKI (DJcity Intro)" data-artist="Tream &amp; Gzuz" data-playlist="Alman - TekSchlag #2" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/bc/92/92/bc929291-9570-b23f-54a9-97fa9ca5bee5/mzaf_10615365935077484116.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -395,7 +553,7 @@
       <div class="card-info">
         <div class="card-title" title="APRE SKI (DJcity Intro)">APRE SKI (DJcity Intro)</div>
         <div class="card-artist">Tream &amp; Gzuz</div>
-        <div class="card-meta"><span class="badge bpm">148.0</span><span class="badge key">7A</span><span class="badge dur">3:01</span></div>
+        <div class="card-meta"><span class="badge bpm">148</span><span class="badge key">7A</span><span class="badge dur">3:01</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Gute Laune" data-artist="Killermichel; selina" data-playlist="Alman - TekSchlag #2" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/42/d7/07/42d70715-404a-53ec-04a5-475a28598ff1/mzaf_8981072719752534468.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -403,7 +561,7 @@
       <div class="card-info">
         <div class="card-title" title="Gute Laune">Gute Laune</div>
         <div class="card-artist">Killermichel; selina</div>
-        <div class="card-meta"><span class="badge bpm">140.0</span><span class="badge key">7A</span><span class="badge dur">2:41</span></div>
+        <div class="card-meta"><span class="badge bpm">140</span><span class="badge key">7A</span><span class="badge dur">2:41</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Mädchen Auf Dem Pferd" data-artist="Luca-Dante Spadafora, Niklas Dee, Octavian, Peter Plate &amp; Ulf Leo Sommer" data-playlist="Alman - TekSchlag #2" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/ff/d3/d0/ffd3d053-4fff-5777-b484-1b17ea5c5bd0/mzaf_11881195123054967178.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -411,7 +569,7 @@
       <div class="card-info">
         <div class="card-title" title="Mädchen Auf Dem Pferd">Mädchen Auf Dem Pferd</div>
         <div class="card-artist">Luca-Dante Spadafora, Niklas Dee, Octavian, Peter Plate &amp; Ulf Leo Sommer</div>
-        <div class="card-meta"><span class="badge bpm">170.0</span><span class="badge key">8A</span><span class="badge dur">2:34</span></div>
+        <div class="card-meta"><span class="badge bpm">170</span><span class="badge key">8A</span><span class="badge dur">2:34</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Major Tom (Völlig losgelöst)" data-artist="MXM; Chris van Dutch" data-playlist="Alman - TekSchlag #2" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/bf/da/72/bfda72d7-171e-85db-98ed-8250b85b139d/mzaf_12595986048038131494.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -419,7 +577,7 @@
       <div class="card-info">
         <div class="card-title" title="Major Tom (Völlig losgelöst)">Major Tom (Völlig losgelöst)</div>
         <div class="card-artist">MXM; Chris van Dutch</div>
-        <div class="card-meta"><span class="badge bpm">165.0</span><span class="badge key">9A</span><span class="badge dur">4:00</span></div>
+        <div class="card-meta"><span class="badge bpm">165</span><span class="badge key">9A</span><span class="badge dur">4:00</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Ein Kompliment" data-artist="Sportfreunde Stiller" data-playlist="Alman - TekSchlag #2" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/57/9a/9e/579a9eca-a9a3-a403-7fbd-7f25b7c70910/mzaf_10306102830693564888.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -427,7 +585,7 @@
       <div class="card-info">
         <div class="card-title" title="Ein Kompliment">Ein Kompliment</div>
         <div class="card-artist">Sportfreunde Stiller</div>
-        <div class="card-meta"><span class="badge bpm">159.0</span><span class="badge key">9A</span><span class="badge dur">3:17</span></div>
+        <div class="card-meta"><span class="badge bpm">159</span><span class="badge key">9A</span><span class="badge dur">3:17</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Durch Den Monsun" data-artist="VIZE, Tokio Hotel &amp; Fourty" data-playlist="Alman - TekSchlag #2" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/92/7e/f5/927ef519-7275-888b-59dd-e9ff32a61c2c/mzaf_13728938014965694963.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -435,7 +593,7 @@
       <div class="card-info">
         <div class="card-title" title="Durch Den Monsun">Durch Den Monsun</div>
         <div class="card-artist">VIZE, Tokio Hotel &amp; Fourty</div>
-        <div class="card-meta"><span class="badge bpm">150.0</span><span class="badge key">9A</span><span class="badge dur">2:33</span></div>
+        <div class="card-meta"><span class="badge bpm">150</span><span class="badge key">9A</span><span class="badge dur">2:33</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Nur geträumt" data-artist="Nena" data-playlist="Alman - TekSchlag #2" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/77/32/e1/7732e1a0-b8e6-07de-173c-7129fcba2475/mzaf_18306062913064340955.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -451,7 +609,7 @@
       <div class="card-info">
         <div class="card-title" title="Wackelkontakt">Wackelkontakt</div>
         <div class="card-artist">Oimara</div>
-        <div class="card-meta"><span class="badge bpm">170.0</span><span class="badge key">8A</span><span class="badge dur">2:47</span></div>
+        <div class="card-meta"><span class="badge bpm">170</span><span class="badge key">8A</span><span class="badge dur">2:47</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Hulapalu" data-artist="Andreas Gabalier" data-playlist="Alman - TekSchlag #2" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/6a/47/3d/6a473d72-a7d4-a8d3-9c9e-1ad2cb307936/mzaf_661270755811602979.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -459,7 +617,7 @@
       <div class="card-info">
         <div class="card-title" title="Hulapalu">Hulapalu</div>
         <div class="card-artist">Andreas Gabalier</div>
-        <div class="card-meta"><span class="badge bpm">125.0</span><span class="badge key">8A</span><span class="badge dur">3:00</span></div>
+        <div class="card-meta"><span class="badge bpm">125</span><span class="badge key">8A</span><span class="badge dur">3:00</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Friesenjung - PRIDE &amp; PARKER Remix" data-artist="Ski Aggu, Joost &amp; Otto Waalkes" data-playlist="Alman - TekSchlag #2" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/26/7c/ca/267cca09-57e0-fbf7-d343-cc2d98465d1f/mzaf_16653790302217645094.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -467,7 +625,7 @@
       <div class="card-info">
         <div class="card-title" title="Friesenjung - PRIDE &amp; PARKER Remix">Friesenjung - PRIDE &amp; PARKER Remix</div>
         <div class="card-artist">Ski Aggu, Joost &amp; Otto Waalkes</div>
-        <div class="card-meta"><span class="badge bpm">140.0</span><span class="badge key">10A</span><span class="badge dur">4:06</span></div>
+        <div class="card-meta"><span class="badge bpm">140</span><span class="badge key">10A</span><span class="badge dur">4:06</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="99 Luftballons" data-artist="Harris &amp; Ford" data-playlist="Alman - TekSchlag #2" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview112/v4/1b/97/46/1b97469b-0c16-3340-b4ef-3f86fe79623f/mzaf_12254257881416524540.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -475,7 +633,7 @@
       <div class="card-info">
         <div class="card-title" title="99 Luftballons">99 Luftballons</div>
         <div class="card-artist">Harris &amp; Ford</div>
-        <div class="card-meta"><span class="badge bpm">100.0</span><span class="badge key">11A</span><span class="badge dur">2:05</span></div>
+        <div class="card-meta"><span class="badge bpm">100</span><span class="badge key">11A</span><span class="badge dur">2:05</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Bisschen Spass" data-artist="HBz, LIZOT &amp; 2 Engel &amp; Charlie" data-playlist="Alman - TekSchlag #2">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -483,7 +641,7 @@
       <div class="card-info">
         <div class="card-title" title="Bisschen Spass">Bisschen Spass</div>
         <div class="card-artist">HBz, LIZOT &amp; 2 Engel &amp; Charlie</div>
-        <div class="card-meta"><span class="badge bpm">152.0</span><span class="badge key">12A</span><span class="badge dur">2:18</span></div>
+        <div class="card-meta"><span class="badge bpm">152</span><span class="badge key">12A</span><span class="badge dur">2:18</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Wir sind alle gestört aber geil" data-artist="Tim Toupet" data-playlist="Alman - TekSchlag #2">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -491,7 +649,7 @@
       <div class="card-info">
         <div class="card-title" title="Wir sind alle gestört aber geil">Wir sind alle gestört aber geil</div>
         <div class="card-artist">Tim Toupet</div>
-        <div class="card-meta"><span class="badge bpm">138.0</span><span class="badge key">12A</span><span class="badge dur">3:07</span></div>
+        <div class="card-meta"><span class="badge bpm">138</span><span class="badge key">12A</span><span class="badge dur">3:07</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Sarà Perché Ti Amo - Scotty Remix (Euro 2024 Version)" data-artist="Nik Stone, Tonec &amp; Lazard" data-playlist="Alman - TekSchlag #2" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/76/cd/b9/76cdb916-9e36-4377-e84e-588a92c34a4e/mzaf_6629018173716063107.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -499,7 +657,7 @@
       <div class="card-info">
         <div class="card-title" title="Sarà Perché Ti Amo - Scotty Remix (Euro 2024 Version)">Sarà Perché Ti Amo - Scotty Remix (Euro 2024 Version)</div>
         <div class="card-artist">Nik Stone, Tonec &amp; Lazard</div>
-        <div class="card-meta"><span class="badge bpm">150.0</span><span class="badge key">12B</span><span class="badge dur">3:29</span></div>
+        <div class="card-meta"><span class="badge bpm">150</span><span class="badge key">12B</span><span class="badge dur">3:29</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Mama Hat Gesagt - FEIER &amp; EIS Remix" data-artist="SDP, Sido &amp; Esther Graf" data-playlist="Alman - TekSchlag #2" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/31/20/f8/3120f8de-d53e-da0d-7285-748a8b6012af/mzaf_5128739479203685598.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -507,7 +665,7 @@
       <div class="card-info">
         <div class="card-title" title="Mama Hat Gesagt - FEIER &amp; EIS Remix">Mama Hat Gesagt - FEIER &amp; EIS Remix</div>
         <div class="card-artist">SDP, Sido &amp; Esther Graf</div>
-        <div class="card-meta"><span class="badge bpm">175.0</span><span class="badge key">12B</span><span class="badge dur">4:03</span></div>
+        <div class="card-meta"><span class="badge bpm">175</span><span class="badge key">12B</span><span class="badge dur">4:03</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Dorfkinder" data-artist="Finnel" data-playlist="Alman - TekSchlag #2" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/d0/26/e6/d026e67d-7f2a-6959-9db1-0afdf2c4d307/mzaf_15737952432504936733.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -515,7 +673,7 @@
       <div class="card-info">
         <div class="card-title" title="Dorfkinder">Dorfkinder</div>
         <div class="card-artist">Finnel</div>
-        <div class="card-meta"><span class="badge bpm">140.0</span><span class="badge key">1A</span><span class="badge dur">2:27</span></div>
+        <div class="card-meta"><span class="badge bpm">140</span><span class="badge key">1A</span><span class="badge dur">2:27</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Willst Du - Achtabahn Remix" data-artist="Achtabahn ft. Alligatoah" data-playlist="Alman - TekSchlag #2">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -523,7 +681,7 @@
       <div class="card-info">
         <div class="card-title" title="Willst Du - Achtabahn Remix">Willst Du - Achtabahn Remix</div>
         <div class="card-artist">Achtabahn ft. Alligatoah</div>
-        <div class="card-meta"><span class="badge bpm">150.0</span><span class="badge key">1B</span><span class="badge dur">1:46</span></div>
+        <div class="card-meta"><span class="badge bpm">150</span><span class="badge key">1B</span><span class="badge dur">1:46</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Mama Laudaaa" data-artist="Almklausi Specktakel" data-playlist="Alman - TekSchlag #2" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/e2/3a/96/e23a9654-de16-b9b2-1841-4af52a2a53f0/mzaf_55961772288471622.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -531,7 +689,7 @@
       <div class="card-info">
         <div class="card-title" title="Mama Laudaaa">Mama Laudaaa</div>
         <div class="card-artist">Almklausi Specktakel</div>
-        <div class="card-meta"><span class="badge bpm">140.0</span><span class="badge key">2A</span><span class="badge dur">3:35</span></div>
+        <div class="card-meta"><span class="badge bpm">140</span><span class="badge key">2A</span><span class="badge dur">3:35</span></div>
       </div>
     </div></div>
     </section><section class="playlist-section" id="MJ-x-Groove">
@@ -542,7 +700,7 @@
       <div class="card-info">
         <div class="card-title" title="S&amp;M - Jablonski vs James Hype Alone Edit">S&amp;M - Jablonski vs James Hype Alone Edit</div>
         <div class="card-artist">Rihanna</div>
-        <div class="card-meta"><span class="badge bpm">130.0</span><span class="badge key">2A</span><span class="badge dur">5:03</span></div>
+        <div class="card-meta"><span class="badge bpm">130</span><span class="badge key">2A</span><span class="badge dur">5:03</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Bad (Bask Edit) (Bask Edit)" data-artist="Michael Jackson" data-playlist="MJ x Groove" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/6e/fd/d8/6efdd854-cdd6-7a9c-829c-7ab8f26255da/mzaf_12994914028555183905.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -550,7 +708,7 @@
       <div class="card-info">
         <div class="card-title" title="Bad (Bask Edit) (Bask Edit)">Bad (Bask Edit) (Bask Edit)</div>
         <div class="card-artist">Michael Jackson</div>
-        <div class="card-meta"><span class="badge bpm">130.0</span><span class="badge key">3A</span><span class="badge dur">5:18</span></div>
+        <div class="card-meta"><span class="badge bpm">130</span><span class="badge key">3A</span><span class="badge dur">5:18</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Don&#39;t Cha - Colin Jay Think About Us Edit (Intro - Dirty)" data-artist="The Pussycat Dolls &amp; Busta Rhymes" data-playlist="MJ x Groove" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/37/0d/f1/370df152-a1f0-9f91-1d25-4d3907a4c5e4/mzaf_12113646064665681076.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -558,7 +716,7 @@
       <div class="card-info">
         <div class="card-title" title="Don&#39;t Cha - Colin Jay Think About Us Edit (Intro - Dirty)">Don&#39;t Cha - Colin Jay Think About Us Edit (Intro - Dirty)</div>
         <div class="card-artist">The Pussycat Dolls &amp; Busta Rhymes</div>
-        <div class="card-meta"><span class="badge bpm">128.0</span><span class="badge key">3B</span><span class="badge dur">4:30</span></div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">3B</span><span class="badge dur">4:30</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Umbrella - Glazur &amp; XM Remix" data-artist="Rihanna" data-playlist="MJ x Groove">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -566,7 +724,7 @@
       <div class="card-info">
         <div class="card-title" title="Umbrella - Glazur &amp; XM Remix">Umbrella - Glazur &amp; XM Remix</div>
         <div class="card-artist">Rihanna</div>
-        <div class="card-meta"><span class="badge bpm">124.0</span><span class="badge key">3A</span><span class="badge dur">3:39</span></div>
+        <div class="card-meta"><span class="badge bpm">124</span><span class="badge key">3A</span><span class="badge dur">3:39</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="APT. (WIN WIN Private Mix)" data-artist="Rose, Bruno Mars" data-playlist="MJ x Groove">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -574,7 +732,7 @@
       <div class="card-info">
         <div class="card-title" title="APT. (WIN WIN Private Mix)">APT. (WIN WIN Private Mix)</div>
         <div class="card-artist">Rose, Bruno Mars</div>
-        <div class="card-meta"><span class="badge bpm">128.0</span><span class="badge key">3A</span><span class="badge dur">3:28</span></div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">3A</span><span class="badge dur">3:28</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="The Way You Make Me Feel (Anthem Kingz Refresh) (Anthem Kingz Refresh)" data-artist="Michael Jackson, Anthem Kingz" data-playlist="MJ x Groove">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -582,7 +740,7 @@
       <div class="card-info">
         <div class="card-title" title="The Way You Make Me Feel (Anthem Kingz Refresh) (Anthem Kingz Refresh)">The Way You Make Me Feel (Anthem Kingz Refresh) (Anthem Kingz Refresh)</div>
         <div class="card-artist">Michael Jackson, Anthem Kingz</div>
-        <div class="card-meta"><span class="badge bpm">125.0</span><span class="badge key">4A</span><span class="badge dur">3:35</span></div>
+        <div class="card-meta"><span class="badge bpm">125</span><span class="badge key">4A</span><span class="badge dur">3:35</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Wanna Be Startin&#39; Somethin&#39; (Remix) (Viktorlof Club Mix)" data-artist="Michael Jackson" data-playlist="MJ x Groove" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/81/9a/e4/819ae4ff-12b7-35c4-6fca-2923fb16852c/mzaf_10788836398273150393.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -590,7 +748,7 @@
       <div class="card-info">
         <div class="card-title" title="Wanna Be Startin&#39; Somethin&#39; (Remix) (Viktorlof Club Mix)">Wanna Be Startin&#39; Somethin&#39; (Remix) (Viktorlof Club Mix)</div>
         <div class="card-artist">Michael Jackson</div>
-        <div class="card-meta"><span class="badge bpm">128.0</span><span class="badge key">6A</span><span class="badge dur">3:33</span></div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">6A</span><span class="badge dur">3:33</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Beat It (Remix) (Federiggio &amp; Asciutto Remix)" data-artist="Michael Jackson" data-playlist="MJ x Groove" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/88/cd/46/88cd46bd-dba7-1dc2-a63b-e8c111ac4fc3/mzaf_4042555053237612653.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -598,7 +756,7 @@
       <div class="card-info">
         <div class="card-title" title="Beat It (Remix) (Federiggio &amp; Asciutto Remix)">Beat It (Remix) (Federiggio &amp; Asciutto Remix)</div>
         <div class="card-artist">Michael Jackson</div>
-        <div class="card-meta"><span class="badge bpm">130.0</span><span class="badge key">7A</span><span class="badge dur">4:46</span></div>
+        <div class="card-meta"><span class="badge bpm">130</span><span class="badge key">7A</span><span class="badge dur">4:46</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Freed From Desire (Diplo Edit Intro Clean)" data-artist="Gala, Diplo" data-playlist="MJ x Groove" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/4e/ca/56/4eca5677-6365-3139-2e19-e1ac65bebc25/mzaf_3606391054930657542.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -606,7 +764,7 @@
       <div class="card-info">
         <div class="card-title" title="Freed From Desire (Diplo Edit Intro Clean)">Freed From Desire (Diplo Edit Intro Clean)</div>
         <div class="card-artist">Gala, Diplo</div>
-        <div class="card-meta"><span class="badge bpm">131.0</span><span class="badge key">7A</span><span class="badge dur">4:29</span></div>
+        <div class="card-meta"><span class="badge bpm">131</span><span class="badge key">7A</span><span class="badge dur">4:29</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Don&#39;t Stop (Remix) (Valmer Club Rework)" data-artist="Michael Jackson" data-playlist="MJ x Groove">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -614,7 +772,7 @@
       <div class="card-info">
         <div class="card-title" title="Don&#39;t Stop (Remix) (Valmer Club Rework)">Don&#39;t Stop (Remix) (Valmer Club Rework)</div>
         <div class="card-artist">Michael Jackson</div>
-        <div class="card-meta"><span class="badge bpm">129.0</span><span class="badge key">8A</span><span class="badge dur">4:45</span></div>
+        <div class="card-meta"><span class="badge bpm">129</span><span class="badge key">8A</span><span class="badge dur">4:45</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="You Rock My World (Remix) (Tasty Or Not Remix)" data-artist="Michael Jackson" data-playlist="MJ x Groove">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -622,7 +780,7 @@
       <div class="card-info">
         <div class="card-title" title="You Rock My World (Remix) (Tasty Or Not Remix)">You Rock My World (Remix) (Tasty Or Not Remix)</div>
         <div class="card-artist">Michael Jackson</div>
-        <div class="card-meta"><span class="badge bpm">126.0</span><span class="badge key">9A</span><span class="badge dur">4:13</span></div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">9A</span><span class="badge dur">4:13</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Only Girl (In The World) - BVRNOUT Remix" data-artist="Rihanna" data-playlist="MJ x Groove">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -630,7 +788,7 @@
       <div class="card-info">
         <div class="card-title" title="Only Girl (In The World) - BVRNOUT Remix">Only Girl (In The World) - BVRNOUT Remix</div>
         <div class="card-artist">Rihanna</div>
-        <div class="card-meta"><span class="badge bpm">132.0</span><span class="badge key">10A</span><span class="badge dur">4:26</span></div>
+        <div class="card-meta"><span class="badge bpm">132</span><span class="badge key">10A</span><span class="badge dur">4:26</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Don&#39;t Stop The Music - Denero Remix" data-artist="Rihanna" data-playlist="MJ x Groove">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -638,7 +796,7 @@
       <div class="card-info">
         <div class="card-title" title="Don&#39;t Stop The Music - Denero Remix">Don&#39;t Stop The Music - Denero Remix</div>
         <div class="card-artist">Rihanna</div>
-        <div class="card-meta"><span class="badge bpm">127.0</span><span class="badge key">11A</span><span class="badge dur">3:32</span></div>
+        <div class="card-meta"><span class="badge bpm">127</span><span class="badge key">11A</span><span class="badge dur">3:32</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Billie Jean (Remix) (Mishell &amp; Oi Edit)" data-artist="Michael Jackson" data-playlist="MJ x Groove" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/dc/bc/8a/dcbc8a3e-4ce1-c00d-cc02-eda2212053c7/mzaf_8347559338388601510.plus.aac.p.m4a">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -646,7 +804,7 @@
       <div class="card-info">
         <div class="card-title" title="Billie Jean (Remix) (Mishell &amp; Oi Edit)">Billie Jean (Remix) (Mishell &amp; Oi Edit)</div>
         <div class="card-artist">Michael Jackson</div>
-        <div class="card-meta"><span class="badge bpm">126.0</span><span class="badge key">12A</span><span class="badge dur">4:04</span></div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">12A</span><span class="badge dur">4:04</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Billie Jean (Remix) (Nicola Pigini &amp; Elion Remix)" data-artist="Michael Jackson" data-playlist="MJ x Groove">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -654,7 +812,7 @@
       <div class="card-info">
         <div class="card-title" title="Billie Jean (Remix) (Nicola Pigini &amp; Elion Remix)">Billie Jean (Remix) (Nicola Pigini &amp; Elion Remix)</div>
         <div class="card-artist">Michael Jackson</div>
-        <div class="card-meta"><span class="badge bpm">126.0</span><span class="badge key">11A</span><span class="badge dur">5:42</span></div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">11A</span><span class="badge dur">5:42</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Pon De Replay - RUGGED Remix" data-artist="Rihanna" data-playlist="MJ x Groove">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -662,7 +820,7 @@
       <div class="card-info">
         <div class="card-title" title="Pon De Replay - RUGGED Remix">Pon De Replay - RUGGED Remix</div>
         <div class="card-artist">Rihanna</div>
-        <div class="card-meta"><span class="badge bpm">120.0</span><span class="badge key">11A</span><span class="badge dur">2:40</span></div>
+        <div class="card-meta"><span class="badge bpm">120</span><span class="badge key">11A</span><span class="badge dur">2:40</span></div>
       </div>
     </div><div class="card" onclick="toggleSong(this)" data-title="Thriller [BVRNOUT Haunted Remix] (Intro Dirty)" data-artist="Michael Jackson" data-playlist="MJ x Groove">
       <div class="card-check"><span class="check-icon">✕</span></div>
@@ -670,11 +828,587 @@
       <div class="card-info">
         <div class="card-title" title="Thriller [BVRNOUT Haunted Remix] (Intro Dirty)">Thriller [BVRNOUT Haunted Remix] (Intro Dirty)</div>
         <div class="card-artist">Michael Jackson</div>
-        <div class="card-meta"><span class="badge bpm">126.0</span><span class="badge key">12A</span><span class="badge dur">3:53</span></div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">12A</span><span class="badge dur">3:53</span></div>
       </div>
     </div></div>
-    </section></main>
-<div class="share-bar" id="shareBar"><div class="share-bar-info"><div class="share-bar-count" id="shareCount">0 Songs markiert</div><div class="share-bar-sub">Diese Songs passen nicht</div></div><div class="share-actions"><button class="btn-reset" onclick="resetAll()">Zurücksetzen</button><button class="btn-share" onclick="shareSelection()"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg> Teilen</button></div></div>
-<div class="toast" id="toast"></div>
-<script>let currentAudio=null,currentBtn=null;function playPreview(e,btn){e.stopPropagation();const url=btn.closest('.card').dataset.preview;if(!url)return;if(currentAudio&&!currentAudio.paused){currentAudio.pause();if(currentBtn)currentBtn.classList.remove('pb-playing','pb-loading','pb-error');if(currentBtn===btn){currentAudio=null;currentBtn=null;return}}btn.classList.remove('pb-playing','pb-error');btn.classList.add('pb-loading');const audio=new Audio(url);currentAudio=audio;currentBtn=btn;audio.addEventListener('canplay',()=>{if(currentAudio!==audio)return;btn.classList.remove('pb-loading');btn.classList.add('pb-playing');audio.play()});audio.addEventListener('ended',()=>{btn.classList.remove('pb-playing','pb-loading');currentAudio=null;currentBtn=null});audio.addEventListener('error',()=>{btn.classList.remove('pb-loading','pb-playing');btn.classList.add('pb-error');setTimeout(()=>btn.classList.remove('pb-error'),2000);currentAudio=null;currentBtn=null});audio.load()}function toggleSong(card){card.classList.toggle('selected');updateShareBar()}function updateShareBar(){const sel=document.querySelectorAll('.card.selected');document.getElementById('shareCount').textContent=sel.length+' Song'+(sel.length!==1?'s':'')+' markiert';document.getElementById('shareBar').classList.toggle('visible',sel.length>0)}function resetAll(){document.querySelectorAll('.card.selected').forEach(c=>c.classList.remove('selected'));updateShareBar()}function shareSelection(){const selected=[...document.querySelectorAll('.card.selected')];if(!selected.length)return;const byPlaylist={};selected.forEach(card=>{const pl=card.dataset.playlist;if(!byPlaylist[pl])byPlaylist[pl]=[];byPlaylist[pl].push(card.dataset.title+' — '+card.dataset.artist)});let text='Diese Songs passen nicht zur Hochzeit GardenCity:\n\n';for(const[pl,songs]of Object.entries(byPlaylist)){text+=pl+':\n';songs.forEach(s=>text+='  ✕ '+s+'\n');text+='\n'}if(navigator.share){navigator.share({title:'Hochzeiten GardenCity — Nicht-Wunschliste',text}).catch(()=>{})}else{navigator.clipboard.writeText(text).then(()=>showToast('In Zwischenablage kopiert!')).catch(()=>{const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);showToast('In Zwischenablage kopiert!')})}}function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500)}</script>
-</body></html>
+    </section><section class="playlist-section" id="Festival-Flash">
+      <h2>Festival-Flash <span class="count">12 Songs</span></h2>
+      <div class="cards"><div class="card" onclick="toggleSong(this)" data-title="Macarena (Extended Mix)" data-artist="Raf Marchesini, Mario Donsi, Tommy Enfasy" data-playlist="Festival-Flash">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Macarena (Extended Mix)">Macarena (Extended Mix)</div>
+        <div class="card-artist">Raf Marchesini, Mario Donsi, Tommy Enfasy</div>
+        <div class="card-meta"><span class="badge bpm">124</span><span class="badge key">1A</span><span class="badge dur">4:04</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Friday (DJcity Intro - Dirty)" data-artist="Timmy Trumpet &amp; Blinkie ft. Bright Lights" data-playlist="Festival-Flash">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Friday (DJcity Intro - Dirty)">Friday (DJcity Intro - Dirty)</div>
+        <div class="card-artist">Timmy Trumpet &amp; Blinkie ft. Bright Lights</div>
+        <div class="card-meta"><span class="badge bpm">121</span><span class="badge key">2A</span><span class="badge dur">3:59</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Wtf! Satisfaction (Asil Mashup Intro Clean)" data-artist="David Guetta, Benny Benassi, Sak Noel" data-playlist="Festival-Flash">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Wtf! Satisfaction (Asil Mashup Intro Clean)">Wtf! Satisfaction (Asil Mashup Intro Clean)</div>
+        <div class="card-artist">David Guetta, Benny Benassi, Sak Noel</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">3A</span><span class="badge dur">3:41</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="You &amp; Me - Rivo Remix" data-artist="Disclosure Rivo Eliza Doolittle" data-playlist="Festival-Flash">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="You &amp; Me - Rivo Remix">You &amp; Me - Rivo Remix</div>
+        <div class="card-artist">Disclosure Rivo Eliza Doolittle</div>
+        <div class="card-meta"><span class="badge bpm">122</span><span class="badge key">3A</span><span class="badge dur">3:28</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Cafe Con Ron (Miss Nijhof, Jayson Alanzo &amp; DamieDJ Remix) (Original Mix)" data-artist="Bad Bunny, Los Pleneros De La Cresta" data-playlist="Festival-Flash">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Cafe Con Ron (Miss Nijhof, Jayson Alanzo &amp; DamieDJ Remix) (Original Mix)">Cafe Con Ron (Miss Nijhof, Jayson Alanzo &amp; DamieDJ Remix) (Original Mix)</div>
+        <div class="card-artist">Bad Bunny, Los Pleneros De La Cresta</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">6A</span><span class="badge dur">2:57</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Fire Fire X Innerbloom (Mashup) (Federiggio Coachella Mashup)" data-artist="Shimza, Kasango, AR/Co, RUFUS DU SOL" data-playlist="Festival-Flash">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Fire Fire X Innerbloom (Mashup) (Federiggio Coachella Mashup)">Fire Fire X Innerbloom (Mashup) (Federiggio Coachella Mashup)</div>
+        <div class="card-artist">Shimza, Kasango, AR/Co, RUFUS DU SOL</div>
+        <div class="card-meta"><span class="badge bpm">125</span><span class="badge key">6A</span><span class="badge dur">5:22</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Pepas (Remixes) (Tiesto Remix)" data-artist="Farruko" data-playlist="Festival-Flash">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Pepas (Remixes) (Tiesto Remix)">Pepas (Remixes) (Tiesto Remix)</div>
+        <div class="card-artist">Farruko</div>
+        <div class="card-meta"><span class="badge bpm">130</span><span class="badge key">8A</span><span class="badge dur">3:42</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Let&#39;s Go x Everybody (WILLO Mashup)" data-artist="Jaden Bojsen, David Guetta, Backstreet Boys" data-playlist="Festival-Flash">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Let&#39;s Go x Everybody (WILLO Mashup)">Let&#39;s Go x Everybody (WILLO Mashup)</div>
+        <div class="card-artist">Jaden Bojsen, David Guetta, Backstreet Boys</div>
+        <div class="card-meta"><span class="badge bpm">130</span><span class="badge key">8A</span><span class="badge dur">3:41</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Titi Me Pregunto (DJ Exodus Remix) (Clean)" data-artist="Bad Bunny" data-playlist="Festival-Flash">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Titi Me Pregunto (DJ Exodus Remix) (Clean)">Titi Me Pregunto (DJ Exodus Remix) (Clean)</div>
+        <div class="card-artist">Bad Bunny</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">8B</span><span class="badge dur">2:29</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Candy Shop [Shockz Remix] (Intro Dirty)" data-artist="50 Cent" data-playlist="Festival-Flash">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Candy Shop [Shockz Remix] (Intro Dirty)">Candy Shop [Shockz Remix] (Intro Dirty)</div>
+        <div class="card-artist">50 Cent</div>
+        <div class="card-meta"><span class="badge bpm">130</span><span class="badge key">9A</span><span class="badge dur">2:57</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Gold Digger Bel Mercy (Kent Mashup Banger)" data-artist="Kanye West, Jengi" data-playlist="Festival-Flash">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Gold Digger Bel Mercy (Kent Mashup Banger)">Gold Digger Bel Mercy (Kent Mashup Banger)</div>
+        <div class="card-artist">Kanye West, Jengi</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">9A</span><span class="badge dur">3:09</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Friday (feat. Mufasa &amp; Hypeman) (Dopamine Re-Edit)" data-artist="Riton Nightcrawlers Mufasa &amp; Hypeman" data-playlist="Festival-Flash">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Friday (feat. Mufasa &amp; Hypeman) (Dopamine Re-Edit)">Friday (feat. Mufasa &amp; Hypeman) (Dopamine Re-Edit)</div>
+        <div class="card-artist">Riton Nightcrawlers Mufasa &amp; Hypeman</div>
+        <div class="card-meta"><span class="badge bpm">123.0</span><span class="badge key">11A</span><span class="badge dur">2:49</span></div>
+      </div>
+    </div></div>
+    </section><section class="playlist-section" id="80-bis-X-Dance">
+      <h2>80-bis-X-Dance <span class="count">27 Songs</span></h2>
+      <div class="cards"><div class="card" onclick="toggleSong(this)" data-title="Better Off Alone - Josh Hunter Remix" data-artist="Alice Deejay" data-playlist="80-bis-X-Dance">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Better Off Alone - Josh Hunter Remix">Better Off Alone - Josh Hunter Remix</div>
+        <div class="card-artist">Alice Deejay</div>
+        <div class="card-meta"><span class="badge bpm">130</span><span class="badge key">1A</span><span class="badge dur">4:41</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Wannabe (Division 4 Remix)" data-artist="Spice Girls " data-playlist="80-bis-X-Dance">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Wannabe (Division 4 Remix)">Wannabe (Division 4 Remix)</div>
+        <div class="card-artist">Spice Girls </div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">1A</span><span class="badge dur">5:39</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Stronger (James Jager Remix (Dirty))" data-artist="Kanye West" data-playlist="80-bis-X-Dance">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Stronger (James Jager Remix (Dirty))">Stronger (James Jager Remix (Dirty))</div>
+        <div class="card-artist">Kanye West</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">2A</span><span class="badge dur">3:18</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Take A Chance On Me (Remix) (Bob Shepherd X Da Clubbmaster Re-Edit)" data-artist="Abba" data-playlist="80-bis-X-Dance">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Take A Chance On Me (Remix) (Bob Shepherd X Da Clubbmaster Re-Edit)">Take A Chance On Me (Remix) (Bob Shepherd X Da Clubbmaster Re-Edit)</div>
+        <div class="card-artist">Abba</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">2B</span><span class="badge dur">4:20</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Everybody (Bob Shepherd X Da Clubbmaster Re-Edit) (Bob Shepherd X Da Clubbmaster Re-Edit)" data-artist="Backstreet Boys" data-playlist="80-bis-X-Dance">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Everybody (Bob Shepherd X Da Clubbmaster Re-Edit) (Bob Shepherd X Da Clubbmaster Re-Edit)">Everybody (Bob Shepherd X Da Clubbmaster Re-Edit) (Bob Shepherd X Da Clubbmaster Re-Edit)</div>
+        <div class="card-artist">Backstreet Boys</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">3A</span><span class="badge dur">4:08</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Rhythm Is a Dancer - Freejak Remix" data-artist="Snap!" data-playlist="80-bis-X-Dance">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Rhythm Is a Dancer - Freejak Remix">Rhythm Is a Dancer - Freejak Remix</div>
+        <div class="card-artist">Snap!</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">3A</span><span class="badge dur">4:45</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="24K Magic (Remixes) (Will Freeman Club Mix)" data-artist="Bruno Mars" data-playlist="80-bis-X-Dance">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="24K Magic (Remixes) (Will Freeman Club Mix)">24K Magic (Remixes) (Will Freeman Club Mix)</div>
+        <div class="card-artist">Bruno Mars</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">4A</span><span class="badge dur">3:24</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Uptown Funk (Hypelezz Mashup) (Intro Clean)" data-artist="Bruno Mars" data-playlist="80-bis-X-Dance">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Uptown Funk (Hypelezz Mashup) (Intro Clean)">Uptown Funk (Hypelezz Mashup) (Intro Clean)</div>
+        <div class="card-artist">Bruno Mars</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">4A</span><span class="badge dur">2:23</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Rhythm Of The Night - Colin Jay Remix" data-artist="Corona" data-playlist="80-bis-X-Dance">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Rhythm Of The Night - Colin Jay Remix">Rhythm Of The Night - Colin Jay Remix</div>
+        <div class="card-artist">Corona</div>
+        <div class="card-meta"><span class="badge bpm">135</span><span class="badge key">5A</span><span class="badge dur">3:39</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Be My Lover - Mark &amp; Thom Remix" data-artist="La Bouche" data-playlist="80-bis-X-Dance">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Be My Lover - Mark &amp; Thom Remix">Be My Lover - Mark &amp; Thom Remix</div>
+        <div class="card-artist">La Bouche</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">5A</span><span class="badge dur">4:26</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Pump Up The Jam (Original Mix)" data-artist="Provi" data-playlist="80-bis-X-Dance">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Pump Up The Jam (Original Mix)">Pump Up The Jam (Original Mix)</div>
+        <div class="card-artist">Provi</div>
+        <div class="card-meta"><span class="badge bpm">124</span><span class="badge key">5A</span><span class="badge dur">5:21</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="I Like To Move It - Bruno Motta &amp; Ric Rulie Remix" data-artist="Reel 2 Real" data-playlist="80-bis-X-Dance">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="I Like To Move It - Bruno Motta &amp; Ric Rulie Remix">I Like To Move It - Bruno Motta &amp; Ric Rulie Remix</div>
+        <div class="card-artist">Reel 2 Real</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">5A</span><span class="badge dur">4:04</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Love Tonight - Hypelezz Be My Lover Edit" data-artist="Shouse" data-playlist="80-bis-X-Dance">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Love Tonight - Hypelezz Be My Lover Edit">Love Tonight - Hypelezz Be My Lover Edit</div>
+        <div class="card-artist">Shouse</div>
+        <div class="card-meta"><span class="badge bpm">125</span><span class="badge key">5A</span><span class="badge dur">2:15</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Rich Man&#39;s World (OKJames Mixes) (OKJames Radio Edit)" data-artist="Abba" data-playlist="80-bis-X-Dance">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Rich Man&#39;s World (OKJames Mixes) (OKJames Radio Edit)">Rich Man&#39;s World (OKJames Mixes) (OKJames Radio Edit)</div>
+        <div class="card-artist">Abba</div>
+        <div class="card-meta"><span class="badge bpm">125</span><span class="badge key">6A</span><span class="badge dur">3:56</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Gimme! Gimme! Gimme! vs. Let It All Out (Gin and Sonic Mashup)" data-artist="ABBA, Siks, Le Pedre, Kris Kiss, Gin and Sonic" data-playlist="80-bis-X-Dance">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Gimme! Gimme! Gimme! vs. Let It All Out (Gin and Sonic Mashup)">Gimme! Gimme! Gimme! vs. Let It All Out (Gin and Sonic Mashup)</div>
+        <div class="card-artist">ABBA, Siks, Le Pedre, Kris Kiss, Gin and Sonic</div>
+        <div class="card-meta"><span class="badge bpm">125</span><span class="badge key">6A</span><span class="badge dur">3:09</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="What Is Love (Denero Extended)" data-artist="Haddaway" data-playlist="80-bis-X-Dance">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="What Is Love (Denero Extended)">What Is Love (Denero Extended)</div>
+        <div class="card-artist">Haddaway</div>
+        <div class="card-meta"><span class="badge bpm">130</span><span class="badge key">6A</span><span class="badge dur">3:29</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Grenade (Funk3d Pop Radio Edit) 126BPM" data-artist="Bruno Mars" data-playlist="80-bis-X-Dance">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Grenade (Funk3d Pop Radio Edit) 126BPM">Grenade (Funk3d Pop Radio Edit) 126BPM</div>
+        <div class="card-artist">Bruno Mars</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">7A</span><span class="badge dur">3:33</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Boy You Turn Me (Intro)" data-artist="Felix Jaehn, Cascada" data-playlist="80-bis-X-Dance">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Boy You Turn Me (Intro)">Boy You Turn Me (Intro)</div>
+        <div class="card-artist">Felix Jaehn, Cascada</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">7A</span><span class="badge dur">3:33</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Marry You (Dan Clare Extended Mix)" data-artist="Bruno Mars" data-playlist="80-bis-X-Dance">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Marry You (Dan Clare Extended Mix)">Marry You (Dan Clare Extended Mix)</div>
+        <div class="card-artist">Bruno Mars</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">7B</span><span class="badge dur">5:31</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Just The Way You Are (Edson Pride Mixes) (Edson Pride Intro Edit By Markinhoz)" data-artist="Bruno Mars" data-playlist="80-bis-X-Dance">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Just The Way You Are (Edson Pride Mixes) (Edson Pride Intro Edit By Markinhoz)">Just The Way You Are (Edson Pride Mixes) (Edson Pride Intro Edit By Markinhoz)</div>
+        <div class="card-artist">Bruno Mars</div>
+        <div class="card-meta"><span class="badge bpm">130</span><span class="badge key">7B</span><span class="badge dur">5:59</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Sweet Dreams" data-artist="CALVO &amp; DAZZ" data-playlist="80-bis-X-Dance">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Sweet Dreams">Sweet Dreams</div>
+        <div class="card-artist">CALVO &amp; DAZZ</div>
+        <div class="card-meta"><span class="badge bpm">132</span><span class="badge key">10A</span><span class="badge dur">3:24</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Mamma Mia (Martial Simon x Tiger Toast Remix)" data-artist="Abba" data-playlist="80-bis-X-Dance">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Mamma Mia (Martial Simon x Tiger Toast Remix)">Mamma Mia (Martial Simon x Tiger Toast Remix)</div>
+        <div class="card-artist">Abba</div>
+        <div class="card-meta"><span class="badge bpm">130</span><span class="badge key">10B</span><span class="badge dur">3:47</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="I Want It That Way x I Could Be The One (OREO SAYS GO Edit)" data-artist="Backstreet Boys, Avicii, Laeko, Andrew A" data-playlist="80-bis-X-Dance">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="I Want It That Way x I Could Be The One (OREO SAYS GO Edit)">I Want It That Way x I Could Be The One (OREO SAYS GO Edit)</div>
+        <div class="card-artist">Backstreet Boys, Avicii, Laeko, Andrew A</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">11A</span><span class="badge dur">2:18</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Shape Of My Heart (Martial Simon Remix)" data-artist="Backstreet Boys, Martial Simon" data-playlist="80-bis-X-Dance">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Shape Of My Heart (Martial Simon Remix)">Shape Of My Heart (Martial Simon Remix)</div>
+        <div class="card-artist">Backstreet Boys, Martial Simon</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">11A</span><span class="badge dur">3:37</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="As it Was (Ranny Remixes) (Ranny Remix)" data-artist="Harry Styles" data-playlist="80-bis-X-Dance">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="As it Was (Ranny Remixes) (Ranny Remix)">As it Was (Ranny Remixes) (Ranny Remix)</div>
+        <div class="card-artist">Harry Styles</div>
+        <div class="card-meta"><span class="badge bpm">121</span><span class="badge key">11A</span><span class="badge dur">3:18</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Take On Me - FÄT TONY Remix" data-artist="a-ha" data-playlist="80-bis-X-Dance">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Take On Me - FÄT TONY Remix">Take On Me - FÄT TONY Remix</div>
+        <div class="card-artist">a-ha</div>
+        <div class="card-meta"><span class="badge bpm">135</span><span class="badge key">11B</span><span class="badge dur">3:39</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Barbie Girl (Main Mix)" data-artist="Aqua" data-playlist="80-bis-X-Dance">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Barbie Girl (Main Mix)">Barbie Girl (Main Mix)</div>
+        <div class="card-artist">Aqua</div>
+        <div class="card-meta"><span class="badge bpm">130.0</span><span class="badge key">12A</span><span class="badge dur">3:17</span></div>
+      </div>
+    </div></div>
+    </section><section class="playlist-section" id="Rap---Mix">
+      <h2>Rap - Mix <span class="count">17 Songs</span></h2>
+      <div class="cards"><div class="card" onclick="toggleSong(this)" data-title="DNA. -  Tall Boys Victory Lap Edit (Dirty)" data-artist="Kendrick Lamar" data-playlist="Rap - Mix">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="DNA. -  Tall Boys Victory Lap Edit (Dirty)">DNA. -  Tall Boys Victory Lap Edit (Dirty)</div>
+        <div class="card-artist">Kendrick Lamar</div>
+        <div class="card-meta"><span class="badge bpm">140</span><span class="badge key">1B</span><span class="badge dur">3:12</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="In Da Club - NAO Remix (Dirty)" data-artist="50 Cent" data-playlist="Rap - Mix">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="In Da Club - NAO Remix (Dirty)">In Da Club - NAO Remix (Dirty)</div>
+        <div class="card-artist">50 Cent</div>
+        <div class="card-meta"><span class="badge bpm">125</span><span class="badge key">1A</span><span class="badge dur">3:05</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="P.I.M.P. Pa Pa Pa (HALFSTEP Edit Intro Dirty)" data-artist="50 Cent, Henry Fon" data-playlist="Rap - Mix">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="P.I.M.P. Pa Pa Pa (HALFSTEP Edit Intro Dirty)">P.I.M.P. Pa Pa Pa (HALFSTEP Edit Intro Dirty)</div>
+        <div class="card-artist">50 Cent, Henry Fon</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">2A</span><span class="badge dur">2:32</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Still D.R.E. (Howl Remix)" data-artist="Dr. Dre" data-playlist="Rap - Mix">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Still D.R.E. (Howl Remix)">Still D.R.E. (Howl Remix)</div>
+        <div class="card-artist">Dr. Dre</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">3A</span><span class="badge dur">4:53</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Who&#39;s That Girl? - KidCutUp vs Richastic 97-125 Throwback Transition" data-artist="Eve" data-playlist="Rap - Mix">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Who&#39;s That Girl? - KidCutUp vs Richastic 97-125 Throwback Transition">Who&#39;s That Girl? - KidCutUp vs Richastic 97-125 Throwback Transition</div>
+        <div class="card-artist">Eve</div>
+        <div class="card-meta"><span class="badge bpm">97.0</span><span class="badge key">3A</span><span class="badge dur">3:09</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="The Real Slim Shady (2Checks Remix) (Original Mix)" data-artist="Eminem" data-playlist="Rap - Mix">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="The Real Slim Shady (2Checks Remix) (Original Mix)">The Real Slim Shady (2Checks Remix) (Original Mix)</div>
+        <div class="card-artist">Eminem</div>
+        <div class="card-meta"><span class="badge bpm">130</span><span class="badge key">4A</span><span class="badge dur">5:10</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Get Low - Audirorokk 101-128 Throwback Transition (Dirty)" data-artist="Steve Aoki &amp; Lil Jon" data-playlist="Rap - Mix">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Get Low - Audirorokk 101-128 Throwback Transition (Dirty)">Get Low - Audirorokk 101-128 Throwback Transition (Dirty)</div>
+        <div class="card-artist">Steve Aoki &amp; Lil Jon</div>
+        <div class="card-meta"><span class="badge bpm">101.0</span><span class="badge key">5A</span><span class="badge dur">5:11</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Without Me (Joe Stone Remix Clean)" data-artist="Eminem" data-playlist="Rap - Mix">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Without Me (Joe Stone Remix Clean)">Without Me (Joe Stone Remix Clean)</div>
+        <div class="card-artist">Eminem</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">6A</span><span class="badge dur">3:59</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Crank That (Soulja Boy) - CHALANT Remix" data-artist="Soulja Boy Tell &#39;Em" data-playlist="Rap - Mix">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Crank That (Soulja Boy) - CHALANT Remix">Crank That (Soulja Boy) - CHALANT Remix</div>
+        <div class="card-artist">Soulja Boy Tell &#39;Em</div>
+        <div class="card-meta"><span class="badge bpm">130</span><span class="badge key">5A</span><span class="badge dur">3:41</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Yeah! (The Scene Kings Remix) (The Scene Kings Remix)" data-artist="Usher" data-playlist="Rap - Mix">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Yeah! (The Scene Kings Remix) (The Scene Kings Remix)">Yeah! (The Scene Kings Remix) (The Scene Kings Remix)</div>
+        <div class="card-artist">Usher</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">6A</span><span class="badge dur">3:34</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Dilemma - Richastic Remix (Intro - Dirty)" data-artist="Nelly ft. Kelly Rowland" data-playlist="Rap - Mix">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Dilemma - Richastic Remix (Intro - Dirty)">Dilemma - Richastic Remix (Intro - Dirty)</div>
+        <div class="card-artist">Nelly ft. Kelly Rowland</div>
+        <div class="card-meta"><span class="badge bpm">113</span><span class="badge key">8B</span><span class="badge dur">3:49</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Jump Around - KidCutUp vs HÄWK 107-126 Throwback Transition" data-artist="House Of Pain" data-playlist="Rap - Mix">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Jump Around - KidCutUp vs HÄWK 107-126 Throwback Transition">Jump Around - KidCutUp vs HÄWK 107-126 Throwback Transition</div>
+        <div class="card-artist">House Of Pain</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">9A</span><span class="badge dur">3:40</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Hot In Herre - Andrew Lux Remix" data-artist="Nelly" data-playlist="Rap - Mix">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Hot In Herre - Andrew Lux Remix">Hot In Herre - Andrew Lux Remix</div>
+        <div class="card-artist">Nelly</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">9A</span><span class="badge dur">2:51</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Not Like Us - DJ Dark Remix (Intro - Dirty)" data-artist="Kendrick Lamar" data-playlist="Rap - Mix">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Not Like Us - DJ Dark Remix (Intro - Dirty)">Not Like Us - DJ Dark Remix (Intro - Dirty)</div>
+        <div class="card-artist">Kendrick Lamar</div>
+        <div class="card-meta"><span class="badge bpm">124</span><span class="badge key">10A</span><span class="badge dur">3:30</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="WAP (feat. Megan Thee Stallion)" data-artist="Cardi B, Megan Thee Stallion" data-playlist="Rap - Mix">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="WAP (feat. Megan Thee Stallion)">WAP (feat. Megan Thee Stallion)</div>
+        <div class="card-artist">Cardi B, Megan Thee Stallion</div>
+        <div class="card-meta"><span class="badge bpm">133.0</span><span class="badge key">10A</span><span class="badge dur">3:07</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Candy Shop - Silque Remix (Dirty)" data-artist="50 Cent ft. Olivia" data-playlist="Rap - Mix">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Candy Shop - Silque Remix (Dirty)">Candy Shop - Silque Remix (Dirty)</div>
+        <div class="card-artist">50 Cent ft. Olivia</div>
+        <div class="card-meta"><span class="badge bpm">125</span><span class="badge key">11A</span><span class="badge dur">3:38</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="All The Stars - Chizzle &amp; Rever Deep Re-Drum (Dirty)" data-artist="Kendrick Lamar &amp; SZA" data-playlist="Rap - Mix">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="All The Stars - Chizzle &amp; Rever Deep Re-Drum (Dirty)">All The Stars - Chizzle &amp; Rever Deep Re-Drum (Dirty)</div>
+        <div class="card-artist">Kendrick Lamar &amp; SZA</div>
+        <div class="card-meta"><span class="badge bpm">97</span><span class="badge key">5A</span><span class="badge dur">4:17</span></div>
+      </div>
+    </div></div>
+    </section><section class="playlist-section" id="Latin-Mix">
+      <h2>Latin-Mix <span class="count">14 Songs</span></h2>
+      <div class="cards"><div class="card" onclick="toggleSong(this)" data-title="Con Altura (feat. El Guincho)" data-artist="ROSALÍA J Balvin El Guincho" data-playlist="Latin-Mix">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Con Altura (feat. El Guincho)">Con Altura (feat. El Guincho)</div>
+        <div class="card-artist">ROSALÍA J Balvin El Guincho</div>
+        <div class="card-meta"><span class="badge bpm">98</span><span class="badge key">4A</span><span class="badge dur">2:41</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Tití Me Preguntó - Vandal On Da Track Remix (Dirty)" data-artist="Bad Bunny" data-playlist="Latin-Mix">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Tití Me Preguntó - Vandal On Da Track Remix (Dirty)">Tití Me Preguntó - Vandal On Da Track Remix (Dirty)</div>
+        <div class="card-artist">Bad Bunny</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">4A</span><span class="badge dur">2:51</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="La Vida Es Un Carnaval - DJ Mag 2020 Re-Drum" data-artist="Celia Cruz" data-playlist="Latin-Mix">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="La Vida Es Un Carnaval - DJ Mag 2020 Re-Drum">La Vida Es Un Carnaval - DJ Mag 2020 Re-Drum</div>
+        <div class="card-artist">Celia Cruz</div>
+        <div class="card-meta"><span class="badge bpm">104</span><span class="badge key">5A</span><span class="badge dur">4:52</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="All I Do Is Win - Afro Bros Remix (Clean)" data-artist="DJ Khaled ft. T-Pain" data-playlist="Latin-Mix">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="All I Do Is Win - Afro Bros Remix (Clean)">All I Do Is Win - Afro Bros Remix (Clean)</div>
+        <div class="card-artist">DJ Khaled ft. T-Pain</div>
+        <div class="card-meta"><span class="badge bpm">133.1</span><span class="badge key">7A</span><span class="badge dur">2:23</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Un Gatito Me Llamó (Intro - Dirty)" data-artist="KAROL G " data-playlist="Latin-Mix">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Un Gatito Me Llamó (Intro - Dirty)">Un Gatito Me Llamó (Intro - Dirty)</div>
+        <div class="card-artist">KAROL G </div>
+        <div class="card-meta"><span class="badge bpm">119.0</span><span class="badge key">7A</span><span class="badge dur">2:31</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="MIAMI (DJcity Intro - Dirty)" data-artist="Tokischa" data-playlist="Latin-Mix">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="MIAMI (DJcity Intro - Dirty)">MIAMI (DJcity Intro - Dirty)</div>
+        <div class="card-artist">Tokischa</div>
+        <div class="card-meta"><span class="badge bpm">114</span><span class="badge key">7A</span><span class="badge dur">2:40</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Bailando (Spanish Version) - 5HOURS Remix" data-artist="Enrique Iglesias ft. Descemer Bueno &amp; Gente De Zona" data-playlist="Latin-Mix">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Bailando (Spanish Version) - 5HOURS Remix">Bailando (Spanish Version) - 5HOURS Remix</div>
+        <div class="card-artist">Enrique Iglesias ft. Descemer Bueno &amp; Gente De Zona</div>
+        <div class="card-meta"><span class="badge bpm">120</span><span class="badge key">9A</span><span class="badge dur">3:12</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Despacito (Major Lazer &amp; MOSKA Remix)" data-artist="Luis Fonsi;Daddy Yankee" data-playlist="Latin-Mix">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Despacito (Major Lazer &amp; MOSKA Remix)">Despacito (Major Lazer &amp; MOSKA Remix)</div>
+        <div class="card-artist">Luis Fonsi;Daddy Yankee</div>
+        <div class="card-meta"><span class="badge bpm">100</span><span class="badge key">10B</span><span class="badge dur">3:10</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Gasolina - MFresh Jet2 Holiday Troll Edit (DJcity Intro)" data-artist="Daddy Yankee" data-playlist="Latin-Mix">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Gasolina - MFresh Jet2 Holiday Troll Edit (DJcity Intro)">Gasolina - MFresh Jet2 Holiday Troll Edit (DJcity Intro)</div>
+        <div class="card-artist">Daddy Yankee</div>
+        <div class="card-meta"><span class="badge bpm">96</span><span class="badge key">11A</span><span class="badge dur">3:37</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Taki Taki - 5HOURS Remix (Clean)" data-artist="DJ Snake ft. Selena Gomez, Ozuna &amp; Cardi B" data-playlist="Latin-Mix">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Taki Taki - 5HOURS Remix (Clean)">Taki Taki - 5HOURS Remix (Clean)</div>
+        <div class="card-artist">DJ Snake ft. Selena Gomez, Ozuna &amp; Cardi B</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">11A</span><span class="badge dur">2:25</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Dale Don Dale" data-artist="Don Omar" data-playlist="Latin-Mix">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Dale Don Dale">Dale Don Dale</div>
+        <div class="card-artist">Don Omar</div>
+        <div class="card-meta"><span class="badge bpm">95</span><span class="badge key">11A</span><span class="badge dur">3:32</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Volare - modish. Remix" data-artist="Gipsy Kings" data-playlist="Latin-Mix">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Volare - modish. Remix">Volare - modish. Remix</div>
+        <div class="card-artist">Gipsy Kings</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">12A</span><span class="badge dur">4:05</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="EoO (DJcity Intro - Dirty)" data-artist="Bad Bunny" data-playlist="Latin-Mix">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="EoO (DJcity Intro - Dirty)">EoO (DJcity Intro - Dirty)</div>
+        <div class="card-artist">Bad Bunny</div>
+        <div class="card-meta"><span class="badge bpm">102</span><span class="badge key">1A</span><span class="badge dur">3:13</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Lo Que Pasó, Pasó - DJ Blayox Re-Drum" data-artist="Daddy Yankee" data-playlist="Latin-Mix">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Lo Que Pasó, Pasó - DJ Blayox Re-Drum">Lo Que Pasó, Pasó - DJ Blayox Re-Drum</div>
+        <div class="card-artist">Daddy Yankee</div>
+        <div class="card-meta"><span class="badge bpm">97</span><span class="badge key">2A</span><span class="badge dur">3:08</span></div>
+      </div>
+    </div></div>
+    </section>
+</main>
+
+
+<script>
+let currentAudio=null,currentBtn=null;function playPreview(e,btn){e.stopPropagation();const url=btn.closest('.card').dataset.preview;if(!url)return;if(currentAudio&&!currentAudio.paused){currentAudio.pause();if(currentBtn)currentBtn.classList.remove('pb-playing','pb-loading','pb-error');if(currentBtn===btn){currentAudio=null;currentBtn=null;return}}btn.classList.remove('pb-playing','pb-error');btn.classList.add('pb-loading');const audio=new Audio(url);currentAudio=audio;currentBtn=btn;audio.addEventListener('canplay',()=>{if(currentAudio!==audio)return;btn.classList.remove('pb-loading');btn.classList.add('pb-playing');audio.play()});audio.addEventListener('ended',()=>{btn.classList.remove('pb-playing','pb-loading');currentAudio=null;currentBtn=null});audio.addEventListener('error',()=>{btn.classList.remove('pb-loading','pb-playing');btn.classList.add('pb-error');setTimeout(()=>btn.classList.remove('pb-error'),2000);currentAudio=null;currentBtn=null});audio.load()}function toggleSong(card){card.classList.toggle('selected');updateShareBar()}function updateShareBar(){const sel=document.querySelectorAll('.card.selected');document.getElementById('shareCount').textContent=sel.length+' Song'+(sel.length!==1?'s':'')+' markiert';document.getElementById('shareBar').classList.toggle('visible',sel.length>0)}function resetAll(){document.querySelectorAll('.card.selected').forEach(c=>c.classList.remove('selected'));updateShareBar()}function shareSelection(){const selected=[...document.querySelectorAll('.card.selected')];if(!selected.length)return;const byPlaylist={};selected.forEach(card=>{const pl=card.dataset.playlist;if(!byPlaylist[pl])byPlaylist[pl]=[];byPlaylist[pl].push(card.dataset.title+' — '+card.dataset.artist)});let text='Diese Songs passen nicht zur Hochzeit GardenCity:\n\n';for(const[pl,songs]of Object.entries(byPlaylist)){text+=pl+':\n';songs.forEach(s=>text+='  ✕ '+s+'\n');text+='\n'}if(navigator.share){navigator.share({title:'Hochzeiten GardenCity — Nicht-Wunschliste',text}).catch(()=>{})}else{navigator.clipboard.writeText(text).then(()=>showToast('In Zwischenablage kopiert!')).catch(()=>{const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);showToast('In Zwischenablage kopiert!')})}}function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500)}
+</script>
+</body>
+</html>
