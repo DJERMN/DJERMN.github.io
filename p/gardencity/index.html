@@ -13,8 +13,10 @@
 
 
 
+
 @layer base{*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}body{@apply font-sans bg-zinc-950 text-zinc-100 min-h-screen;padding-bottom:100px;-webkit-text-size-adjust:100%}}
 @layer components{header{@apply bg-zinc-900 border-b border-zinc-800;padding:clamp(28px,6vw,52px) clamp(16px,5vw,48px) clamp(20px,4vw,36px)}header h1{@apply font-extrabold text-white tracking-tight leading-tight;font-size:clamp(1.4rem,5vw,2.2rem)}header p{@apply mt-1.5 text-zinc-400;font-size:clamp(.75rem,2.5vw,.85rem)}.hint{@apply mt-2 text-zinc-500;font-size:clamp(.72rem,2.2vw,.8rem)}.nav{@apply flex mt-5 overflow-x-auto pb-0.5;flex-wrap:nowrap;gap:6px;scrollbar-width:none}.nav::-webkit-scrollbar{display:none}.nav a{@apply text-zinc-500 no-underline font-medium border border-zinc-800 rounded shrink-0 whitespace-nowrap transition-colors duration-150;font-size:.72rem;padding:5px 13px;-webkit-tap-highlight-color:transparent;touch-action:manipulation}.nav a:hover{@apply text-amber-400;border-color:rgba(251,191,36,.3)}main{@apply max-w-[1440px] mx-auto;padding:clamp(32px,5vw,56px) clamp(12px,4vw,36px) 40px}.playlist-section{@apply mb-12;scroll-margin-top:16px}.playlist-section h2{@apply text-amber-400 font-semibold mb-3.5 pb-3 border-b border-zinc-800 flex items-center flex-wrap gap-2.5;font-size:clamp(.82rem,3vw,.95rem)}.count{@apply text-zinc-600 font-normal text-xs}.cards{@apply border border-zinc-800 rounded-lg overflow-hidden;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr));gap:1px;background-color:#27272a}.card{@apply bg-zinc-900 flex items-center gap-3 cursor-pointer relative transition-colors duration-100;padding:11px 12px;border-radius:0;-webkit-tap-highlight-color:transparent;touch-action:manipulation;user-select:none}@media(hover:hover){.card:hover{@apply bg-zinc-800}.card.selected:hover{background-color:#200a0a}}.card-check{@apply absolute top-2.5 right-2.5 w-5 h-5 rounded border border-zinc-700 flex items-center justify-center shrink-0 transition-all duration-150}.check-icon{@apply leading-none transition-colors duration-150;font-size:.6rem;color:transparent;font-weight:900}.card.selected{background-color:#1c0808}.card.selected .card-check{@apply bg-red-700 border-red-700}.card.selected .check-icon{@apply text-white}.card.selected .card-title{@apply text-red-300}.cover-wrap{@apply relative shrink-0;width:52px;height:52px}.cover{@apply rounded-md object-cover bg-zinc-800;width:52px;height:52px;pointer-events:none}.no-cover{@apply flex items-center justify-center text-xl}.play-btn{@apply absolute rounded-full flex items-center justify-center p-0 cursor-pointer transition-all duration-150;bottom:3px;right:3px;width:22px;height:22px;background:rgba(0,0,0,.85);border:1px solid rgba(255,255,255,.18);-webkit-tap-highlight-color:transparent}.play-btn:active{transform:scale(.86)}.play-btn svg{@apply shrink-0;width:9px;height:9px;fill:#d4d4d4}.play-btn.pb-playing{background:#f59e0b;border-color:rgba(245,158,11,.35)}.play-btn.pb-playing svg{fill:#000}.play-btn.pb-error{background:rgba(185,28,28,.9);border-color:transparent}.play-btn.pb-loading{border-color:transparent}@keyframes pb-spin{to{transform:rotate(360deg)}}.play-btn.pb-loading::before{content:'';position:absolute;inset:-2px;border-radius:50%;border:1.5px solid transparent;border-top-color:#f59e0b;animation:pb-spin .7s linear infinite}.card-info{@apply flex-1 min-w-0;padding-right:26px}.card-title{@apply text-sm font-semibold text-zinc-100 truncate mb-0.5 leading-snug transition-colors duration-150}.card-artist{@apply text-xs text-zinc-400 truncate leading-snug;margin-bottom:6px}.card-meta{@apply flex flex-wrap gap-1}.badge{@apply text-[0.6rem] font-semibold px-1.5 py-0.5 rounded whitespace-nowrap;letter-spacing:.2px}.bpm{@apply bg-amber-950 text-amber-400 ring-1 ring-amber-900/50}.key{@apply bg-emerald-950 text-emerald-400 ring-1 ring-emerald-900/50}.dur{@apply bg-zinc-800 text-zinc-500 ring-1 ring-zinc-700/50}.share-bar{@apply fixed bottom-0 left-0 right-0 z-50 bg-zinc-900 border-t border-zinc-800 flex items-center justify-between gap-3;padding:clamp(12px,3vw,16px) clamp(16px,5vw,32px);transform:translateY(100%);transition:transform .22s cubic-bezier(.34,1.56,.64,1)}.share-bar.visible{transform:translateY(0)}.share-bar-info{@apply flex-1 min-w-0}.share-bar-count{@apply font-bold text-red-400;font-size:clamp(.85rem,3vw,.95rem)}.share-bar-sub{@apply text-xs text-zinc-500 mt-0.5}.share-actions{@apply flex gap-2 shrink-0}.btn-reset{@apply text-xs font-semibold border border-zinc-700 text-zinc-400 bg-transparent rounded cursor-pointer whitespace-nowrap;padding:9px 14px;font-family:inherit;-webkit-tap-highlight-color:transparent}.btn-share{@apply text-xs font-semibold bg-green-500 text-white rounded cursor-pointer flex items-center gap-1.5 whitespace-nowrap border-0;padding:9px 18px;font-family:inherit;-webkit-tap-highlight-color:transparent}.btn-share:active{opacity:.8}.toast{@apply fixed z-[200] bg-zinc-900 border border-zinc-700 text-amber-400 text-xs font-semibold rounded whitespace-nowrap;top:20px;left:50%;padding:10px 20px;transform:translateX(-50%) translateY(-80px);transition:transform .28s cubic-bezier(.34,1.56,.64,1)}.toast.show{transform:translateX(-50%) translateY(0)}}
+
 
 
 
@@ -23,9 +25,9 @@
 <body>
 <header>
   <h1>Hochzeiten GardenCity — Playlists</h1>
-  <p>Rekordbox Library · 169 Songs in 11 Playlists</p>
+  <p>Rekordbox Library · 243 Songs in 16 Playlists</p>
   <p class="hint">▶ Vorschau per Klick auf den Play-Button</p>
-  <nav class="nav"><a href="#Alman---Phase-1">Alman - Phase #1</a><a href="#Banger---Phase-1">Banger - Phase #1</a><a href="#Greek---Big-Fat-Wedding">Greek - Big Fat Wedding</a><a href="#Banger---Phase-2">Banger - Phase #2</a><a href="#Alman---TekSchlag-2">Alman - TekSchlag #2</a><a href="#MJ-x-Groove">MJ x Groove</a><a href="#Festival-Flash">Festival-Flash</a><a href="#80-bis-X-Dance">80-bis-X-Dance</a><a href="#Rap---Mix">Rap - Mix</a><a href="#Deutschrap-Mix">Deutschrap-Mix</a><a href="#Latin-Mix">Latin-Mix</a></nav>
+  <nav class="nav"><a href="#Alman---Phase-1">Alman - Phase #1</a><a href="#Banger---Phase-1">Banger - Phase #1</a><a href="#Greek---Big-Fat-Wedding">Greek - Big Fat Wedding</a><a href="#Banger---Phase-2">Banger - Phase #2</a><a href="#Alman---TekSchlag-2">Alman - TekSchlag #2</a><a href="#MJ-x-Groove">MJ x Groove</a><a href="#Festival-Flash">Festival-Flash</a><a href="#80-bis-X-Dance">80-bis-X-Dance</a><a href="#Rap---Mix">Rap - Mix</a><a href="#Deutschrap">Deutschrap-Mix / Deutschrap</a><a href="#Deutschrap-110BPM">Deutschrap-Mix / Deutschrap-110BPM</a><a href="#Deutschrap-120BPM">Deutschrap-Mix / Deutschrap-120BPM</a><a href="#Deutschrap-134BPM">Deutschrap-Mix / Deutschrap-134BPM</a><a href="#Deutschrap-145BPM">Deutschrap-Mix / Deutschrap-145BPM</a><a href="#Deutschrap-Open">Deutschrap-Mix / Deutschrap-Open</a><a href="#Latin-Mix">Latin-Mix</a></nav>
 </header>
 <main>
 <section class="playlist-section" id="Alman---Phase-1">
@@ -1295,9 +1297,616 @@
         <div class="card-meta"><span class="badge bpm">97</span><span class="badge key">5A</span><span class="badge dur">4:17</span></div>
       </div>
     </div></div>
-    </section><section class="playlist-section" id="Deutschrap-Mix">
-      <h2>Deutschrap-Mix <span class="count">0 Songs</span></h2>
-      <div class="cards"><div class="card" style="justify-content:center;color:#71717a;font-size:.8rem;padding:20px">Keine Songs in dieser Playlist</div></div>
+    </section><section class="playlist-section" id="Deutschrap">
+      <h2>Deutschrap-Mix / Deutschrap <span class="count">37 Songs</span></h2>
+      <div class="cards"><div class="card" onclick="toggleSong(this)" data-title="Ohne Benzin" data-artist="Domiziana" data-playlist="Deutschrap-Mix / Deutschrap">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Ohne Benzin">Ohne Benzin</div>
+        <div class="card-artist">Domiziana</div>
+        <div class="card-meta"><span class="badge bpm">133</span><span class="badge key">1A</span><span class="badge dur">2:32</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="IDGAF" data-artist="Ikkimel" data-playlist="Deutschrap-Mix / Deutschrap">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="IDGAF">IDGAF</div>
+        <div class="card-artist">Ikkimel</div>
+        <div class="card-meta"><span class="badge bpm">155</span><span class="badge key">1A</span><span class="badge dur">2:17</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Keine Angst" data-artist="KitschKrieg ft. Alli Neumann &amp; Trettmann" data-playlist="Deutschrap-Mix / Deutschrap">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Keine Angst">Keine Angst</div>
+        <div class="card-artist">KitschKrieg ft. Alli Neumann &amp; Trettmann</div>
+        <div class="card-meta"><span class="badge bpm">116.7</span><span class="badge key">1A</span><span class="badge dur">3:48</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Blaues Licht - DJcity Hype Edit" data-artist="RAF Camora" data-playlist="Deutschrap-Mix / Deutschrap">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Blaues Licht - DJcity Hype Edit">Blaues Licht - DJcity Hype Edit</div>
+        <div class="card-artist">RAF Camora</div>
+        <div class="card-meta"><span class="badge bpm">145.0</span><span class="badge key">1A</span><span class="badge dur">2:47</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Gib Ihm (Intro - Dirty)" data-artist="Shirin David" data-playlist="Deutschrap-Mix / Deutschrap">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Gib Ihm (Intro - Dirty)">Gib Ihm (Intro - Dirty)</div>
+        <div class="card-artist">Shirin David</div>
+        <div class="card-meta"><span class="badge bpm">98</span><span class="badge key">2A</span><span class="badge dur">3:17</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Gold Digger - Anthem Kingz edamame Edit (Dirty)" data-artist="Kanye West" data-playlist="Deutschrap-Mix / Deutschrap">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Gold Digger - Anthem Kingz edamame Edit (Dirty)">Gold Digger - Anthem Kingz edamame Edit (Dirty)</div>
+        <div class="card-artist">Kanye West</div>
+        <div class="card-meta"><span class="badge bpm">106</span><span class="badge key">2B</span><span class="badge dur">2:46</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Apache - DJ Dado 104-128 Transition" data-artist="Apache 207" data-playlist="Deutschrap-Mix / Deutschrap">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Apache - DJ Dado 104-128 Transition">Apache - DJ Dado 104-128 Transition</div>
+        <div class="card-artist">Apache 207</div>
+        <div class="card-meta"><span class="badge bpm">128.0</span><span class="badge key">3A</span><span class="badge dur">2:56</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Valla nein!" data-artist="KC Rebell &amp; summer Cem ft. Luciano" data-playlist="Deutschrap-Mix / Deutschrap">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Valla nein!">Valla nein!</div>
+        <div class="card-artist">KC Rebell &amp; summer Cem ft. Luciano</div>
+        <div class="card-meta"><span class="badge bpm">136</span><span class="badge key">3A</span><span class="badge dur">2:58</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Kleiner Grüner Kaktus" data-artist="KLEPTO, Michael Caspar &amp; German Gents" data-playlist="Deutschrap-Mix / Deutschrap">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Kleiner Grüner Kaktus">Kleiner Grüner Kaktus</div>
+        <div class="card-artist">KLEPTO, Michael Caspar &amp; German Gents</div>
+        <div class="card-meta"><span class="badge bpm">160</span><span class="badge key">4A</span><span class="badge dur">1:53</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Sie Liebt Techno (Intro)" data-artist="Romero" data-playlist="Deutschrap-Mix / Deutschrap">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Sie Liebt Techno (Intro)">Sie Liebt Techno (Intro)</div>
+        <div class="card-artist">Romero</div>
+        <div class="card-meta"><span class="badge bpm">139.9</span><span class="badge key">4A</span><span class="badge dur">2:03</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="We Made It (DJcity Intro)" data-artist="t-low &amp; Miksu / Macloud" data-playlist="Deutschrap-Mix / Deutschrap">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="We Made It (DJcity Intro)">We Made It (DJcity Intro)</div>
+        <div class="card-artist">t-low &amp; Miksu / Macloud</div>
+        <div class="card-meta"><span class="badge bpm">116</span><span class="badge key">4A</span><span class="badge dur">3:43</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Wunder - FEIER &amp; EIS Remix" data-artist="AYLIVA &amp; Apache 207" data-playlist="Deutschrap-Mix / Deutschrap">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Wunder - FEIER &amp; EIS Remix">Wunder - FEIER &amp; EIS Remix</div>
+        <div class="card-artist">AYLIVA &amp; Apache 207</div>
+        <div class="card-meta"><span class="badge bpm">120</span><span class="badge key">4B</span><span class="badge dur">2:40</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="WHO&#39;S THAT (Intro)" data-artist="Ikkimel &amp; Robbensohn" data-playlist="Deutschrap-Mix / Deutschrap">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="WHO&#39;S THAT (Intro)">WHO&#39;S THAT (Intro)</div>
+        <div class="card-artist">Ikkimel &amp; Robbensohn</div>
+        <div class="card-meta"><span class="badge bpm">156</span><span class="badge key">4B</span><span class="badge dur">2:40</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="RADW - DJ Juize Remix (Intro)" data-artist="Haftbefehl" data-playlist="Deutschrap-Mix / Deutschrap">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="RADW - DJ Juize Remix (Intro)">RADW - DJ Juize Remix (Intro)</div>
+        <div class="card-artist">Haftbefehl</div>
+        <div class="card-meta"><span class="badge bpm">136</span><span class="badge key">5A</span><span class="badge dur">3:07</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="SUVs - DJ Jeezy Remix" data-artist="Luciano" data-playlist="Deutschrap-Mix / Deutschrap">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="SUVs - DJ Jeezy Remix">SUVs - DJ Jeezy Remix</div>
+        <div class="card-artist">Luciano</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">5A</span><span class="badge dur">3:03</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Yallah Goodbye (Intro)" data-artist="Summer Cem ft. Gringo" data-playlist="Deutschrap-Mix / Deutschrap">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Yallah Goodbye (Intro)">Yallah Goodbye (Intro)</div>
+        <div class="card-artist">Summer Cem ft. Gringo</div>
+        <div class="card-meta"><span class="badge bpm">105</span><span class="badge key">5A</span><span class="badge dur">2:45</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Gut Genug - Dan Gerous Remix" data-artist="KITSCHKRIEG, Blumengarten &amp; Shirin David" data-playlist="Deutschrap-Mix / Deutschrap">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Gut Genug - Dan Gerous Remix">Gut Genug - Dan Gerous Remix</div>
+        <div class="card-artist">KITSCHKRIEG, Blumengarten &amp; Shirin David</div>
+        <div class="card-meta"><span class="badge bpm">140</span><span class="badge key">6A</span><span class="badge dur">2:03</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Zeit, DASS SICH WAS DREHT - FEIER &amp; EIS Remix" data-artist="$OHO BANI, Herbert Grönemeyer &amp; Ericson" data-playlist="Deutschrap-Mix / Deutschrap">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Zeit, DASS SICH WAS DREHT - FEIER &amp; EIS Remix">Zeit, DASS SICH WAS DREHT - FEIER &amp; EIS Remix</div>
+        <div class="card-artist">$OHO BANI, Herbert Grönemeyer &amp; Ericson</div>
+        <div class="card-meta"><span class="badge bpm">155</span><span class="badge key">7A</span><span class="badge dur">2:24</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Für Dich Da" data-artist="Trettmann, KitschKrieg, Levin Liam &amp; SFR" data-playlist="Deutschrap-Mix / Deutschrap">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Für Dich Da">Für Dich Da</div>
+        <div class="card-artist">Trettmann, KitschKrieg, Levin Liam &amp; SFR</div>
+        <div class="card-meta"><span class="badge bpm">120</span><span class="badge key">8A</span><span class="badge dur">3:02</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Fata Morgana" data-artist="Nina Chuba" data-playlist="Deutschrap-Mix / Deutschrap" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/e4/4c/c2/e44cc297-38bc-54dc-4885-fc082d006237/mzaf_3434201997175103673.plus.aac.p.m4a">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/80/38/9c/80389cec-c7d3-e152-cd60-3ab7eca0748b/196872537932.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Fata Morgana">Fata Morgana</div>
+        <div class="card-artist">Nina Chuba</div>
+        <div class="card-meta"><span class="badge bpm">118</span><span class="badge key">9A</span><span class="badge dur">2:43</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="9 bis 9 - FEIER &amp; EIS Remix" data-artist="SIRA, Bausa &amp; badchieff" data-playlist="Deutschrap-Mix / Deutschrap">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="9 bis 9 - FEIER &amp; EIS Remix">9 bis 9 - FEIER &amp; EIS Remix</div>
+        <div class="card-artist">SIRA, Bausa &amp; badchieff</div>
+        <div class="card-meta"><span class="badge bpm">145</span><span class="badge key">9A</span><span class="badge dur">1:52</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="200 km/h (Intro)" data-artist="Apache 207" data-playlist="Deutschrap-Mix / Deutschrap">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="200 km/h (Intro)">200 km/h (Intro)</div>
+        <div class="card-artist">Apache 207</div>
+        <div class="card-meta"><span class="badge bpm">148</span><span class="badge key">10A</span><span class="badge dur">3:32</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Sommergewitter" data-artist="Pashanim" data-playlist="Deutschrap-Mix / Deutschrap">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Sommergewitter">Sommergewitter</div>
+        <div class="card-artist">Pashanim</div>
+        <div class="card-meta"><span class="badge bpm">92</span><span class="badge key">10A</span><span class="badge dur">2:15</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Ich Darf Das - DJcity Hype Edit" data-artist="Shirin David" data-playlist="Deutschrap-Mix / Deutschrap">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Ich Darf Das - DJcity Hype Edit">Ich Darf Das - DJcity Hype Edit</div>
+        <div class="card-artist">Shirin David</div>
+        <div class="card-meta"><span class="badge bpm">102</span><span class="badge key">10A</span><span class="badge dur">2:51</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Alles Oder Nix" data-artist="SSIO" data-playlist="Deutschrap-Mix / Deutschrap">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Alles Oder Nix">Alles Oder Nix</div>
+        <div class="card-artist">SSIO</div>
+        <div class="card-meta"><span class="badge bpm">95</span><span class="badge key">10A</span><span class="badge dur">4:10</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Conan x Xenia" data-artist="Haftbefehl &amp; Shirin David" data-playlist="Deutschrap-Mix / Deutschrap">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Conan x Xenia">Conan x Xenia</div>
+        <div class="card-artist">Haftbefehl &amp; Shirin David</div>
+        <div class="card-meta"><span class="badge bpm">148</span><span class="badge key">10B</span><span class="badge dur">3:20</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Fühlst Du Das Auch" data-artist="Apache207" data-playlist="Deutschrap-Mix / Deutschrap">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Fühlst Du Das Auch">Fühlst Du Das Auch</div>
+        <div class="card-artist">Apache207</div>
+        <div class="card-meta"><span class="badge bpm">176</span><span class="badge key">11A</span><span class="badge dur">3:02</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Madonna" data-artist="Bausa &amp; Apache 207" data-playlist="Deutschrap-Mix / Deutschrap" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/55/ca/2c/55ca2c54-0156-2101-35fb-4499e2579a96/mzaf_7085618974054916183.plus.aac.p.m4a">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/46/cb/ec/46cbecae-fb7f-2bcb-5a00-635cbf3a809d/190295194062.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Madonna">Madonna</div>
+        <div class="card-artist">Bausa &amp; Apache 207</div>
+        <div class="card-meta"><span class="badge bpm">117</span><span class="badge key">11A</span><span class="badge dur">3:14</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Die Braune Tasche - Frizzo Remix" data-artist="Haftbefehl ft. Bazzazian" data-playlist="Deutschrap-Mix / Deutschrap">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Die Braune Tasche - Frizzo Remix">Die Braune Tasche - Frizzo Remix</div>
+        <div class="card-artist">Haftbefehl ft. Bazzazian</div>
+        <div class="card-meta"><span class="badge bpm">148</span><span class="badge key">11A</span><span class="badge dur">1:31</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Nachts Wach - FEIER &amp; EIS Remix" data-artist="Miksu / Macloud &amp; makko" data-playlist="Deutschrap-Mix / Deutschrap">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Nachts Wach - FEIER &amp; EIS Remix">Nachts Wach - FEIER &amp; EIS Remix</div>
+        <div class="card-artist">Miksu / Macloud &amp; makko</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">11A</span><span class="badge dur">3:30</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Wildberry Lillet - SGRO Remix" data-artist="Nina Chuba" data-playlist="Deutschrap-Mix / Deutschrap">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Wildberry Lillet - SGRO Remix">Wildberry Lillet - SGRO Remix</div>
+        <div class="card-artist">Nina Chuba</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">11A</span><span class="badge dur">3:16</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Durstlöscher" data-artist="01099, Gustav &amp; Zachi" data-playlist="Deutschrap-Mix / Deutschrap">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Durstlöscher">Durstlöscher</div>
+        <div class="card-artist">01099, Gustav &amp; Zachi</div>
+        <div class="card-meta"><span class="badge bpm">134</span><span class="badge key">12A</span><span class="badge dur">2:39</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Fame (DJcity Intro)" data-artist="Apache 207" data-playlist="Deutschrap-Mix / Deutschrap">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Fame (DJcity Intro)">Fame (DJcity Intro)</div>
+        <div class="card-artist">Apache 207</div>
+        <div class="card-meta"><span class="badge bpm">130</span><span class="badge key">12A</span><span class="badge dur">3:12</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Bangaranga - FEIER &amp; EIS Remix" data-artist="DARA" data-playlist="Deutschrap-Mix / Deutschrap">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Bangaranga - FEIER &amp; EIS Remix">Bangaranga - FEIER &amp; EIS Remix</div>
+        <div class="card-artist">DARA</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">12A</span><span class="badge dur">3:33</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="VEMPA - FEIER &amp; EIS Remix" data-artist="FOURTY &amp; Bausa" data-playlist="Deutschrap-Mix / Deutschrap">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="VEMPA - FEIER &amp; EIS Remix">VEMPA - FEIER &amp; EIS Remix</div>
+        <div class="card-artist">FOURTY &amp; Bausa</div>
+        <div class="card-meta"><span class="badge bpm">134</span><span class="badge key">12A</span><span class="badge dur">2:55</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Money Money (Money Money)" data-artist="Haftbefehl &amp; Frizzo" data-playlist="Deutschrap-Mix / Deutschrap">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Money Money (Money Money)">Money Money (Money Money)</div>
+        <div class="card-artist">Haftbefehl &amp; Frizzo</div>
+        <div class="card-meta"><span class="badge bpm">91</span><span class="badge key">12A</span><span class="badge dur">1:51</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="90-60-111 (Intro)" data-artist="Shirin David" data-playlist="Deutschrap-Mix / Deutschrap">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="90-60-111 (Intro)">90-60-111 (Intro)</div>
+        <div class="card-artist">Shirin David</div>
+        <div class="card-meta"><span class="badge bpm">144</span><span class="badge key">12A</span><span class="badge dur">3:20</span></div>
+      </div>
+    </div></div>
+    </section><section class="playlist-section" id="Deutschrap-110BPM">
+      <h2>Deutschrap-Mix / Deutschrap-110BPM <span class="count">7 Songs</span></h2>
+      <div class="cards"><div class="card" onclick="toggleSong(this)" data-title="Money Money (Money Money)" data-artist="Haftbefehl &amp; Frizzo" data-playlist="Deutschrap-Mix / Deutschrap-110BPM">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Money Money (Money Money)">Money Money (Money Money)</div>
+        <div class="card-artist">Haftbefehl &amp; Frizzo</div>
+        <div class="card-meta"><span class="badge bpm">91</span><span class="badge key">12A</span><span class="badge dur">1:51</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Sommergewitter" data-artist="Pashanim" data-playlist="Deutschrap-Mix / Deutschrap-110BPM">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Sommergewitter">Sommergewitter</div>
+        <div class="card-artist">Pashanim</div>
+        <div class="card-meta"><span class="badge bpm">92</span><span class="badge key">10A</span><span class="badge dur">2:15</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Alles Oder Nix" data-artist="SSIO" data-playlist="Deutschrap-Mix / Deutschrap-110BPM">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Alles Oder Nix">Alles Oder Nix</div>
+        <div class="card-artist">SSIO</div>
+        <div class="card-meta"><span class="badge bpm">95</span><span class="badge key">10A</span><span class="badge dur">4:10</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Gib Ihm (Intro - Dirty)" data-artist="Shirin David" data-playlist="Deutschrap-Mix / Deutschrap-110BPM">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Gib Ihm (Intro - Dirty)">Gib Ihm (Intro - Dirty)</div>
+        <div class="card-artist">Shirin David</div>
+        <div class="card-meta"><span class="badge bpm">98</span><span class="badge key">2A</span><span class="badge dur">3:17</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Ich Darf Das - DJcity Hype Edit" data-artist="Shirin David" data-playlist="Deutschrap-Mix / Deutschrap-110BPM">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Ich Darf Das - DJcity Hype Edit">Ich Darf Das - DJcity Hype Edit</div>
+        <div class="card-artist">Shirin David</div>
+        <div class="card-meta"><span class="badge bpm">102</span><span class="badge key">10A</span><span class="badge dur">2:51</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Yallah Goodbye (Intro)" data-artist="Summer Cem ft. Gringo" data-playlist="Deutschrap-Mix / Deutschrap-110BPM">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Yallah Goodbye (Intro)">Yallah Goodbye (Intro)</div>
+        <div class="card-artist">Summer Cem ft. Gringo</div>
+        <div class="card-meta"><span class="badge bpm">105</span><span class="badge key">5A</span><span class="badge dur">2:45</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Gold Digger - Anthem Kingz edamame Edit (Dirty)" data-artist="Kanye West" data-playlist="Deutschrap-Mix / Deutschrap-110BPM">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Gold Digger - Anthem Kingz edamame Edit (Dirty)">Gold Digger - Anthem Kingz edamame Edit (Dirty)</div>
+        <div class="card-artist">Kanye West</div>
+        <div class="card-meta"><span class="badge bpm">106</span><span class="badge key">2B</span><span class="badge dur">2:46</span></div>
+      </div>
+    </div></div>
+    </section><section class="playlist-section" id="Deutschrap-120BPM">
+      <h2>Deutschrap-Mix / Deutschrap-120BPM <span class="count">6 Songs</span></h2>
+      <div class="cards"><div class="card" onclick="toggleSong(this)" data-title="We Made It (DJcity Intro)" data-artist="t-low &amp; Miksu / Macloud" data-playlist="Deutschrap-Mix / Deutschrap-120BPM">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="We Made It (DJcity Intro)">We Made It (DJcity Intro)</div>
+        <div class="card-artist">t-low &amp; Miksu / Macloud</div>
+        <div class="card-meta"><span class="badge bpm">116</span><span class="badge key">4A</span><span class="badge dur">3:43</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Keine Angst" data-artist="KitschKrieg ft. Alli Neumann &amp; Trettmann" data-playlist="Deutschrap-Mix / Deutschrap-120BPM">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Keine Angst">Keine Angst</div>
+        <div class="card-artist">KitschKrieg ft. Alli Neumann &amp; Trettmann</div>
+        <div class="card-meta"><span class="badge bpm">116.7</span><span class="badge key">1A</span><span class="badge dur">3:48</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Madonna" data-artist="Bausa &amp; Apache 207" data-playlist="Deutschrap-Mix / Deutschrap-120BPM" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/55/ca/2c/55ca2c54-0156-2101-35fb-4499e2579a96/mzaf_7085618974054916183.plus.aac.p.m4a">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/46/cb/ec/46cbecae-fb7f-2bcb-5a00-635cbf3a809d/190295194062.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Madonna">Madonna</div>
+        <div class="card-artist">Bausa &amp; Apache 207</div>
+        <div class="card-meta"><span class="badge bpm">117</span><span class="badge key">11A</span><span class="badge dur">3:14</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Fata Morgana" data-artist="Nina Chuba" data-playlist="Deutschrap-Mix / Deutschrap-120BPM" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/e4/4c/c2/e44cc297-38bc-54dc-4885-fc082d006237/mzaf_3434201997175103673.plus.aac.p.m4a">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/80/38/9c/80389cec-c7d3-e152-cd60-3ab7eca0748b/196872537932.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Fata Morgana">Fata Morgana</div>
+        <div class="card-artist">Nina Chuba</div>
+        <div class="card-meta"><span class="badge bpm">118</span><span class="badge key">9A</span><span class="badge dur">2:43</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Wunder - FEIER &amp; EIS Remix" data-artist="AYLIVA &amp; Apache 207" data-playlist="Deutschrap-Mix / Deutschrap-120BPM">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Wunder - FEIER &amp; EIS Remix">Wunder - FEIER &amp; EIS Remix</div>
+        <div class="card-artist">AYLIVA &amp; Apache 207</div>
+        <div class="card-meta"><span class="badge bpm">120</span><span class="badge key">4B</span><span class="badge dur">2:40</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Für Dich Da" data-artist="Trettmann, KitschKrieg, Levin Liam &amp; SFR" data-playlist="Deutschrap-Mix / Deutschrap-120BPM">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Für Dich Da">Für Dich Da</div>
+        <div class="card-artist">Trettmann, KitschKrieg, Levin Liam &amp; SFR</div>
+        <div class="card-meta"><span class="badge bpm">120</span><span class="badge key">8A</span><span class="badge dur">3:02</span></div>
+      </div>
+    </div></div>
+    </section><section class="playlist-section" id="Deutschrap-134BPM">
+      <h2>Deutschrap-Mix / Deutschrap-134BPM <span class="count">9 Songs</span></h2>
+      <div class="cards"><div class="card" onclick="toggleSong(this)" data-title="SUVs - DJ Jeezy Remix" data-artist="Luciano" data-playlist="Deutschrap-Mix / Deutschrap-134BPM">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="SUVs - DJ Jeezy Remix">SUVs - DJ Jeezy Remix</div>
+        <div class="card-artist">Luciano</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">5A</span><span class="badge dur">3:03</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Apache - DJ Dado 104-128 Transition" data-artist="Apache 207" data-playlist="Deutschrap-Mix / Deutschrap-134BPM">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Apache - DJ Dado 104-128 Transition">Apache - DJ Dado 104-128 Transition</div>
+        <div class="card-artist">Apache 207</div>
+        <div class="card-meta"><span class="badge bpm">128.0</span><span class="badge key">3A</span><span class="badge dur">2:56</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Bangaranga - FEIER &amp; EIS Remix" data-artist="DARA" data-playlist="Deutschrap-Mix / Deutschrap-134BPM">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Bangaranga - FEIER &amp; EIS Remix">Bangaranga - FEIER &amp; EIS Remix</div>
+        <div class="card-artist">DARA</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">12A</span><span class="badge dur">3:33</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Nachts Wach - FEIER &amp; EIS Remix" data-artist="Miksu / Macloud &amp; makko" data-playlist="Deutschrap-Mix / Deutschrap-134BPM">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Nachts Wach - FEIER &amp; EIS Remix">Nachts Wach - FEIER &amp; EIS Remix</div>
+        <div class="card-artist">Miksu / Macloud &amp; makko</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">11A</span><span class="badge dur">3:30</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Wildberry Lillet - SGRO Remix" data-artist="Nina Chuba" data-playlist="Deutschrap-Mix / Deutschrap-134BPM">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Wildberry Lillet - SGRO Remix">Wildberry Lillet - SGRO Remix</div>
+        <div class="card-artist">Nina Chuba</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">11A</span><span class="badge dur">3:16</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Fame (DJcity Intro)" data-artist="Apache 207" data-playlist="Deutschrap-Mix / Deutschrap-134BPM">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Fame (DJcity Intro)">Fame (DJcity Intro)</div>
+        <div class="card-artist">Apache 207</div>
+        <div class="card-meta"><span class="badge bpm">130</span><span class="badge key">12A</span><span class="badge dur">3:12</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Ohne Benzin" data-artist="Domiziana" data-playlist="Deutschrap-Mix / Deutschrap-134BPM">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Ohne Benzin">Ohne Benzin</div>
+        <div class="card-artist">Domiziana</div>
+        <div class="card-meta"><span class="badge bpm">133</span><span class="badge key">1A</span><span class="badge dur">2:32</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Durstlöscher" data-artist="01099, Gustav &amp; Zachi" data-playlist="Deutschrap-Mix / Deutschrap-134BPM">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Durstlöscher">Durstlöscher</div>
+        <div class="card-artist">01099, Gustav &amp; Zachi</div>
+        <div class="card-meta"><span class="badge bpm">134</span><span class="badge key">12A</span><span class="badge dur">2:39</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="VEMPA - FEIER &amp; EIS Remix" data-artist="FOURTY &amp; Bausa" data-playlist="Deutschrap-Mix / Deutschrap-134BPM">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="VEMPA - FEIER &amp; EIS Remix">VEMPA - FEIER &amp; EIS Remix</div>
+        <div class="card-artist">FOURTY &amp; Bausa</div>
+        <div class="card-meta"><span class="badge bpm">134</span><span class="badge key">12A</span><span class="badge dur">2:55</span></div>
+      </div>
+    </div></div>
+    </section><section class="playlist-section" id="Deutschrap-145BPM">
+      <h2>Deutschrap-Mix / Deutschrap-145BPM <span class="count">7 Songs</span></h2>
+      <div class="cards"><div class="card" onclick="toggleSong(this)" data-title="RADW - DJ Juize Remix (Intro)" data-artist="Haftbefehl" data-playlist="Deutschrap-Mix / Deutschrap-145BPM">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="RADW - DJ Juize Remix (Intro)">RADW - DJ Juize Remix (Intro)</div>
+        <div class="card-artist">Haftbefehl</div>
+        <div class="card-meta"><span class="badge bpm">136</span><span class="badge key">5A</span><span class="badge dur">3:07</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Valla nein!" data-artist="KC Rebell &amp; summer Cem ft. Luciano" data-playlist="Deutschrap-Mix / Deutschrap-145BPM">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Valla nein!">Valla nein!</div>
+        <div class="card-artist">KC Rebell &amp; summer Cem ft. Luciano</div>
+        <div class="card-meta"><span class="badge bpm">136</span><span class="badge key">3A</span><span class="badge dur">2:58</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Sie Liebt Techno (Intro)" data-artist="Romero" data-playlist="Deutschrap-Mix / Deutschrap-145BPM">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Sie Liebt Techno (Intro)">Sie Liebt Techno (Intro)</div>
+        <div class="card-artist">Romero</div>
+        <div class="card-meta"><span class="badge bpm">139.9</span><span class="badge key">4A</span><span class="badge dur">2:03</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Gut Genug - Dan Gerous Remix" data-artist="KITSCHKRIEG, Blumengarten &amp; Shirin David" data-playlist="Deutschrap-Mix / Deutschrap-145BPM">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Gut Genug - Dan Gerous Remix">Gut Genug - Dan Gerous Remix</div>
+        <div class="card-artist">KITSCHKRIEG, Blumengarten &amp; Shirin David</div>
+        <div class="card-meta"><span class="badge bpm">140</span><span class="badge key">6A</span><span class="badge dur">2:03</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="90-60-111 (Intro)" data-artist="Shirin David" data-playlist="Deutschrap-Mix / Deutschrap-145BPM">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="90-60-111 (Intro)">90-60-111 (Intro)</div>
+        <div class="card-artist">Shirin David</div>
+        <div class="card-meta"><span class="badge bpm">144</span><span class="badge key">12A</span><span class="badge dur">3:20</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Blaues Licht - DJcity Hype Edit" data-artist="RAF Camora" data-playlist="Deutschrap-Mix / Deutschrap-145BPM">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Blaues Licht - DJcity Hype Edit">Blaues Licht - DJcity Hype Edit</div>
+        <div class="card-artist">RAF Camora</div>
+        <div class="card-meta"><span class="badge bpm">145.0</span><span class="badge key">1A</span><span class="badge dur">2:47</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="9 bis 9 - FEIER &amp; EIS Remix" data-artist="SIRA, Bausa &amp; badchieff" data-playlist="Deutschrap-Mix / Deutschrap-145BPM">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="9 bis 9 - FEIER &amp; EIS Remix">9 bis 9 - FEIER &amp; EIS Remix</div>
+        <div class="card-artist">SIRA, Bausa &amp; badchieff</div>
+        <div class="card-meta"><span class="badge bpm">145</span><span class="badge key">9A</span><span class="badge dur">1:52</span></div>
+      </div>
+    </div></div>
+    </section><section class="playlist-section" id="Deutschrap-Open">
+      <h2>Deutschrap-Mix / Deutschrap-Open <span class="count">8 Songs</span></h2>
+      <div class="cards"><div class="card" onclick="toggleSong(this)" data-title="200 km/h (Intro)" data-artist="Apache 207" data-playlist="Deutschrap-Mix / Deutschrap-Open">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="200 km/h (Intro)">200 km/h (Intro)</div>
+        <div class="card-artist">Apache 207</div>
+        <div class="card-meta"><span class="badge bpm">148</span><span class="badge key">10A</span><span class="badge dur">3:32</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Conan x Xenia" data-artist="Haftbefehl &amp; Shirin David" data-playlist="Deutschrap-Mix / Deutschrap-Open">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Conan x Xenia">Conan x Xenia</div>
+        <div class="card-artist">Haftbefehl &amp; Shirin David</div>
+        <div class="card-meta"><span class="badge bpm">148</span><span class="badge key">10B</span><span class="badge dur">3:20</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Die Braune Tasche - Frizzo Remix" data-artist="Haftbefehl ft. Bazzazian" data-playlist="Deutschrap-Mix / Deutschrap-Open">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Die Braune Tasche - Frizzo Remix">Die Braune Tasche - Frizzo Remix</div>
+        <div class="card-artist">Haftbefehl ft. Bazzazian</div>
+        <div class="card-meta"><span class="badge bpm">148</span><span class="badge key">11A</span><span class="badge dur">1:31</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Zeit, DASS SICH WAS DREHT - FEIER &amp; EIS Remix" data-artist="$OHO BANI, Herbert Grönemeyer &amp; Ericson" data-playlist="Deutschrap-Mix / Deutschrap-Open">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Zeit, DASS SICH WAS DREHT - FEIER &amp; EIS Remix">Zeit, DASS SICH WAS DREHT - FEIER &amp; EIS Remix</div>
+        <div class="card-artist">$OHO BANI, Herbert Grönemeyer &amp; Ericson</div>
+        <div class="card-meta"><span class="badge bpm">155</span><span class="badge key">7A</span><span class="badge dur">2:24</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="IDGAF" data-artist="Ikkimel" data-playlist="Deutschrap-Mix / Deutschrap-Open">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="IDGAF">IDGAF</div>
+        <div class="card-artist">Ikkimel</div>
+        <div class="card-meta"><span class="badge bpm">155</span><span class="badge key">1A</span><span class="badge dur">2:17</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="WHO&#39;S THAT (Intro)" data-artist="Ikkimel &amp; Robbensohn" data-playlist="Deutschrap-Mix / Deutschrap-Open">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="WHO&#39;S THAT (Intro)">WHO&#39;S THAT (Intro)</div>
+        <div class="card-artist">Ikkimel &amp; Robbensohn</div>
+        <div class="card-meta"><span class="badge bpm">156</span><span class="badge key">4B</span><span class="badge dur">2:40</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Kleiner Grüner Kaktus" data-artist="KLEPTO, Michael Caspar &amp; German Gents" data-playlist="Deutschrap-Mix / Deutschrap-Open">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Kleiner Grüner Kaktus">Kleiner Grüner Kaktus</div>
+        <div class="card-artist">KLEPTO, Michael Caspar &amp; German Gents</div>
+        <div class="card-meta"><span class="badge bpm">160</span><span class="badge key">4A</span><span class="badge dur">1:53</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Fühlst Du Das Auch" data-artist="Apache207" data-playlist="Deutschrap-Mix / Deutschrap-Open">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div></div>
+      <div class="card-info">
+        <div class="card-title" title="Fühlst Du Das Auch">Fühlst Du Das Auch</div>
+        <div class="card-artist">Apache207</div>
+        <div class="card-meta"><span class="badge bpm">176</span><span class="badge key">11A</span><span class="badge dur">3:02</span></div>
+      </div>
+    </div></div>
     </section><section class="playlist-section" id="Latin-Mix">
       <h2>Latin-Mix <span class="count">14 Songs</span></h2>
       <div class="cards"><div class="card" onclick="toggleSong(this)" data-title="Con Altura (feat. El Guincho)" data-artist="ROSALÍA J Balvin El Guincho" data-playlist="Latin-Mix" data-preview="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/9c/38/ff/9c38ff38-455d-f477-999b-7568184c6f25/mzaf_15437150768562178188.plus.aac.p.m4a">
@@ -1420,7 +2029,9 @@
 <script>
 
 
+
 let currentAudio=null,currentBtn=null;function playPreview(e,btn){e.stopPropagation();const url=btn.closest('.card').dataset.preview;if(!url)return;if(currentAudio&&!currentAudio.paused){currentAudio.pause();if(currentBtn)currentBtn.classList.remove('pb-playing','pb-loading','pb-error');if(currentBtn===btn){currentAudio=null;currentBtn=null;return}}btn.classList.remove('pb-playing','pb-error');btn.classList.add('pb-loading');const audio=new Audio(url);currentAudio=audio;currentBtn=btn;audio.addEventListener('canplay',()=>{if(currentAudio!==audio)return;btn.classList.remove('pb-loading');btn.classList.add('pb-playing');audio.play()});audio.addEventListener('ended',()=>{btn.classList.remove('pb-playing','pb-loading');currentAudio=null;currentBtn=null});audio.addEventListener('error',()=>{btn.classList.remove('pb-loading','pb-playing');btn.classList.add('pb-error');setTimeout(()=>btn.classList.remove('pb-error'),2000);currentAudio=null;currentBtn=null});audio.load()}function toggleSong(card){card.classList.toggle('selected');updateShareBar()}function updateShareBar(){const sel=document.querySelectorAll('.card.selected');document.getElementById('shareCount').textContent=sel.length+' Song'+(sel.length!==1?'s':'')+' markiert';document.getElementById('shareBar').classList.toggle('visible',sel.length>0)}function resetAll(){document.querySelectorAll('.card.selected').forEach(c=>c.classList.remove('selected'));updateShareBar()}function shareSelection(){const selected=[...document.querySelectorAll('.card.selected')];if(!selected.length)return;const byPlaylist={};selected.forEach(card=>{const pl=card.dataset.playlist;if(!byPlaylist[pl])byPlaylist[pl]=[];byPlaylist[pl].push(card.dataset.title+' — '+card.dataset.artist)});let text='Diese Songs passen nicht zur Hochzeit GardenCity:\n\n';for(const[pl,songs]of Object.entries(byPlaylist)){text+=pl+':\n';songs.forEach(s=>text+='  ✕ '+s+'\n');text+='\n'}if(navigator.share){navigator.share({title:'Hochzeiten GardenCity — Nicht-Wunschliste',text}).catch(()=>{})}else{navigator.clipboard.writeText(text).then(()=>showToast('In Zwischenablage kopiert!')).catch(()=>{const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);showToast('In Zwischenablage kopiert!')})}}function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500)}
+
 
 
 </script>
