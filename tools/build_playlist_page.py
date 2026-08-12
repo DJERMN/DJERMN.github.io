@@ -1,40 +1,47 @@
 #!/usr/bin/env python3
 """
-GardenCity Playlist-Seite aus Rekordbox-DB aktualisieren.
+Rekordbox-Playlist-Seite generisch aktualisieren.
 
-Macht folgendes:
-  1. Liest die Playlists unter dem Ordner "Hochzeiten GardenCity" aus der Rekordbox-DB
-  2. Erzeugt 2s-MP3-Samples (aus der Songmitte) aus den lokalen Files
-  3. Generiert p/gardencity/index.html neu (behält Cover-Art der alten Seite)
+Liest einen Rekordbox-Ordner (inkl. Subplaylists) aus der lokalen DB,
+erzeugt 2s-MP3-Samples (Songmitte) aus den lokalen Files und baut die
+HTML-Seite neu. Cover-Art der bestehenden Seite bleibt erhalten.
 
 Usage:
-  python3 p/gardencity/build_samples.py
+  python3 tools/build_playlist_page.py --folder "Hochzeiten GardenCity" \
+      --output p/gardencity/index.html
+
+  python3 tools/build_playlist_page.py --folder "Hochzeiten" \
+      --output p/0da1f091d91e/hochzeiten.html
+
+Options:
+  --folder   Name des Rekordbox-Ordners (Pflicht)
+  --output   Ziel-HTML-Datei, relativ zum Repo (Pflicht)
+  --title    Seiten-Titel (Default: "<Folder> — Playlists")
+  --db       Pfad zur master.db (Default: Standard-Rekordbox-Pfad)
+  --no-samples  Nur HTML bauen, keine Samples erzeugen
 
 Requirements:
-  pip3 install pyrekordbox
+  pip3 install pyrekordbox sqlalchemy
   brew install ffmpeg
 """
 
+import argparse
+import hashlib
+import html as html_mod
 import os
 import re
-import html as html_mod
 import subprocess
-import hashlib
 from pathlib import Path
 
 from pyrekordbox.db6.database import Rekordbox6Database
 from pyrekordbox.db6.tables import DjmdContent, DjmdSongPlaylist, DjmdPlaylist, DjmdKey
 from sqlalchemy import select
 
-REPO_DIR = Path(__file__).resolve().parent.parent.parent  # .../DJERMN.github.io
-HTML_PATH = REPO_DIR / "p" / "gardencity" / "index.html"
-SAMPLES_DIR = REPO_DIR / "p" / "gardencity" / "samples"
+REPO_DIR = Path(__file__).resolve().parent.parent  # .../DJERMN.github.io
+DEFAULT_DB = "/Users/bariser/Library/Pioneer/rekordbox/master.db"
 
-DB_PATH = "/Users/bariser/Library/Pioneer/rekordbox/master.db"
-FOLDER_NAME = "Hochzeiten GardenCity"  # Rekordbox-Ordner mit den Playlists
-
-SAMPLE_DURATION = 2      # Sekunden
-SAMPLE_OFFSET_RATIO = 0.5  # Start in der Songmitte
+SAMPLE_DURATION = 2         # Sekunden
+SAMPLE_OFFSET_RATIO = 0.5   # Start in der Songmitte
 
 PLAY_BTN = ('<button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau">'
             '<svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22">'
@@ -42,31 +49,38 @@ PLAY_BTN = ('<button class="play-btn" onclick="playPreview(event,this)" aria-lab
 
 
 # ── Rekordbox lesen ──────────────────────────────────────────────
-def read_rekordbox_data():
-    db = Rekordbox6Database(str(DB_PATH))
+def read_rekordbox_data(db_path: str, folder_name: str):
+    db = Rekordbox6Database(db_path)
 
-    # Ordner finden
     folder = None
     for row in db.session.execute(select(DjmdPlaylist)).fetchall():
-        if row[0].Name == FOLDER_NAME:
+        if row[0].Name == folder_name and row[0].Attribute == 1:
             folder = row[0]
             break
     if folder is None:
-        raise SystemExit(f"Ordner '{FOLDER_NAME}' nicht in Rekordbox gefunden")
+        raise SystemExit(f"Ordner '{folder_name}' nicht in Rekordbox gefunden")
 
-    # Playlists im Ordner (nach Seq sortiert)
-    pl_stmt = (select(DjmdPlaylist)
-               .where(DjmdPlaylist.ParentID == str(folder.ID))
-               .order_by(DjmdPlaylist.Seq))
-    playlist_rows = db.session.execute(pl_stmt).fetchall()
+    # Alle Playlists (auch in Subordnern) rekursiv einsammeln
+    def collect(node_id, playlists_out):
+        pl_stmt = (select(DjmdPlaylist)
+                   .where(DjmdPlaylist.ParentID == str(node_id))
+                   .order_by(DjmdPlaylist.Seq))
+        for row in db.session.execute(pl_stmt).fetchall():
+            node = row[0]
+            if node.Attribute == 1:
+                collect(node.ID, playlists_out)  # Subordner
+            else:
+                playlists_out.append(node)
+        return playlists_out
+
+    playlist_rows = collect(folder.ID, [])
 
     key_cache = {}
     for row in db.session.execute(select(DjmdKey)).fetchall():
         key_cache[row[0].ID] = row[0].ScaleName
 
     playlists = []
-    for row in playlist_rows:
-        pl = row[0]
+    for pl in playlist_rows:
         stmt = (
             select(DjmdContent, DjmdSongPlaylist)
             .join(DjmdSongPlaylist, DjmdContent.ID == DjmdSongPlaylist.ContentID)
@@ -95,8 +109,10 @@ def read_rekordbox_data():
 
 
 # ── Alte Seite parsen (Cover-Art übernehmen) ─────────────────────
-def parse_existing_html():
-    with open(HTML_PATH, "r", encoding="utf-8") as f:
+def parse_existing_html(html_path: Path):
+    if not html_path.exists():
+        return {}, ""
+    with open(html_path, "r", encoding="utf-8") as f:
         content = f.read()
 
     cover_map = {}
@@ -116,12 +132,12 @@ def parse_existing_html():
 
 # ── Samples erzeugen ─────────────────────────────────────────────
 def sample_filename(track_id):
-    return hashlib.md5(f"garden_{track_id}".encode()).hexdigest()[:12] + ".mp3"
+    return hashlib.md5(str(track_id).encode()).hexdigest()[:12] + ".mp3"
 
 
-def generate_sample(src_path, dur_sec, track_id):
-    fname = sample_filename(str(track_id))
-    out_path = SAMPLES_DIR / fname
+def generate_sample(src_path, dur_sec, track_id, out_dir: Path):
+    fname = sample_filename(track_id)
+    out_path = out_dir / fname
     if out_path.exists():
         return fname
 
@@ -182,35 +198,9 @@ def make_card(track, cover_map, sample_file):
             f'      {cover_section}\n      {info}')
 
 
-def main():
-    SAMPLES_DIR.mkdir(exist_ok=True)
-
-    print("Parsing existing HTML for cover art...")
-    cover_map, old_html = parse_existing_html()
-    print(f"  {len(cover_map)} Cover-Einträge")
-
-    print("Reading Rekordbox database...")
-    playlists = read_rekordbox_data()
+def build_html(playlists, cover_map, sample_map, title, old_html):
     total = sum(len(p["tracks"]) for p in playlists)
-    print(f"  {total} Tracks in {len(playlists)} Playlists")
 
-    print("\nGenerating audio samples...")
-    sample_map = {}
-    done = 0
-    for pl in playlists:
-        for track in pl["tracks"]:
-            tid = track["id"]
-            if tid in sample_map:
-                continue
-            if os.path.exists(track["path"]) and track["dur_sec"] > 0:
-                fname = generate_sample(track["path"], track["dur_sec"], tid)
-                sample_map[tid] = fname
-                done += 1
-                if done % 20 == 0:
-                    print(f"  {done}/{total}...")
-    print(f"  {done} Samples, {total - done} fehlende Dateien")
-
-    print("\nBuilding HTML...")
     style = re.search(r'<style type="text/tailwindcss">(.*?)</style>', old_html, re.DOTALL)
     css = style.group(0) if style else ""
     js = re.search(r'</main>\s*(<script>.*?</script>.*?)</body>', old_html, re.DOTALL)
@@ -232,7 +222,7 @@ def main():
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hochzeiten GardenCity — Playlists</title>
+<title>{html_mod.escape(title)}</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -242,7 +232,7 @@ def main():
 </head>
 <body>
 <header>
-  <h1>Hochzeiten GardenCity — Playlists</h1>
+  <h1>{html_mod.escape(title)}</h1>
   <p>Rekordbox Library · {total} Songs in {len(playlists)} Playlists</p>
   <p class="hint">▶ Vorschau per Klick auf den Play-Button</p>
   <nav class="nav">{''.join(nav)}</nav>
@@ -252,14 +242,64 @@ def main():
 </main>
 {js_block}</body>
 </html>"""
+    return html
 
-    with open(HTML_PATH, "w", encoding="utf-8") as f:
+
+def main():
+    ap = argparse.ArgumentParser(description="Rekordbox-Playlist-Seite generisch bauen")
+    ap.add_argument("--folder", required=True, help="Rekordbox-Ordner-Name")
+    ap.add_argument("--output", required=True, help="Ziel-HTML relativ zum Repo-Root")
+    ap.add_argument("--title", default=None, help="Seiten-Titel (Default: '<Folder> — Playlists')")
+    ap.add_argument("--db", default=DEFAULT_DB, help="Pfad zur Rekordbox master.db")
+    ap.add_argument("--no-samples", action="store_true", help="Keine Samples erzeugen")
+    args = ap.parse_args()
+
+    title = args.title or f"{args.folder} — Playlists"
+    html_path = (REPO_DIR / args.output).resolve()
+    samples_dir = html_path.parent / "samples"
+    samples_dir.mkdir(exist_ok=True)
+
+    print(f"Folder:    {args.folder}")
+    print(f"Output:    {html_path.relative_to(REPO_DIR)}")
+    print(f"Title:     {title}")
+
+    print("\nParsing existing HTML for cover art...")
+    cover_map, old_html = parse_existing_html(html_path)
+    print(f"  {len(cover_map)} Cover-Einträge")
+
+    print("Reading Rekordbox database...")
+    playlists = read_rekordbox_data(args.db, args.folder)
+    total = sum(len(p["tracks"]) for p in playlists)
+    print(f"  {total} Tracks in {len(playlists)} Playlists")
+
+    sample_map = {}
+    if args.no_samples:
+        print("\nSkipping samples (--no-samples)")
+    else:
+        print("\nGenerating audio samples...")
+        done = 0
+        for pl in playlists:
+            for track in pl["tracks"]:
+                tid = track["id"]
+                if tid in sample_map:
+                    continue
+                if os.path.exists(track["path"]) and track["dur_sec"] > 0:
+                    fname = generate_sample(track["path"], track["dur_sec"], tid, samples_dir)
+                    sample_map[tid] = fname
+                    done += 1
+                    if done % 20 == 0:
+                        print(f"  {done}/{total}...")
+        print(f"  {done} Samples, {total - done} fehlende Dateien")
+
+    print("\nBuilding HTML...")
+    html = build_html(playlists, cover_map, sample_map, title, old_html)
+    with open(html_path, "w", encoding="utf-8") as f:
         f.write(html)
 
-    size = sum(os.path.getsize(SAMPLES_DIR / f) for f in os.listdir(SAMPLES_DIR) if f.endswith(".mp3"))
-    print(f"\nDone! {done} Samples, {size / 1024 / 1024:.1f} MB total")
-    print(f"Updated: {HTML_PATH}")
-    print("\nNext: git add p/gardencity && git commit && git push")
+    size = sum(os.path.getsize(samples_dir / f) for f in os.listdir(samples_dir) if f.endswith(".mp3"))
+    print(f"\nDone! Samples: {size / 1024 / 1024:.1f} MB total")
+    print(f"Updated: {html_path.relative_to(REPO_DIR)}")
+    print("\nNext: git add && git commit && git push")
 
 
 if __name__ == "__main__":
