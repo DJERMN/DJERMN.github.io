@@ -491,9 +491,23 @@ function scheduleReload() {
       currentData = d; lastTitle = null; lastArtwork = null;
       renderNowPlaying(d);
     }).catch(() => {});
-  }, 45000);
+  }, 10000);
 }
 scheduleReload();
+
+function refreshNowPlaying() {
+  if (activeTab !== 'nowplaying') return;
+  get(ref(db, 'now-playing')).then(s => {
+    const d = s.val() || {};
+    currentData = d; lastTitle = null; lastArtwork = null;
+    renderNowPlaying(d);
+  }).catch(() => {});
+}
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden) refreshNowPlaying();
+});
+window.addEventListener('pageshow', refreshNowPlaying);
+window.addEventListener('online', refreshNowPlaying);
 
 const uid = (() => {
   let id = localStorage.getItem('djermn-uid');
