@@ -203,8 +203,8 @@ def build_html(playlists, cover_map, sample_map, title, old_html):
 
     style = re.search(r'<style type="text/tailwindcss">(.*?)</style>', old_html, re.DOTALL)
     css = style.group(0) if style else ""
-    js = re.search(r'</main>\s*(<script>.*?</script>.*?)</body>', old_html, re.DOTALL)
-    js_block = js.group(1) if js else ""
+    js = re.search(r'</main>\s*(.*?)</body>', old_html, re.DOTALL)
+    tail_block = js.group(1) if js else ""
 
     nav, sections = [], []
     for pl in playlists:
@@ -240,7 +240,7 @@ def build_html(playlists, cover_map, sample_map, title, old_html):
 <main>
 {''.join(sections)}
 </main>
-{js_block}</body>
+{tail_block}</body>
 </html>"""
     return html
 
