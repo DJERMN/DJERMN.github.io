@@ -3,7 +3,7 @@
 Rekordbox-Playlist-Seite generisch aktualisieren.
 
 Liest einen Rekordbox-Ordner (inkl. Subplaylists) aus der lokalen DB,
-erzeugt 2s-MP3-Samples (Songmitte) aus den lokalen Files und baut die
+erzeugt 3s-MP3-Samples (Songmitte) aus den lokalen Files und baut die
 HTML-Seite neu. Cover-Art der bestehenden Seite bleibt erhalten.
 
 Usage:
@@ -40,7 +40,7 @@ from sqlalchemy import select
 REPO_DIR = Path(__file__).resolve().parent.parent  # .../DJERMN.github.io
 DEFAULT_DB = "/Users/bariser/Library/Pioneer/rekordbox/master.db"
 
-SAMPLE_DURATION = 2         # Sekunden
+SAMPLE_DURATION = 3         # Sekunden
 SAMPLE_OFFSET_RATIO = 0.5   # Start in der Songmitte
 
 PLAY_BTN = ('<button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau">'
@@ -147,12 +147,12 @@ def generate_sample(src_path, dur_sec, track_id, out_dir: Path):
 
     cmd = ["ffmpeg", "-y", "-v", "error", "-ss", str(start), "-t", str(SAMPLE_DURATION),
            "-i", src_path, "-c:a", "libmp3lame", "-b:a", "128k",
-           "-af", "afade=t=in:d=0.01,afade=t=out:st=1.9:d=0.1", str(out_path)]
+           "-af", "afade=t=in:d=0.01,afade=t=out:st=2.9:d=0.1", str(out_path)]
     try:
         subprocess.run(cmd, check=True, timeout=15)
         return fname
     except Exception:
-        cmd[4] = "30"  # Fallback: fester Start bei 30s
+        cmd[5] = "30"  # Fallback: fester Start bei 30s
         try:
             subprocess.run(cmd, check=True, timeout=15)
             return fname
