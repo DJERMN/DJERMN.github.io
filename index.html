@@ -83,15 +83,6 @@
 
         <label class="cookie-option">
           <div class="cookie-option-info">
-            <span class="cookie-option-name">🎵 SoundCloud</span>
-            <span class="cookie-option-desc">Audioplayer von SoundCloud (Datenübertragung an SoundCloud)</span>
-          </div>
-          <input type="checkbox" id="chkSoundCloud" />
-          <span class="cookie-toggle"></span>
-        </label>
-
-        <label class="cookie-option">
-          <div class="cookie-option-info">
             <span class="cookie-option-name">📊 Google Analytics</span>
             <span class="cookie-option-desc">Statistiken & Seitenanalyse (Datenübertragung an Google)</span>
           </div>
@@ -212,13 +203,9 @@
     <div class="container">
       <h2 class="section-title">Hörprobe</h2>
       <p class="section-sub">Reinhören – Club Session live.</p>
-      <div class="sc-wrap" id="scWrap">
-        <!-- SoundCloud wird erst nach Cookie-Zustimmung geladen -->
-        <div class="sc-blocked" id="scBlocked">
-          <p>🎵 Der SoundCloud-Player ist deaktiviert.</p>
-          <p>Bitte akzeptiere <strong>SoundCloud-Cookies</strong>, um die Hörprobe abzuspielen.</p>
-          <button class="cookie-btn save-sel" onclick="openCookieSettings()">Cookie-Einstellungen öffnen</button>
-        </div>
+      <div class="sc-wrap">
+        <audio controls preload="metadata" src="p/airmann-house.mp3"></audio>
+        <p class="sc-label">AirMann – House · Club Session Mix</p>
       </div>
     </div>
   </section>
@@ -470,38 +457,25 @@
     }
 
     function acceptAll() {
-      document.getElementById('chkFonts').checked      = true;
-      document.getElementById('chkSoundCloud').checked = true;
-      document.getElementById('chkAnalytics').checked  = true;
+      document.getElementById('chkFonts').checked     = true;
+      document.getElementById('chkAnalytics').checked = true;
       saveSelection();
     }
 
     function saveSelection() {
       const fonts     = document.getElementById('chkFonts').checked;
-      const sc        = document.getElementById('chkSoundCloud').checked;
       const analytics = document.getElementById('chkAnalytics').checked;
       localStorage.setItem('cookieFonts',      fonts     ? 'yes' : 'no');
-      localStorage.setItem('cookieSoundCloud', sc        ? 'yes' : 'no');
       localStorage.setItem('cookieAnalytics',  analytics ? 'yes' : 'no');
       localStorage.setItem('cookieConsent', 'done');
       closeBanner();
       if (fonts)     loadFonts();
-      if (sc)        loadSoundCloud();
       if (analytics) loadAnalytics();
     }
 
     function loadFonts() {
       document.getElementById('gfonts').href =
         'https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap';
-    }
-
-    function loadSoundCloud() {
-      const wrap = document.getElementById('scWrap');
-      wrap.innerHTML =
-        '<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" ' +
-        'src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/airmann/letse-go-b' +
-        '&color=%23a855f7&auto_play=false&hide_related=true&show_comments=false' +
-        '&show_user=true&show_reposts=false&show_teaser=false"></iframe>';
     }
 
     function loadAnalytics() {
@@ -519,9 +493,8 @@
     // Show or hide on load
     if (localStorage.getItem('cookieConsent') === 'done') {
       banner.style.display = 'none';
-      if (localStorage.getItem('cookieFonts')      === 'yes') loadFonts();
-      if (localStorage.getItem('cookieSoundCloud') === 'yes') loadSoundCloud();
-      if (localStorage.getItem('cookieAnalytics')  === 'yes') loadAnalytics();
+      if (localStorage.getItem('cookieFonts')     === 'yes') loadFonts();
+      if (localStorage.getItem('cookieAnalytics') === 'yes') loadAnalytics();
     } else {
       // Smooth fade-in after short delay
       banner.style.display = 'flex';
@@ -634,9 +607,8 @@
     }
 
     function openCookieSettings() {
-      document.getElementById('chkFonts').checked      = localStorage.getItem('cookieFonts')      === 'yes';
-      document.getElementById('chkSoundCloud').checked = localStorage.getItem('cookieSoundCloud') === 'yes';
-      document.getElementById('chkAnalytics').checked  = localStorage.getItem('cookieAnalytics')  === 'yes';
+      document.getElementById('chkFonts').checked     = localStorage.getItem('cookieFonts')     === 'yes';
+      document.getElementById('chkAnalytics').checked = localStorage.getItem('cookieAnalytics') === 'yes';
       banner.style.display = 'flex';
       banner.classList.remove('cookie-hide');
       banner.style.opacity = '0';

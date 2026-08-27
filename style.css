@@ -715,15 +715,15 @@ body {
   box-shadow: 0 4px 24px rgba(0,0,0,0.4);
 }
 
-.sc-blocked {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid var(--border);
-  border-radius: 12px; padding: 2rem;
-  text-align: center; color: #888; font-size: 0.95rem; line-height: 1.7;
+.sc-wrap audio {
+  width: 100%; display: block;
+  background: #111;
 }
 
-.sc-blocked strong { color: #bbb; }
-.sc-blocked .cookie-btn { margin-top: 1rem; }
+.sc-label {
+  text-align: center; color: #888;
+  font-size: 0.85rem; padding: 0.6rem 0 0.2rem;
+}
 
 .story-caption {
   position: absolute; bottom: 0; left: 0; right: 0;
