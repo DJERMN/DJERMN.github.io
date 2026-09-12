@@ -237,6 +237,28 @@ body {
 
 .hero-content { position: relative; z-index: 1; }
 
+/* Banner: Verweis auf die neue Hauptwebsite djerman.de */
+.hero-new-site {
+  display: inline-block;
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(0.62rem, 1.2vw, 0.75rem);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #c8f542;
+  border: 1px solid #c8f542;
+  border-radius: 999px;
+  padding: 0.55em 1.4em;
+  margin-bottom: 2rem;
+  background: rgba(200, 245, 66, 0.1);
+  box-shadow: 0 0 22px rgba(200, 245, 66, 0.15);
+  transition: background 0.2s, color 0.2s;
+}
+.hero-new-site:hover {
+  background: #c8f542;
+  color: #0a1200;
+}
+
 .hero-sub {
   font-family: 'Orbitron', sans-serif;
   font-size: 0.7rem; letter-spacing: 0.5em;
