@@ -81,15 +81,6 @@
           <span class="cookie-toggle"></span>
         </label>
 
-        <label class="cookie-option">
-          <div class="cookie-option-info">
-            <span class="cookie-option-name">📊 Google Analytics</span>
-            <span class="cookie-option-desc">Statistiken & Seitenanalyse (Datenübertragung an Google)</span>
-          </div>
-          <input type="checkbox" id="chkAnalytics" />
-          <span class="cookie-toggle"></span>
-        </label>
-
       </div>
 
       <div class="cookie-modal-actions">
@@ -208,19 +199,15 @@
 
     function acceptAll() {
       document.getElementById('chkFonts').checked     = true;
-      document.getElementById('chkAnalytics').checked = true;
       saveSelection();
     }
 
     function saveSelection() {
-      const fonts     = document.getElementById('chkFonts').checked;
-      const analytics = document.getElementById('chkAnalytics').checked;
-      localStorage.setItem('cookieFonts',      fonts     ? 'yes' : 'no');
-      localStorage.setItem('cookieAnalytics',  analytics ? 'yes' : 'no');
+      const fonts = document.getElementById('chkFonts').checked;
+      localStorage.setItem('cookieFonts',   fonts ? 'yes' : 'no');
       localStorage.setItem('cookieConsent', 'done');
       closeBanner();
-      if (fonts)     loadFonts();
-      if (analytics) loadAnalytics();
+      if (fonts) loadFonts();
     }
 
     function loadFonts() {
@@ -228,23 +215,10 @@
         'https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap';
     }
 
-    function loadAnalytics() {
-      const s = document.createElement('script');
-      s.async = true;
-      s.src   = 'https://www.googletagmanager.com/gtag/js?id=G-RC4N8XNVNK';
-      document.head.appendChild(s);
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){ dataLayer.push(arguments); }
-      window.gtag = gtag;
-      gtag('js', new Date());
-      gtag('config', 'G-RC4N8XNVNK');
-    }
-
     // Show or hide on load
     if (localStorage.getItem('cookieConsent') === 'done') {
       banner.style.display = 'none';
-      if (localStorage.getItem('cookieFonts')     === 'yes') loadFonts();
-      if (localStorage.getItem('cookieAnalytics') === 'yes') loadAnalytics();
+      if (localStorage.getItem('cookieFonts') === 'yes') loadFonts();
     } else {
       // Smooth fade-in after short delay
       banner.style.display = 'flex';
@@ -278,8 +252,7 @@
     }
 
     function openCookieSettings() {
-      document.getElementById('chkFonts').checked     = localStorage.getItem('cookieFonts')     === 'yes';
-      document.getElementById('chkAnalytics').checked = localStorage.getItem('cookieAnalytics') === 'yes';
+      document.getElementById('chkFonts').checked = localStorage.getItem('cookieFonts') === 'yes';
       banner.style.display = 'flex';
       banner.classList.remove('cookie-hide');
       banner.style.opacity = '0';
