@@ -454,6 +454,10 @@ body {
   color: var(--muted); margin-bottom: 3rem; margin-top: 0.9rem; font-size: 1rem;
 }
 
+.section-sub a {
+  color: #fff;
+}
+
 /* ── ABOUT ────────────────────────────────────────── */
 .about-grid {
   display: grid; grid-template-columns: 1fr 1fr;
