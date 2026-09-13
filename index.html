@@ -106,11 +106,7 @@
       <span></span><span></span><span></span>
     </button>
     <ul class="nav-links" id="navLinks">
-      <li><a href="#stories"  onclick="closeMenu()">Stories</a></li>
-      <li><a href="#hoerprobe" onclick="closeMenu()">Hörprobe</a></li>
       <li><a href="#about"    onclick="closeMenu()">Über mich</a></li>
-      <li><a href="#genres"   onclick="closeMenu()">Genres</a></li>
-      <li><a href="#warum"    onclick="closeMenu()">Warum ich?</a></li>
       <li><a href="#booking"  onclick="closeMenu()">Booking</a></li>
     </ul>
   </nav>
@@ -132,84 +128,10 @@
       </div>
       <p class="hero-location">📍 Stuttgart · Böblingen · Baden-Württemberg</p>
       <div class="hero-btns">
-        <a href="#stories" class="btn">Stories ansehen</a>
         <a href="https://djermn.github.io/now-playing/" class="btn btn-live" target="_blank" rel="noopener"><span class="live-dot-hero"></span>Now Playing</a>
       </div>
     </div>
   </header>
-
-  <!-- STORIES -->
-  <section class="section dark" id="stories">
-    <div class="container">
-      <h2 class="section-title">Stories</h2>
-      
-
-      <div class="phone-wrap">
-        <div class="phone-frame">
-          <!-- Notch -->
-          <div class="phone-notch"></div>
-
-          <!-- Story progress bars -->
-          <div class="story-progress" id="storyProgress"></div>
-
-          <!-- Story header -->
-          <div class="story-header">
-            <div class="story-avatar">ERMAN</div>
-            <div class="story-meta">
-              <span class="story-name">BARIS ERMAN</span>
-              <span class="story-time">gerade eben</span>
-            </div>
-            <span class="story-close">✕</span>
-          </div>
-
-          <!-- Slides -->
-          <div class="story-slides" id="storySlides">
-
-            <div class="story-slide active" data-type="image">
-              <img src="ERMN-Image-1.JPG" alt="BARIS ERMAN live am Pioneer XDJ-XZ" />
-              <div class="story-caption">
-                <span class="story-tag">📸 Live</span>
-                <p>BARIS ERMAN im Einsatz</p>
-              </div>
-            </div>
-
-            <div class="story-slide" data-type="image">
-              <img src="purple-ermn-1.jpg" alt="BARIS ERMAN – House und Techno DJ Stuttgart" />
-              <div class="story-caption">
-                <span class="story-tag">🎧 Vibes</span>
-                <p>Purple Nights &amp; Heavy Beats</p>
-              </div>
-            </div>
-
-            <div class="story-slide" data-type="image">
-              <img src="image-ERMN-1.JPG" alt="BARIS ERMAN Booking – Hochzeit, Firmenfeier, Geburtstag" />
-              <div class="story-caption">
-                <span class="story-tag">🔥 Energy</span>
-                <p>Pioneer XDJ-XZ · All Night Long</p>
-              </div>
-            </div>
-
-          </div>
-
-          <!-- Tap zones -->
-          <div class="tap-zone tap-left"  id="tapLeft"></div>
-          <div class="tap-zone tap-right" id="tapRight"></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- HÖRPROBE -->
-  <section class="section dark" id="hoerprobe">
-    <div class="container">
-      <h2 class="section-title">Hörprobe</h2>
-      <p class="section-sub">Reinhören – Club Session live.</p>
-      <div class="sc-wrap">
-        <audio controls preload="metadata" src="p/airmann-house.mp3"></audio>
-        <p class="sc-label">AirMann – House · Club Session Mix</p>
-      </div>
-    </div>
-  </section>
 
   <!-- ABOUT -->
   <section class="section" id="about">
@@ -233,143 +155,6 @@
             Dein Event, meine Musik. ❤️
           </p>
         </div>
-        <div class="equipment-box">
-          <h3 style="font-family:'Orbitron',sans-serif;font-size:0.8rem;letter-spacing:0.3em;color:var(--accent);text-transform:uppercase;margin-bottom:1rem;">Equipment</h3>
-          <div class="eq-list">
-            <div class="eq-item">
-              <span class="eq-item-icon">🎛️</span>
-              <div class="eq-item-info">
-                <span class="eq-item-name">Pioneer XDJ-XZ</span>
-                <span class="eq-item-desc">All-in-One DJ System · 4-Kanal · standalone</span>
-              </div>
-            </div>
-            <div class="eq-item">
-              <span class="eq-item-icon">🔊</span>
-              <div class="eq-item-info">
-                <span class="eq-item-name">2 x FAME Everest 8 Stereo-Set</span>
-                <span class="eq-item-desc">ART PAH260 · Professionelle PA-Beschallung</span>
-              </div>
-            </div>
-            <div class="eq-item">
-              <span class="eq-item-icon">💨</span>
-              <div class="eq-item-info">
-                <span class="eq-item-name">Nebelmaschine</span>
-                <span class="eq-item-desc">Atmosphäre &amp; Lichteffekte</span>
-              </div>
-            </div>
-            <div class="eq-item">
-              <span class="eq-item-icon">💡</span>
-              <div class="eq-item-info">
-                <span class="eq-item-name">DMX Lichtanlage</span>
-                <span class="eq-item-desc">Stroboskop &amp; Movingheads</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- GENRES -->
-  <section class="section dark" id="genres">
-    <div class="container">
-      <h2 class="section-title">Genres &amp; Skills</h2>
-
-      <div class="genre-grid">
-
-        <div class="genre-col">
-          <h3 class="genre-col-title green">⭐ Stärken</h3>
-          <div class="genre-card strong">
-            <span class="genre-name">House</span>
-            <div class="bar-wrap"><div class="bar" style="width:96%"></div></div>
-            <span class="bar-label">96%</span>
-          </div>
-          <div class="genre-card strong">
-            <span class="genre-name">Techno</span>
-            <div class="bar-wrap"><div class="bar" style="width:93%"></div></div>
-            <span class="bar-label">93%</span>
-          </div>
-          <div class="genre-card strong">
-            <span class="genre-name">Clubbangers</span>
-            <div class="bar-wrap"><div class="bar" style="width:88%"></div></div>
-            <span class="bar-label">88%</span>
-          </div>
-          <div class="genre-card strong">
-            <span class="genre-name">EDM</span>
-            <div class="bar-wrap"><div class="bar" style="width:85%"></div></div>
-            <span class="bar-label">85%</span>
-          </div>
-        </div>
-
-        <div class="genre-col">
-          <h3 class="genre-col-title yellow">〜 Gelegentlich</h3>
-          <div class="genre-card medium">
-            <span class="genre-name">HipHop</span>
-            <div class="bar-wrap"><div class="bar med" style="width:65%"></div></div>
-            <span class="bar-label">65%</span>
-          </div>
-          <div class="genre-card medium">
-            <span class="genre-name">Hard Tech</span>
-            <div class="bar-wrap"><div class="bar med" style="width:55%"></div></div>
-            <span class="bar-label">55%</span>
-          </div>
-          <div class="genre-card medium">
-            <span class="genre-name">Latin</span>
-            <div class="bar-wrap"><div class="bar med" style="width:50%"></div></div>
-            <span class="bar-label">50%</span>
-          </div>
-        </div>
-
-        <div class="genre-col">
-          <h3 class="genre-col-title red">✗ Leider ohne mich</h3>
-          <div class="genre-card none">
-            <span class="genre-name">Rock</span>
-          </div>
-          <div class="genre-card none">
-            <span class="genre-name">Metal</span>
-          </div>
-          <div class="genre-card none">
-            <span class="genre-name">Schlager</span>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- WARUM MICH -->
-  <section class="section" id="warum">
-    <div class="container">
-      <h2 class="section-title">Warum mich als DJ für Deine Feier?</h2>
-      <p class="section-sub">Was Ihr bei mir bekommt — und so nicht überall.</p>
-
-      <div class="usp-grid">
-
-        <div class="usp-card usp-card--hero">
-          <h3 class="usp-title">Live "Now Playing" für Eure Gäste</h3>
-          <p class="usp-text">Eine eigene Website, die Euren Gästen während der Feier live zeigt, welcher Song gerade läuft – inklusive Stimmungs-Voting und Icebreaker-Karten für die Tanzpausen.</p>
-        </div>
-
-        <div class="usp-card usp-card--hero">
-          <h3 class="usp-title">No-Go-List</h3>
-          <p class="usp-text">Du kannst vorab Songs markieren, die nicht laufen sollen – dabei erhältst Du einen Zugriff auf meine individuelle Playlist für den Abend, direkt via Website.</p>
-        </div>
-
-        <div class="usp-card">
-          <h3 class="usp-title">Hochwertige DJ Edits</h3>
-          <p class="usp-text">Aktuelle Tracks, exklusive Remixe und professionelle Edits – immer auf dem neuesten Stand für die richtige Energie auf der Tanzfläche.</p>
-        </div>
-
-        <div class="usp-card">
-          <h3 class="usp-title">Komplett-Equipment inklusive</h3>
-          <p class="usp-text">Pioneer XDJ-XZ Standalone, 2× FAME Everest 8 Stereo-Set, DMX-Lichtanlage und Nebelmaschine – alles dabei, kein Aufpreis. Direkt einsatzbereit für 80–120 Gäste.</p>
-        </div>
-
-        <div class="usp-card">
-          <h3 class="usp-title">Persönliche Beratung — kein Mittelsmann</h3>
-          <p class="usp-text">Direkter Kontakt von Anfrage bis Abbau. Vorgespräch zu Ablauf, Wunschsongs und Stil – keine Agentur, keine Telefonwarteschleife.</p>
-        </div>
-
       </div>
     </div>
   </section>
@@ -388,42 +173,6 @@
             <p>E-Mail</p>
             <a href="mailto:baris_er@icloud.com">baris_er@icloud.com</a>
           </div>
-        </div>
-
-        <!-- Buchungsbedingungen Teaser → klickbar -->
-        <div class="contact-box contact-box--clickable" onclick="togglePricing()" id="bookingCondBox" aria-expanded="false" role="button" tabindex="0">
-          <span class="contact-icon">📋</span>
-          <div style="flex:1">
-            <p>Buchungsbedingungen</p>
-            <span class="contact-teaser">Individuelle Absprache · faire Konditionen</span>
-          </div>
-          <svg class="pricing-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-        </div>
-      </div>
-
-      <div class="pricing-details" id="pricingDetails">
-        <div class="pricing-inner">
-          <div class="pricing-grid">
-            <div class="pricing-item">
-              <span class="pricing-label">🎛️ Stundensatz</span>
-              <strong class="pricing-value">250 € / Std.</strong>
-            </div>
-            <div class="pricing-item">
-              <span class="pricing-label">📦 Pauschalangebot</span>
-              <strong class="pricing-value">1.200 € / Tag</strong>
-            </div>
-            <div class="pricing-item">
-              <span class="pricing-label">🚗 Anfahrt</span>
-              <strong class="pricing-value">ab 50 km · 0,40 € / km</strong>
-            </div>
-            <div class="pricing-item">
-              <span class="pricing-label">🔊 Equipment</span>
-              <strong class="pricing-value">Inklusive</strong>
-            </div>
-            
-            
-          </div>
-          <p class="pricing-note">Alle Preise sind Richtwerte – wir gehen noch einmal alles Schritt für Schritt durch. Es gibt keine versteckten Kosten, versprochen! 🤝</p>
         </div>
       </div>
     </div>
@@ -504,78 +253,7 @@
       });
     }
 
-    /* ── Story Logic ─────────────────────────────── */
-    const slides      = document.querySelectorAll('.story-slide');
-    const progressBar = document.getElementById('storyProgress');
-    const DURATION    = 5000; // ms per image slide
-    let current       = 0;
-    let timer         = null;
-    let startX        = 0;
-
-    // Build progress segments
-    slides.forEach((_, i) => {
-      const seg = document.createElement('div');
-      seg.className = 'progress-seg';
-      const fill = document.createElement('div');
-      fill.className = 'progress-fill';
-      seg.appendChild(fill);
-      progressBar.appendChild(seg);
-    });
-
-    function goTo(index) {
-      if (index < 0) index = 0;
-      if (index >= slides.length) index = slides.length - 1;
-
-      slides[current].classList.remove('active');
-      current = index;
-      slides[current].classList.add('active');
-
-      updateProgress();
-      clearInterval(timer);
-
-      const isVideo = slides[current].dataset.type === 'video';
-      if (!isVideo) {
-        timer = setInterval(() => {
-          if (current < slides.length - 1) goTo(current + 1);
-          else clearInterval(timer);
-        }, DURATION);
-      }
-    }
-
-    function updateProgress() {
-      const fills = progressBar.querySelectorAll('.progress-fill');
-      fills.forEach((fill, i) => {
-        fill.style.transition = 'none';
-        if (i < current) {
-          fill.style.width = '100%';
-        } else if (i === current) {
-          fill.style.width = '0%';
-          const isVideo = slides[current].dataset.type === 'video';
-          if (!isVideo) {
-            requestAnimationFrame(() => {
-              fill.style.transition = `width ${DURATION}ms linear`;
-              fill.style.width = '100%';
-            });
-          }
-        } else {
-          fill.style.width = '0%';
-        }
-      });
-    }
-
-    document.getElementById('tapLeft').addEventListener('click',  () => goTo(current - 1));
-    document.getElementById('tapRight').addEventListener('click', () => goTo(current + 1));
-
-    // Touch swipe
-    document.getElementById('storySlides').addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, {passive: true});
-    document.getElementById('storySlides').addEventListener('touchend',   e => {
-      const dx = e.changedTouches[0].clientX - startX;
-      if (Math.abs(dx) > 40) goTo(dx < 0 ? current + 1 : current - 1);
-    });
-
-    goTo(0);
-
-    /* ── Prevent pinch zoom (iOS Safari fix) ────── */
+/* ── Prevent pinch zoom (iOS Safari fix) ────── */
     document.addEventListener('touchmove', function(e) {
       if (e.touches.length > 1) e.preventDefault();
     }, { passive: false });
@@ -597,14 +275,6 @@
     function closeMenu() {
       hamburger.classList.remove('open');
       navLinks.classList.remove('open');
-    }
-
-    /* ── Pricing Toggle ───────────────────────────── */
-    function togglePricing() {
-      const box     = document.getElementById('bookingCondBox');
-      const details = document.getElementById('pricingDetails');
-      const isOpen  = details.classList.toggle('open');
-      box.setAttribute('aria-expanded', isOpen);
     }
 
     function openCookieSettings() {
