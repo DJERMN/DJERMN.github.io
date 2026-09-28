@@ -1,5 +1,3 @@
 User-agent: *
 Allow: /
 Disallow: /p/
-
-Sitemap: https://djermn.github.io/sitemap.xml
