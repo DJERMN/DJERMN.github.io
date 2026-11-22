@@ -63,13 +63,13 @@ PLAY_ALL_SCRIPT = """<script>
   const PLAYLIST_CROSSFADE_SECONDS = 0.45;
   let _playlistPlayback = null;
 
-  function _setPlaylistButton(button, playing) {
+  function _setPlaylistButton(button, playing, labelText) {
     if (!button) return;
     button.classList.toggle('is-playing', playing);
     const icon = button.querySelector('.play-all-icon');
     const label = button.querySelector('.play-all-label');
     if (icon) icon.textContent = playing ? '■' : '▶';
-    if (label) label.textContent = playing ? 'Stop' : 'Play All';
+    if (label) label.textContent = labelText || (playing ? 'Stop' : 'Play All');
     button.setAttribute('aria-pressed', String(playing));
     button.setAttribute('aria-label', playing ? 'Wiedergabe stoppen' : button.dataset.playLabel);
   }
@@ -78,14 +78,11 @@ PLAY_ALL_SCRIPT = """<script>
     const state = _playlistPlayback;
     if (!state) return;
     _playlistPlayback = null;
-    if (state.monitorTimer) clearTimeout(state.monitorTimer);
-    if (state.fadeFrame) cancelAnimationFrame(state.fadeFrame);
-    [state.currentAudio, state.nextAudio].forEach(audio => {
-      if (!audio) return;
-      audio.onended = null;
-      audio.onerror = null;
-      audio.pause();
+    state.sources.forEach(source => {
+      source.onended = null;
+      try { source.stop(); } catch (error) {}
     });
+    if (state.context && state.context.state !== 'closed') state.context.close().catch(() => {});
     _setPlaylistButton(state.button, false);
   }
 
@@ -102,107 +99,90 @@ PLAY_ALL_SCRIPT = """<script>
     const cards = Array.from(section.querySelectorAll('.card[data-preview]'));
     if (!cards.length) return;
 
-    const state = { button, cards, index: 0, currentAudio: null, nextAudio: null,
-                    monitorTimer: null, fadeFrame: null, fading: false };
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContextClass) {
+      _showPlaylistError();
+      return;
+    }
+
+    const state = { button, cards, context: new AudioContextClass(), sources: [] };
     _playlistPlayback = state;
-    _setPlaylistButton(button, true);
-    _startPlaylistTrack(state, 0);
+    _setPlaylistButton(button, true, 'Lädt…');
+    _loadAndStartPlaylist(state);
   }
 
-  function _preparePlaylistNext(state) {
-    const card = state.cards[state.index + 1];
-    if (!card) {
-      state.nextAudio = null;
-      return;
-    }
-    state.nextAudio = new Audio(card.dataset.preview);
-    state.nextAudio.preload = 'auto';
-    state.nextAudio.volume = 0;
+  function _showPlaylistError() {
+    const toast = document.getElementById('toast');
+    if (!toast || typeof showToast !== 'function') return;
+    toast.textContent = 'Vorschau konnte nicht geladen werden.';
+    showToast();
   }
 
-  function _advancePlaylistTrack(state, current) {
-    if (_playlistPlayback !== state || state.currentAudio !== current || state.fading) return;
-    const next = state.nextAudio;
-    state.nextAudio = null;
-    _startPlaylistTrack(state, state.index + 1, next);
-  }
+  async function _loadAndStartPlaylist(state) {
+    try {
+      // Resume inside the click gesture so mobile browsers allow scheduled playback.
+      await state.context.resume();
+      const buffers = await Promise.all(state.cards.map(async card => {
+        try {
+          const response = await fetch(card.dataset.preview);
+          if (!response.ok) return null;
+          return await state.context.decodeAudioData(await response.arrayBuffer());
+        } catch (error) {
+          return null;
+        }
+      }));
 
-  function _startPlaylistTrack(state, index, audio) {
-    if (_playlistPlayback !== state) return;
-    if (index >= state.cards.length) {
-      stopPlaylistPlayback();
-      return;
-    }
-    if (state.monitorTimer) clearTimeout(state.monitorTimer);
-    state.monitorTimer = null;
-    state.index = index;
-    const current = audio || state.nextAudio || new Audio(state.cards[index].dataset.preview);
-    state.nextAudio = null;
-    current.preload = 'auto';
-    current.volume = 1;
-    state.currentAudio = current;
-    current.onended = () => _advancePlaylistTrack(state, current);
-    current.onerror = () => _advancePlaylistTrack(state, current);
-    _preparePlaylistNext(state);
-
-    current.play().then(() => _monitorPlaylist(state)).catch(() => {
-      if (_playlistPlayback === state) stopPlaylistPlayback();
-    });
-  }
-
-  function _monitorPlaylist(state) {
-    if (_playlistPlayback !== state || state.fading) return;
-    const current = state.currentAudio;
-    if (state.nextAudio && Number.isFinite(current.duration) && current.duration > 0 &&
-        current.duration - current.currentTime <= PLAYLIST_CROSSFADE_SECONDS) {
-      _crossfadePlaylistTrack(state);
-      return;
-    }
-    state.monitorTimer = setTimeout(() => _monitorPlaylist(state), 80);
-  }
-
-  function _crossfadePlaylistTrack(state) {
-    const from = state.currentAudio;
-    const to = state.nextAudio;
-    if (!from || !to || state.fading) return;
-    state.fading = true;
-    to.volume = 0;
-    to.onended = () => _advancePlaylistTrack(state, to);
-    to.onerror = () => _advancePlaylistTrack(state, to);
-
-    to.play().then(() => {
-      if (_playlistPlayback !== state) {
-        to.pause();
+      if (_playlistPlayback !== state) return;
+      const playable = buffers.filter(Boolean);
+      if (!playable.length) {
+        stopPlaylistPlayback();
+        _showPlaylistError();
         return;
       }
-      const start = performance.now();
-      const fade = now => {
-        if (_playlistPlayback !== state) return;
-        const progress = Math.min(1, (now - start) / (PLAYLIST_CROSSFADE_SECONDS * 1000));
-        from.volume = 1 - progress;
-        to.volume = progress;
-        if (progress < 1) {
-          state.fadeFrame = requestAnimationFrame(fade);
-          return;
-        }
-        state.fadeFrame = null;
-        from.onended = null;
-        from.onerror = null;
-        from.pause();
-        state.nextAudio = null;
-        state.index += 1;
-        state.currentAudio = to;
-        state.fading = false;
-        _preparePlaylistNext(state);
-        _monitorPlaylist(state);
-      };
-      state.fadeFrame = requestAnimationFrame(fade);
-    }).catch(() => {
-      if (_playlistPlayback !== state) return;
-      state.fading = false;
-      state.nextAudio = null;
-      to.pause();
-      if (from.ended) _advancePlaylistTrack(state, from);
+      _schedulePlaylist(state, playable);
+      _setPlaylistButton(state.button, true);
+    } catch (error) {
+      if (_playlistPlayback === state) {
+        stopPlaylistPlayback();
+        _showPlaylistError();
+      }
+    }
+  }
+
+  function _schedulePlaylist(state, buffers) {
+    const context = state.context;
+    let startAt = context.currentTime + 0.08;
+    let previousFade = 0;
+
+    buffers.forEach((buffer, index) => {
+      const source = context.createBufferSource();
+      const gain = context.createGain();
+      source.buffer = buffer;
+      source.connect(gain);
+      gain.connect(context.destination);
+
+      const duration = buffer.duration;
+      const nextBuffer = buffers[index + 1];
+      const fadeOut = nextBuffer
+        ? Math.min(PLAYLIST_CROSSFADE_SECONDS, duration * 0.45, nextBuffer.duration * 0.45)
+        : Math.min(0.2, duration * 0.25);
+      const fadeIn = index === 0 ? Math.min(0.12, duration * 0.25) : previousFade;
+
+      gain.gain.setValueAtTime(0, startAt);
+      gain.gain.linearRampToValueAtTime(1, startAt + fadeIn);
+      gain.gain.setValueAtTime(1, startAt + duration - fadeOut);
+      gain.gain.linearRampToValueAtTime(0, startAt + duration);
+      source.start(startAt);
+      state.sources.push(source);
+
+      if (index === buffers.length - 1) {
+        source.onended = () => {
+          if (_playlistPlayback === state) stopPlaylistPlayback();
+        };
+      }
+
+      startAt += duration - fadeOut;
+      previousFade = fadeOut;
     });
   }
 
@@ -518,6 +498,7 @@ def build_html(playlists, cover_map, sample_map, title, old_html, feedback_endpo
     css = style.group(0) if style else ""
     js = re.search(r'</main>\s*(.*?)</body>', old_html, re.DOTALL)
     tail_block = js.group(1) if js else ""
+    tail_block = re.sub(r'<script>\s*const PLAYLIST_CROSSFADE_SECONDS\b.*?</script>', "", tail_block, flags=re.DOTALL)
     tail_block = re.sub(r'<script>\s*const playlistFeedbackEndpoint\b.*?</script>', "", tail_block, flags=re.DOTALL)
     if not feedback_endpoint:
         endpoint = re.search(r'<meta name="playlist-feedback-endpoint" content="([^"]*)"', old_html)
@@ -545,7 +526,7 @@ def build_html(playlists, cover_map, sample_map, title, old_html, feedback_endpo
         )
         sections.append(f'<section class="playlist-section" id="{sid}">\n      <h2>{playlist_name} <span class="count">{count} Songs</span>{play_all_button}</h2>\n      <div class="cards">{cards}</div>\n    </section>')
 
-    play_all_script = "" if "function togglePlaylistPlayback" in tail_block else PLAY_ALL_SCRIPT
+    play_all_script = PLAY_ALL_SCRIPT
     feedback_script = PLAYLIST_FEEDBACK_SCRIPT
 
     html = f"""<!DOCTYPE html>
