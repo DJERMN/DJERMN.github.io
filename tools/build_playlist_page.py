@@ -279,8 +279,9 @@ PLAYLIST_FEEDBACK_SCRIPT = """<script>
     }
 
     window.addEventListener('message', event => {
-      if (event.source !== responseFrame.contentWindow) return;
       const result = event.data;
+      // Apps Script can wrap the response in a sandbox frame, so correlate by the
+      // per-submission nonce rather than requiring one exact WindowProxy source.
       if (!result || result.type !== 'playlist-feedback-result' || result.submissionId !== activeSubmissionId) return;
       finishSubmission(result);
     });
