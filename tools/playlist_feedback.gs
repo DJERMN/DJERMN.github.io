@@ -10,6 +10,7 @@ const SPREADSHEET_NAME = 'DJERMN – Kunden-Songwünsche';
 const SHEET_NAME = 'Einsendungen';
 const ALLOWED_ORIGINS = ['https://djermn.github.io'];
 const MAX_SONGS_PER_SUBMISSION = 250;
+const NOTIFY_EMAIL = 'info@djerman.de';
 
 function setup() {
   const properties = PropertiesService.getScriptProperties();
@@ -40,10 +41,7 @@ function setup() {
     sheet.getRange(1, 1, 1, 6).setFontWeight('bold');
   }
 
-  const ownerEmail = Session.getEffectiveUser().getEmail();
-  if (ownerEmail && !properties.getProperty('NOTIFY_EMAIL')) {
-    properties.setProperty('NOTIFY_EMAIL', ownerEmail);
-  }
+  properties.setProperty('NOTIFY_EMAIL', NOTIFY_EMAIL);
 
   Logger.log('Google Sheet: ' + spreadsheet.getUrl());
   Logger.log('E-Mail-Benachrichtigung: ' + (properties.getProperty('NOTIFY_EMAIL') || 'aus'));
