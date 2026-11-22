@@ -1,0 +1,1627 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geburtstag Lucas &amp; Sarah — Playlists</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','system-ui','sans-serif']}}}}</script>
+<style type="text/tailwindcss">
+  @layer base {
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { @apply font-sans bg-zinc-950 text-zinc-100 min-h-screen; padding-bottom: 100px; -webkit-text-size-adjust: 100%; }
+  }
+  @layer components {
+    header { @apply bg-zinc-900 border-b border-zinc-800; padding: clamp(28px,6vw,52px) clamp(16px,5vw,48px) clamp(20px,4vw,36px); }
+    header h1 { @apply font-extrabold text-white tracking-tight leading-tight; font-size: clamp(1.4rem,5vw,2.2rem); }
+    header p { @apply mt-1.5 text-zinc-400; font-size: clamp(0.75rem,2.5vw,0.85rem); }
+    .hint { @apply mt-2 text-zinc-500; font-size: clamp(0.72rem,2.2vw,0.8rem); }
+
+    .nav { @apply flex mt-5 overflow-x-auto pb-0.5; flex-wrap: nowrap; gap: 6px; scrollbar-width: none; }
+    .nav::-webkit-scrollbar { display: none; }
+    .nav a { @apply text-zinc-500 no-underline font-medium border border-zinc-800 rounded shrink-0 whitespace-nowrap transition-colors duration-150; font-size: 0.72rem; padding: 5px 13px; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+    .nav a:hover { @apply text-amber-400; border-color: rgba(251,191,36,0.3); }
+
+    main { @apply max-w-[1440px] mx-auto; padding: clamp(32px,5vw,56px) clamp(12px,4vw,36px) 40px; }
+
+    .playlist-section { @apply mb-12; scroll-margin-top: 16px; }
+    .playlist-section h2 { @apply text-amber-400 font-semibold mb-3.5 pb-3 border-b border-zinc-800 flex items-center flex-wrap gap-2.5; font-size: clamp(0.82rem,3vw,0.95rem); }
+    .count { @apply text-zinc-600 font-normal text-xs; }
+
+    .cards { @apply border border-zinc-800 rounded-lg overflow-hidden; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 290px), 1fr)); gap: 1px; background-color: #27272a; }
+
+    .card { @apply bg-zinc-900 flex items-center gap-3 cursor-pointer relative transition-colors duration-100; padding: 11px 12px; border-radius: 0; -webkit-tap-highlight-color: transparent; touch-action: manipulation; user-select: none; }
+    @media (hover: hover) {
+      .card:hover { @apply bg-zinc-800; }
+      .card.selected:hover { background-color: #200a0a; }
+    }
+
+    .card-check { @apply absolute top-2.5 right-2.5 w-5 h-5 rounded border border-zinc-700 flex items-center justify-center shrink-0 transition-all duration-150; }
+    .check-icon { @apply leading-none transition-colors duration-150; font-size: 0.6rem; color: transparent; font-weight: 900; }
+    .card.selected { background-color: #1c0808; }
+    .card.selected .card-check { @apply bg-red-700 border-red-700; }
+    .card.selected .check-icon { @apply text-white; }
+    .card.selected .card-title { @apply text-red-300; }
+
+    .cover-wrap { @apply relative shrink-0; width: 52px; height: 52px; }
+    .cover-wrap .cover { @apply w-full h-full; flex-shrink: unset; }
+    .cover { @apply rounded-md object-cover shrink-0 bg-zinc-800; width: 52px; height: 52px; pointer-events: none; }
+    .no-cover { @apply flex items-center justify-center text-xl bg-zinc-800; }
+
+    .play-btn { @apply absolute rounded-full flex items-center justify-center p-0 cursor-pointer transition-all duration-150; bottom: 3px; right: 3px; width: 22px; height: 22px; background: rgba(0,0,0,0.85); border: 1px solid rgba(255,255,255,0.18); -webkit-tap-highlight-color: transparent; }
+    .play-btn:active { transform: scale(0.86); }
+    .play-btn svg { @apply shrink-0; width: 9px; height: 9px; fill: #d4d4d4; }
+    .play-btn.pb-playing { background: #f59e0b; border-color: rgba(245,158,11,0.35); }
+    .play-btn.pb-playing svg { fill: #000; }
+    .play-btn.pb-error { background: rgba(185,28,28,0.9); border-color: transparent; }
+    .play-btn.pb-loading { border-color: transparent; }
+    @keyframes pb-spin { to { transform: rotate(360deg); } }
+    .play-btn.pb-loading::before { content: ''; position: absolute; inset: -2px; border-radius: 50%; border: 1.5px solid transparent; border-top-color: #f59e0b; animation: pb-spin 0.7s linear infinite; }
+
+    .card-info { @apply flex-1 min-w-0; padding-right: 26px; }
+    .card-title { @apply text-sm font-semibold text-zinc-100 truncate mb-0.5 leading-snug transition-colors duration-150; }
+    .card-artist { @apply text-xs text-zinc-400 truncate leading-snug; margin-bottom: 6px; }
+    .card-meta { @apply flex flex-wrap gap-1; }
+    .badge { @apply text-[0.6rem] font-semibold px-1.5 py-0.5 rounded whitespace-nowrap; letter-spacing: 0.2px; }
+    .bpm { @apply bg-amber-950 text-amber-400 ring-1 ring-amber-900/50; }
+    .key { @apply bg-emerald-950 text-emerald-400 ring-1 ring-emerald-900/50; }
+    .dur { @apply bg-zinc-800 text-zinc-500 ring-1 ring-zinc-700/50; }
+    .genre { @apply bg-zinc-800 text-zinc-400 ring-1 ring-zinc-700/50; }
+
+    .share-bar { @apply fixed bottom-0 left-0 right-0 z-50 bg-zinc-900 border-t border-zinc-800 flex items-center justify-between gap-3; padding: clamp(12px,3vw,16px) clamp(16px,5vw,32px); transform: translateY(100%); transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1); }
+    .share-bar.visible { transform: translateY(0); }
+    .share-bar-info { @apply flex-1 min-w-0; }
+    .share-bar-count { @apply font-bold text-red-400; font-size: clamp(0.85rem,3vw,0.95rem); }
+    .share-bar-sub { @apply text-xs text-zinc-500 mt-0.5; }
+    .share-actions { @apply flex gap-2 shrink-0; }
+    .btn-reset { @apply text-xs font-semibold border border-zinc-700 text-zinc-400 bg-transparent rounded cursor-pointer whitespace-nowrap; padding: 9px 14px; font-family: inherit; -webkit-tap-highlight-color: transparent; }
+    .btn-share { @apply text-xs font-semibold bg-green-500 text-white rounded cursor-pointer flex items-center gap-1.5 whitespace-nowrap border-0; padding: 9px 18px; font-family: inherit; -webkit-tap-highlight-color: transparent; }
+    .btn-share:active { @apply opacity-80; }
+
+    .toast { @apply fixed z-[200] bg-zinc-900 border border-zinc-700 text-amber-400 text-xs font-semibold rounded whitespace-nowrap; top: 20px; left: 50%; padding: 10px 20px; transform: translateX(-50%) translateY(-80px); transition: transform 0.28s cubic-bezier(0.34,1.56,0.64,1); }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Geburtstag Lucas &amp; Sarah — Playlists</h1>
+  <p>Rekordbox Library · 175 Songs in 11 Playlists</p>
+  <p class="hint">▶ Vorschau per Klick auf den Play-Button</p>
+  <nav class="nav"><a href="#Intro---House">Intro - House</a><a href="#Deutsch---Einsteiger">Deutsch - Einsteiger</a><a href="#1---Rock">1 - Rock</a><a href="#2---Deutsch-Pop--Sprech">2 - Deutsch-Pop &amp; Sprech</a><a href="#3---RB,-Hip-Hop---slow">3 - R&amp;B, Hip-Hop - slow</a><a href="#4---RB,-Hip-Hop--Rap">4 - R&amp;B, Hip-Hop &amp; Rap</a><a href="#5---Pop-Eng">5 - Pop Eng</a><a href="#6---Dancehall">6 - Dancehall</a><a href="#7---EDM,-House--Dance-Pop">7 - EDM, House &amp; Dance-Pop</a><a href="#8---Festival-Vibe">8 - Festival Vibe</a><a href="#Deutsch-Schlager">Deutsch Schlager</a></nav>
+</header>
+<main>
+<section class="playlist-section" id="Intro---House">
+      <h2>Intro - House <span class="count">12 Songs</span></h2>
+      <div class="cards"><div class="card" onclick="toggleSong(this)" data-title="PYHU (Put Your Hands Up) (Extended Mix)" data-artist="Kurd Maverick, Hugel" data-playlist="Intro - House" data-preview="samples/b57a9b24b61c.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="PYHU (Put Your Hands Up) (Extended Mix)">PYHU (Put Your Hands Up) (Extended Mix)</div>
+        <div class="card-artist">Kurd Maverick, Hugel</div>
+        <div class="card-meta"><span class="badge bpm">123</span><span class="badge key">2A</span><span class="badge dur">5:23</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Dance With Somebody (Hoax (BE) Remix) (Last Night Edit)" data-artist="Whitney Houston, Hoax (BE)" data-playlist="Intro - House" data-preview="samples/a7e34d7156a6.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Dance With Somebody (Hoax (BE) Remix) (Last Night Edit)">Dance With Somebody (Hoax (BE) Remix) (Last Night Edit)</div>
+        <div class="card-artist">Whitney Houston, Hoax (BE)</div>
+        <div class="card-meta"><span class="badge bpm">123</span><span class="badge key">2A</span><span class="badge dur">5:27</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Everybody (Original Mix)" data-artist="Block &amp; Crown" data-playlist="Intro - House" data-preview="samples/41e1a90fd46d.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Everybody (Original Mix)">Everybody (Original Mix)</div>
+        <div class="card-artist">Block &amp; Crown</div>
+        <div class="card-meta"><span class="badge bpm">124</span><span class="badge key">3A</span><span class="badge dur">4:41</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Hello (Remix) (5hours Francesco Ken &amp; Alessio Centra Remix)" data-artist="Adele" data-playlist="Intro - House" data-preview="samples/5a426b70fdfc.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Hello (Remix) (5hours Francesco Ken &amp; Alessio Centra Remix)">Hello (Remix) (5hours Francesco Ken &amp; Alessio Centra Remix)</div>
+        <div class="card-artist">Adele</div>
+        <div class="card-meta"><span class="badge bpm">123</span><span class="badge key">4A</span><span class="badge dur">4:31</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Pasilda (Remix) (DJ Kone &amp; Marc Palacios Remix)" data-artist="DJ Wady, Sean Finn, MoonDark" data-playlist="Intro - House" data-preview="samples/22bb88938ce8.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Pasilda (Remix) (DJ Kone &amp; Marc Palacios Remix)">Pasilda (Remix) (DJ Kone &amp; Marc Palacios Remix)</div>
+        <div class="card-artist">DJ Wady, Sean Finn, MoonDark</div>
+        <div class="card-meta"><span class="badge bpm">124</span><span class="badge key">5A</span><span class="badge dur">5:29</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Bailando (Original Mix)" data-artist="Massianello, Pietro" data-playlist="Intro - House" data-preview="samples/5321c57fac2f.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Bailando (Original Mix)">Bailando (Original Mix)</div>
+        <div class="card-artist">Massianello, Pietro</div>
+        <div class="card-meta"><span class="badge bpm">122</span><span class="badge key">6A</span><span class="badge dur">4:11</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Radio Gaga (Original Mix)" data-artist="Block &amp; Crown" data-playlist="Intro - House" data-preview="samples/ee1a63bfd21d.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Radio Gaga (Original Mix)">Radio Gaga (Original Mix)</div>
+        <div class="card-artist">Block &amp; Crown</div>
+        <div class="card-meta"><span class="badge bpm">124</span><span class="badge key">7B</span><span class="badge dur">5:35</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Finder House (Extended Mix)" data-artist="Arkad3" data-playlist="Intro - House" data-preview="samples/5cf3db05c105.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Finder House (Extended Mix)">Finder House (Extended Mix)</div>
+        <div class="card-artist">Arkad3</div>
+        <div class="card-meta"><span class="badge bpm">124</span><span class="badge key">8A</span><span class="badge dur">5:25</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Jump &amp; Shout (Extended Mix)" data-artist="Divolly &amp; Markward, Hugel" data-playlist="Intro - House" data-preview="samples/2f341f013c49.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Jump &amp; Shout (Extended Mix)">Jump &amp; Shout (Extended Mix)</div>
+        <div class="card-artist">Divolly &amp; Markward, Hugel</div>
+        <div class="card-meta"><span class="badge bpm">122</span><span class="badge key">9A</span><span class="badge dur">5:46</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Rock Your Body (Groove Dude Remix) (Groove Dude Remix)" data-artist="Justin Timberlake" data-playlist="Intro - House" data-preview="samples/1e3f75e901ef.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Rock Your Body (Groove Dude Remix) (Groove Dude Remix)">Rock Your Body (Groove Dude Remix) (Groove Dude Remix)</div>
+        <div class="card-artist">Justin Timberlake</div>
+        <div class="card-meta"><span class="badge bpm">122</span><span class="badge key">9A</span><span class="badge dur">5:24</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Day &#x27;n&#x27; Night (Dj Juize Hype Edit)" data-artist="Paakman" data-playlist="Intro - House" data-preview="samples/89d4d96af7bc.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Day &#x27;n&#x27; Night (Dj Juize Hype Edit)">Day &#x27;n&#x27; Night (Dj Juize Hype Edit)</div>
+        <div class="card-artist">Paakman</div>
+        <div class="card-meta"><span class="badge bpm">124</span><span class="badge key">10A</span><span class="badge dur">6:01</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Don’t You Want Some More (Extended Mix)" data-artist="Harry Romero" data-playlist="Intro - House" data-preview="samples/e686dc9a8ed2.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Don’t You Want Some More (Extended Mix)">Don’t You Want Some More (Extended Mix)</div>
+        <div class="card-artist">Harry Romero</div>
+        <div class="card-meta"><span class="badge bpm">123</span><span class="badge key">11A</span><span class="badge dur">5:59</span></div>
+      </div>
+    </div></div>
+    </section><section class="playlist-section" id="Deutsch---Einsteiger">
+      <h2>Deutsch - Einsteiger <span class="count">13 Songs</span></h2>
+      <div class="cards"><div class="card" onclick="toggleSong(this)" data-title="Nur ein Wort" data-artist="Wir Sind Helden" data-playlist="Deutsch - Einsteiger" data-preview="samples/0a4da8de7c58.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Nur ein Wort">Nur ein Wort</div>
+        <div class="card-artist">Wir Sind Helden</div>
+        <div class="card-meta"><span class="badge bpm">92.3</span><span class="badge key">1B</span><span class="badge dur">3:55</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Bilder von Dir" data-artist="Laith Al-Deen" data-playlist="Deutsch - Einsteiger" data-preview="samples/0ca30ce5dc77.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Bilder von Dir">Bilder von Dir</div>
+        <div class="card-artist">Laith Al-Deen</div>
+        <div class="card-meta"><span class="badge bpm">104.0</span><span class="badge key">12B</span><span class="badge dur">4:55</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="99 Luftballons (Single Version)" data-artist="Nena" data-playlist="Deutsch - Einsteiger" data-preview="samples/fcc27a0499aa.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="99 Luftballons (Single Version)">99 Luftballons (Single Version)</div>
+        <div class="card-artist">Nena</div>
+        <div class="card-meta"><span class="badge bpm">97.1</span><span class="badge key">12B</span><span class="badge dur">3:48</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Hamma! (Single Edit)" data-artist="Culcha Candela" data-playlist="Deutsch - Einsteiger" data-preview="samples/034638782484.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Hamma! (Single Edit)">Hamma! (Single Edit)</div>
+        <div class="card-artist">Culcha Candela</div>
+        <div class="card-meta"><span class="badge bpm">100</span><span class="badge key">11B</span><span class="badge dur">3:34</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="---------------------" data-artist="Loopmasters" data-playlist="Deutsch - Einsteiger" data-preview="samples/25eabc57dcfc.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="---------------------">---------------------</div>
+        <div class="card-artist">Loopmasters</div>
+        <div class="card-meta"><span class="badge bpm">0</span><span class="badge key">4A</span><span class="badge dur">0:04</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Chöre" data-artist="Mark Forster" data-playlist="Deutsch - Einsteiger" data-preview="samples/3e62832c30fd.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Chöre">Chöre</div>
+        <div class="card-artist">Mark Forster</div>
+        <div class="card-meta"><span class="badge bpm">130</span><span class="badge key">11A</span><span class="badge dur">3:27</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="---------------------" data-artist="Loopmasters" data-playlist="Deutsch - Einsteiger" data-preview="samples/25eabc57dcfc.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="---------------------">---------------------</div>
+        <div class="card-artist">Loopmasters</div>
+        <div class="card-meta"><span class="badge bpm">0</span><span class="badge key">4A</span><span class="badge dur">0:04</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Tage wie diese" data-artist="Die Toten Hosen" data-playlist="Deutsch - Einsteiger" data-preview="samples/6f418c719d22.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Tage wie diese">Tage wie diese</div>
+        <div class="card-artist">Die Toten Hosen</div>
+        <div class="card-meta"><span class="badge bpm">97</span><span class="badge key">10B</span><span class="badge dur">4:28</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Au Revoir (feat. Sido)" data-artist="Mark Forster Sido" data-playlist="Deutsch - Einsteiger" data-preview="samples/6d0c92fb0646.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Au Revoir (feat. Sido)">Au Revoir (feat. Sido)</div>
+        <div class="card-artist">Mark Forster Sido</div>
+        <div class="card-meta"><span class="badge bpm">106</span><span class="badge key">9A</span><span class="badge dur">3:22</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Ein Kompliment" data-artist="Sportfreunde Stiller" data-playlist="Deutsch - Einsteiger" data-preview="samples/ba0da225d263.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Ein Kompliment">Ein Kompliment</div>
+        <div class="card-artist">Sportfreunde Stiller</div>
+        <div class="card-meta"><span class="badge bpm">159</span><span class="badge key">9A</span><span class="badge dur">3:17</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Gut Genug" data-artist="KITSCHKRIEG, Blumengarten &amp; Shirin David" data-playlist="Deutsch - Einsteiger" data-preview="samples/b2a85fc3557a.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Gut Genug">Gut Genug</div>
+        <div class="card-artist">KITSCHKRIEG, Blumengarten &amp; Shirin David</div>
+        <div class="card-meta"><span class="badge bpm">122</span><span class="badge key">9B</span><span class="badge dur">3:08</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Traum" data-artist="CRO" data-playlist="Deutsch - Einsteiger" data-preview="samples/abf3b48ce37c.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Traum">Traum</div>
+        <div class="card-artist">CRO</div>
+        <div class="card-meta"><span class="badge bpm">120</span><span class="badge key">8A</span><span class="badge dur">3:16</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Schrei nach Liebe" data-artist="Die Ärzte" data-playlist="Deutsch - Einsteiger" data-preview="samples/c222e80f5e33.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Schrei nach Liebe">Schrei nach Liebe</div>
+        <div class="card-artist">Die Ärzte</div>
+        <div class="card-meta"><span class="badge bpm">168.0</span><span class="badge key">7A</span><span class="badge dur">4:12</span></div>
+      </div>
+    </div></div>
+    </section><section class="playlist-section" id="1---Rock">
+      <h2>1 - Rock <span class="count">11 Songs</span></h2>
+      <div class="cards"><div class="card" onclick="toggleSong(this)" data-title="What I&#x27;ve Done (Original Mix)" data-artist="Linkin Park" data-playlist="1 - Rock" data-preview="samples/e41ce84dd1ad.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="What I&#x27;ve Done (Original Mix)">What I&#x27;ve Done (Original Mix)</div>
+        <div class="card-artist">Linkin Park</div>
+        <div class="card-meta"><span class="badge bpm">120.0</span><span class="badge key">6A</span><span class="badge dur">3:25</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="A LIGHT THAT NEVER COMES REMIX" data-artist="Linkin Park Steve Aoki" data-playlist="1 - Rock" data-preview="samples/cf7688072699.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="A LIGHT THAT NEVER COMES REMIX">A LIGHT THAT NEVER COMES REMIX</div>
+        <div class="card-artist">Linkin Park Steve Aoki</div>
+        <div class="card-meta"><span class="badge bpm">125</span><span class="badge key">6A</span><span class="badge dur">3:53</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Pretty Fly (Original Mix)" data-artist="Mr. Saccardo" data-playlist="1 - Rock" data-preview="samples/414adab7dcfc.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Pretty Fly (Original Mix)">Pretty Fly (Original Mix)</div>
+        <div class="card-artist">Mr. Saccardo</div>
+        <div class="card-meta"><span class="badge bpm">124</span><span class="badge key">7A</span><span class="badge dur">4:11</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="BURN IT DOWN (Tom Swoon Remix)" data-artist="Linkin Park" data-playlist="1 - Rock" data-preview="samples/1577f06b42b6.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="BURN IT DOWN (Tom Swoon Remix)">BURN IT DOWN (Tom Swoon Remix)</div>
+        <div class="card-artist">Linkin Park</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">7B</span><span class="badge dur">4:46</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="All The Small Things - Chunky Dip Everybody Bootleg" data-artist="blink-182" data-playlist="1 - Rock" data-preview="samples/c592652262b9.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="All The Small Things - Chunky Dip Everybody Bootleg">All The Small Things - Chunky Dip Everybody Bootleg</div>
+        <div class="card-artist">blink-182</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">8B</span><span class="badge dur">2:39</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Numb / Encore - Anthem Kingz T.N.T. Edit" data-artist="JAY-Z &amp; Linkin Park" data-playlist="1 - Rock" data-preview="samples/79b9295e1ed7.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Numb / Encore - Anthem Kingz T.N.T. Edit">Numb / Encore - Anthem Kingz T.N.T. Edit</div>
+        <div class="card-artist">JAY-Z &amp; Linkin Park</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">9A</span><span class="badge dur">3:46</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Seven Nation Army (Club Mix)" data-artist="Tradelove" data-playlist="1 - Rock" data-preview="samples/18d22c306a6f.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Seven Nation Army (Club Mix)">Seven Nation Army (Club Mix)</div>
+        <div class="card-artist">Tradelove</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">9A</span><span class="badge dur">5:49</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="---------------------" data-artist="Loopmasters" data-playlist="1 - Rock" data-preview="samples/25eabc57dcfc.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="---------------------">---------------------</div>
+        <div class="card-artist">Loopmasters</div>
+        <div class="card-meta"><span class="badge bpm">0</span><span class="badge key">4A</span><span class="badge dur">0:04</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="In The End (Remix) (Malaa Remix)" data-artist="Linkin Park" data-playlist="1 - Rock" data-preview="samples/6b46bf7b3c0a.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="In The End (Remix) (Malaa Remix)">In The End (Remix) (Malaa Remix)</div>
+        <div class="card-artist">Linkin Park</div>
+        <div class="card-meta"><span class="badge bpm">124</span><span class="badge key">3A</span><span class="badge dur">4:07</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Mr. Brightside - Tall Boys Heartless Edit" data-artist="The Killers" data-playlist="1 - Rock" data-preview="samples/f8142e186830.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Mr. Brightside - Tall Boys Heartless Edit">Mr. Brightside - Tall Boys Heartless Edit</div>
+        <div class="card-artist">The Killers</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">3B</span><span class="badge dur">3:03</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Song 2 - Audiorokk Big Beat Set Starter" data-artist="Blur" data-playlist="1 - Rock" data-preview="samples/0615fd3ed5ec.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Song 2 - Audiorokk Big Beat Set Starter">Song 2 - Audiorokk Big Beat Set Starter</div>
+        <div class="card-artist">Blur</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">4A</span><span class="badge dur">3:03</span></div>
+      </div>
+    </div></div>
+    </section><section class="playlist-section" id="2---Deutsch-Pop--Sprech">
+      <h2>2 - Deutsch-Pop &amp; Sprech <span class="count">26 Songs</span></h2>
+      <div class="cards"><div class="card" onclick="toggleSong(this)" data-title="Einfach Sein" data-artist="Die Fantastischen Vier" data-playlist="2 - Deutsch-Pop &amp; Sprech" data-preview="samples/7d11a0cdd740.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Einfach Sein">Einfach Sein</div>
+        <div class="card-artist">Die Fantastischen Vier</div>
+        <div class="card-meta"><span class="badge bpm">147.1</span><span class="badge key">4A</span><span class="badge dur">3:36</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Durch Den Monsun" data-artist="VIZE, Tokio Hotel &amp; Fourty" data-playlist="2 - Deutsch-Pop &amp; Sprech" data-preview="samples/28209a180b41.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Durch Den Monsun">Durch Den Monsun</div>
+        <div class="card-artist">VIZE, Tokio Hotel &amp; Fourty</div>
+        <div class="card-meta"><span class="badge bpm">150</span><span class="badge key">9A</span><span class="badge dur">2:33</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Du hast den schönsten Arsch der Welt" data-artist="Alex C. Yass" data-playlist="2 - Deutsch-Pop &amp; Sprech" data-preview="samples/abc6312c7d29.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Du hast den schönsten Arsch der Welt">Du hast den schönsten Arsch der Welt</div>
+        <div class="card-artist">Alex C. Yass</div>
+        <div class="card-meta"><span class="badge bpm">136</span><span class="badge key">4A</span><span class="badge dur">3:35</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Party Sahne" data-artist="Ski Aggu Endzone Ericson" data-playlist="2 - Deutsch-Pop &amp; Sprech" data-preview="samples/e5406c35d122.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Party Sahne">Party Sahne</div>
+        <div class="card-artist">Ski Aggu Endzone Ericson</div>
+        <div class="card-meta"><span class="badge bpm">136</span><span class="badge key">4A</span><span class="badge dur">2:17</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Emanuela" data-artist="Fettes Brot" data-playlist="2 - Deutsch-Pop &amp; Sprech" data-preview="samples/1089b7cc7883.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Emanuela">Emanuela</div>
+        <div class="card-artist">Fettes Brot</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">4A</span><span class="badge dur">3:34</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Neunzig" data-artist="Apache 207" data-playlist="2 - Deutsch-Pop &amp; Sprech" data-preview="samples/f192f80c05e1.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Neunzig">Neunzig</div>
+        <div class="card-artist">Apache 207</div>
+        <div class="card-meta"><span class="badge bpm">129</span><span class="badge key">4A</span><span class="badge dur">2:25</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="---------------------" data-artist="Loopmasters" data-playlist="2 - Deutsch-Pop &amp; Sprech" data-preview="samples/25eabc57dcfc.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="---------------------">---------------------</div>
+        <div class="card-artist">Loopmasters</div>
+        <div class="card-meta"><span class="badge bpm">0</span><span class="badge key">4A</span><span class="badge dur">0:04</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="WHO&#x27;S THAT" data-artist="Ikkimel &amp; Robbensohn" data-playlist="2 - Deutsch-Pop &amp; Sprech" data-preview="samples/d09c193e9c33.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="WHO&#x27;S THAT">WHO&#x27;S THAT</div>
+        <div class="card-artist">Ikkimel &amp; Robbensohn</div>
+        <div class="card-meta"><span class="badge bpm">156</span><span class="badge key">4A</span><span class="badge dur">2:19</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Augenbling" data-artist="Seeed" data-playlist="2 - Deutsch-Pop &amp; Sprech" data-preview="samples/38328503a65e.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Augenbling">Augenbling</div>
+        <div class="card-artist">Seeed</div>
+        <div class="card-meta"><span class="badge bpm">102.5</span><span class="badge key">5A</span><span class="badge dur">3:36</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Ausländer" data-artist="Rammstein" data-playlist="2 - Deutsch-Pop &amp; Sprech" data-preview="samples/aca32ffa9169.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Ausländer">Ausländer</div>
+        <div class="card-artist">Rammstein</div>
+        <div class="card-meta"><span class="badge bpm">125</span><span class="badge key">6A</span><span class="badge dur">3:51</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="KINK (DJcity Intro)" data-artist="Ikkimel, Barré &amp; Florida Juicy" data-playlist="2 - Deutsch-Pop &amp; Sprech" data-preview="samples/62861e7f0b31.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="KINK (DJcity Intro)">KINK (DJcity Intro)</div>
+        <div class="card-artist">Ikkimel, Barré &amp; Florida Juicy</div>
+        <div class="card-meta"><span class="badge bpm">163</span><span class="badge key">6A</span><span class="badge dur">2:21</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="BIER" data-artist="Drunken Masters Maxim K.I.Z K.I.Z" data-playlist="2 - Deutsch-Pop &amp; Sprech" data-preview="samples/267a271c8529.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/0a/79/0b/0a790bcb-5d4e-730b-70d5-f610d6bb528b/20UMGIM84348.rgb.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="BIER">BIER</div>
+        <div class="card-artist">Drunken Masters Maxim K.I.Z K.I.Z</div>
+        <div class="card-meta"><span class="badge bpm">140</span><span class="badge key">7A</span><span class="badge dur">2:09</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Ein Affe und ein Pferd" data-artist="K.I.Z" data-playlist="2 - Deutsch-Pop &amp; Sprech" data-preview="samples/b0bbcb73218b.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/01/5c/ec/015cec9b-bebc-37e5-b98a-a9e84d4e8518/00602557315813.rgb.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Ein Affe und ein Pferd">Ein Affe und ein Pferd</div>
+        <div class="card-artist">K.I.Z</div>
+        <div class="card-meta"><span class="badge bpm">138</span><span class="badge key">8A</span><span class="badge dur">3:45</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="DEUTSCHLAND 🇩🇪" data-artist="Ski Aggu &amp; Ikkimel" data-playlist="2 - Deutsch-Pop &amp; Sprech" data-preview="samples/d36edca9be8a.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="DEUTSCHLAND 🇩🇪">DEUTSCHLAND 🇩🇪</div>
+        <div class="card-artist">Ski Aggu &amp; Ikkimel</div>
+        <div class="card-meta"><span class="badge bpm">166</span><span class="badge key">8A</span><span class="badge dur">2:36</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="---------------------" data-artist="Loopmasters" data-playlist="2 - Deutsch-Pop &amp; Sprech" data-preview="samples/25eabc57dcfc.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="---------------------">---------------------</div>
+        <div class="card-artist">Loopmasters</div>
+        <div class="card-meta"><span class="badge bpm">0</span><span class="badge key">4A</span><span class="badge dur">0:04</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Vielleicht (Radio Edit)" data-artist="Gestört Aber GeiL Adel Tawil" data-playlist="2 - Deutsch-Pop &amp; Sprech" data-preview="samples/232d5bb66dee.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Vielleicht (Radio Edit)">Vielleicht (Radio Edit)</div>
+        <div class="card-artist">Gestört Aber GeiL Adel Tawil</div>
+        <div class="card-meta"><span class="badge bpm">122</span><span class="badge key">11A</span><span class="badge dur">3:16</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="tau mich auf - FEIER &amp; EIS Remix" data-artist="Zartmann" data-playlist="2 - Deutsch-Pop &amp; Sprech" data-preview="samples/a24126937a7a.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="tau mich auf - FEIER &amp; EIS Remix">tau mich auf - FEIER &amp; EIS Remix</div>
+        <div class="card-artist">Zartmann</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">10A</span><span class="badge dur">2:15</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Bella Napoli" data-artist="Roy Bianco &amp; Die Abbrunzati Boys" data-playlist="2 - Deutsch-Pop &amp; Sprech" data-preview="samples/f9b25e70aad3.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Bella Napoli">Bella Napoli</div>
+        <div class="card-artist">Roy Bianco &amp; Die Abbrunzati Boys</div>
+        <div class="card-meta"><span class="badge bpm">135.0</span><span class="badge key">10B</span><span class="badge dur">3:55</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Der letzte Song (Alles wird gut)" data-artist="KUMMER Fred Rabe" data-playlist="2 - Deutsch-Pop &amp; Sprech" data-preview="samples/46ed23442a8a.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Der letzte Song (Alles wird gut)">Der letzte Song (Alles wird gut)</div>
+        <div class="card-artist">KUMMER Fred Rabe</div>
+        <div class="card-meta"><span class="badge bpm">148</span><span class="badge key">9A</span><span class="badge dur">2:54</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="9 bis 9" data-artist="Sira Bausa badchieff" data-playlist="2 - Deutsch-Pop &amp; Sprech" data-preview="samples/9d1627ba94e8.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="9 bis 9">9 bis 9</div>
+        <div class="card-artist">Sira Bausa badchieff</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">9A</span><span class="badge dur">2:11</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="---------------------" data-artist="Loopmasters" data-playlist="2 - Deutsch-Pop &amp; Sprech" data-preview="samples/25eabc57dcfc.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="---------------------">---------------------</div>
+        <div class="card-artist">Loopmasters</div>
+        <div class="card-meta"><span class="badge bpm">0</span><span class="badge key">4A</span><span class="badge dur">0:04</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Bettina, zieh dir bitte etwas an" data-artist="Fettes Brot" data-playlist="2 - Deutsch-Pop &amp; Sprech" data-preview="samples/062e6029627f.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Bettina, zieh dir bitte etwas an">Bettina, zieh dir bitte etwas an</div>
+        <div class="card-artist">Fettes Brot</div>
+        <div class="card-meta"><span class="badge bpm">135</span><span class="badge key">12A</span><span class="badge dur">3:50</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Nachts Wach - FEIER &amp; EIS Remix" data-artist="Miksu / Macloud &amp; makko" data-playlist="2 - Deutsch-Pop &amp; Sprech" data-preview="samples/08d2e398c528.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Nachts Wach - FEIER &amp; EIS Remix">Nachts Wach - FEIER &amp; EIS Remix</div>
+        <div class="card-artist">Miksu / Macloud &amp; makko</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">11A</span><span class="badge dur">3:30</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="VEMPA - FEIER &amp; EIS Remix" data-artist="FOURTY &amp; Bausa" data-playlist="2 - Deutsch-Pop &amp; Sprech" data-preview="samples/d99e60969a60.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="VEMPA - FEIER &amp; EIS Remix">VEMPA - FEIER &amp; EIS Remix</div>
+        <div class="card-artist">FOURTY &amp; Bausa</div>
+        <div class="card-meta"><span class="badge bpm">134</span><span class="badge key">12A</span><span class="badge dur">2:55</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Wolke 4" data-artist="Bausa &amp; Philipp Dittberner" data-playlist="2 - Deutsch-Pop &amp; Sprech" data-preview="samples/ec66d33bb611.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Wolke 4">Wolke 4</div>
+        <div class="card-artist">Bausa &amp; Philipp Dittberner</div>
+        <div class="card-meta"><span class="badge bpm">124</span><span class="badge key">12A</span><span class="badge dur">2:15</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Fotzen im Club" data-artist="SXTN" data-playlist="2 - Deutsch-Pop &amp; Sprech" data-preview="samples/4a641d348334.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Fotzen im Club">Fotzen im Club</div>
+        <div class="card-artist">SXTN</div>
+        <div class="card-meta"><span class="badge bpm">120</span><span class="badge key">12A</span><span class="badge dur">3:10</span></div>
+      </div>
+    </div></div>
+    </section><section class="playlist-section" id="3---RB,-Hip-Hop---slow">
+      <h2>3 - R&amp;B, Hip-Hop - slow <span class="count">22 Songs</span></h2>
+      <div class="cards"><div class="card" onclick="toggleSong(this)" data-title="Who&#x27;s That Girl? - KidCutUp vs Richastic 97-125 Throwback Transition" data-artist="Eve" data-playlist="3 - R&amp;B, Hip-Hop - slow" data-preview="samples/301860fc2251.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Who&#x27;s That Girl? - KidCutUp vs Richastic 97-125 Throwback Transition">Who&#x27;s That Girl? - KidCutUp vs Richastic 97-125 Throwback Transition</div>
+        <div class="card-artist">Eve</div>
+        <div class="card-meta"><span class="badge bpm">97.0</span><span class="badge key">3A</span><span class="badge dur">3:09</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Nuttin Nuh Go So - Da Phonk &amp; Luis R Remix  (DJcity Intro)" data-artist="Notch" data-playlist="3 - R&amp;B, Hip-Hop - slow" data-preview="samples/26362df6cafa.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Nuttin Nuh Go So - Da Phonk &amp; Luis R Remix  (DJcity Intro)">Nuttin Nuh Go So - Da Phonk &amp; Luis R Remix  (DJcity Intro)</div>
+        <div class="card-artist">Notch</div>
+        <div class="card-meta"><span class="badge bpm">98</span><span class="badge key">3B</span><span class="badge dur">4:10</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Boo&#x27;d Up - Vincent Sim Remix" data-artist="Ella Mai" data-playlist="3 - R&amp;B, Hip-Hop - slow" data-preview="samples/64cd98c362e4.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Boo&#x27;d Up - Vincent Sim Remix">Boo&#x27;d Up - Vincent Sim Remix</div>
+        <div class="card-artist">Ella Mai</div>
+        <div class="card-meta"><span class="badge bpm">101</span><span class="badge key">3A</span><span class="badge dur">3:48</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Daylight" data-artist="John Legend" data-playlist="3 - R&amp;B, Hip-Hop - slow" data-preview="samples/ff1c724579be.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Daylight">Daylight</div>
+        <div class="card-artist">John Legend</div>
+        <div class="card-meta"><span class="badge bpm">100</span><span class="badge key">4A</span><span class="badge dur">3:15</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="---------------------" data-artist="Loopmasters" data-playlist="3 - R&amp;B, Hip-Hop - slow" data-preview="samples/25eabc57dcfc.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="---------------------">---------------------</div>
+        <div class="card-artist">Loopmasters</div>
+        <div class="card-meta"><span class="badge bpm">0</span><span class="badge key">4A</span><span class="badge dur">0:04</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="(When You Gonna) Give It Up to Me (feat. Keyshia Cole) [Radio Version]" data-artist="Sean Paul, Keyshia Cole" data-playlist="3 - R&amp;B, Hip-Hop - slow" data-preview="samples/e8f5bc34738c.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="(When You Gonna) Give It Up to Me (feat. Keyshia Cole) [Radio Version]">(When You Gonna) Give It Up to Me (feat. Keyshia Cole) [Radio Version]</div>
+        <div class="card-artist">Sean Paul, Keyshia Cole</div>
+        <div class="card-meta"><span class="badge bpm">96</span><span class="badge key">5A</span><span class="badge dur">4:03</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Let Me Love You (Clean)" data-artist="Mario" data-playlist="3 - R&amp;B, Hip-Hop - slow" data-preview="samples/68cbbc5c3d68.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Let Me Love You (Clean)">Let Me Love You (Clean)</div>
+        <div class="card-artist">Mario</div>
+        <div class="card-meta"><span class="badge bpm">94.5</span><span class="badge key">6A</span><span class="badge dur">4:10</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Can We Talk - SMS Remix" data-artist="Tevin Campbell" data-playlist="3 - R&amp;B, Hip-Hop - slow" data-preview="samples/5724722c35b5.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Can We Talk - SMS Remix">Can We Talk - SMS Remix</div>
+        <div class="card-artist">Tevin Campbell</div>
+        <div class="card-meta"><span class="badge bpm">100</span><span class="badge key">6A</span><span class="badge dur">2:53</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Crazy in Love (feat. JAY-Z)" data-artist="Beyoncé, JAY Z" data-playlist="3 - R&amp;B, Hip-Hop - slow" data-preview="samples/d96ef295b1d1.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Crazy in Love (feat. JAY-Z)">Crazy in Love (feat. JAY-Z)</div>
+        <div class="card-artist">Beyoncé, JAY Z</div>
+        <div class="card-meta"><span class="badge bpm">99.3</span><span class="badge key">6A</span><span class="badge dur">4:09</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Return Of The Mack - Tall Boys Club Edit" data-artist="Mark Morrison" data-playlist="3 - R&amp;B, Hip-Hop - slow" data-preview="samples/04f42ebac77b.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Return Of The Mack - Tall Boys Club Edit">Return Of The Mack - Tall Boys Club Edit</div>
+        <div class="card-artist">Mark Morrison</div>
+        <div class="card-meta"><span class="badge bpm">98</span><span class="badge key">7A</span><span class="badge dur">3:35</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Work - Trayze Shake It To The Max (Fly) Remix (Dirty)" data-artist="Rihanna ft. Drake" data-playlist="3 - R&amp;B, Hip-Hop - slow" data-preview="samples/64c0e54a0695.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Work - Trayze Shake It To The Max (Fly) Remix (Dirty)">Work - Trayze Shake It To The Max (Fly) Remix (Dirty)</div>
+        <div class="card-artist">Rihanna ft. Drake</div>
+        <div class="card-meta"><span class="badge bpm">98</span><span class="badge key">8A</span><span class="badge dur">3:35</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Rock The Boat - SMASHA Remix" data-artist="Aaliyah" data-playlist="3 - R&amp;B, Hip-Hop - slow" data-preview="samples/6235da73a70d.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Rock The Boat - SMASHA Remix">Rock The Boat - SMASHA Remix</div>
+        <div class="card-artist">Aaliyah</div>
+        <div class="card-meta"><span class="badge bpm">103</span><span class="badge key">8A</span><span class="badge dur">4:08</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="---------------------" data-artist="Loopmasters" data-playlist="3 - R&amp;B, Hip-Hop - slow" data-preview="samples/25eabc57dcfc.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="---------------------">---------------------</div>
+        <div class="card-artist">Loopmasters</div>
+        <div class="card-meta"><span class="badge bpm">0</span><span class="badge key">4A</span><span class="badge dur">0:04</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Rack City - Richastic &amp; AT-80 Remix (Intro - Dirty)" data-artist="Tyga" data-playlist="3 - R&amp;B, Hip-Hop - slow" data-preview="samples/81d850cb020d.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Rack City - Richastic &amp; AT-80 Remix (Intro - Dirty)">Rack City - Richastic &amp; AT-80 Remix (Intro - Dirty)</div>
+        <div class="card-artist">Tyga</div>
+        <div class="card-meta"><span class="badge bpm">99</span><span class="badge key">11B</span><span class="badge dur">3:17</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Pon De Replay - Tall Boys Taki Taki Bootleg" data-artist="Rihanna" data-playlist="3 - R&amp;B, Hip-Hop - slow" data-preview="samples/368c5eabc18b.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Pon De Replay - Tall Boys Taki Taki Bootleg">Pon De Replay - Tall Boys Taki Taki Bootleg</div>
+        <div class="card-artist">Rihanna</div>
+        <div class="card-meta"><span class="badge bpm">100</span><span class="badge key">12A</span><span class="badge dur">3:12</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Let Me Blow Ya Mind - MarkCutz Remix (Dirty)" data-artist=" Eve ft. Gwen Stefani" data-playlist="3 - R&amp;B, Hip-Hop - slow" data-preview="samples/7329f618b9aa.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Let Me Blow Ya Mind - MarkCutz Remix (Dirty)">Let Me Blow Ya Mind - MarkCutz Remix (Dirty)</div>
+        <div class="card-artist"> Eve ft. Gwen Stefani</div>
+        <div class="card-meta"><span class="badge bpm">100</span><span class="badge key">12A</span><span class="badge dur">3:21</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Me &amp; U - Sir Marcus &amp; Kareem Remix (DJcity Intro)" data-artist="Cassie" data-playlist="3 - R&amp;B, Hip-Hop - slow" data-preview="samples/dae7bd7b3564.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Me &amp; U - Sir Marcus &amp; Kareem Remix (DJcity Intro)">Me &amp; U - Sir Marcus &amp; Kareem Remix (DJcity Intro)</div>
+        <div class="card-artist">Cassie</div>
+        <div class="card-meta"><span class="badge bpm">103</span><span class="badge key">1A</span><span class="badge dur">3:27</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Like Glue - Richastic Remix" data-artist="Sean Paul" data-playlist="3 - R&amp;B, Hip-Hop - slow" data-preview="samples/f901af1767be.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Like Glue - Richastic Remix">Like Glue - Richastic Remix</div>
+        <div class="card-artist">Sean Paul</div>
+        <div class="card-meta"><span class="badge bpm">104</span><span class="badge key">12A</span><span class="badge dur">3:35</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="No Diggity - Tall Boys Remix (Intro)" data-artist="Blackstreet" data-playlist="3 - R&amp;B, Hip-Hop - slow" data-preview="samples/cf9a51ef0e2c.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="No Diggity - Tall Boys Remix (Intro)">No Diggity - Tall Boys Remix (Intro)</div>
+        <div class="card-artist">Blackstreet</div>
+        <div class="card-meta"><span class="badge bpm">105</span><span class="badge key">11A</span><span class="badge dur">2:45</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Work It - Tall Boys Lovin On Me Edit (Intro - Clean)" data-artist="Missy Elliot" data-playlist="3 - R&amp;B, Hip-Hop - slow" data-preview="samples/5728b694f084.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/19/5c/ef/195cefbe-555e-c80f-0520-e478c03fa491/dj.cbaflfil.png/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Work It - Tall Boys Lovin On Me Edit (Intro - Clean)">Work It - Tall Boys Lovin On Me Edit (Intro - Clean)</div>
+        <div class="card-artist">Missy Elliot</div>
+        <div class="card-meta"><span class="badge bpm">105</span><span class="badge key">12A</span><span class="badge dur">2:48</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="No Scrubs" data-artist="TLC" data-playlist="3 - R&amp;B, Hip-Hop - slow" data-preview="samples/3aaa3555855a.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="No Scrubs">No Scrubs</div>
+        <div class="card-artist">TLC</div>
+        <div class="card-meta"><span class="badge bpm">92.9</span><span class="badge key">1A</span><span class="badge dur">3:34</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Family Affair - DJ Bizzon Club Edit" data-artist="Mary J. Blige" data-playlist="3 - R&amp;B, Hip-Hop - slow" data-preview="samples/4580a0d51c6d.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Family Affair - DJ Bizzon Club Edit">Family Affair - DJ Bizzon Club Edit</div>
+        <div class="card-artist">Mary J. Blige</div>
+        <div class="card-meta"><span class="badge bpm">96</span><span class="badge key">12A</span><span class="badge dur">4:40</span></div>
+      </div>
+    </div></div>
+    </section><section class="playlist-section" id="4---RB,-Hip-Hop--Rap">
+      <h2>4 - R&amp;B, Hip-Hop &amp; Rap <span class="count">14 Songs</span></h2>
+      <div class="cards"><div class="card" onclick="toggleSong(this)" data-title="Jump Around - KidCutUp vs HÄWK 107-126 Throwback Transition" data-artist="House Of Pain" data-playlist="4 - R&amp;B, Hip-Hop &amp; Rap" data-preview="samples/906523c66a69.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Jump Around - KidCutUp vs HÄWK 107-126 Throwback Transition">Jump Around - KidCutUp vs HÄWK 107-126 Throwback Transition</div>
+        <div class="card-artist">House Of Pain</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">9A</span><span class="badge dur">3:40</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Hot In Herre - Andrew Lux Remix" data-artist="Nelly" data-playlist="4 - R&amp;B, Hip-Hop &amp; Rap" data-preview="samples/9e5a69cfe66c.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/37/35/62/373562e8-ab69-254b-bbf2-f1cb9aca66fe/06UMGIM16889.rgb.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Hot In Herre - Andrew Lux Remix">Hot In Herre - Andrew Lux Remix</div>
+        <div class="card-artist">Nelly</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">9A</span><span class="badge dur">2:51</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Hotel Room Service (feat. Nicole Scherzinger) (Remix)" data-artist="Pitbull, Nicole Scherzinger" data-playlist="4 - R&amp;B, Hip-Hop &amp; Rap" data-preview="samples/15b79d95fefa.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Hotel Room Service (feat. Nicole Scherzinger) (Remix)">Hotel Room Service (feat. Nicole Scherzinger) (Remix)</div>
+        <div class="card-artist">Pitbull, Nicole Scherzinger</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">11A</span><span class="badge dur">3:47</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="---------------------" data-artist="Loopmasters" data-playlist="4 - R&amp;B, Hip-Hop &amp; Rap" data-preview="samples/25eabc57dcfc.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="---------------------">---------------------</div>
+        <div class="card-artist">Loopmasters</div>
+        <div class="card-meta"><span class="badge bpm">0</span><span class="badge key">4A</span><span class="badge dur">0:04</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Turn On The Lights again.. (feat. Future &amp; Fred again..) [Anyma Remix]" data-artist="Swedish House Mafia, Future, Fred again.." data-playlist="4 - R&amp;B, Hip-Hop &amp; Rap" data-preview="samples/f867979f388f.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Turn On The Lights again.. (feat. Future &amp; Fred again..) [Anyma Remix]">Turn On The Lights again.. (feat. Future &amp; Fred again..) [Anyma Remix]</div>
+        <div class="card-artist">Swedish House Mafia, Future, Fred again..</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">11A</span><span class="badge dur">4:13</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Like A G6 (Remix) (Vincci Remix)" data-artist="Far East Movement" data-playlist="4 - R&amp;B, Hip-Hop &amp; Rap" data-preview="samples/20b361457e7d.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Like A G6 (Remix) (Vincci Remix)">Like A G6 (Remix) (Vincci Remix)</div>
+        <div class="card-artist">Far East Movement</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">12B</span><span class="badge dur">4:30</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Fight For Your Right - MAKJ Remix" data-artist="Beastie Boys" data-playlist="4 - R&amp;B, Hip-Hop &amp; Rap" data-preview="samples/d3fca72c264c.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Fight For Your Right - MAKJ Remix">Fight For Your Right - MAKJ Remix</div>
+        <div class="card-artist">Beastie Boys</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">1A</span><span class="badge dur">2:35</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Empire State Of Mind - Krooner Remix" data-artist="JAY-Z ft. Alicia Keys" data-playlist="4 - R&amp;B, Hip-Hop &amp; Rap" data-preview="samples/dbcb7cc0af77.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Empire State Of Mind - Krooner Remix">Empire State Of Mind - Krooner Remix</div>
+        <div class="card-artist">JAY-Z ft. Alicia Keys</div>
+        <div class="card-meta"><span class="badge bpm">120</span><span class="badge key">2A</span><span class="badge dur">4:07</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="---------------------" data-artist="Loopmasters" data-playlist="4 - R&amp;B, Hip-Hop &amp; Rap" data-preview="samples/25eabc57dcfc.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="---------------------">---------------------</div>
+        <div class="card-artist">Loopmasters</div>
+        <div class="card-meta"><span class="badge bpm">0</span><span class="badge key">4A</span><span class="badge dur">0:04</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Without Me (Joe Stone Remix Clean)" data-artist="Eminem" data-playlist="4 - R&amp;B, Hip-Hop &amp; Rap" data-preview="samples/e46452fd9ad0.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Without Me (Joe Stone Remix Clean)">Without Me (Joe Stone Remix Clean)</div>
+        <div class="card-artist">Eminem</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">6A</span><span class="badge dur">3:59</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Shut Up (MATEK Remix)" data-artist="Black Eyed Peas" data-playlist="4 - R&amp;B, Hip-Hop &amp; Rap" data-preview="samples/f182413811f0.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Shut Up (MATEK Remix)">Shut Up (MATEK Remix)</div>
+        <div class="card-artist">Black Eyed Peas</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">7A</span><span class="badge dur">3:56</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="---------------------" data-artist="Loopmasters" data-playlist="4 - R&amp;B, Hip-Hop &amp; Rap" data-preview="samples/25eabc57dcfc.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="---------------------">---------------------</div>
+        <div class="card-artist">Loopmasters</div>
+        <div class="card-meta"><span class="badge bpm">0</span><span class="badge key">4A</span><span class="badge dur">0:04</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Paper Planes" data-artist="M.I.A." data-playlist="4 - R&amp;B, Hip-Hop &amp; Rap" data-preview="samples/daa65edbfc9e.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Paper Planes">Paper Planes</div>
+        <div class="card-artist">M.I.A.</div>
+        <div class="card-meta"><span class="badge bpm">172.0</span><span class="badge key">7A</span><span class="badge dur">3:25</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Survivor" data-artist="Destiny&#x27;s Child" data-playlist="4 - R&amp;B, Hip-Hop &amp; Rap" data-preview="samples/dd642af9d203.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Survivor">Survivor</div>
+        <div class="card-artist">Destiny&#x27;s Child</div>
+        <div class="card-meta"><span class="badge bpm">161.2</span><span class="badge key">1A</span><span class="badge dur">4:14</span></div>
+      </div>
+    </div></div>
+    </section><section class="playlist-section" id="5---Pop-Eng">
+      <h2>5 - Pop Eng <span class="count">11 Songs</span></h2>
+      <div class="cards"><div class="card" onclick="toggleSong(this)" data-title="High Hopes (Don Diablo Remix)" data-artist="Panic! At The Disco" data-playlist="5 - Pop Eng" data-preview="samples/5b69255ccc7d.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/3b/92/c7/3b92c7e4-92eb-dd0f-68d5-b8b5bd357ec6/075679875136.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="High Hopes (Don Diablo Remix)">High Hopes (Don Diablo Remix)</div>
+        <div class="card-artist">Panic! At The Disco</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">7A</span><span class="badge dur">3:05</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Promiscuous - Lukas &amp; Frank &amp; Vescu Remix (Clean)" data-artist="Nelly Furtado &amp; Timbaland" data-playlist="5 - Pop Eng" data-preview="samples/8898f27c2faa.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Promiscuous - Lukas &amp; Frank &amp; Vescu Remix (Clean)">Promiscuous - Lukas &amp; Frank &amp; Vescu Remix (Clean)</div>
+        <div class="card-artist">Nelly Furtado &amp; Timbaland</div>
+        <div class="card-meta"><span class="badge bpm">121</span><span class="badge key">8A</span><span class="badge dur">2:44</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="I Gotta Feeling - Stavros Martina &amp; Kevin D Remix" data-artist="Black Eyed Peas" data-playlist="5 - Pop Eng" data-preview="samples/2d4562b5e241.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="I Gotta Feeling - Stavros Martina &amp; Kevin D Remix">I Gotta Feeling - Stavros Martina &amp; Kevin D Remix</div>
+        <div class="card-artist">Black Eyed Peas</div>
+        <div class="card-meta"><span class="badge bpm">129</span><span class="badge key">9B</span><span class="badge dur">2:52</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Levitating - Colin Jay New Religon Edit (Clean)" data-artist="Dua Lipa" data-playlist="5 - Pop Eng" data-preview="samples/20b520621ebb.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Levitating - Colin Jay New Religon Edit (Clean)">Levitating - Colin Jay New Religon Edit (Clean)</div>
+        <div class="card-artist">Dua Lipa</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">10A</span><span class="badge dur">2:51</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="I Want It That Way x I Could Be The One (OREO SAYS GO Edit)" data-artist="Backstreet Boys, Avicii, Laeko, Andrew A" data-playlist="5 - Pop Eng" data-preview="samples/615191c19c5c.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="I Want It That Way x I Could Be The One (OREO SAYS GO Edit)">I Want It That Way x I Could Be The One (OREO SAYS GO Edit)</div>
+        <div class="card-artist">Backstreet Boys, Avicii, Laeko, Andrew A</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">11A</span><span class="badge dur">2:18</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Shape Of You - Richastic Remix" data-artist="Ed Sheeran" data-playlist="5 - Pop Eng" data-preview="samples/41051911d5e3.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Shape Of You - Richastic Remix">Shape Of You - Richastic Remix</div>
+        <div class="card-artist">Ed Sheeran</div>
+        <div class="card-meta"><span class="badge bpm">122</span><span class="badge key">12A</span><span class="badge dur">3:02</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Dai Dai - Da Phonk Club Edit" data-artist="Shakira &amp; Burna Boy" data-playlist="5 - Pop Eng" data-preview="samples/2f6ea8ea8a21.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Dai Dai - Da Phonk Club Edit">Dai Dai - Da Phonk Club Edit</div>
+        <div class="card-artist">Shakira &amp; Burna Boy</div>
+        <div class="card-meta"><span class="badge bpm">116</span><span class="badge key">12A</span><span class="badge dur">4:22</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Wannabe (Division 4 Remix)" data-artist="Spice Girls " data-playlist="5 - Pop Eng" data-preview="samples/7fabb44de89c.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Wannabe (Division 4 Remix)">Wannabe (Division 4 Remix)</div>
+        <div class="card-artist">Spice Girls </div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">1A</span><span class="badge dur">5:39</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="I Wanna Dance With Somebody (Who Loves Me) (David Solomon Remix)" data-artist="Whitney Houston" data-playlist="5 - Pop Eng" data-preview="samples/2d63764aa6b7.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="I Wanna Dance With Somebody (Who Loves Me) (David Solomon Remix)">I Wanna Dance With Somebody (Who Loves Me) (David Solomon Remix)</div>
+        <div class="card-artist">Whitney Houston</div>
+        <div class="card-meta"><span class="badge bpm">125</span><span class="badge key">2A</span><span class="badge dur">3:21</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="S&amp;M - Joan Qveralt Remix (Clean)" data-artist="Rihanna" data-playlist="5 - Pop Eng" data-preview="samples/8756b3b169e4.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="S&amp;M - Joan Qveralt Remix (Clean)">S&amp;M - Joan Qveralt Remix (Clean)</div>
+        <div class="card-artist">Rihanna</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">2A</span><span class="badge dur">4:00</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Low - Tall Boys Club Edit" data-artist="Flo Rida ft. T-Pain" data-playlist="5 - Pop Eng" data-preview="samples/9acc0fa4428a.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Low - Tall Boys Club Edit">Low - Tall Boys Club Edit</div>
+        <div class="card-artist">Flo Rida ft. T-Pain</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">2A</span><span class="badge dur">4:17</span></div>
+      </div>
+    </div></div>
+    </section><section class="playlist-section" id="6---Dancehall">
+      <h2>6 - Dancehall <span class="count">19 Songs</span></h2>
+      <div class="cards"><div class="card" onclick="toggleSong(this)" data-title="Light It Up - Richastic Remix" data-artist="Major Lazer ft. Nyla &amp; Fuse ODG" data-playlist="6 - Dancehall" data-preview="samples/e03cada7cb1b.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Light It Up - Richastic Remix">Light It Up - Richastic Remix</div>
+        <div class="card-artist">Major Lazer ft. Nyla &amp; Fuse ODG</div>
+        <div class="card-meta"><span class="badge bpm">122</span><span class="badge key">8A</span><span class="badge dur">1:59</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Pepas (Remixes) (Tiesto Remix)" data-artist="Farruko" data-playlist="6 - Dancehall" data-preview="samples/0b307e8c4d7d.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Pepas (Remixes) (Tiesto Remix)">Pepas (Remixes) (Tiesto Remix)</div>
+        <div class="card-artist">Farruko</div>
+        <div class="card-meta"><span class="badge bpm">130</span><span class="badge key">8A</span><span class="badge dur">3:42</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Beauty And A Beat - Joan Qveralt Remix (Dirty)" data-artist="Justin Bieber ft. Nicki Minaj" data-playlist="6 - Dancehall" data-preview="samples/bae496701a5b.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Beauty And A Beat - Joan Qveralt Remix (Dirty)">Beauty And A Beat - Joan Qveralt Remix (Dirty)</div>
+        <div class="card-artist">Justin Bieber ft. Nicki Minaj</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">8B</span><span class="badge dur">3:46</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Crazy In Love" data-artist="MATTN &amp; Noel Holler" data-playlist="6 - Dancehall" data-preview="samples/9f7d2afac005.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Crazy In Love">Crazy In Love</div>
+        <div class="card-artist">MATTN &amp; Noel Holler</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">7A</span><span class="badge dur">3:20</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Yeah! (The Scene Kings Remix) (The Scene Kings Remix)" data-artist="Usher" data-playlist="6 - Dancehall" data-preview="samples/e831c75f3156.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Yeah! (The Scene Kings Remix) (The Scene Kings Remix)">Yeah! (The Scene Kings Remix) (The Scene Kings Remix)</div>
+        <div class="card-artist">Usher</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">6A</span><span class="badge dur">3:34</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="---------------------" data-artist="Loopmasters" data-playlist="6 - Dancehall" data-preview="samples/25eabc57dcfc.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="---------------------">---------------------</div>
+        <div class="card-artist">Loopmasters</div>
+        <div class="card-meta"><span class="badge bpm">0</span><span class="badge key">4A</span><span class="badge dur">0:04</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Levels - RICHIE ROZEX Remix" data-artist="Avicii" data-playlist="6 - Dancehall" data-preview="samples/cdd0dfb6abe8.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/67/38/43/67384338-9ed7-fc68-5927-93f1fcf4705d/11UMGIM36900.rgb.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Levels - RICHIE ROZEX Remix">Levels - RICHIE ROZEX Remix</div>
+        <div class="card-artist">Avicii</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">12A</span><span class="badge dur">3:32</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Timber" data-artist="Pitbull Kesha" data-playlist="6 - Dancehall" data-preview="samples/de461c2a7133.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Timber">Timber</div>
+        <div class="card-artist">Pitbull Kesha</div>
+        <div class="card-meta"><span class="badge bpm">130</span><span class="badge key">1B</span><span class="badge dur">3:24</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="The Way I Are - Austin Ashtin Remix" data-artist="Timbaland ft. Keri Hilson &amp; D.O.E." data-playlist="6 - Dancehall" data-preview="samples/88c9e06d9001.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="The Way I Are - Austin Ashtin Remix">The Way I Are - Austin Ashtin Remix</div>
+        <div class="card-artist">Timbaland ft. Keri Hilson &amp; D.O.E.</div>
+        <div class="card-meta"><span class="badge bpm">130</span><span class="badge key">1A</span><span class="badge dur">3:45</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="On The Floor 2025 (Tiger Toast Club Mix)" data-artist="Jennifer Lopez, Pitbull" data-playlist="6 - Dancehall" data-preview="samples/b0053ca524d4.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="On The Floor 2025 (Tiger Toast Club Mix)">On The Floor 2025 (Tiger Toast Club Mix)</div>
+        <div class="card-artist">Jennifer Lopez, Pitbull</div>
+        <div class="card-meta"><span class="badge bpm">130</span><span class="badge key">2A</span><span class="badge dur">5:40</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Freak N Night (CIBUS Mash-Up)" data-artist="Kid Cudi, Biscits" data-playlist="6 - Dancehall" data-preview="samples/21bb9b7102cd.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Freak N Night (CIBUS Mash-Up)">Freak N Night (CIBUS Mash-Up)</div>
+        <div class="card-artist">Kid Cudi, Biscits</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">3A</span><span class="badge dur">4:21</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Temperature - WeDamnz &amp; Rivas Satisfaction Edit" data-artist="Sean Paul" data-playlist="6 - Dancehall" data-preview="samples/686c37b0d4de.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Temperature - WeDamnz &amp; Rivas Satisfaction Edit">Temperature - WeDamnz &amp; Rivas Satisfaction Edit</div>
+        <div class="card-artist">Sean Paul</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">3A</span><span class="badge dur">3:37</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Satisfaction (Extended Mix)" data-artist="FAULHABER, Kooyman" data-playlist="6 - Dancehall" data-preview="samples/a0cc2f396db4.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Satisfaction (Extended Mix)">Satisfaction (Extended Mix)</div>
+        <div class="card-artist">FAULHABER, Kooyman</div>
+        <div class="card-meta"><span class="badge bpm">129</span><span class="badge key">4A</span><span class="badge dur">3:39</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Makina Time (Remix) (Joel Corry Extended Remix)" data-artist="Dimitri Vegas, Like Mike, Marlon Hoffstadt, DJ Konik" data-playlist="6 - Dancehall" data-preview="samples/f4b7ff5409f2.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Makina Time (Remix) (Joel Corry Extended Remix)">Makina Time (Remix) (Joel Corry Extended Remix)</div>
+        <div class="card-artist">Dimitri Vegas, Like Mike, Marlon Hoffstadt, DJ Konik</div>
+        <div class="card-meta"><span class="badge bpm">134</span><span class="badge key">5A</span><span class="badge dur">4:35</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="---------------------" data-artist="Loopmasters" data-playlist="6 - Dancehall" data-preview="samples/25eabc57dcfc.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="---------------------">---------------------</div>
+        <div class="card-artist">Loopmasters</div>
+        <div class="card-meta"><span class="badge bpm">0</span><span class="badge key">4A</span><span class="badge dur">0:04</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="I Run" data-artist="HAVEN. &amp; Kaitlin Aragon" data-playlist="6 - Dancehall" data-preview="samples/c0cb33fc2f59.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="I Run">I Run</div>
+        <div class="card-artist">HAVEN. &amp; Kaitlin Aragon</div>
+        <div class="card-meta"><span class="badge bpm">138</span><span class="badge key">2A</span><span class="badge dur">2:09</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Hollaback Girl - D4VIS Tokyo Drift Remix (Dirty)" data-artist="Gwen Stefani" data-playlist="6 - Dancehall" data-preview="samples/b982bc6da1ac.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Hollaback Girl - D4VIS Tokyo Drift Remix (Dirty)">Hollaback Girl - D4VIS Tokyo Drift Remix (Dirty)</div>
+        <div class="card-artist">Gwen Stefani</div>
+        <div class="card-meta"><span class="badge bpm">140</span><span class="badge key">3A</span><span class="badge dur">1:57</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Rattle - Pickle Remix" data-artist="Bingo Players" data-playlist="6 - Dancehall" data-preview="samples/8f9173877988.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Rattle - Pickle Remix">Rattle - Pickle Remix</div>
+        <div class="card-artist">Bingo Players</div>
+        <div class="card-meta"><span class="badge bpm">145</span><span class="badge key">4A</span><span class="badge dur">3:13</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="It&#x27;s That Time (Clean)" data-artist="Marlon Hoffstadt &amp; DJ Daddy Trance" data-playlist="6 - Dancehall" data-preview="samples/2d6aa9c49cf9.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="It&#x27;s That Time (Clean)">It&#x27;s That Time (Clean)</div>
+        <div class="card-artist">Marlon Hoffstadt &amp; DJ Daddy Trance</div>
+        <div class="card-meta"><span class="badge bpm">147</span><span class="badge key">4A</span><span class="badge dur">2:31</span></div>
+      </div>
+    </div></div>
+    </section><section class="playlist-section" id="7---EDM,-House--Dance-Pop">
+      <h2>7 - EDM, House &amp; Dance-Pop <span class="count">15 Songs</span></h2>
+      <div class="cards"><div class="card" onclick="toggleSong(this)" data-title="Runaway (U &amp; I) - Rich DietZ Remix" data-artist="Galantis" data-playlist="7 - EDM, House &amp; Dance-Pop" data-preview="samples/154281bfed1b.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Runaway (U &amp; I) - Rich DietZ Remix">Runaway (U &amp; I) - Rich DietZ Remix</div>
+        <div class="card-artist">Galantis</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">3A</span><span class="badge dur">4:45</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="The Days - Goshfather vs NOTION Disco Edit" data-artist="CHRYSTAL" data-playlist="7 - EDM, House &amp; Dance-Pop" data-preview="samples/2dfd5a692237.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="The Days - Goshfather vs NOTION Disco Edit">The Days - Goshfather vs NOTION Disco Edit</div>
+        <div class="card-artist">CHRYSTAL</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">3A</span><span class="badge dur">2:40</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="You &amp; Me - Rivo Remix" data-artist="Disclosure Rivo Eliza Doolittle" data-playlist="7 - EDM, House &amp; Dance-Pop" data-preview="samples/7de52bb41bc1.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="You &amp; Me - Rivo Remix">You &amp; Me - Rivo Remix</div>
+        <div class="card-artist">Disclosure Rivo Eliza Doolittle</div>
+        <div class="card-meta"><span class="badge bpm">122</span><span class="badge key">3A</span><span class="badge dur">3:28</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Blah Blah Blah" data-artist="Armin Van Buuren" data-playlist="7 - EDM, House &amp; Dance-Pop" data-preview="samples/04b90f010ffe.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Blah Blah Blah">Blah Blah Blah</div>
+        <div class="card-artist">Armin Van Buuren</div>
+        <div class="card-meta"><span class="badge bpm">138</span><span class="badge key">4A</span><span class="badge dur">3:03</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="---------------------" data-artist="Loopmasters" data-playlist="7 - EDM, House &amp; Dance-Pop" data-preview="samples/25eabc57dcfc.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="---------------------">---------------------</div>
+        <div class="card-artist">Loopmasters</div>
+        <div class="card-meta"><span class="badge bpm">0</span><span class="badge key">4A</span><span class="badge dur">0:04</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Ladida (My Heart Goes Boom)" data-artist="Kool Kat Ilira" data-playlist="7 - EDM, House &amp; Dance-Pop" data-preview="samples/a37701086a1b.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Ladida (My Heart Goes Boom)">Ladida (My Heart Goes Boom)</div>
+        <div class="card-artist">Kool Kat Ilira</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">5A</span><span class="badge dur">2:53</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Call On Me (Hills Remix) (Hills Remix)" data-artist="Eric Prydz" data-playlist="7 - EDM, House &amp; Dance-Pop" data-preview="samples/da0f041bf050.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Call On Me (Hills Remix) (Hills Remix)">Call On Me (Hills Remix) (Hills Remix)</div>
+        <div class="card-artist">Eric Prydz</div>
+        <div class="card-meta"><span class="badge bpm">130</span><span class="badge key">6B</span><span class="badge dur">5:06</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Move Your Body" data-artist="Öwnboss SEVEK" data-playlist="7 - EDM, House &amp; Dance-Pop" data-preview="samples/00bf93520948.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/31/8a/22/318a228d-1095-77c5-2a83-d6c3a49acfcf/190296407383.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Move Your Body">Move Your Body</div>
+        <div class="card-artist">Öwnboss SEVEK</div>
+        <div class="card-meta"><span class="badge bpm">125</span><span class="badge key">7A</span><span class="badge dur">2:37</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="---------------------" data-artist="Loopmasters" data-playlist="7 - EDM, House &amp; Dance-Pop" data-preview="samples/25eabc57dcfc.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="---------------------">---------------------</div>
+        <div class="card-artist">Loopmasters</div>
+        <div class="card-meta"><span class="badge bpm">0</span><span class="badge key">4A</span><span class="badge dur">0:04</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Show Me Love - Ced vs Emmaculate Remix" data-artist="Robin S." data-playlist="7 - EDM, House &amp; Dance-Pop" data-preview="samples/221e93809563.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Show Me Love - Ced vs Emmaculate Remix">Show Me Love - Ced vs Emmaculate Remix</div>
+        <div class="card-artist">Robin S.</div>
+        <div class="card-meta"><span class="badge bpm">125</span><span class="badge key">7A</span><span class="badge dur">6:31</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Scream &amp; Shout - Anthem Kingz Intoxicated Edit (Dirty)" data-artist="will.i.am ft. Britney Spears" data-playlist="7 - EDM, House &amp; Dance-Pop" data-preview="samples/b6bb88f3840f.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Scream &amp; Shout - Anthem Kingz Intoxicated Edit (Dirty)">Scream &amp; Shout - Anthem Kingz Intoxicated Edit (Dirty)</div>
+        <div class="card-artist">will.i.am ft. Britney Spears</div>
+        <div class="card-meta"><span class="badge bpm">125</span><span class="badge key">8A</span><span class="badge dur">2:16</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Lipstick X The Parade (Mashup) (Eke Mashup)" data-artist="Alaia &amp; Gallo, Da Hool, Joel Corry" data-playlist="7 - EDM, House &amp; Dance-Pop" data-preview="samples/aabba9291dd3.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Lipstick X The Parade (Mashup) (Eke Mashup)">Lipstick X The Parade (Mashup) (Eke Mashup)</div>
+        <div class="card-artist">Alaia &amp; Gallo, Da Hool, Joel Corry</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">8A</span><span class="badge dur">2:15</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="One More Time - Valmer Remix" data-artist="Daft Punk" data-playlist="7 - EDM, House &amp; Dance-Pop" data-preview="samples/7ef47151eaf5.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="One More Time - Valmer Remix">One More Time - Valmer Remix</div>
+        <div class="card-artist">Daft Punk</div>
+        <div class="card-meta"><span class="badge bpm">129</span><span class="badge key">9B</span><span class="badge dur">5:12</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Moves Like Jagger (Original Mix)" data-artist="Max Magnani" data-playlist="7 - EDM, House &amp; Dance-Pop" data-preview="samples/a0e17cf33527.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Moves Like Jagger (Original Mix)">Moves Like Jagger (Original Mix)</div>
+        <div class="card-artist">Max Magnani</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">10A</span><span class="badge dur">4:10</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Technologic - HORIZON Remix" data-artist="Daft Punk" data-playlist="7 - EDM, House &amp; Dance-Pop" data-preview="samples/dee0b9e8a2d0.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Technologic - HORIZON Remix">Technologic - HORIZON Remix</div>
+        <div class="card-artist">Daft Punk</div>
+        <div class="card-meta"><span class="badge bpm">130</span><span class="badge key">11A</span><span class="badge dur">4:18</span></div>
+      </div>
+    </div></div>
+    </section><section class="playlist-section" id="8---Festival-Vibe">
+      <h2>8 - Festival Vibe <span class="count">11 Songs</span></h2>
+      <div class="cards"><div class="card" onclick="toggleSong(this)" data-title="A Sky Full Of Stars - Hydan Our Time Edit (Clean)" data-artist="Coldplay" data-playlist="8 - Festival Vibe" data-preview="samples/c5e6d7b99d6f.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="A Sky Full Of Stars - Hydan Our Time Edit (Clean)">A Sky Full Of Stars - Hydan Our Time Edit (Clean)</div>
+        <div class="card-artist">Coldplay</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">2B</span><span class="badge dur">3:07</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Ghosts &#x27;n&#x27; Stuff - Luke Alexander Remix" data-artist="deadmau5 ft. Rob Swire" data-playlist="8 - Festival Vibe" data-preview="samples/6cbbf3f73886.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Ghosts &#x27;n&#x27; Stuff - Luke Alexander Remix">Ghosts &#x27;n&#x27; Stuff - Luke Alexander Remix</div>
+        <div class="card-artist">deadmau5 ft. Rob Swire</div>
+        <div class="card-meta"><span class="badge bpm">130</span><span class="badge key">3A</span><span class="badge dur">3:42</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="KIKI2000 - Livitup Hype Edit" data-artist="DJ Snake" data-playlist="8 - Festival Vibe" data-preview="samples/12562bfee9bf.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="KIKI2000 - Livitup Hype Edit">KIKI2000 - Livitup Hype Edit</div>
+        <div class="card-artist">DJ Snake</div>
+        <div class="card-meta"><span class="badge bpm">130.0</span><span class="badge key">3A</span><span class="badge dur">3:08</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Kernkraft 400 - James Hype Remix" data-artist="Zombie Nation" data-playlist="8 - Festival Vibe" data-preview="samples/d6aa96471fa0.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Kernkraft 400 - James Hype Remix">Kernkraft 400 - James Hype Remix</div>
+        <div class="card-artist">Zombie Nation</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">3A</span><span class="badge dur">2:37</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="---------------------" data-artist="Loopmasters" data-playlist="8 - Festival Vibe" data-preview="samples/25eabc57dcfc.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="---------------------">---------------------</div>
+        <div class="card-artist">Loopmasters</div>
+        <div class="card-meta"><span class="badge bpm">0</span><span class="badge key">4A</span><span class="badge dur">0:04</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Pepas (Remixes) (Tiesto Remix)" data-artist="Farruko" data-playlist="8 - Festival Vibe" data-preview="samples/0b307e8c4d7d.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Pepas (Remixes) (Tiesto Remix)">Pepas (Remixes) (Tiesto Remix)</div>
+        <div class="card-artist">Farruko</div>
+        <div class="card-meta"><span class="badge bpm">130</span><span class="badge key">8A</span><span class="badge dur">3:42</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Feel So Close vs. Lift Your Voices (Gin and Sonic Mashup)" data-artist="Calvin Harris, Raven &amp; Kreyn, Gin and Sonic" data-playlist="8 - Festival Vibe" data-preview="samples/5f5e92cddd26.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Feel So Close vs. Lift Your Voices (Gin and Sonic Mashup)">Feel So Close vs. Lift Your Voices (Gin and Sonic Mashup)</div>
+        <div class="card-artist">Calvin Harris, Raven &amp; Kreyn, Gin and Sonic</div>
+        <div class="card-meta"><span class="badge bpm">126</span><span class="badge key">9A</span><span class="badge dur">3:48</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Sandstorm (Zans Remix) (Extended Mix)" data-artist="Darude" data-playlist="8 - Festival Vibe" data-preview="samples/231902e23091.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Sandstorm (Zans Remix) (Extended Mix)">Sandstorm (Zans Remix) (Extended Mix)</div>
+        <div class="card-artist">Darude</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">9A</span><span class="badge dur">5:00</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Drugs From Celebrate (Ragash Mashup)" data-artist="Mau P, Kura, Vedenzo" data-playlist="8 - Festival Vibe" data-preview="samples/9057c661e562.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Drugs From Celebrate (Ragash Mashup)">Drugs From Celebrate (Ragash Mashup)</div>
+        <div class="card-artist">Mau P, Kura, Vedenzo</div>
+        <div class="card-meta"><span class="badge bpm">127</span><span class="badge key">9A</span><span class="badge dur">3:25</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Meet Her At The Love Parade - Don Diablo Remix" data-artist="Da Hool" data-playlist="8 - Festival Vibe" data-preview="samples/df23058dddb5.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Meet Her At The Love Parade - Don Diablo Remix">Meet Her At The Love Parade - Don Diablo Remix</div>
+        <div class="card-artist">Da Hool</div>
+        <div class="card-meta"><span class="badge bpm">132</span><span class="badge key">10B</span><span class="badge dur">4:11</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="If I Lose Myself - Matthew Topper Easy Edit (Clean)" data-artist="OneRepublic" data-playlist="8 - Festival Vibe" data-preview="samples/8b763715aaf0.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="If I Lose Myself - Matthew Topper Easy Edit (Clean)">If I Lose Myself - Matthew Topper Easy Edit (Clean)</div>
+        <div class="card-artist">OneRepublic</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">10B</span><span class="badge dur">3:02</span></div>
+      </div>
+    </div></div>
+    </section><section class="playlist-section" id="Deutsch-Schlager">
+      <h2>Deutsch Schlager <span class="count">21 Songs</span></h2>
+      <div class="cards"><div class="card" onclick="toggleSong(this)" data-title="Sarà Perché Ti Amo - Scotty Remix (Euro 2024 Version)" data-artist="Nik Stone, Tonec &amp; Lazard" data-playlist="Deutsch Schlager" data-preview="samples/83a07e3f60b1.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Sarà Perché Ti Amo - Scotty Remix (Euro 2024 Version)">Sarà Perché Ti Amo - Scotty Remix (Euro 2024 Version)</div>
+        <div class="card-artist">Nik Stone, Tonec &amp; Lazard</div>
+        <div class="card-meta"><span class="badge bpm">150</span><span class="badge key">12B</span><span class="badge dur">3:29</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Sarà Perché Ti Amo (Stereoact Remix)" data-artist="DJ Redblack Stereoact" data-playlist="Deutsch Schlager" data-preview="samples/15514236741a.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/9d/92/dd/9d92ddfc-f729-9232-879a-883392a41fc4/23UMGIM54443.rgb.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Sarà Perché Ti Amo (Stereoact Remix)">Sarà Perché Ti Amo (Stereoact Remix)</div>
+        <div class="card-artist">DJ Redblack Stereoact</div>
+        <div class="card-meta"><span class="badge bpm">138</span><span class="badge key">12B</span><span class="badge dur">2:02</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Wir sind alle gestört aber geil" data-artist="Tim Toupet" data-playlist="Deutsch Schlager" data-preview="samples/5f28a2711e65.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Wir sind alle gestört aber geil">Wir sind alle gestört aber geil</div>
+        <div class="card-artist">Tim Toupet</div>
+        <div class="card-meta"><span class="badge bpm">138</span><span class="badge key">12A</span><span class="badge dur">3:07</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="99 Luftballons" data-artist="Harris &amp; Ford" data-playlist="Deutsch Schlager" data-preview="samples/daae1e455b5a.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="99 Luftballons">99 Luftballons</div>
+        <div class="card-artist">Harris &amp; Ford</div>
+        <div class="card-meta"><span class="badge bpm">100</span><span class="badge key">11A</span><span class="badge dur">2:05</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Was du Liebe nennst" data-artist="Bausa" data-playlist="Deutsch Schlager" data-preview="samples/e70ec992f478.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Was du Liebe nennst">Was du Liebe nennst</div>
+        <div class="card-artist">Bausa</div>
+        <div class="card-meta"><span class="badge bpm">145</span><span class="badge key">10B</span><span class="badge dur">3:23</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Friesenjung - PRIDE &amp; PARKER Remix" data-artist="Ski Aggu, Joost &amp; Otto Waalkes" data-playlist="Deutsch Schlager" data-preview="samples/334d80a659a3.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/98/d3/3e/98d33e00-01b7-5351-0a3c-3e0e92a49899/197902569183.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Friesenjung - PRIDE &amp; PARKER Remix">Friesenjung - PRIDE &amp; PARKER Remix</div>
+        <div class="card-artist">Ski Aggu, Joost &amp; Otto Waalkes</div>
+        <div class="card-meta"><span class="badge bpm">140</span><span class="badge key">10A</span><span class="badge dur">4:06</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Ein Kompliment" data-artist="Sportfreunde Stiller" data-playlist="Deutsch Schlager" data-preview="samples/ba0da225d263.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Ein Kompliment">Ein Kompliment</div>
+        <div class="card-artist">Sportfreunde Stiller</div>
+        <div class="card-meta"><span class="badge bpm">159</span><span class="badge key">9A</span><span class="badge dur">3:17</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Major Tom (Völlig losgelöst)" data-artist="MXM; Chris van Dutch" data-playlist="Deutsch Schlager" data-preview="samples/fbef7651c07d.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Major Tom (Völlig losgelöst)">Major Tom (Völlig losgelöst)</div>
+        <div class="card-artist">MXM; Chris van Dutch</div>
+        <div class="card-meta"><span class="badge bpm">165</span><span class="badge key">9A</span><span class="badge dur">4:00</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Wackelkontakt" data-artist="Oimara" data-playlist="Deutsch Schlager" data-preview="samples/8f7208e330df.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Wackelkontakt">Wackelkontakt</div>
+        <div class="card-artist">Oimara</div>
+        <div class="card-meta"><span class="badge bpm">170</span><span class="badge key">8A</span><span class="badge dur">2:47</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Mädchen Auf Dem Pferd" data-artist="Luca-Dante Spadafora, Niklas Dee, Octavian, Peter Plate &amp; Ulf Leo Sommer" data-playlist="Deutsch Schlager" data-preview="samples/c5a95b8f5b6c.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Mädchen Auf Dem Pferd">Mädchen Auf Dem Pferd</div>
+        <div class="card-artist">Luca-Dante Spadafora, Niklas Dee, Octavian, Peter Plate &amp; Ulf Leo Sommer</div>
+        <div class="card-meta"><span class="badge bpm">170</span><span class="badge key">8A</span><span class="badge dur">2:34</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Hulapalu" data-artist="Andreas Gabalier" data-playlist="Deutsch Schlager" data-preview="samples/a546ff51a4f5.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Hulapalu">Hulapalu</div>
+        <div class="card-artist">Andreas Gabalier</div>
+        <div class="card-meta"><span class="badge bpm">125</span><span class="badge key">8A</span><span class="badge dur">3:00</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="APRE SKI (DJcity Intro)" data-artist="Tream &amp; Gzuz" data-playlist="Deutsch Schlager" data-preview="samples/fc2d83131e53.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="APRE SKI (DJcity Intro)">APRE SKI (DJcity Intro)</div>
+        <div class="card-artist">Tream &amp; Gzuz</div>
+        <div class="card-meta"><span class="badge bpm">148</span><span class="badge key">7A</span><span class="badge dur">3:01</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Gute Laune" data-artist="Killermichel; selina" data-playlist="Deutsch Schlager" data-preview="samples/eef4f6792ed1.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Gute Laune">Gute Laune</div>
+        <div class="card-artist">Killermichel; selina</div>
+        <div class="card-meta"><span class="badge bpm">140</span><span class="badge key">7A</span><span class="badge dur">2:41</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Komet - Scotty Remix" data-artist="Udo Lindenberg &amp; Apache 207" data-playlist="Deutsch Schlager" data-preview="samples/33a8dfa148fa.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Komet - Scotty Remix">Komet - Scotty Remix</div>
+        <div class="card-artist">Udo Lindenberg &amp; Apache 207</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">6A</span><span class="badge dur">3:39</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Pink" data-artist="Vanessa Mai &amp; HBz" data-playlist="Deutsch Schlager" data-preview="samples/ecab8551181f.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Pink">Pink</div>
+        <div class="card-artist">Vanessa Mai &amp; HBz</div>
+        <div class="card-meta"><span class="badge bpm">150</span><span class="badge key">5A</span><span class="badge dur">3:31</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Griechischer Wein" data-artist="Udo Jürgens" data-playlist="Deutsch Schlager" data-preview="samples/ea6362893b98.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Griechischer Wein">Griechischer Wein</div>
+        <div class="card-artist">Udo Jürgens</div>
+        <div class="card-meta"><span class="badge bpm">148.8</span><span class="badge key">5A</span><span class="badge dur">4:04</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Hey DJ - Initi8 Remix" data-artist="Joel Corry" data-playlist="Deutsch Schlager" data-preview="samples/6861d0dd32a9.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Hey DJ - Initi8 Remix">Hey DJ - Initi8 Remix</div>
+        <div class="card-artist">Joel Corry</div>
+        <div class="card-meta"><span class="badge bpm">150</span><span class="badge key">4A</span><span class="badge dur">3:03</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Mama Laudaaa" data-artist="Almklausi Specktakel" data-playlist="Deutsch Schlager" data-preview="samples/3e07ba5ac43a.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Mama Laudaaa">Mama Laudaaa</div>
+        <div class="card-artist">Almklausi Specktakel</div>
+        <div class="card-meta"><span class="badge bpm">140</span><span class="badge key">2A</span><span class="badge dur">3:35</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Willst Du - Achtabahn Remix" data-artist="Achtabahn ft. Alligatoah" data-playlist="Deutsch Schlager" data-preview="samples/74e17441732f.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Willst Du - Achtabahn Remix">Willst Du - Achtabahn Remix</div>
+        <div class="card-artist">Achtabahn ft. Alligatoah</div>
+        <div class="card-meta"><span class="badge bpm">150</span><span class="badge key">1B</span><span class="badge dur">1:46</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Atemlos durch die Nacht" data-artist="Helene Fischer" data-playlist="Deutsch Schlager" data-preview="samples/a6107c1eced6.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><div class="cover no-cover">🎵</div><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Atemlos durch die Nacht">Atemlos durch die Nacht</div>
+        <div class="card-artist">Helene Fischer</div>
+        <div class="card-meta"><span class="badge bpm">128</span><span class="badge key">1A</span><span class="badge dur">3:40</span></div>
+      </div>
+    </div><div class="card" onclick="toggleSong(this)" data-title="Dorfkinder" data-artist="Finnel" data-playlist="Deutsch Schlager" data-preview="samples/9e0d889b25f9.mp3">
+      <div class="card-check"><span class="check-icon">✕</span></div>
+      <div class="cover-wrap"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/71/35/e3/7135e3f2-f331-4d07-676d-33165489a3e5/3617224271306.jpg/600x600bb.jpg" alt="Cover" class="cover" loading="lazy"><button class="play-btn" onclick="playPreview(event,this)" aria-label="Vorschau"><svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M8 5v14l11-7z"/></svg></button></div>
+      <div class="card-info">
+        <div class="card-title" title="Dorfkinder">Dorfkinder</div>
+        <div class="card-artist">Finnel</div>
+        <div class="card-meta"><span class="badge bpm">140</span><span class="badge key">1A</span><span class="badge dur">2:27</span></div>
+      </div>
+    </div></div>
+    </section>
+</main>
+<div class="share-bar" id="shareBar">
+  <div class="share-bar-info">
+    <div class="share-bar-count"><span id="selCount">0</span> Songs markiert</div>
+    <div class="share-bar-sub">Tippe „Teilen" um die Liste zu kopieren</div>
+  </div>
+  <div class="share-actions">
+    <button class="btn-reset" onclick="resetAll()">Zurücksetzen</button>
+    <button class="btn-share" onclick="shareSelection()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.855L.057 23.63a.75.75 0 0 0 .92.919l5.83-1.527A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.709 9.709 0 0 1-4.953-1.355l-.355-.212-3.686.966.984-3.596-.232-.372A9.705 9.705 0 0 1 2.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
+      Teilen
+    </button>
+  </div>
+</div>
+<div class="toast" id="toast">✓ In Zwischenablage kopiert!</div>
+
+<script>
+  let selected = new Set();
+  function toggleSong(card) {
+    const id = card.dataset.title + '||' + card.dataset.artist;
+    if (selected.has(id)) { selected.delete(id); card.classList.remove('selected'); }
+    else { selected.add(id); card.classList.add('selected'); }
+    updateBar();
+  }
+  function updateBar() {
+    document.getElementById('selCount').textContent = selected.size;
+    document.getElementById('shareBar').classList.toggle('visible', selected.size > 0);
+  }
+  function resetAll() {
+    selected.clear();
+    document.querySelectorAll('.card.selected').forEach(c => c.classList.remove('selected'));
+    updateBar();
+  }
+  function shareSelection() {
+    const songs = Array.from(document.querySelectorAll('.card.selected')).map(c => ({
+      song: c.dataset.title, artist: c.dataset.artist, playlist: c.dataset.playlist
+    }));
+    const payload = JSON.stringify({ datum: new Date().toLocaleDateString('de-DE'), hinweis: "Diese Songs bitte weglassen", songs }, null, 2);
+    if (navigator.clipboard?.writeText) { navigator.clipboard.writeText(payload).then(showToast); }
+    else {
+      const ta = Object.assign(document.createElement('textarea'), { value: payload, style: 'position:fixed;opacity:0' });
+      document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); showToast();
+    }
+  }
+  function showToast() {
+    const t = document.getElementById('toast');
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
+  }
+
+  const _PLAY  = '<path d="M8 5v14l11-7z"/>';
+  const _PAUSE = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+
+  let _aud = null, _btn = null;
+
+  function _icon(b, p) { b.querySelector('svg').innerHTML = p; }
+  function _setState(b, state) {
+    b.classList.remove('pb-loading','pb-playing');
+    if (state) b.classList.add('pb-' + state);
+  }
+  function _stop() {
+    if (_aud) { _aud.pause(); _aud = null; }
+    if (_btn) { _icon(_btn, _PLAY); _setState(_btn, null); _btn = null; }
+  }
+
+  // Hide play buttons for cards without a preview URL
+  document.querySelectorAll('.card:not([data-preview]) .play-btn').forEach(b => b.style.display = 'none');
+
+  function playPreview(e, btn) {
+    e.stopPropagation();
+    const card = btn.closest('.card');
+    const url  = card.dataset.preview;
+    if (!url) return;
+
+    if (_btn === btn) {
+      if (_aud.paused) { _aud.play(); _icon(btn, _PAUSE); _setState(btn, 'playing'); }
+      else             { _aud.pause(); _icon(btn, _PLAY);  _setState(btn, null); }
+      return;
+    }
+    _stop();
+    _btn = btn;
+    _icon(btn, '');
+    _setState(btn, 'loading');
+
+    _aud = new Audio(url);
+    _aud.play();
+    _icon(btn, _PAUSE);
+    _setState(btn, 'playing');
+    _aud.onended = () => {
+      if (_btn === btn) { _icon(btn, _PLAY); _setState(btn, null); _btn = null; _aud = null; }
+    };
+    _aud.onerror = () => {
+      if (_btn === btn) { _icon(btn, _PLAY); _setState(btn, null); _btn = null; _aud = null; }
+    };
+  }
+</script></body>
+</html>
