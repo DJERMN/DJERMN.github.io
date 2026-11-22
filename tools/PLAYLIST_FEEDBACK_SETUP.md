@@ -20,7 +20,7 @@ Benachrichtigung an `info@djerman.de`.
    ```bash
    python3 tools/build_playlist_page.py \
      --folder "Geburtstag Lucas & Sarah" \
-     --output p/lucas-sarah/index.html \
+      --output p/lukas-sarah/index.html \
      --title "Geburtstag Lukas & Sarah — Playlists" \
      --feedback-endpoint "https://script.google.com/macros/s/DEPLOYMENT_ID/exec"
    ```
